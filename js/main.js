@@ -1,35 +1,34 @@
-import { getState, dispatch, subscribe } from './state.js';
+import { dispatch } from './state.js';
 import { Engine } from './engine.js';
 import { SaveSystem } from './save.js';
 
+// type="module" scripts are deferred — DOM is already ready here, no DOMContentLoaded needed
 const engine = new Engine();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const btnNew  = document.getElementById('btn-new-game');
-  const btnCont = document.getElementById('btn-continue');
-  const btnAch  = document.getElementById('btn-achievements');
+const btnNew  = document.getElementById('btn-new-game');
+const btnCont = document.getElementById('btn-continue');
+const btnAch  = document.getElementById('btn-achievements');
 
-  if (SaveSystem.hasSave()) {
-    btnCont.disabled = false;
-  }
+if (SaveSystem.hasSave()) {
+  btnCont.disabled = false;
+}
 
-  btnNew.addEventListener('click', () => {
-    SaveSystem.deleteSave();
-    dispatch('RESET_STATE');
-    engine.startNewGame();
-  });
-
-  btnCont.addEventListener('click', () => {
-    const saved = SaveSystem.load();
-    if (saved) {
-      dispatch('LOAD_STATE', { state: saved });
-      engine.resumeGame();
-    }
-  });
-
-  btnAch.addEventListener('click', () => {
-    engine.showAchievements();
-  });
-
-  console.log('[Escape Protocol] Ready.');
+btnNew.addEventListener('click', () => {
+  SaveSystem.deleteSave();
+  dispatch('RESET_STATE');
+  engine.startNewGame().catch(e => console.error('[Game] startNewGame failed:', e));
 });
+
+btnCont.addEventListener('click', () => {
+  const saved = SaveSystem.load();
+  if (saved) {
+    dispatch('LOAD_STATE', { state: saved });
+    engine.resumeGame().catch(e => console.error('[Game] resumeGame failed:', e));
+  }
+});
+
+btnAch.addEventListener('click', () => {
+  engine.showAchievements();
+});
+
+console.log('[Escape Protocol] Ready.');
