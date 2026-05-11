@@ -3,7 +3,6 @@ import { showToast, showInspection } from './ui.js';
 import { PuzzleManager } from './puzzles/puzzle-manager.js';
 import { SaveSystem } from './save.js';
 import { AudioSystem } from './audio.js';
-import { ParticleSystem } from './particles.js';
 
 // itemId:objectId → handler name
 const USE_TABLE = {

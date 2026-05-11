@@ -108,6 +108,17 @@
 
 </div><!-- #game-wrapper -->
 
+<!-- Catch any JS errors before module loads and show them visually -->
+<script>
+  window.addEventListener('error', function(e) {
+    var btn = document.getElementById('btn-new-game');
+    if (btn) btn.textContent = '⚠ JS Error — see console';
+    console.error('[EP Fatal]', e.message, e.filename, e.lineno);
+  });
+  window.addEventListener('unhandledrejection', function(e) {
+    console.error('[EP Unhandled]', e.reason);
+  });
+</script>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

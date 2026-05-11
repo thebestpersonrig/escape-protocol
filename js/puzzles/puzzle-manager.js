@@ -1,8 +1,7 @@
 import { getState, dispatch } from '../state.js';
 import { AudioSystem } from '../audio.js';
-import { showToast } from '../ui.js';
+import { showToast, updateObjectiveDisplay } from '../ui.js';
 import { AchievementSystem } from '../achievements.js';
-import { updateObjectiveDisplay } from '../ui.js';
 
 const _ach = new AchievementSystem();
 
