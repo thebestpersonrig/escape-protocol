@@ -78,7 +78,7 @@ export const PuzzleManager = {
           showToast(`⚠ ALARM: ${reason}. Security in 60s!`, 'error');
           import('../ui.js').then(m => m.updateAlarmDisplay());
         } else if (!st.alarmTriggered && mistakesLeft <= 2 && mistakesLeft > 0) {
-          showToast(`Warning: ${mistakesLeft} mistake${mistakesLeft === 1 ? '' : 's'} left before alarm!`, 'info');
+          showToast(`Warning: ${mistakesLeft} mistake${mistakesLeft === 1 ? '' : 's'} left before alarm triggers!`, 'info');
         }
       },
       onClose: () => {

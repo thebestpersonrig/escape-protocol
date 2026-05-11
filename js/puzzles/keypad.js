@@ -19,7 +19,7 @@ export function init(container, puzzleState, callbacks) {
       </div>
       <button class="keypad-btn enter" id="kp-enter" style="width:100%;margin-top:6px;">ENTER</button>
     </div>
-    <div style="margin-top:14px;font-size:11px;color:var(--text-dim);text-align:center;font-family:var(--font-mono);">Attempts: ${puzzleState.attempts || 0}</div>
+    <div style="margin-top:14px;font-size:11px;color:var(--text-dim);text-align:center;font-family:var(--font-mono);">Attempts: <span id="kp-attempts">${puzzleState.attempts || 0}</span></div>
   `;
 
   const display = container.querySelector('#kp-display');
@@ -64,6 +64,8 @@ export function init(container, puzzleState, callbacks) {
         updateDisplay();
       }, 700);
       callbacks.onFailure();
+      const attEl = container.querySelector('#kp-attempts');
+      if (attEl) attEl.textContent = parseInt(attEl.textContent) + 1;
     }
   });
 }
