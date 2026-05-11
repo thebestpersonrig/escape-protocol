@@ -62,7 +62,7 @@
       "label": "Ventilation Shaft",
       "x": 43, "y": 60, "w": 14, "h": 22,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A large ventilation shaft behind the server rack. Wide enough to crawl through. The grate has been removed — recently, by the look of the fresh scratches on the floor.\n\nWhere does it lead...?" },
+      "action": { "type": "inspect", "text": "A large ventilation shaft behind the server rack. Wide enough to crawl through. The grate has been removed — recently, by the look of the fresh scratches on the floor.\n\nWhere does it lead...?", "unlocksRoom": "secret-room" },
       "contents": [
         {
           "id": "laser-key",
@@ -73,6 +73,17 @@
           "action": { "type": "pick-up", "itemId": "laser-key" }
         }
       ]
+    },
+    {
+      "id": "server-vent-enter",
+      "type": "door",
+      "label": "Crawl Through Vent",
+      "x": 43, "y": 82, "w": 14, "h": 10,
+      "cursor": "pointer",
+      "condition": { "secretRoomUnlocked": true },
+      "action": { "type": "navigate", "to": "secret-room" },
+      "lockedMessage": "Inspect the ventilation shaft first.",
+      "contents": []
     }
   ]
 }

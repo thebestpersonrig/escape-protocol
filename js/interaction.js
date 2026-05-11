@@ -44,6 +44,11 @@ export class InteractionSystem {
           const cond = state.objects[item.visibleWhen.objectState];
           if (cond !== item.visibleWhen.equals) continue;
         }
+        // Check clue location randomisation (mirror rooms.js logic)
+        if (item.clueSlot) {
+          const assignedContainer = state.clueLocations[item.clueSlot];
+          if (assignedContainer && assignedContainer !== hs.id) continue;
+        }
         if (state.inventory.includes(item.id)) continue;
         if (state.objects[item.id] === 'taken') continue;
         this._allHotspots.push(item);
@@ -103,6 +108,9 @@ export class InteractionSystem {
     if (condition.hasItem) {
       return state.inventory.includes(condition.hasItem);
     }
+    if (condition.secretRoomUnlocked) {
+      return state.secretRoomUnlocked === true;
+    }
     if (condition.objectState) {
       // Support both { objectState: { id, equals } } and { objectState: "id", equals: "val" }
       if (typeof condition.objectState === 'object') {
@@ -142,6 +150,9 @@ export class InteractionSystem {
       case 'inspect':
         showInspection(action.text, action.image || null, hs.id);
         AudioSystem.play('paper-rustle');
+        if (action.unlocksRoom === 'secret-room') {
+          dispatch('UNLOCK_SECRET_ROOM');
+        }
         break;
 
       case 'pick-up':
@@ -204,7 +215,7 @@ export class InteractionSystem {
         if (st.puzzles['lever-combo']?.solved) {
           dispatch('DESELECT_ITEM');
           AudioSystem.play('door-unlock');
-          import('./engine.js').then(m => m.Engine.instance?.navigateTo('final-exit'));
+          import('./engine.js').then(m => m.Engine.instance?.navigateTo('escaped'));
         } else {
           showToast('The lever combination must be set first.', 'error');
           AudioSystem.play('door-locked');

@@ -204,27 +204,29 @@ export class RoomRenderer {
     const inner = this._getHotspotInnerHTML(hs, objState, state, config);
     if (inner) el.innerHTML = inner;
 
-    // Contents (items inside containers)
+    // Contents (items inside containers) — pass parent container id for clue filtering
     if (hs.contents) {
       for (const item of hs.contents) {
-        this._renderContentItem(item, state);
+        this._renderContentItem(item, state, hs.id);
       }
     }
 
     this._objEl.appendChild(el);
   }
 
-  _renderContentItem(item, state) {
+  _renderContentItem(item, state, parentContainerId) {
     // Check visibility condition
     if (item.visibleWhen) {
       const condState = state.objects[item.visibleWhen.objectState];
       if (condState !== item.visibleWhen.equals) return;
     }
 
-    // Check clue location randomisation
+    // Check clue location randomisation:
+    // clueLocations[itemId] = the container this item was assigned to.
+    // Only show this item if it belongs to the current parent container.
     if (item.clueSlot) {
-      const placed = state.clueLocations[item.clueSlot];
-      if (placed && placed !== item.id) return;
+      const assignedContainer = state.clueLocations[item.clueSlot];
+      if (assignedContainer && assignedContainer !== parentContainerId) return;
     }
 
     // Don't show if already taken
