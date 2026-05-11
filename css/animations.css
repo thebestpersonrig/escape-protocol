@@ -1,0 +1,103 @@
+/* ── Keyframes ───────────────────────────────────────────── */
+
+@keyframes flicker {
+  0%   { opacity: 1; }
+  4%   { opacity: 0.9; }
+  5%   { opacity: 0.3; }
+  6%   { opacity: 0.95; }
+  30%  { opacity: 1; }
+  44%  { opacity: 1; }
+  45%  { opacity: 0.4; }
+  46%  { opacity: 1; }
+  75%  { opacity: 1; }
+  76%  { opacity: 0.6; }
+  77%  { opacity: 0.9; }
+  78%  { opacity: 0.3; }
+  79%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes flicker-fast {
+  0%   { opacity: 1; }
+  10%  { opacity: 0.2; }
+  11%  { opacity: 0.9; }
+  20%  { opacity: 1; }
+  50%  { opacity: 0.5; }
+  51%  { opacity: 1; }
+  80%  { opacity: 1; }
+  90%  { opacity: 0.3; }
+  91%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 8px var(--accent-glow), inset 0 0 8px var(--accent-dim); }
+  50%       { box-shadow: 0 0 18px var(--accent-glow), inset 0 0 18px rgba(0,255,224,0.25); }
+}
+
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+
+@keyframes alarm-flash {
+  0%, 100% { box-shadow: inset 0 0 40px rgba(255,48,64,0.15); }
+  50%      { box-shadow: inset 0 0 80px rgba(255,48,64,0.35); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-6px); }
+  40%  { transform: translateX(6px); }
+  60%  { transform: translateX(-4px); }
+  80%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes spark-burst {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.2); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 6px var(--accent-glow); }
+  50%      { box-shadow: 0 0 20px var(--accent-glow); }
+}
+
+@keyframes success-pop {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes cursor-blink {
+  0%, 49% { border-right-color: var(--accent); }
+  50%, 100% { border-right-color: transparent; }
+}
+
+@keyframes menu-title-glow {
+  0%, 100% { text-shadow: 0 0 20px var(--accent-glow), 0 0 60px var(--accent-dim); }
+  50%      { text-shadow: 0 0 30px var(--accent-glow), 0 0 90px rgba(0,255,224,0.25); }
+}
+
+/* ── Utility classes ─────────────────────────────────────── */
+.flicker      { animation: flicker 5s infinite; }
+.flicker-fast { animation: flicker-fast 2s infinite; }
+.glow-pulse   { animation: glow-pulse 2s ease-in-out infinite; }
+.shake        { animation: shake 0.4s ease; }
+.success-pop  { animation: success-pop 0.4s ease forwards; }

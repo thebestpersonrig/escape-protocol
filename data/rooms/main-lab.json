@@ -1,0 +1,141 @@
+{
+  "id": "main-lab",
+  "name": "Main Laboratory",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "The main lab. Overturned chairs, scattered papers. Someone left in a hurry. Power to the server room must still be down.",
+  "particles": { "type": "smoke", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "lab-cabinet-left",
+      "type": "container",
+      "label": "Storage Cabinet",
+      "x": 4, "y": 20, "w": 16, "h": 55,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "lab-cabinet-left" },
+      "contents": [
+        {
+          "id": "wire-cutter",
+          "type": "pickupable",
+          "label": "Wire Cutter",
+          "x": 5, "y": 35, "w": 6, "h": 8,
+          "clueSlot": "wire-cutter",
+          "visibleWhen": { "objectState": "lab-cabinet-left", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "wire-cutter" }
+        },
+        {
+          "id": "fuse",
+          "type": "pickupable",
+          "label": "Fuse",
+          "x": 12, "y": 35, "w": 5, "h": 7,
+          "clueSlot": "fuse",
+          "visibleWhen": { "objectState": "lab-cabinet-left", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "fuse" }
+        },
+        {
+          "id": "server-diagram",
+          "type": "item",
+          "label": "Wiring Diagram",
+          "x": 5, "y": 55, "w": 8, "h": 10,
+          "clueSlot": "server-diagram",
+          "visibleWhen": { "objectState": "lab-cabinet-left", "equals": "open" },
+          "action": { "type": "inspect", "text": "SERVER ROOM WIRING DIAGRAM\n\nWire junction panel — cross-reference:\nRed → Red terminal\nBlue → Blue terminal\nGreen → Green terminal\nYellow → Yellow terminal\nWhite → White terminal\n\n(Match colours to restore routing)\n\nAlso noted at bottom in red ink:\nTerminal password: PROMETHEUS" }
+        }
+      ]
+    },
+    {
+      "id": "lab-cabinet-right",
+      "type": "container",
+      "label": "Equipment Cabinet",
+      "x": 80, "y": 20, "w": 16, "h": 55,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "lab-cabinet-right" },
+      "contents": [
+        {
+          "id": "lever-diagram",
+          "type": "item",
+          "label": "Lever Diagram",
+          "x": 81, "y": 35, "w": 8, "h": 9,
+          "clueSlot": "lever-diagram",
+          "visibleWhen": { "objectState": "lab-cabinet-right", "equals": "open" },
+          "action": { "type": "inspect", "text": "EMERGENCY EXIT — LEVER CONTROL SEQUENCE\n\nTo disengage electromagnetic locks:\n\n L1  L2  L3  L4\n[ ↑ ][ ↓ ][ ↑ ][ ↓ ]\n\nAll four must be set simultaneously before pressing ENGAGE.\n\nWarning: Incorrect sequence triggers secondary alarm." }
+        }
+      ]
+    },
+    {
+      "id": "lab-locker",
+      "type": "container",
+      "label": "Personal Locker",
+      "x": 68, "y": 18, "w": 10, "h": 58,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "lab-locker" },
+      "contents": [
+        {
+          "id": "access-card-b",
+          "type": "pickupable",
+          "label": "Keycard B",
+          "x": 69, "y": 30, "w": 6, "h": 7,
+          "visibleWhen": { "objectState": "lab-locker", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "access-card-b" }
+        }
+      ]
+    },
+    {
+      "id": "lab-symbol-board",
+      "type": "puzzle-trigger",
+      "label": "Symbol Lock Panel",
+      "x": 38, "y": 14, "w": 14, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "lab-symbol" },
+      "contents": []
+    },
+    {
+      "id": "lab-terminal",
+      "type": "puzzle-trigger",
+      "label": "Security Terminal",
+      "x": 24, "y": 42, "w": 14, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "terminal-hack" },
+      "contents": []
+    },
+    {
+      "id": "lab-door-server",
+      "type": "door",
+      "label": "Server Room Door",
+      "x": 87, "y": 12, "w": 11, "h": 70,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "lab-symbol" },
+      "action": { "type": "navigate", "to": "server-room" },
+      "lockedMessage": "This door uses a symbol lock. Find the correct symbol combination.",
+      "contents": []
+    },
+    {
+      "id": "lab-entry-door",
+      "type": "door",
+      "label": "← Back to Entry",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "lab-entry" },
+      "contents": []
+    },
+    {
+      "id": "lab-secret-panel",
+      "type": "inspect",
+      "label": "Loose Panel",
+      "x": 48, "y": 78, "w": 6, "h": 8,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A panel behind one of the benches sits slightly ajar. A faint draft comes through. Someone has been here before — scratch marks on the floor, like something was dragged away from this wall." },
+      "contents": []
+    },
+    {
+      "id": "lab-memory-device",
+      "type": "puzzle-trigger",
+      "label": "Data Vault",
+      "x": 55, "y": 44, "w": 10, "h": 16,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "memory-card" },
+      "contents": []
+    }
+  ]
+}

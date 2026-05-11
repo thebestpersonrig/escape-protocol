@@ -1,0 +1,58 @@
+{
+  "id": "final-exit",
+  "name": "Emergency Exit Corridor",
+  "ambientSound": "ambient-final",
+  "lighting": "red-alert",
+  "narrativeOnEnter": "The final corridor. Laser grid active. You can see the emergency exit door at the far end. So close.",
+  "particles": { "type": "dust", "density": 0.6 },
+
+  "hotspots": [
+    {
+      "id": "final-lever-panel",
+      "type": "puzzle-trigger",
+      "label": "Lever Control Panel",
+      "x": 4, "y": 38, "w": 16, "h": 32,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "lever-combo" },
+      "contents": []
+    },
+    {
+      "id": "final-door",
+      "type": "door",
+      "label": "Emergency Exit",
+      "x": 78, "y": 12, "w": 18, "h": 70,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "lever-combo" },
+      "action": { "type": "navigate", "to": "escaped" },
+      "lockedMessage": "The electromagnetic lock is engaged. Set the lever combination first.",
+      "contents": []
+    },
+    {
+      "id": "laser-grid-trigger",
+      "type": "puzzle-trigger",
+      "label": "Laser Grid — Bypass",
+      "x": 35, "y": 25, "w": 30, "h": 60,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "laser-avoid" },
+      "contents": []
+    },
+    {
+      "id": "final-door-back",
+      "type": "door",
+      "label": "← Back to Lab",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "main-lab" },
+      "contents": []
+    },
+    {
+      "id": "final-note",
+      "type": "inspect",
+      "label": "Emergency Placard",
+      "x": 22, "y": 20, "w": 10, "h": 14,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "EMERGENCY EXIT PROTOCOL\n\n1. Disengage EM locks via lever panel\n2. Navigate laser grid to reach door\n3. Use access card on door reader\n\nWARNING: Once the exit sequence begins, you have 30 seconds before full facility lockdown." },
+      "contents": []
+    }
+  ]
+}

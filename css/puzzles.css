@@ -1,0 +1,374 @@
+/* ── Shared puzzle styles ────────────────────────────────── */
+.puzzle-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.puzzle-subtitle {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 16px;
+  margin-top: -14px;
+}
+
+/* ── Keypad ──────────────────────────────────────────────── */
+.keypad-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.keypad-display {
+  width: 220px;
+  background: #050510;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 24px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-align: center;
+  text-shadow: 0 0 8px var(--accent-glow);
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad-display.error {
+  color: var(--danger);
+  border-color: var(--danger);
+  text-shadow: 0 0 8px rgba(255,48,64,0.6);
+  animation: shake 0.4s ease;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 220px;
+}
+
+.keypad-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  height: 52px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keypad-btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.keypad-btn:active { transform: scale(0.92); }
+.keypad-btn.wide  { grid-column: span 2; }
+.keypad-btn.enter { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.keypad-btn.enter:hover { background: rgba(0,255,224,0.25); }
+
+/* ── Symbol match ────────────────────────────────────────── */
+.symbol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 320px;
+}
+
+.symbol-card {
+  aspect-ratio: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transition: all 0.2s ease;
+  perspective: 400px;
+}
+
+.symbol-card:hover:not(.matched):not(.face-up) {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.symbol-card.face-up  { background: var(--surface); border-color: var(--accent); }
+.symbol-card.matched  { background: rgba(0,255,224,0.1); border-color: var(--accent); opacity: 0.7; cursor: default; }
+.symbol-card .sym-back { color: var(--text-dim); font-size: 18px; }
+
+/* ── Wire connect ────────────────────────────────────────── */
+.wire-wrap {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  width: 380px;
+  height: 260px;
+  position: relative;
+}
+
+.wire-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80px;
+}
+
+.wire-svg-area {
+  flex: 1;
+  position: relative;
+}
+
+.wire-svg-area svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wire-node {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  background: var(--surface2);
+}
+
+.wire-node:hover { transform: scale(1.1); }
+.wire-node.connected { opacity: 0.6; cursor: default; }
+
+.wire-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+
+/* ── Memory card ─────────────────────────────────────────── */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 340px;
+}
+
+.mem-card {
+  aspect-ratio: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mem-card:hover:not(.locked) {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.mem-card.revealed { border-color: var(--accent); background: var(--surface); }
+.mem-card.correct  { border-color: #00ff88; background: rgba(0,255,136,0.1); }
+.mem-card.wrong    { border-color: var(--danger); animation: shake 0.3s ease; }
+.mem-card.locked   { opacity: 0.5; cursor: default; }
+
+.memory-lives {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.life-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: background 0.3s;
+}
+
+.life-dot.lost { background: var(--danger); }
+
+/* ── Terminal hack ───────────────────────────────────────── */
+.terminal-wrap {
+  background: #010a06;
+  border: 1px solid #00aa44;
+  border-radius: var(--radius);
+  width: 440px;
+  height: 280px;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #00cc55;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #004422 transparent;
+}
+
+.terminal-output p { margin-bottom: 2px; opacity: 0.85; }
+.terminal-output .error-line { color: #ff4444; }
+.terminal-output .success-line { color: #00ff88; }
+.terminal-output .sys-line { color: #446644; }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px solid #004422;
+  padding-top: 8px;
+}
+
+.terminal-prompt { color: #00aa44; flex-shrink: 0; }
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00cc55;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  caret-color: #00cc55;
+}
+
+/* ── Lever combo ─────────────────────────────────────────── */
+.lever-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.lever-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.lever-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.lever-track {
+  width: 20px;
+  height: 80px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.lever-handle {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  border: 2px solid var(--border);
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  top: 46px;
+}
+
+.lever-track.up .lever-handle {
+  top: 6px;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.lever-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.lever-btn {
+  margin-top: 4px;
+  padding: 10px 32px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: uppercase;
+}
+
+.lever-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ── Laser avoid ─────────────────────────────────────────── */
+.laser-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#laser-canvas {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #050508;
+  display: block;
+}
+
+.laser-lives {
+  display: flex;
+  gap: 8px;
+}
+
+.laser-instructions {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}

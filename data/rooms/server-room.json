@@ -1,0 +1,78 @@
+{
+  "id": "server-room",
+  "name": "Server Room",
+  "ambientSound": "ambient-server",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "Hot air and the smell of burning plastic. Half the servers are dead. The fuse box in the corner might fix that.",
+  "particles": { "type": "smoke", "density": 0.5 },
+
+  "hotspots": [
+    {
+      "id": "fuse-box",
+      "type": "container",
+      "label": "Fuse Box",
+      "x": 82, "y": 22, "w": 10, "h": 18,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "fuse-box" },
+      "contents": []
+    },
+    {
+      "id": "server-panel",
+      "type": "container",
+      "label": "Wire Junction Panel",
+      "x": 5, "y": 30, "w": 16, "h": 30,
+      "cursor": "pointer",
+      "condition": { "hasItem": "wire-cutter" },
+      "action": { "type": "toggle-container", "objectId": "server-panel" },
+      "lockedMessage": "The panel cover is bolted shut. You'd need something to cut through it.",
+      "contents": []
+    },
+    {
+      "id": "server-wire-panel",
+      "type": "puzzle-trigger",
+      "label": "Wire Puzzle",
+      "x": 22, "y": 30, "w": 14, "h": 30,
+      "cursor": "zoom-in",
+      "condition": { "objectState": { "id": "server-panel", "equals": "open" } },
+      "action": { "type": "open-puzzle", "puzzleId": "server-wire" },
+      "lockedMessage": "The wire junction is behind the panel cover.",
+      "contents": []
+    },
+    {
+      "id": "server-door-lab",
+      "type": "door",
+      "label": "← Back to Lab",
+      "x": 88, "y": 12, "w": 10, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "main-lab" },
+      "contents": []
+    },
+    {
+      "id": "server-rack-note",
+      "type": "inspect",
+      "label": "Server Rack Log",
+      "x": 20, "y": 12, "w": 12, "h": 18,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "ARCADIA SYSTEMS — SERVER STATUS LOG\n\n[ERR] Rack A: PSU failure\n[ERR] Rack B: Fuse blown (Bay 3)\n[OK]  Rack C: Nominal\n[ERR] Network uplink: severed\n\nNote taped below:\n'Replacement fuse in main lab cabinet. Don't tell Harkins.'" },
+      "contents": []
+    },
+    {
+      "id": "server-hidden-door",
+      "type": "inspect",
+      "label": "Ventilation Shaft",
+      "x": 43, "y": 60, "w": 14, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A large ventilation shaft behind the server rack. Wide enough to crawl through. The grate has been removed — recently, by the look of the fresh scratches on the floor.\n\nWhere does it lead...?" },
+      "contents": [
+        {
+          "id": "laser-key",
+          "type": "pickupable",
+          "label": "Laser Key",
+          "x": 45, "y": 65, "w": 5, "h": 8,
+          "visibleWhen": { "objectState": "fuse-box", "equals": "powered" },
+          "action": { "type": "pick-up", "itemId": "laser-key" }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "escaped",
+    "title": "ESCAPE SUCCESSFUL",
+    "titleClass": "success",
+    "body": "You burst through the emergency exit as the facility goes into full lockdown. Fresh air. Sirens fade behind you. You made it out."
+  },
+  {
+    "id": "time-out",
+    "title": "TIME EXPIRED",
+    "titleClass": "fail",
+    "body": "The automated lockdown sequence completes. Blast doors seal every corridor. You're trapped inside as the ventilation system begins its purge cycle. Next time, move faster."
+  },
+  {
+    "id": "alarm-caught",
+    "title": "SECURITY RESPONSE",
+    "titleClass": "fail",
+    "body": "Red lights flood the corridor. You hear boots on the stairwell. The security response team arrives in under a minute. You don't reach the exit in time."
+  },
+  {
+    "id": "secret-escape",
+    "title": "SHADOW EXIT",
+    "titleClass": "success",
+    "body": "The maintenance hatch swings open to reveal daylight. You slip out through the forgotten tunnel. No logs. No cameras. No one will ever know you were here."
+  }
+]

@@ -1,0 +1,43 @@
+/* Inventory slot hover tooltip */
+.inv-slot:hover .inv-label { color: var(--accent); }
+
+/* Item count badge */
+.inv-slot .count-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* New item pick-up animation */
+@keyframes item-bounce {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  60%  { transform: scale(1.15) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.inv-slot.new-item {
+  animation: item-bounce 0.4s ease forwards;
+}
+
+/* Cursor item preview (when item selected) */
+#cursor-item {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}

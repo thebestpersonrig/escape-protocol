@@ -1,0 +1,11 @@
+[
+  { "id": "speed-runner",   "name": "Speed Runner",       "desc": "Escape with more than 30 minutes remaining." },
+  { "id": "no-hints",       "name": "I Don't Need Help",  "desc": "Escape without using any hints." },
+  { "id": "no-mistakes",    "name": "Ghost Protocol",     "desc": "Escape without triggering the alarm." },
+  { "id": "secret-escape",  "name": "Shadow Exit",        "desc": "Find and use the secret room exit." },
+  { "id": "too-loud",       "name": "Too Loud",           "desc": "Escape while the alarm is still active." },
+  { "id": "time-out",       "name": "Time's Up",          "desc": "Run out of time. Better luck next time." },
+  { "id": "completionist",  "name": "Completionist",      "desc": "Inspect every object in every room." },
+  { "id": "wire-first-try", "name": "Electrician",        "desc": "Solve the wire puzzle on the first try." },
+  { "id": "memory-master",  "name": "Memory Master",      "desc": "Complete the memory puzzle on the first try." }
+]
