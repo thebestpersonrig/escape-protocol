@@ -179,6 +179,7 @@ export function showInspection(text, imageSrc = null, objectId = null) {
   const popup = document.getElementById('inspection-popup');
   const textEl = document.getElementById('inspection-text');
   const imgEl  = document.getElementById('inspection-image');
+  const noteBtn = document.getElementById('inspection-note-btn');
   if (!popup || !textEl) return;
 
   if (objectId) dispatch('MARK_INSPECTED', { objectId });
@@ -193,11 +194,89 @@ export function showInspection(text, imageSrc = null, objectId = null) {
     imgEl.src = '';
   }
 
+  // Reset "Note it" button for each new inspection
+  if (noteBtn) {
+    noteBtn.textContent = '📓 Note it';
+    noteBtn.classList.remove('noted');
+    noteBtn.onclick = () => {
+      addJournalClue(text);
+      noteBtn.textContent = '✓ Noted';
+      noteBtn.classList.add('noted');
+    };
+  }
+
   popup.classList.add('visible');
 }
 
 export function hideInspection() {
   document.getElementById('inspection-popup')?.classList.remove('visible');
+}
+
+// ── Journal ───────────────────────────────────────────────
+const _JOURNAL_NOTES_KEY = 'ep-journal-notes';
+const _JOURNAL_CLUES_KEY = 'ep-journal-clues';
+let _journalClues = [];
+
+export function initJournal() {
+  // Load saved free-form notes
+  const savedNotes = localStorage.getItem(_JOURNAL_NOTES_KEY);
+  const textarea = document.getElementById('journal-textarea');
+  if (savedNotes && textarea) textarea.value = savedNotes;
+
+  // Load saved clue entries
+  try {
+    const savedClues = localStorage.getItem(_JOURNAL_CLUES_KEY);
+    if (savedClues) { _journalClues = JSON.parse(savedClues); _renderJournalClues(); }
+  } catch (e) { _journalClues = []; }
+
+  // Auto-save notes on every keystroke
+  textarea?.addEventListener('input', () => {
+    localStorage.setItem(_JOURNAL_NOTES_KEY, textarea.value);
+  });
+
+  document.getElementById('journal-close')?.addEventListener('click', () => toggleJournal(false));
+  document.getElementById('journal-button')?.addEventListener('click', () => toggleJournal());
+}
+
+export function clearJournal() {
+  _journalClues = [];
+  localStorage.removeItem(_JOURNAL_CLUES_KEY);
+  localStorage.removeItem(_JOURNAL_NOTES_KEY);
+  const textarea = document.getElementById('journal-textarea');
+  if (textarea) textarea.value = '';
+  _renderJournalClues();
+}
+
+export function toggleJournal(force) {
+  const overlay = document.getElementById('journal-overlay');
+  if (!overlay) return;
+  const willOpen = force !== undefined ? force : !overlay.classList.contains('visible');
+  overlay.classList.toggle('visible', willOpen);
+}
+
+export function addJournalClue(text) {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  _journalClues.push({ text: text.trim(), time: `${h}:${m}` });
+  localStorage.setItem(_JOURNAL_CLUES_KEY, JSON.stringify(_journalClues));
+  _renderJournalClues();
+  toggleJournal(true);
+}
+
+function _renderJournalClues() {
+  const list = document.getElementById('journal-clues-list');
+  if (!list) return;
+  if (_journalClues.length === 0) {
+    list.innerHTML = '<div id="journal-clues-empty">No clues noted yet — inspect objects and click "Note it".</div>';
+    return;
+  }
+  list.innerHTML = _journalClues.map(c => `
+    <div class="journal-clue-entry">
+      <div class="journal-clue-time">${c.time}</div>${c.text}
+    </div>
+  `).join('');
+  list.scrollTop = list.scrollHeight;
 }
 
 // ── Achievement toast ─────────────────────────────────────
@@ -229,8 +308,20 @@ export function initUI() {
     if (st.hintsAvailable > 0) showHint();
   });
 
-  document.getElementById('inspection-popup')?.addEventListener('click', hideInspection);
+  document.getElementById('inspection-popup')?.addEventListener('click', e => {
+    // Close if clicking the backdrop, but NOT the note button
+    if (e.target.id === 'inspection-popup') hideInspection();
+  });
 
+  // J key toggles journal
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'j' || e.key === 'J') && !e.ctrlKey && !e.metaKey) {
+      const puzzleOpen = document.getElementById('puzzle-overlay')?.classList.contains('visible');
+      if (!puzzleOpen) toggleJournal();
+    }
+  });
+
+  initJournal();
   updateTimerDisplay();
   updateObjectiveDisplay();
   updateHintButton();
