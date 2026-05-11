@@ -112,9 +112,9 @@ export function init(container, puzzleState, callbacks) {
       showIdx++;
       setTimeout(showSequence, 900);
     } else {
-      // Hide all
-      renderGrid();
+      // Switch to input phase BEFORE rendering so cards get click listeners
       phase = 'input';
+      renderGrid();
       statusEl.textContent = 'Now repeat the sequence!';
     }
   }

@@ -33,10 +33,9 @@ export function init(container, puzzleState, callbacks) {
     <div class="puzzle-subtitle">Connect each wire to its matching terminal</div>
     <div class="wire-wrap" id="wire-wrap">
       <div class="wire-col" id="wire-left"></div>
-      <div class="wire-svg-area" id="wire-svg-area">
-        <svg id="wire-svg" overflow="visible"></svg>
-      </div>
+      <div class="wire-spacer"></div>
       <div class="wire-col" id="wire-right"></div>
+      <svg id="wire-svg" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;"></svg>
     </div>
     <div style="margin-top:10px;font-size:11px;color:var(--text-dim);text-align:center;font-family:var(--font-mono);">
       Connected: <span id="wire-count">0</span> / 5
@@ -46,7 +45,6 @@ export function init(container, puzzleState, callbacks) {
   const leftCol  = container.querySelector('#wire-left');
   const rightCol = container.querySelector('#wire-right');
   const svg      = container.querySelector('#wire-svg');
-  const svgArea  = container.querySelector('#wire-svg-area');
   const countEl  = container.querySelector('#wire-count');
 
   // Build left nodes (sources)
