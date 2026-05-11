@@ -146,6 +146,22 @@ export function updateHintButton() {
   }
 }
 
+// ── Screen shake ──────────────────────────────────────────
+export function triggerShake(hard = false) {
+  // soft: shake scene only. hard: shake whole wrapper + red flash (alarm)
+  const el = document.getElementById(hard ? 'game-wrapper' : 'scene-container');
+  if (!el) return;
+  const cls = hard ? 'shake-hard' : 'shake';
+  el.classList.remove('shake', 'shake-hard');
+  void el.offsetWidth; // force reflow so animation restarts
+  el.classList.add(cls);
+  if (hard) {
+    el.classList.add('alarm-flash-border');
+    setTimeout(() => el.classList.remove('alarm-flash-border'), 1600);
+  }
+  setTimeout(() => el.classList.remove(cls), hard ? 700 : 450);
+}
+
 // ── Toast ─────────────────────────────────────────────────
 let _toastTimer = null;
 

@@ -69,6 +69,25 @@
   100% { transform: translateX(0); }
 }
 
+@keyframes shake-hard {
+  0%   { transform: translate(0,0)      rotate(0deg); }
+  10%  { transform: translate(-10px,4px) rotate(-0.6deg); }
+  20%  { transform: translate(10px,-4px) rotate(0.6deg); }
+  30%  { transform: translate(-8px,3px)  rotate(-0.4deg); }
+  40%  { transform: translate(8px,-3px)  rotate(0.4deg); }
+  50%  { transform: translate(-5px,2px)  rotate(-0.2deg); }
+  60%  { transform: translate(5px,-2px)  rotate(0.2deg); }
+  75%  { transform: translate(-3px,1px)  rotate(-0.1deg); }
+  90%  { transform: translate(3px,-1px)  rotate(0.1deg); }
+  100% { transform: translate(0,0)       rotate(0deg); }
+}
+
+@keyframes alarm-border-flash {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  25%      { box-shadow: 0 0 0 4px rgba(255,48,64,0.8); }
+  75%      { box-shadow: 0 0 0 8px rgba(255,48,64,0.4); }
+}
+
 @keyframes spark-burst {
   0%   { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.2); }
@@ -100,4 +119,6 @@
 .flicker-fast { animation: flicker-fast 2s infinite; }
 .glow-pulse   { animation: glow-pulse 2s ease-in-out infinite; }
 .shake        { animation: shake 0.4s ease; }
+.shake-hard   { animation: shake-hard 0.65s ease; }
+.alarm-flash-border { animation: alarm-border-flash 0.5s ease 3; }
 .success-pop  { animation: success-pop 0.4s ease forwards; }

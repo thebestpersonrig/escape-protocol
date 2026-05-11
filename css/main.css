@@ -757,6 +757,59 @@ body {
   z-index: 4;
 }
 
+/* ── Pause menu ──────────────────────────────────────────── */
+#pause-menu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.80);
+  z-index: 180;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+#pause-menu.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#pause-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8), 0 0 24px var(--accent-dim);
+  animation: slide-up 0.2s ease;
+  min-width: 260px;
+}
+
+#pause-title {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-shadow: 0 0 16px var(--accent-glow);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+#pause-subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface); }

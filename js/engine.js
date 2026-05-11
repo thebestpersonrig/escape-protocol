@@ -12,10 +12,12 @@ import { initClueLocations } from './clue-randomiser.js';
 export class Engine {
   constructor() {
     Engine.instance = this;
-    this._fadeEl = document.getElementById('fade-cover');
-    this._menuEl = document.getElementById('main-menu');
-    this._endEl  = document.getElementById('ending-screen');
+    this._fadeEl    = document.getElementById('fade-cover');
+    this._menuEl    = document.getElementById('main-menu');
+    this._endEl     = document.getElementById('ending-screen');
     this._achScreenEl = document.getElementById('achievements-screen');
+    this._pauseEl   = document.getElementById('pause-menu');
+    this._paused    = false;
 
     this._renderer    = new RoomRenderer();
     this._interaction = new InteractionSystem(this._renderer);
@@ -35,6 +37,54 @@ export class Engine {
       this._achScreenEl?.classList.remove('visible');
       this._menuEl?.classList.remove('hidden');
     });
+
+    // Pause menu buttons
+    document.getElementById('pause-resume')?.addEventListener('click', () => this.togglePause());
+    document.getElementById('pause-restart')?.addEventListener('click', () => {
+      this._hidePause();
+      this._endEl?.classList.remove('visible');
+      this._paused = false;
+      dispatch('RESET_STATE');
+      this._menuEl?.classList.remove('hidden');
+    });
+    document.getElementById('pause-quit')?.addEventListener('click', () => {
+      this._hidePause();
+      stopTimer();
+      this._paused = false;
+      dispatch('RESET_STATE');
+      this._menuEl?.classList.remove('hidden');
+    });
+
+    // P key to toggle pause
+    document.addEventListener('keydown', e => {
+      if (e.key === 'p' || e.key === 'P') {
+        const st = getState();
+        // Only allow pause when game is actually running
+        if (!st.timerRunning && !this._paused) return;
+        if (st.ending) return;
+        // Don't pause if puzzle is open
+        const puzzleOverlay = document.getElementById('puzzle-overlay');
+        if (puzzleOverlay?.classList.contains('visible')) return;
+        this.togglePause();
+      }
+    });
+  }
+
+  togglePause() {
+    const st = getState();
+    if (st.ending) return;
+    this._paused = !this._paused;
+    if (this._paused) {
+      stopTimer();
+      this._pauseEl?.classList.add('visible');
+    } else {
+      this._hidePause();
+      startTimer();
+    }
+  }
+
+  _hidePause() {
+    this._pauseEl?.classList.remove('visible');
   }
 
   async startNewGame(difficulty = 'medium') {

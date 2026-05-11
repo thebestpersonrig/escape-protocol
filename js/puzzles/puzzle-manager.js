@@ -1,6 +1,6 @@
 import { getState, dispatch } from '../state.js';
 import { AudioSystem } from '../audio.js';
-import { showToast, updateObjectiveDisplay } from '../ui.js';
+import { showToast, updateObjectiveDisplay, triggerShake } from '../ui.js';
 import { AchievementSystem } from '../achievements.js';
 
 const PUZZLE_NAMES = {
@@ -65,13 +65,15 @@ export const PuzzleManager = {
       },
       onFailure: () => {
         AudioSystem.play('puzzle-fail');
+        triggerShake(false); // soft shake on every mistake
         const wasAlarm = getState().alarmTriggered;
         const reason = `Failed ${PUZZLE_NAMES[puzzleId] || puzzleId} too many times`;
         dispatch('FAIL_PUZZLE', { puzzleId, reason });
         const st = getState();
         const mistakesLeft = st.mistakeLimit - st.mistakeCount;
         if (st.alarmTriggered && !wasAlarm) {
-          // Alarm just triggered — show why
+          // Alarm just triggered — hard shake + red flash
+          triggerShake(true);
           AudioSystem.playAlarm();
           showToast(`⚠ ALARM: ${reason}. Security in 60s!`, 'error');
           import('../ui.js').then(m => m.updateAlarmDisplay());
