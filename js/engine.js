@@ -37,9 +37,10 @@ export class Engine {
     });
   }
 
-  async startNewGame() {
+  async startNewGame(difficulty = 'medium') {
     const seed = Date.now();
     dispatch('SET_SEED', { seed });
+    dispatch('SET_DIFFICULTY', { difficulty });
     dispatch('START_TIMER');
     localStorage.setItem('ep-seed', String(seed));
     initClueLocations(seed);
@@ -134,8 +135,11 @@ export class Engine {
     if (bodyEl)  bodyEl.textContent = ending.body;
 
     const st = getState();
-    const min = Math.floor((3600 - st.timerSeconds) / 60);
-    const sec = (3600 - st.timerSeconds) % 60;
+    const DIFF_TOTALS = { easy: 1800, medium: 1200, hard: 600 };
+    const totalSecs = DIFF_TOTALS[st.difficulty] ?? 1200;
+    const elapsed = totalSecs - st.timerSeconds;
+    const min = Math.floor(elapsed / 60);
+    const sec = elapsed % 60;
     if (statsEl) statsEl.textContent = `Time elapsed: ${min}m ${sec}s  |  Hints used: ${st.hintsUsed}  |  Mistakes: ${st.mistakeCount}`;
 
     this._endEl?.classList.add('visible');

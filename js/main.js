@@ -5,6 +5,7 @@ import { dispatch } from './state.js';
 import { SaveSystem } from './save.js';
 
 let _engine = null;
+let _selectedDifficulty = 'medium';
 
 async function getEngine() {
   if (!_engine) {
@@ -16,7 +17,7 @@ async function getEngine() {
 
 function showButtonError(btn, msg) {
   btn.disabled = false;
-  btn.textContent = '▶ New Game';
+  btn.textContent = btn.dataset.label || '▶ New Game';
   let errEl = document.getElementById('ep-start-error');
   if (!errEl) {
     errEl = document.createElement('div');
@@ -28,6 +29,26 @@ function showButtonError(btn, msg) {
   console.error('[EP]', msg);
 }
 
+// Difficulty selection
+const DIFF_LABELS = { easy: '30 MINUTES', medium: '20 MINUTES', hard: '10 MINUTES' };
+const _diffLabel = document.getElementById('diff-label');
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    _selectedDifficulty = this.dataset.diff;
+    document.querySelectorAll('.diff-btn').forEach(b => {
+      b.classList.remove('selected');
+      b.style.borderColor = '#2a2a3a';
+      b.style.background  = '#111118';
+      b.style.color       = '#5a6070';
+    });
+    this.classList.add('selected');
+    this.style.borderColor = '#00ffe0';
+    this.style.background  = 'rgba(0,255,224,.1)';
+    this.style.color       = '#00ffe0';
+    if (_diffLabel) _diffLabel.textContent = DIFF_LABELS[_selectedDifficulty] || '';
+  });
+});
+
 // Check for existing save
 const btnCont = document.getElementById('btn-continue');
 if (SaveSystem.hasSave() && btnCont) btnCont.disabled = false;
@@ -35,13 +56,14 @@ if (SaveSystem.hasSave() && btnCont) btnCont.disabled = false;
 // New Game
 document.getElementById('btn-new-game')?.addEventListener('click', async function() {
   const btn = this;
+  btn.dataset.label = btn.textContent;
   btn.disabled = true;
   btn.textContent = 'Starting...';
   try {
     const engine = await getEngine();
     SaveSystem.deleteSave();
     dispatch('RESET_STATE');
-    await engine.startNewGame();
+    await engine.startNewGame(_selectedDifficulty);
   } catch (e) {
     showButtonError(btn, e?.message || String(e));
   }

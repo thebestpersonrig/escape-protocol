@@ -1,10 +1,17 @@
+const DIFFICULTY_TIMERS = {
+  easy:   1800,   // 30 min
+  medium: 1200,   // 20 min
+  hard:    600,   // 10 min
+};
+
 const DEFAULT_STATE = {
   version: "1.0",
   seed: null,
+  difficulty: "medium",
   currentRoom: "lab-entry",
   previousRoom: null,
   visitedRooms: [],
-  timerSeconds: 3600,
+  timerSeconds: 1200,
   timerRunning: false,
   alarmTriggered: false,
   alarmSecondsLeft: 60,
@@ -192,6 +199,13 @@ export function dispatch(action, payload = {}) {
     case "SET_SEED":
       _state.seed = payload.seed;
       break;
+
+    case "SET_DIFFICULTY": {
+      const d = payload.difficulty;
+      _state.difficulty = d;
+      _state.timerSeconds = DIFFICULTY_TIMERS[d] ?? DIFFICULTY_TIMERS.medium;
+      break;
+    }
 
     case "SET_CLUE_LOCATIONS":
       _state.clueLocations = payload.clueLocations;

@@ -44,11 +44,6 @@ export class InteractionSystem {
           const cond = state.objects[item.visibleWhen.objectState];
           if (cond !== item.visibleWhen.equals) continue;
         }
-        // Check clue location randomisation (mirror rooms.js logic)
-        if (item.clueSlot) {
-          const assignedContainer = state.clueLocations[item.clueSlot];
-          if (assignedContainer && assignedContainer !== hs.id) continue;
-        }
         if (state.inventory.includes(item.id)) continue;
         if (state.objects[item.id] === 'taken') continue;
         this._allHotspots.push(item);
