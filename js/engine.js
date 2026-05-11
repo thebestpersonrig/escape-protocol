@@ -61,7 +61,6 @@ export class Engine {
     this._menuEl?.classList.add('hidden');
     initUI();
     this._audio.init().catch(() => {});
-    const st = getState();
     await this._loadRoom(st.currentRoom);
     this._particles.init(document.getElementById('particle-canvas'));
     startTimer();
