@@ -142,13 +142,18 @@ export class InteractionSystem {
         break;
       }
 
-      case 'inspect':
-        showInspection(action.text, action.image || null, hs.id);
+      case 'inspect': {
+        const _st = getState();
+        const _code = _st.keypadCode || '????';
+        const _displayCode = _code.split('').join('-');
+        const _text = (action.text || '').replace(/\{\{keypad-code\}\}/g, _displayCode);
+        showInspection(_text, action.image || null, hs.id);
         AudioSystem.play('paper-rustle');
         if (action.unlocksRoom === 'secret-room') {
           dispatch('UNLOCK_SECRET_ROOM');
         }
         break;
+      }
 
       case 'pick-up':
         dispatch('PICK_UP_ITEM', { itemId: action.itemId });

@@ -42,7 +42,7 @@
           "x": 6, "y": 72, "w": 7, "h": 8,
           "clueSlot": "sticky-note",
           "visibleWhen": { "objectState": "entry-drawer", "equals": "open" },
-          "action": { "type": "inspect", "text": "A scrawled sticky note reads:\n\n'New keypad code — IT changed it again.\nCheck the server diagram for the password too.\n— Dr. Chen'\n\nBelow it, barely visible: 4-8-2-1" }
+          "action": { "type": "inspect", "text": "A scrawled sticky note reads:\n\n'New keypad code — IT changed it again.\nCheck the server diagram for the password too.\n— Dr. Chen'\n\nBelow it, barely visible: {{keypad-code}}" }
         },
         {
           "id": "screwdriver",

@@ -1,15 +1,8 @@
 import { AudioSystem } from '../audio.js';
-
-// 5 possible codes — picked by seed at game start
-const CODES = ['4821', '7364', '2957', '6140', '3589'];
-
-function getCode() {
-  const seed = parseInt(localStorage.getItem('ep-seed') || '0');
-  return CODES[seed % CODES.length];
-}
+import { getState } from '../state.js';
 
 export function init(container, puzzleState, callbacks) {
-  const code = getCode();
+  const code = getState().keypadCode || '4821';
   let input = '';
 
   container.innerHTML = `

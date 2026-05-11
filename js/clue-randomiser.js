@@ -52,5 +52,9 @@ export function initClueLocations(seed) {
     clueLocations[clue.id] = clue.validSlots[idx];
   }
 
+  // Generate a random 4-digit keypad code from the same seed
+  const keypadCode = Array.from({ length: 4 }, () => Math.floor(rng() * 10)).join('');
+
   dispatch('SET_CLUE_LOCATIONS', { clueLocations });
+  dispatch('SET_KEYPAD_CODE', { keypadCode });
 }

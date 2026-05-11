@@ -49,6 +49,7 @@ const DEFAULT_STATE = {
   hintsUsed: 0,
   hintsAvailable: 3,
   clueLocations: {},
+  keypadCode: '4821',
   inspectedObjects: [],
   achievements: [],
   ending: null,
@@ -209,6 +210,10 @@ export function dispatch(action, payload = {}) {
 
     case "SET_CLUE_LOCATIONS":
       _state.clueLocations = payload.clueLocations;
+      break;
+
+    case "SET_KEYPAD_CODE":
+      _state.keypadCode = payload.keypadCode;
       break;
 
     default:
