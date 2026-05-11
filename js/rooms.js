@@ -322,6 +322,14 @@ export class RoomRenderer {
           <div style="position:absolute;top:50%;left:10%;width:8%;height:5%;background:#223428;border:1px solid #3a5038;border-radius:1px;transform:translateY(-50%);"></div>
         </div>`,
 
+      'lab-exit-corridor': (() => {
+        const unlocked = state.puzzles['terminal-hack']?.solved;
+        return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,#161628,#0e0e1e);border:2px solid ${unlocked ? 'rgba(0,255,224,0.6)' : '#2a2a4a'};border-radius:3px;display:flex;align-items:center;justify-content:center;gap:6%;padding:0 8%;">
+          <div style="color:${unlocked ? 'var(--accent)' : '#3a3a5a'};font-family:monospace;font-size:0.75vw;letter-spacing:0.15em;writing-mode:vertical-rl;opacity:${unlocked ? '1' : '0.5'};">EMERGENCY CORRIDOR</div>
+          <div style="width:8%;aspect-ratio:1;background:${unlocked ? 'rgba(0,255,224,0.3)' : '#1a1a30'};border:1px solid ${unlocked ? 'var(--accent)' : '#3a3a5a'};border-radius:50%;box-shadow:${unlocked ? '0 0 12px rgba(0,255,224,0.6)' : 'none'};"></div>
+        </div>`;
+      })(),
+
       'lab-symbol-board': `
         <div style="width:100%;height:100%;background:#141e14;border:1px solid #2a3e2a;border-radius:3px;display:grid;grid-template-columns:repeat(2,1fr);gap:4%;padding:6%;align-items:center;justify-items:center;">
           <div style="color:rgba(0,220,100,0.7);font-size:1.5vw;">⬡</div>

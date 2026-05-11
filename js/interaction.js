@@ -201,6 +201,12 @@ export class InteractionSystem {
         this._buildHotspotList(this._config, getState());
       },
       insertFuse: () => {
+        const st = getState();
+        if (!st.puzzles['server-wire']?.solved) {
+          showToast('The wiring must be reconnected before the fuse will hold.', 'error');
+          AudioSystem.play('door-locked');
+          return;
+        }
         dispatch('SET_OBJECT_STATE', { objectId: 'fuse-box', newState: 'powered' });
         AudioSystem.play('door-unlock');
         showToast('Power restored! The server room hums to life.', 'success');

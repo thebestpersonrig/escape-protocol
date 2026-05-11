@@ -1,21 +1,9 @@
 // Lever combination puzzle — set 4 levers to the correct UP/DOWN pattern
-
-// Patterns: 1=UP, 0=DOWN. Clue is found on lever-diagram item
-const PATTERNS = [
-  [1, 0, 1, 0],
-  [0, 1, 1, 0],
-  [1, 1, 0, 1],
-  [0, 0, 1, 1],
-  [1, 0, 0, 1],
-];
-
-function getPattern() {
-  const seed = parseInt(localStorage.getItem('ep-seed') || '0');
-  return PATTERNS[seed % PATTERNS.length];
-}
+// Pattern: 1=UP, 0=DOWN.  Matches the diagram clue: [ ↑ ][ ↓ ][ ↑ ][ ↓ ]
+const PATTERN = [1, 0, 1, 0];
 
 export function init(container, puzzleState, callbacks) {
-  const pattern = getPattern();
+  const pattern = PATTERN;
   let positions = puzzleState.leverPositions?.slice() || [0, 0, 0, 0];
 
   container.innerHTML = `

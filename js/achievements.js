@@ -2,7 +2,7 @@ import { getState, dispatch } from './state.js';
 import { SaveSystem } from './save.js';
 
 const DEFS = [
-  { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than 30 minutes remaining.' },
+  { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than half your time remaining.' },
   { id: 'no-hints',       name: "I Don't Need Help",  desc: 'Escape without using any hints.' },
   { id: 'no-mistakes',    name: 'Ghost Protocol',      desc: 'Escape without triggering the alarm.' },
   { id: 'secret-escape',  name: 'Shadow Exit',         desc: 'Find and use the secret room exit.' },
@@ -28,9 +28,12 @@ export class AchievementSystem {
   checkEnding(endingId) {
     const st = getState();
     const remaining = st.timerSeconds;
+    const DIFF_TOTALS = { easy: 1800, medium: 1200, hard: 600 };
+    const totalSecs = DIFF_TOTALS[st.difficulty] ?? 1200;
 
     if (endingId === 'escaped' || endingId === 'secret-escape') {
-      if (remaining > 1800) this.unlock('speed-runner');
+      // Speed Runner: escaped with more than half the time left
+      if (remaining > totalSecs * 0.5) this.unlock('speed-runner');
       if (st.hintsUsed === 0) this.unlock('no-hints');
       if (!st.alarmTriggered) this.unlock('no-mistakes');
       if (st.alarmTriggered) this.unlock('too-loud');

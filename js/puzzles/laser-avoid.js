@@ -1,10 +1,17 @@
 // Laser avoidance minigame — canvas-based, WASD/arrow keys
 
+// Module-level handles so destroy() can always cancel a running game
+let _animId   = null;
+let _cleanup  = () => {};
+
 export function init(container, puzzleState, callbacks) {
+  // Cancel any leftover run from a previous open
+  if (_animId !== null) { cancelAnimationFrame(_animId); _animId = null; }
+  _cleanup();
+
   const W = 360, H = 260;
   let lives = 3;
   let won   = false;
-  let animId;
 
   container.innerHTML = `
     <div class="puzzle-title">⚡ LASER GRID ⚡</div>
@@ -160,7 +167,7 @@ export function init(container, puzzleState, callbacks) {
 
   function loop() {
     if (won) return;
-    animId = requestAnimationFrame(loop);
+    _animId = requestAnimationFrame(loop);
 
     // Move lasers
     for (const laser of lasers) {
@@ -190,8 +197,8 @@ export function init(container, puzzleState, callbacks) {
         reset();
         if (lives <= 0) {
           won = true;
-          cancelAnimationFrame(animId);
-          cleanup();
+          cancelAnimationFrame(_animId); _animId = null;
+          cleanup(); _cleanup = () => {};
           setTimeout(() => callbacks.onClose(), 800);
           return;
         }
@@ -199,8 +206,8 @@ export function init(container, puzzleState, callbacks) {
 
       if (checkExit()) {
         won = true;
-        cancelAnimationFrame(animId);
-        cleanup();
+        cancelAnimationFrame(_animId); _animId = null;
+        cleanup(); _cleanup = () => {};
         setTimeout(() => callbacks.onSuccess(), 300);
         return;
       }
@@ -213,11 +220,14 @@ export function init(container, puzzleState, callbacks) {
     document.removeEventListener('keydown', onKey);
     document.removeEventListener('keyup',   onKey);
   }
+  _cleanup = cleanup;
 
   updateLives();
   loop();
 }
 
 export function destroy(container) {
+  if (_animId !== null) { cancelAnimationFrame(_animId); _animId = null; }
+  _cleanup(); _cleanup = () => {};
   container.innerHTML = '';
 }

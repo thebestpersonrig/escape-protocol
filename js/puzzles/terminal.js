@@ -1,12 +1,6 @@
 // Terminal hacking puzzle — type the correct password
-
-// Password is hidden in the server-diagram item clue
-const PASSWORDS = ['PROMETHEUS', 'LAZARUS', 'VOID_LAB', 'SECTOR7', 'CHIMERA'];
-
-function getPassword() {
-  const seed = parseInt(localStorage.getItem('ep-seed') || '0');
-  return PASSWORDS[seed % PASSWORDS.length];
-}
+// Password is always PROMETHEUS — shown on the server-diagram clue in main lab
+const PASSWORD = 'PROMETHEUS';
 
 const BOOT_LINES = [
   '> ARCADIA RESEARCH SYSTEMS v4.2.1',
@@ -21,7 +15,7 @@ const BOOT_LINES = [
 ];
 
 export function init(container, puzzleState, callbacks) {
-  const password = getPassword();
+  const password = PASSWORD;
   let attempts   = puzzleState.attempts || 0;
   const MAX_ATT  = 3;
 

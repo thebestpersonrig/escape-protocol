@@ -1,4 +1,5 @@
 // Wire connection puzzle — drag from source to matching terminal
+import { AudioSystem } from '../audio.js';
 
 const WIRE_COLORS = [
   { id: 'red',    color: '#cc3333', label: 'RED' },
@@ -160,7 +161,8 @@ export function init(container, puzzleState, callbacks) {
             setTimeout(() => callbacks.onSuccess(), 400);
           }
         } else {
-          callbacks.onFailure();
+          // Wrong colour — don't count as a global mistake, just buzz locally
+          AudioSystem.play('puzzle-fail');
         }
       }
     });

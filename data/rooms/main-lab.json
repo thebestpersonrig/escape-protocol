@@ -96,7 +96,9 @@
       "label": "Security Terminal",
       "x": 24, "y": 42, "w": 14, "h": 20,
       "cursor": "zoom-in",
+      "condition": { "objectState": { "id": "fuse-box", "equals": "powered" } },
       "action": { "type": "open-puzzle", "puzzleId": "terminal-hack" },
+      "lockedMessage": "The terminal is dead. Restore server room power first.",
       "contents": []
     },
     {
@@ -135,6 +137,17 @@
       "x": 55, "y": 44, "w": 10, "h": 16,
       "cursor": "zoom-in",
       "action": { "type": "open-puzzle", "puzzleId": "memory-card" },
+      "contents": []
+    },
+    {
+      "id": "lab-exit-corridor",
+      "type": "door",
+      "label": "Emergency Corridor →",
+      "x": 54, "y": 12, "w": 13, "h": 22,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "terminal-hack" },
+      "action": { "type": "navigate", "to": "final-exit" },
+      "lockedMessage": "The corridor is sealed. Hack the security terminal to disengage the lock.",
       "contents": []
     }
   ]
