@@ -452,6 +452,14 @@ body {
   animation: blink 0.8s step-end infinite;
 }
 
+#alarm-reason {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 48, 64, 0.7);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
 #alarm-countdown {
   font-family: var(--font-mono);
   font-size: 22px;

@@ -59,11 +59,13 @@ function checkAlarmCountdown() {
 // ── Alarm display ─────────────────────────────────────────
 export function updateAlarmDisplay() {
   const st = getState();
-  const overlay = document.getElementById('alarm-overlay');
+  const overlay   = document.getElementById('alarm-overlay');
   const countdown = document.getElementById('alarm-countdown');
+  const reasonEl  = document.getElementById('alarm-reason');
   if (!overlay) return;
   if (st.alarmTriggered) {
     overlay.classList.add('active');
+    if (reasonEl && st.alarmReason) reasonEl.textContent = st.alarmReason;
     if (countdown) {
       const s = Math.max(0, st.alarmSecondsLeft);
       countdown.textContent = `SECURITY RESPONSE IN: 0:${pad(s)}`;

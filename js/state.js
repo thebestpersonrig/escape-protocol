@@ -4,6 +4,12 @@ const DIFFICULTY_TIMERS = {
   hard:    600,   // 10 min
 };
 
+const DIFFICULTY_MISTAKE_LIMITS = {
+  easy:   10,
+  medium:  5,
+  hard:    3,
+};
+
 const DEFAULT_STATE = {
   version: "1.0",
   seed: null,
@@ -15,6 +21,7 @@ const DEFAULT_STATE = {
   timerRunning: false,
   alarmTriggered: false,
   alarmSecondsLeft: 60,
+  alarmReason: '',
   mistakeCount: 0,
   mistakeLimit: 5,
   inventory: [],
@@ -122,6 +129,7 @@ export function dispatch(action, payload = {}) {
       if (_state.mistakeCount >= _state.mistakeLimit && !_state.alarmTriggered) {
         _state.alarmTriggered = true;
         _state.alarmSecondsLeft = 60;
+        _state.alarmReason = payload.reason || 'Too many failed attempts';
         dispatch("TRIGGER_ALARM");
         return;
       }
@@ -204,7 +212,8 @@ export function dispatch(action, payload = {}) {
     case "SET_DIFFICULTY": {
       const d = payload.difficulty;
       _state.difficulty = d;
-      _state.timerSeconds = DIFFICULTY_TIMERS[d] ?? DIFFICULTY_TIMERS.medium;
+      _state.timerSeconds  = DIFFICULTY_TIMERS[d]       ?? DIFFICULTY_TIMERS.medium;
+      _state.mistakeLimit  = DIFFICULTY_MISTAKE_LIMITS[d] ?? 5;
       break;
     }
 

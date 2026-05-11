@@ -86,7 +86,12 @@ export function init(container, puzzleState, callbacks) {
     } else {
       lives--;
       updateLives();
+      // Each lost life counts as one global mistake
       callbacks.onFailure();
+      // Flash wrong card
+      grid.querySelectorAll('.mem-card').forEach(card => {
+        if (card.textContent === sym) { card.classList.add('wrong'); setTimeout(() => card.classList.remove('wrong'), 400); }
+      });
       if (lives <= 0) {
         statusEl.textContent = 'Memory wipe complete.';
         statusEl.style.color = 'var(--danger)';
@@ -95,11 +100,14 @@ export function init(container, puzzleState, callbacks) {
       } else {
         playerSeq = [];
         progressEl.textContent = 0;
-        // Flash wrong
-        grid.querySelectorAll('.mem-card').forEach(card => {
-          if (card.textContent === sym) { card.classList.add('wrong'); setTimeout(() => card.classList.remove('wrong'), 400); }
-        });
-        statusEl.textContent = `Wrong! ${lives} attempt${lives === 1 ? '' : 's'} left. Try again.`;
+        statusEl.textContent = `Wrong! ${lives} life${lives === 1 ? '' : 's'} left. Starting over...`;
+        // Brief pause then re-show the sequence so player can re-learn it
+        setTimeout(() => {
+          phase = 'showing';
+          showIdx = 0;
+          statusEl.style.color = '';
+          setTimeout(showSequence, 400);
+        }, 800);
       }
     }
   }

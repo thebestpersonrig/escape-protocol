@@ -1,4 +1,5 @@
 // Memory/matching card puzzle — match pairs of symbols
+import { AudioSystem } from '../audio.js';
 
 const SYMBOLS = ['⬡', '◈', '⬟', '✦', '⚙', '⬢', '◉', '✺'];
 
@@ -74,11 +75,11 @@ export function init(container, puzzleState, callbacks) {
           setTimeout(() => callbacks.onSuccess(), 500);
         }
       } else {
-        // No match
+        // No match — play sound locally, never counts as a global mistake
+        AudioSystem.play('puzzle-fail');
         setTimeout(() => {
           flipped = [];
           locked  = false;
-          callbacks.onFailure();
           render();
         }, 900);
       }

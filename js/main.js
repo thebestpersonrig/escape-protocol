@@ -30,7 +30,7 @@ function showButtonError(btn, msg) {
 }
 
 // Difficulty selection
-const DIFF_LABELS = { easy: '30 MINUTES', medium: '20 MINUTES', hard: '10 MINUTES' };
+const DIFF_LABELS = { easy: '30 MIN · 10 MISTAKES', medium: '20 MIN · 5 MISTAKES', hard: '10 MIN · 3 MISTAKES' };
 const _diffLabel = document.getElementById('diff-label');
 document.querySelectorAll('.diff-btn').forEach(btn => {
   btn.addEventListener('click', function() {

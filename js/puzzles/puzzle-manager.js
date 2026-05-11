@@ -3,6 +3,16 @@ import { AudioSystem } from '../audio.js';
 import { showToast, updateObjectiveDisplay } from '../ui.js';
 import { AchievementSystem } from '../achievements.js';
 
+const PUZZLE_NAMES = {
+  'entry-keypad':  'Security Keypad',
+  'lab-symbol':    'Symbol Matrix',
+  'server-wire':   'Wire Junction',
+  'memory-card':   'Sequence Memory',
+  'terminal-hack': 'Terminal Hack',
+  'lever-combo':   'Lever Controls',
+  'laser-avoid':   'Laser Grid',
+};
+
 const _ach = new AchievementSystem();
 
 // Lazy-load puzzle modules
@@ -55,13 +65,18 @@ export const PuzzleManager = {
       },
       onFailure: () => {
         AudioSystem.play('puzzle-fail');
-        dispatch('FAIL_PUZZLE', { puzzleId });
-        // Check if alarm should trigger
+        const wasAlarm = getState().alarmTriggered;
+        const reason = `Failed ${PUZZLE_NAMES[puzzleId] || puzzleId} too many times`;
+        dispatch('FAIL_PUZZLE', { puzzleId, reason });
         const st = getState();
-        if (st.alarmTriggered && !st._alarmStarted) {
-          st._alarmStarted = true;
+        const mistakesLeft = st.mistakeLimit - st.mistakeCount;
+        if (st.alarmTriggered && !wasAlarm) {
+          // Alarm just triggered — show why
           AudioSystem.playAlarm();
+          showToast(`⚠ ALARM: ${reason}. Security in 60s!`, 'error');
           import('../ui.js').then(m => m.updateAlarmDisplay());
+        } else if (!st.alarmTriggered && mistakesLeft <= 2 && mistakesLeft > 0) {
+          showToast(`Warning: ${mistakesLeft} mistake${mistakesLeft === 1 ? '' : 's'} left before alarm!`, 'info');
         }
       },
       onClose: () => {
