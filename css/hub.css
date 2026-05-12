@@ -21,8 +21,8 @@
 
 html {
   background: var(--bg);
-  /* prevent any child from causing horizontal scroll */
-  overflow-x: clip;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body {
@@ -30,7 +30,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 /* ── Background grid ─────────────────────────────────────────── */
