@@ -425,3 +425,81 @@
   .laser-dpad { display: flex; }
   .laser-instructions { display: none; }
 }
+
+/* ── Sequence panel ───────────────────────────────────────── */
+.seq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 280px;
+  margin: 4px auto 0;
+}
+
+.seq-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 22px 12px 18px;
+  background: var(--surface2);
+  border: 2px solid var(--seq-color, var(--border));
+  border-radius: var(--radius);
+  color: var(--seq-color, var(--text));
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  opacity: 0.35;
+}
+
+.seq-grid:not(.seq-watching) .seq-btn:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 14px var(--seq-glow, transparent);
+}
+
+.seq-grid.seq-watching .seq-btn {
+  cursor: default;
+  pointer-events: none;
+}
+
+.seq-btn.lit {
+  opacity: 1;
+  box-shadow:
+    0 0 18px var(--seq-glow, transparent),
+    0 0 36px var(--seq-glow, transparent),
+    inset 0 0 20px var(--seq-glow, transparent);
+  transform: scale(1.05);
+}
+
+.seq-sym {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.seq-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.seq-track {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.seq-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.seq-pip.filled {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
+}

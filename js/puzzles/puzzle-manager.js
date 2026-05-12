@@ -31,7 +31,7 @@ const PUZZLE_MODULES = {
   'laser-avoid':   () => import('./laser-avoid.js'),
   'bio-switch':      () => import('./switch-circuit.js'),
   'director-safe':   () => import('./keypad.js'),
-  'security-panel':  () => import('./symbol-match.js'),
+  'security-panel':  () => import('./sequence-panel.js'),
   'power-frequency': () => import('./frequency-tuner.js'),
   'hatch-keypad':    () => import('./keypad.js'),
 };

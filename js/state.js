@@ -36,7 +36,7 @@ const DEFAULT_STATE = {
     "laser-avoid":   { solved: false, attempts: 0 },
     "bio-switch":       { solved: false, attempts: 0, pattern: [1, 0, 1, 1] },
     "director-safe":   { solved: false, attempts: 0, code: '7391' },
-    "security-panel":  { solved: false, attempts: 0 },
+    "security-panel":  { solved: false, attempts: 0, sequence: [2, 0, 3, 1, 2] },
     "power-frequency": { solved: false, attempts: 0, target: 500 },
     "hatch-keypad":    { solved: false, attempts: 0 },
   },
@@ -263,6 +263,10 @@ export function dispatch(action, payload = {}) {
     case "SET_POWER_FREQUENCY":
       _state.powerFrequency = payload.frequency;
       _state.puzzles["power-frequency"].target = payload.frequency;
+      break;
+
+    case "SET_SECURITY_SEQUENCE":
+      _state.puzzles["security-panel"].sequence = payload.sequence;
       break;
 
     default:

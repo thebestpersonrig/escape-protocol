@@ -177,17 +177,72 @@ export class RoomRenderer {
         <div style="position:absolute;top:50%;left:6%;width:10%;height:1px;background:#3a3a6a;"></div>
       `,
       'secret-room': `
-        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0e0e18,transparent);"></div>
-        <div style="position:absolute;top:0;left:0;width:12%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.7),transparent);"></div>
-        <div style="position:absolute;top:0;right:0;width:12%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.7),transparent);"></div>
-        <div style="position:absolute;top:30%;left:20%;width:20%;height:25%;background:#10101e;border:1px solid #222236;padding:8px;display:flex;flex-direction:column;gap:4px;">
-          <div style="width:80%;height:2px;background:#2a2a42;"></div>
-          <div style="width:60%;height:2px;background:#2a2a42;"></div>
-          <div style="width:90%;height:2px;background:#2a2a42;"></div>
-          <div style="width:40%;height:2px;background:#2a2a42;"></div>
+        <!-- Floor -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0c0c18,transparent);"></div>
+        <!-- Floor grid lines -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:repeating-linear-gradient(90deg,rgba(40,40,80,0.35),rgba(40,40,80,0.35) 1px,transparent 1px,transparent 8%),repeating-linear-gradient(rgba(40,40,80,0.25),rgba(40,40,80,0.25) 1px,transparent 1px,transparent 28px);"></div>
+        <!-- Side vignettes -->
+        <div style="position:absolute;top:0;left:0;width:10%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.75),transparent);"></div>
+        <div style="position:absolute;top:0;right:0;width:10%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.75),transparent);"></div>
+        <!-- Dim blue ceiling strip — secret room only power source -->
+        <div style="position:absolute;top:0;left:20%;width:60%;height:3px;background:linear-gradient(90deg,transparent,rgba(60,100,220,0.6),transparent);box-shadow:0 0 18px rgba(60,100,220,0.4),0 0 40px rgba(60,100,220,0.15);"></div>
+        <!-- Ambient pool on floor -->
+        <div style="position:absolute;bottom:0;left:25%;right:25%;height:30%;background:radial-gradient(ellipse,rgba(40,60,160,0.06) 0%,transparent 70%);"></div>
+        <!-- Left wall — filing cabinet bank -->
+        <div style="position:absolute;bottom:28%;left:4%;width:14%;height:42%;background:#0e0e1c;border:1px solid #1c1c32;border-radius:2px;"></div>
+        <div style="position:absolute;bottom:28%;left:4%;width:14%;height:1px;background:#222238;top:38%;"></div>
+        <div style="position:absolute;bottom:28%;left:4%;width:14%;height:1px;background:#222238;top:48%;"></div>
+        <div style="position:absolute;bottom:28%;left:4%;width:14%;height:1px;background:#222238;top:58%;"></div>
+        <!-- Filing cabinet handles -->
+        <div style="position:absolute;top:40%;left:9%;width:3%;height:2px;background:#2a2a44;border-radius:1px;"></div>
+        <div style="position:absolute;top:50%;left:9%;width:3%;height:2px;background:#2a2a44;border-radius:1px;"></div>
+        <div style="position:absolute;top:60%;left:9%;width:3%;height:2px;background:#2a2a44;border-radius:1px;"></div>
+        <!-- Center back wall — large data terminal -->
+        <div style="position:absolute;top:15%;left:33%;width:34%;height:55%;background:#0a0a18;border:1px solid #202040;border-radius:2px;"></div>
+        <!-- Terminal screen area (dark CRT look) -->
+        <div style="position:absolute;top:18%;left:35%;width:30%;height:32%;background:#050510;border:1px solid #1a1a38;border-radius:1px;box-shadow:inset 0 0 20px rgba(40,60,200,0.08);"></div>
+        <!-- Scanline overlay on screen -->
+        <div style="position:absolute;top:18%;left:35%;width:30%;height:32%;background:repeating-linear-gradient(rgba(0,0,40,0.18),rgba(0,0,40,0.18) 2px,transparent 2px,transparent 4px);border-radius:1px;pointer-events:none;"></div>
+        <!-- Terminal text lines (decorative) -->
+        <div style="position:absolute;top:21%;left:37%;width:22%;height:2px;background:rgba(40,80,200,0.25);border-radius:1px;"></div>
+        <div style="position:absolute;top:25%;left:37%;width:16%;height:2px;background:rgba(40,80,200,0.2);border-radius:1px;"></div>
+        <div style="position:absolute;top:29%;left:37%;width:20%;height:2px;background:rgba(40,80,200,0.2);border-radius:1px;"></div>
+        <div style="position:absolute;top:33%;left:37%;width:12%;height:2px;background:rgba(40,80,200,0.15);border-radius:1px;"></div>
+        <!-- Terminal blinking cursor dot -->
+        <div style="position:absolute;top:37%;left:37%;width:1%;height:2px;background:rgba(80,120,255,0.5);animation:blink 1s step-end infinite;"></div>
+        <!-- Terminal base controls -->
+        <div style="position:absolute;top:52%;left:36%;width:28%;height:14%;background:#0c0c20;border:1px solid #1a1a38;border-radius:1px;display:flex;align-items:center;justify-content:center;gap:8px;padding:4px;">
+          <div style="width:10px;height:10px;border-radius:50%;background:#002200;border:1px solid rgba(0,180,60,0.5);box-shadow:0 0 6px rgba(0,180,60,0.4);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#200000;border:1px solid rgba(180,40,0,0.4);"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#001a1a;border:1px solid rgba(0,160,180,0.4);box-shadow:0 0 5px rgba(0,160,180,0.3);"></div>
         </div>
-        <div style="position:absolute;top:35%;right:15%;width:8%;height:15%;background:#10101e;border:1px solid rgba(0,200,255,0.5);box-shadow:0 0 20px rgba(0,200,255,0.2);border-radius:3px;"></div>
-        <div style="position:absolute;top:8%;left:8%;color:rgba(140,140,180,0.3);font-size:3vw;">⌂</div>
+        <!-- Right wall — server rack with blinking LEDs -->
+        <div style="position:absolute;bottom:28%;right:4%;width:13%;height:40%;background:#0c0c1a;border:1px solid #1c1c30;border-radius:2px;"></div>
+        <div style="position:absolute;bottom:28%;right:4%;width:13%;height:1px;background:#1e1e34;top:36%;"></div>
+        <div style="position:absolute;bottom:28%;right:4%;width:13%;height:1px;background:#1e1e34;top:46%;"></div>
+        <div style="position:absolute;bottom:28%;right:4%;width:13%;height:1px;background:#1e1e34;top:56%;"></div>
+        <!-- Server rack LED indicators -->
+        <div style="position:absolute;top:38%;right:5%;display:flex;gap:3px;">
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(0,200,80,0.8);box-shadow:0 0 5px rgba(0,200,80,0.6);animation:blink 2.1s step-end infinite;"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(0,200,80,0.8);box-shadow:0 0 5px rgba(0,200,80,0.6);animation:blink 1.7s step-end infinite;"></div>
+        </div>
+        <div style="position:absolute;top:48%;right:5%;display:flex;gap:3px;">
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(0,200,80,0.8);box-shadow:0 0 5px rgba(0,200,80,0.6);animation:blink 3s step-end infinite;"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(200,60,0,0.7);box-shadow:0 0 4px rgba(200,60,0,0.5);"></div>
+        </div>
+        <div style="position:absolute;top:58%;right:5%;display:flex;gap:3px;">
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(0,200,80,0.8);box-shadow:0 0 5px rgba(0,200,80,0.6);animation:blink 2.5s step-end infinite;"></div>
+          <div style="width:5px;height:5px;border-radius:50%;background:rgba(0,200,80,0.8);box-shadow:0 0 5px rgba(0,200,80,0.6);animation:blink 1.3s step-end infinite;"></div>
+        </div>
+        <!-- Vent grate top right -->
+        <div style="position:absolute;top:6%;right:6%;width:8%;height:6%;background:#0c0c18;border:1px solid #1a1a2e;border-radius:2px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:2px;">
+          <div style="background:#151528;border-radius:1px;"></div><div style="background:#151528;border-radius:1px;"></div>
+          <div style="background:#151528;border-radius:1px;"></div><div style="background:#151528;border-radius:1px;"></div>
+          <div style="background:#151528;border-radius:1px;"></div><div style="background:#151528;border-radius:1px;"></div>
+          <div style="background:#151528;border-radius:1px;"></div><div style="background:#151528;border-radius:1px;"></div>
+        </div>
+        <!-- Caution tape on floor (diagonal) -->
+        <div style="position:absolute;bottom:18%;left:18%;width:6%;height:6px;background:repeating-linear-gradient(45deg,rgba(255,180,0,0.5),rgba(255,180,0,0.5) 4px,rgba(20,20,40,0.5) 4px,rgba(20,20,40,0.5) 8px);transform:rotate(-8deg);"></div>
       `,
 
       'bio-lab': `

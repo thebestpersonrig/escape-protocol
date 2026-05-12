@@ -69,4 +69,14 @@ export function initClueLocations(seed) {
   // --- Utility corridor frequency target (200–890 Hz, round to nearest 10) ---
   const rawHz = Math.floor(rng() * 70) * 10 + 200; // 200, 210, ..., 890
   dispatch('SET_POWER_FREQUENCY', { frequency: rawHz });
+
+  // --- Security panel sequence (5 steps, indices 0-3, no two identical adjacent) ---
+  const seqLen = 5;
+  const secSeq = [];
+  for (let i = 0; i < seqLen; i++) {
+    let v;
+    do { v = Math.floor(rng() * 4); } while (i > 0 && v === secSeq[i - 1]);
+    secSeq.push(v);
+  }
+  dispatch('SET_SECURITY_SEQUENCE', { sequence: secSeq });
 }
