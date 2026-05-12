@@ -34,10 +34,11 @@ const DEFAULT_STATE = {
     "terminal-hack": { solved: false, attempts: 0 },
     "lever-combo":   { solved: false, attempts: 0, leverPositions: [0, 0, 0, 0] },
     "laser-avoid":   { solved: false, attempts: 0 },
-    "bio-memory":       { solved: false, attempts: 0 },
+    "bio-switch":       { solved: false, attempts: 0, pattern: [1, 0, 1, 1] },
     "director-safe":   { solved: false, attempts: 0, code: '7391' },
     "security-panel":  { solved: false, attempts: 0 },
-    "power-junction":  { solved: false, attempts: 0 },
+    "power-frequency": { solved: false, attempts: 0, target: 500 },
+    "hatch-keypad":    { solved: false, attempts: 0 },
   },
   objects: {
     "entry-drawer":       "closed",
@@ -71,6 +72,8 @@ const DEFAULT_STATE = {
   leverPattern: [1, 0, 1, 0],
   terminalPassword: 'PROMETHEUS',
   directorSafeCode: '7391',
+  bioSwitchPattern: [1, 0, 1, 1],
+  powerFrequency: 500,
   inspectedObjects: [],
   achievements: [],
   ending: null,
@@ -250,6 +253,16 @@ export function dispatch(action, payload = {}) {
     case "SET_DIRECTOR_SAFE_CODE":
       _state.directorSafeCode = payload.code;
       _state.puzzles["director-safe"].code = payload.code;
+      break;
+
+    case "SET_BIO_SWITCH_PATTERN":
+      _state.bioSwitchPattern = payload.pattern;
+      _state.puzzles["bio-switch"].pattern = payload.pattern;
+      break;
+
+    case "SET_POWER_FREQUENCY":
+      _state.powerFrequency = payload.frequency;
+      _state.puzzles["power-frequency"].target = payload.frequency;
       break;
 
     default:

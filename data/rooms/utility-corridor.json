@@ -28,10 +28,10 @@
     {
       "id": "power-junction-trigger",
       "type": "puzzle-trigger",
-      "label": "Power Junction — Sequence Reset",
+      "label": "Power Junction — Frequency Stabiliser",
       "x": 60, "y": 18, "w": 22, "h": 42,
       "cursor": "zoom-in",
-      "action": { "type": "open-puzzle", "puzzleId": "power-junction" },
+      "action": { "type": "open-puzzle", "puzzleId": "power-frequency" },
       "contents": []
     },
     {
@@ -40,9 +40,9 @@
       "label": "Bypass Chip Compartment",
       "x": 60, "y": 60, "w": 22, "h": 18,
       "cursor": "pointer",
-      "condition": { "puzzleSolved": "power-junction" },
+      "condition": { "puzzleSolved": "power-frequency" },
       "action": { "type": "toggle-container", "objectId": "chip-compartment" },
-      "lockedMessage": "The compartment is locked by the junction — reset the power sequence above first.",
+      "lockedMessage": "The compartment is locked — stabilise the junction frequency above first.",
       "contents": [
         {
           "id": "bypass-chip",

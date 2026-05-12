@@ -58,4 +58,15 @@ export function initClueLocations(seed) {
   const dRest  = Array.from({ length: 3 }, () => Math.floor(rng() * 10));
   const directorSafeCode = [dFirst, ...dRest].join('');
   dispatch('SET_DIRECTOR_SAFE_CODE', { code: directorSafeCode });
+
+  // --- Bio-lab switch circuit pattern (4 switches, not all-same) ---
+  let switchPattern;
+  do {
+    switchPattern = [0, 1, 2, 3].map(() => Math.floor(rng() * 2));
+  } while (switchPattern.every(p => p === 0) || switchPattern.every(p => p === 1));
+  dispatch('SET_BIO_SWITCH_PATTERN', { pattern: switchPattern });
+
+  // --- Utility corridor frequency target (200–890 Hz, round to nearest 10) ---
+  const rawHz = Math.floor(rng() * 70) * 10 + 200; // 200, 210, ..., 890
+  dispatch('SET_POWER_FREQUENCY', { frequency: rawHz });
 }

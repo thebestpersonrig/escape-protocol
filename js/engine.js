@@ -33,6 +33,12 @@ export class Engine {
       this._menuEl?.classList.remove('hidden');
     });
 
+    document.getElementById('ending-main-menu')?.addEventListener('click', () => {
+      this._endEl?.classList.remove('visible');
+      dispatch('RESET_STATE');
+      this._menuEl?.classList.remove('hidden');
+    });
+
     document.getElementById('ach-back-btn')?.addEventListener('click', () => {
       this._achScreenEl?.classList.remove('visible');
       this._menuEl?.classList.remove('hidden');

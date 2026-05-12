@@ -490,10 +490,21 @@ export class RoomRenderer {
       })(),
 
       // --- Secret Room ---
-      'secret-exit-panel': `
-        <div style="width:100%;height:100%;background:#10101c;border:1px solid rgba(0,200,255,0.5);border-radius:3px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(0,200,255,0.2);">
-          <div style="color:rgba(0,200,255,0.7);font-size:1.8vw;">⊞</div>
+      'secret-hatch-keypad': `
+        <div style="width:100%;height:100%;background:#0e0e1e;border:2px solid rgba(0,180,255,0.4);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:4% 6%;box-shadow:0 0 14px rgba(0,180,255,0.15);">
+          <div style="color:rgba(0,180,255,0.55);font-family:monospace;font-size:0.55vw;letter-spacing:0.12em;">HATCH OVERRIDE</div>
+          <div style="width:80%;height:18%;background:#080818;border:1px solid rgba(0,180,255,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,180,255,0.7);font-family:monospace;font-size:0.9vw;letter-spacing:0.3em;box-shadow:0 0 6px rgba(0,180,255,0.3);">____</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;width:90%;">
+            ${[1,2,3,4,5,6,7,8,9,'*',0,'#'].map(n=>`<div style="aspect-ratio:1;background:#14142a;border:1px solid #22223a;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(100,160,220,0.6);font-family:monospace;font-size:0.7vw;">${n}</div>`).join('')}
+          </div>
         </div>`,
+
+      'secret-exit-panel': (() => {
+        const open = state.puzzles['hatch-keypad']?.solved;
+        return `<div style="width:100%;height:100%;background:${open ? 'linear-gradient(to bottom,#001a10,#00100a)' : '#0c0c16'};border:2px solid ${open ? 'rgba(0,255,136,0.6)' : 'rgba(0,120,200,0.3)'};border-radius:3px;display:flex;align-items:center;justify-content:center;box-shadow:${open ? '0 0 20px rgba(0,255,136,0.3)' : '0 0 8px rgba(0,100,200,0.1)'};">
+          <div style="color:${open ? 'rgba(0,255,136,0.9)' : 'rgba(0,150,220,0.4)'};font-size:2vw;">${open ? '▶' : '⊟'}</div>
+        </div>`;
+      })(),
 
       // --- Bio Lab ---
       'bio-fridge': `
@@ -504,18 +515,19 @@ export class RoomRenderer {
           <div style="position:absolute;top:8%;left:50%;transform:translateX(-50%);color:rgba(100,220,180,0.5);font-size:0.7vw;font-family:monospace;letter-spacing:0.1em;">SPECIMEN</div>
         </div>`,
 
-      'bio-vault-lock': `
-        <div style="width:100%;height:100%;background:linear-gradient(to bottom,#121e1a,#0a1612);border:2px solid #1e3228;border-radius:4px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8%;">
-          <div style="color:rgba(0,200,140,0.6);font-family:monospace;font-size:0.7vw;letter-spacing:0.15em;">VAULT SEQUENCE</div>
-          <div style="display:flex;gap:6%;width:80%;">
-            ${[0,1,2,3].map(() => `<div style="flex:1;aspect-ratio:1;background:#0a1410;border:1px solid rgba(0,180,120,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,180,120,0.7);font-size:1.2vw;">◎</div>`).join('')}
+      'bio-vault-lock': (() => {
+        const pat = state.puzzles['bio-switch']?.pattern || [1,0,1,1];
+        return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,#121e1a,#0a1612);border:2px solid #1e3228;border-radius:4px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8%;padding:8%;">
+          <div style="color:rgba(0,200,140,0.6);font-family:monospace;font-size:0.65vw;letter-spacing:0.15em;">CIRCUIT LOCK</div>
+          <div style="display:flex;gap:5%;width:90%;">
+            ${pat.map(v=>`<div style="flex:1;height:28px;background:${v?'rgba(0,220,140,0.2)':'rgba(200,40,40,0.15)'};border:1px solid ${v?'rgba(0,220,140,0.6)':'rgba(200,40,40,0.5)'};border-radius:3px;display:flex;align-items:center;justify-content:center;color:${v?'rgba(0,220,140,0.8)':'rgba(200,40,40,0.7)'};font-size:0.85vw;">${v?'█':'○'}</div>`).join('')}
           </div>
-          <div style="width:60%;height:2px;background:rgba(0,180,120,0.2);border-radius:1px;"></div>
-        </div>`,
+        </div>`;
+      })(),
 
       'bio-key-box': `
-        <div style="width:100%;height:100%;background:#0e1a14;border:1px solid ${state.puzzles['bio-memory']?.solved ? 'rgba(0,220,140,0.6)' : '#1a2e22'};border-radius:3px;display:flex;align-items:center;justify-content:center;gap:8%;padding:0 10%;">
-          <div style="width:10%;aspect-ratio:1;background:${state.puzzles['bio-memory']?.solved ? 'rgba(0,220,140,0.4)' : '#0a1410'};border:1px solid ${state.puzzles['bio-memory']?.solved ? '#00dc8c' : '#1a2e22'};border-radius:50%;box-shadow:${state.puzzles['bio-memory']?.solved ? '0 0 10px rgba(0,220,140,0.6)' : 'none'};"></div>
+        <div style="width:100%;height:100%;background:#0e1a14;border:1px solid ${state.puzzles['bio-switch']?.solved ? 'rgba(0,220,140,0.6)' : '#1a2e22'};border-radius:3px;display:flex;align-items:center;justify-content:center;gap:8%;padding:0 10%;">
+          <div style="width:10%;aspect-ratio:1;background:${state.puzzles['bio-switch']?.solved ? 'rgba(0,220,140,0.4)' : '#0a1410'};border:1px solid ${state.puzzles['bio-switch']?.solved ? '#00dc8c' : '#1a2e22'};border-radius:50%;box-shadow:${state.puzzles['bio-switch']?.solved ? '0 0 10px rgba(0,220,140,0.6)' : 'none'};"></div>
           <div style="color:rgba(0,180,100,0.5);font-family:monospace;font-size:0.6vw;letter-spacing:0.1em;">MAINT. KEYS</div>
         </div>`,
 
@@ -632,19 +644,25 @@ export class RoomRenderer {
           <div style="color:rgba(120,60,20,0.5);font-size:2vw;text-shadow:0 0 12px rgba(200,80,0,0.3);">🔥</div>
         </div>`,
 
-      'power-junction-trigger': `
-        <div style="width:100%;height:100%;background:#141008;border:2px solid #2a2010;border-radius:4px;padding:4%;display:flex;flex-direction:column;gap:6%;">
-          <div style="color:rgba(255,160,40,0.7);font-family:monospace;font-size:0.6vw;letter-spacing:0.1em;">PJ-7 JUNCTION</div>
-          <div style="display:flex;gap:6%;flex:1;align-items:center;justify-content:center;">
-            ${['#cc2020','#2060cc','#20cc60','#ccaa20'].map(c=>`<div style="width:14%;aspect-ratio:1;background:${c}22;border:1px solid ${c}88;border-radius:50%;box-shadow:0 0 6px ${c}44;"></div>`).join('')}
+      'power-junction-trigger': (() => {
+        const hz = state.powerFrequency || 500;
+        return `<div style="width:100%;height:100%;background:#141008;border:2px solid #2a2010;border-radius:4px;padding:4%;display:flex;flex-direction:column;gap:5%;">
+          <div style="color:rgba(255,160,40,0.7);font-family:monospace;font-size:0.55vw;letter-spacing:0.1em;">PJ-7 FREQ STABILISER</div>
+          <div style="background:#0a0600;border:1px solid rgba(255,140,30,0.25);border-radius:3px;padding:4%;text-align:center;">
+            <div style="color:rgba(255,130,30,0.45);font-size:0.45vw;font-family:monospace;letter-spacing:0.1em;">TARGET</div>
+            <div style="color:rgba(255,160,60,0.8);font-family:monospace;font-size:0.9vw;">${hz} Hz</div>
           </div>
-          <div style="height:2px;background:rgba(255,140,0,0.3);border-radius:1px;box-shadow:0 0 6px rgba(255,140,0,0.2);"></div>
-        </div>`,
+          <div style="height:18%;background:#0a0600;border:1px solid rgba(255,120,30,0.2);border-radius:2px;overflow:hidden;position:relative;">
+            <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,100,20,0.3);"></div>
+          </div>
+          <div style="height:2px;background:rgba(255,140,0,0.25);border-radius:1px;"></div>
+        </div>`;
+      })(),
 
       'chip-compartment': `
-        <div style="width:100%;height:100%;background:#0e0c08;border:1px solid ${state.puzzles['power-junction']?.solved ? 'rgba(255,160,40,0.6)' : '#1e1a10'};border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8%;padding:0 8%;box-shadow:${state.puzzles['power-junction']?.solved ? '0 0 12px rgba(255,160,40,0.25)' : 'none'};">
-          <div style="width:10%;aspect-ratio:1;background:${state.puzzles['power-junction']?.solved ? 'rgba(255,160,40,0.4)' : '#14120a'};border:1px solid ${state.puzzles['power-junction']?.solved ? '#ffa028' : '#241e10'};border-radius:50%;box-shadow:${state.puzzles['power-junction']?.solved ? '0 0 8px rgba(255,160,40,0.5)' : 'none'};"></div>
-          <div style="color:rgba(200,140,40,${state.puzzles['power-junction']?.solved ? '0.7' : '0.3'});font-family:monospace;font-size:0.55vw;letter-spacing:0.08em;">BYPASS CHIPS</div>
+        <div style="width:100%;height:100%;background:#0e0c08;border:1px solid ${state.puzzles['power-frequency']?.solved ? 'rgba(255,160,40,0.6)' : '#1e1a10'};border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8%;padding:0 8%;box-shadow:${state.puzzles['power-frequency']?.solved ? '0 0 12px rgba(255,160,40,0.25)' : 'none'};">
+          <div style="width:10%;aspect-ratio:1;background:${state.puzzles['power-frequency']?.solved ? 'rgba(255,160,40,0.4)' : '#14120a'};border:1px solid ${state.puzzles['power-frequency']?.solved ? '#ffa028' : '#241e10'};border-radius:50%;box-shadow:${state.puzzles['power-frequency']?.solved ? '0 0 8px rgba(255,160,40,0.5)' : 'none'};"></div>
+          <div style="color:rgba(200,140,40,${state.puzzles['power-frequency']?.solved ? '0.7' : '0.3'});font-family:monospace;font-size:0.55vw;letter-spacing:0.08em;">BYPASS CHIPS</div>
         </div>`,
     };
 
