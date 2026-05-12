@@ -27,7 +27,11 @@
         { "puzzleSolved": "laser-avoid" }
       ] },
       "action": { "type": "navigate", "to": "escaped" },
-      "lockedMessage": "The path is blocked — disengage the lever locks and bypass the laser grid.",
+      "lockedMessage": "The exit is sealed.",
+      "lockedMessages": [
+        "The electromagnetic lock is engaged. Set the lever combination first.",
+        "Levers set — but the laser grid is still active. Bypass it first."
+      ],
       "contents": []
     },
     {

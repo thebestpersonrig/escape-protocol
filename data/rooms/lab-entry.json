@@ -18,7 +18,11 @@
         { "hasItem": "keycard-a" }
       ] },
       "action": { "type": "navigate", "to": "main-lab" },
-      "lockedMessage": "Keypad solved — but you still need your access keycard to get through.",
+      "lockedMessage": "The door is sealed.",
+      "lockedMessages": [
+        "The door is sealed. Find the access keypad.",
+        "Keypad light is green — swipe your access keycard to proceed."
+      ],
       "contents": []
     },
     {

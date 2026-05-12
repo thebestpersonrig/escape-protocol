@@ -92,7 +92,15 @@ export class InteractionSystem {
     // Check condition
     if (hs.condition) {
       if (!this._checkCondition(hs.condition, state)) {
-        showToast(hs.lockedMessage || 'This is locked.', 'error');
+        // For 'all' conditions, find the first failing sub-condition and use its message
+        let msg = hs.lockedMessage || 'This is locked.';
+        if (hs.condition.all && hs.lockedMessages) {
+          const failIdx = hs.condition.all.findIndex(c => !this._checkCondition(c, state));
+          if (failIdx >= 0 && hs.lockedMessages[failIdx]) {
+            msg = hs.lockedMessages[failIdx];
+          }
+        }
+        showToast(msg, 'error');
         AudioSystem.play('door-locked');
         return;
       }
