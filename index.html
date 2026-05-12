@@ -8,124 +8,123 @@
   <link rel="stylesheet" href="css/hub.css" />
 </head>
 <body>
+
 <div id="hub-wrap">
 
   <!-- ── Header ─────────────────────────────────────────────── -->
   <header id="hub-header">
-    <div class="hub-logo">
-      <h1 class="hub-logo-title">
-        <span class="hub-logo-accent">ESCAPE</span> PROTOCOL<span class="hub-cursor">_</span>
-      </h1>
-      <span class="hub-logo-sub">Mission Select</span>
-    </div>
-    <div class="hub-clearance-pill">▋ Operative Clearance: Level 5</div>
+    <div class="hub-eyebrow">Classified · Operative Briefing Terminal · v2.0</div>
+    <h1 class="hub-logo-title">
+      <span class="hub-logo-accent">ESCAPE</span> PROTOCOL<span class="hub-cursor">_</span>
+    </h1>
+    <div class="hub-tagline">Select your assignment, operative</div>
   </header>
 
-  <!-- ── Missions ───────────────────────────────────────────── -->
+  <!-- ── Active Missions ────────────────────────────────────── -->
   <div class="hub-section-label">// Active Assignments</div>
 
   <div id="hub-grid">
 
-    <!-- Mission 01 — Arcadia (available) -->
-    <div class="hub-card available"
-         onclick="location.href='arcadia.html'"
-         role="button" tabindex="0"
-         onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
-
-      <div class="hub-card-toprow">
-        <span class="hub-card-num">Mission 01</span>
-        <span class="hub-clearance c5">▋ Level 5 Clearance</span>
+    <!-- ── Mission 01 — Arcadia ─────────────────────────────── -->
+    <div class="hub-card available" onclick="location.href='arcadia.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
+      <div class="hub-card-num">Mission 01</div>
+      <div class="hub-card-badge hub-badge-available">Available Now</div>
+      <div class="hub-card-title">Arcadia Research Facility</div>
+      <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
+      <div class="hub-card-desc">
+        Arcadia's underground research facility went dark 72 hours ago.
+        An emergency lockdown has sealed all exits. Navigate the labs,
+        restore power, and find the override codes before the lockdown
+        becomes permanent.
       </div>
-
-      <div class="hub-card-body">
-        <div class="hub-card-info">
-          <div class="hub-card-title">Arcadia Research Facility</div>
-          <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
-          <div class="hub-card-desc">
-            Arcadia's underground research facility went dark 72 hours ago.
-            An emergency lockdown has sealed every exit. Navigate the labs,
-            restore power, and find the override codes before the lockdown
-            becomes permanent.
-          </div>
-          <div class="hub-card-meta">
-            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">20 min</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">12</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★☆☆</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="arcadia-endings">0 / 4</span></div>
-          </div>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">20 min</span>
         </div>
-        <div class="hub-card-action">
-          <div class="hub-card-badge hub-badge-available">Available</div>
-          <div class="hub-card-play">▶ Enter Facility</div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">12</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★☆☆</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val" id="arcadia-endings">0 / 4</span>
         </div>
       </div>
+      <div class="hub-card-play">▶ Enter Facility</div>
     </div>
 
-    <!-- Mission 02 — Blackwood (locked) -->
-    <div class="hub-card locked">
-
-      <div class="hub-card-toprow">
-        <span class="hub-card-num">Mission 02</span>
-        <span class="hub-clearance c6">▋ Level 6 Clearance</span>
+    <!-- ── Mission 02 — Blackwood ───────────────────────────── -->
+    <div class="hub-card coming-soon">
+      <div class="hub-card-num">Mission 02</div>
+      <div class="hub-card-badge hub-badge-soon">Coming Soon</div>
+      <div class="hub-card-title">Blackwood Asylum</div>
+      <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
+      <div class="hub-card-desc">
+        Blackwood Psychiatric Institute has been sealed for 40 years.
+        An anonymous tip sent you inside the east wing. The doors locked
+        behind you. Something in the dark is still active.
       </div>
-
-      <div class="hub-card-body">
-        <div class="hub-card-info">
-          <div class="hub-card-title">Blackwood Asylum</div>
-          <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
-          <div class="hub-card-desc">
-            Blackwood Psychiatric Institute has been sealed for 40 years.
-            An anonymous tip sent you inside the east wing. The doors locked
-            behind you. Something in the dark is still active.
-          </div>
-          <div class="hub-card-meta">
-            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">25 min</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">14</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★☆</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">4</span></div>
-          </div>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">25 min</span>
         </div>
-        <div class="hub-card-action">
-          <div class="hub-card-badge hub-badge-soon">Coming Soon</div>
-          <div class="hub-card-play locked-play">// Classified</div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">14</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★★☆</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val">4</span>
         </div>
       </div>
+      <div class="hub-card-play locked">// Classified</div>
     </div>
 
-    <!-- Mission 03 — Meridian (locked) -->
-    <div class="hub-card locked">
-
-      <div class="hub-card-toprow">
-        <span class="hub-card-num">Mission 03</span>
-        <span class="hub-clearance c7">▋ Level 7 Clearance</span>
+    <!-- ── Mission 03 — Meridian ────────────────────────────── -->
+    <div class="hub-card coming-soon">
+      <div class="hub-card-num">Mission 03</div>
+      <div class="hub-card-badge hub-badge-locked">Encrypted</div>
+      <div class="hub-card-title">Meridian Station Alpha</div>
+      <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
+      <div class="hub-card-desc">
+        Six hours from Earth orbit, Meridian Station has lost contact with
+        Mission Control. The airlock is compromised, life support is failing.
+        You have 30 minutes of oxygen.
       </div>
-
-      <div class="hub-card-body">
-        <div class="hub-card-info">
-          <div class="hub-card-title">Meridian Station Alpha</div>
-          <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
-          <div class="hub-card-desc">
-            Six hours from Earth orbit, Meridian Station has lost contact with
-            Mission Control. The airlock is compromised, life support failing.
-            You have 30 minutes of oxygen.
-          </div>
-          <div class="hub-card-meta">
-            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">16</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
-            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">5</span></div>
-          </div>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">30 min</span>
         </div>
-        <div class="hub-card-action">
-          <div class="hub-card-badge hub-badge-locked">Encrypted</div>
-          <div class="hub-card-play locked-play">// Encrypted</div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">16</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★★★</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val">5</span>
         </div>
       </div>
+      <div class="hub-card-play locked">// Encrypted</div>
     </div>
 
   </div><!-- #hub-grid -->
 
-  <!-- ── Operative Record ────────────────────────────────────── -->
+  <!-- ── Operative Stats (bottom) ───────────────────────────── -->
   <div class="hub-section-label">// Operative Record</div>
 
   <div id="hub-stats">
@@ -159,12 +158,16 @@
   (function () {
     const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
     const ach  = JSON.parse(localStorage.getItem('escape-protocol-achievements') || '[]');
+
     document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
     document.getElementById('hstat-attempts').textContent = seen.length;
     document.getElementById('hstat-ach').textContent      = ach.length;
-    const found = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => seen.includes(e)).length;
-    document.getElementById('arcadia-endings').textContent = found + ' / 4';
+
+    const arcadiaAll   = ['escaped','secret-escape','alarm-caught','time-out'];
+    const arcadiaFound = arcadiaAll.filter(e => seen.includes(e)).length;
+    document.getElementById('arcadia-endings').textContent = arcadiaFound + ' / 4';
   })();
 </script>
+
 </body>
 </html>
