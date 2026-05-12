@@ -70,6 +70,24 @@ export function init(container, puzzleState, callbacks) {
     btn.addEventListener('pointerleave', e => { keys[k] = false; });
   });
 
+  // ── Touch — drag finger to steer player ──────────────────
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (deathCooldown > 0 || won) return;
+    const touch = e.touches[0];
+    const rect  = canvas.getBoundingClientRect();
+    const touchX = (touch.clientX - rect.left) * (W / rect.width);
+    const touchY = (touch.clientY - rect.top)  * (H / rect.height);
+    const dx = touchX - player.x;
+    const dy = touchY - player.y;
+    const dist = Math.hypot(dx, dy);
+    if (dist > 2) {
+      const speed = Math.min(dist, player.speed * 2.5);
+      player.x = Math.max(14, Math.min(W - 14, player.x + (dx / dist) * speed));
+      player.y = Math.max(14, Math.min(H - 14, player.y + (dy / dist) * speed));
+    }
+  }, { passive: false });
+
   // ── Helpers ───────────────────────────────────────────────
   function beamTop()    { return cY - GAP / 2; }
   function beamBottom() { return cY + GAP / 2; }

@@ -119,10 +119,11 @@ export function init(container, puzzleState, callbacks) {
     }
   }
 
-  // Drag events on left nodes
+  // Drag events on left nodes — Pointer Events work for both mouse and touch
   leftCol.querySelectorAll('.wire-node').forEach(node => {
-    node.addEventListener('mousedown', e => {
+    node.addEventListener('pointerdown', e => {
       e.preventDefault();
+      node.setPointerCapture(e.pointerId);
       const wireId = node.dataset.wireId;
       if (connections[wireId]) {
         delete connections[wireId];
@@ -132,14 +133,14 @@ export function init(container, puzzleState, callbacks) {
     });
   });
 
-  container.addEventListener('mousemove', e => {
+  container.addEventListener('pointermove', e => {
     if (!dragging) return;
     const wrapRect = container.querySelector('#wire-wrap').getBoundingClientRect();
     mousePos = { x: e.clientX - wrapRect.left, y: e.clientY - wrapRect.top };
     drawLines();
   });
 
-  container.addEventListener('mouseup', e => {
+  container.addEventListener('pointerup', e => {
     if (!dragging) return;
     // Check if over a right node
     const rightNodes = rightCol.querySelectorAll('.wire-node');

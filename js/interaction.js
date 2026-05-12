@@ -24,9 +24,16 @@ export class InteractionSystem {
     this._config    = null;
     this._allHotspots = [];
 
-    this._scene?.addEventListener('mousemove', e => this._onMouseMove(e));
-    this._scene?.addEventListener('click',     e => this._onClick(e));
-    this._scene?.addEventListener('mouseleave',  () => this._clearHighlight());
+    this._touchMoved = false;
+
+    this._scene?.addEventListener('mousemove',  e => this._onMouseMove(e));
+    this._scene?.addEventListener('click',      e => this._onClick(e));
+    this._scene?.addEventListener('mouseleave',   () => this._clearHighlight());
+
+    // Touch support — touchstart shows highlight, touchend fires action
+    this._scene?.addEventListener('touchstart', e => this._onTouchStart(e), { passive: true });
+    this._scene?.addEventListener('touchmove',  () => { this._touchMoved = true; }, { passive: true });
+    this._scene?.addEventListener('touchend',   e => this._onTouchEnd(e),   { passive: false });
   }
 
   attachTo(config, state) {
@@ -58,7 +65,7 @@ export class InteractionSystem {
   }
 
   _onMouseMove(e) {
-    const hs = this._findHotspot(e);
+    const hs = this._findHotspotAt(e.clientX, e.clientY);
     if (hs) {
       this._showHighlight(hs);
       this._showTooltip(hs, e);
@@ -67,8 +74,27 @@ export class InteractionSystem {
     }
   }
 
+  _onTouchStart(e) {
+    this._touchMoved = false;
+    const t = e.touches[0];
+    const hs = this._findHotspotAt(t.clientX, t.clientY);
+    if (hs) this._showHighlight(hs);
+  }
+
+  _onTouchEnd(e) {
+    if (this._touchMoved) { this._clearHighlight(); return; }
+    e.preventDefault(); // stop ghost mouse-click
+    const t = e.changedTouches[0];
+    this._handleClickAt(t.clientX, t.clientY);
+    this._clearHighlight();
+  }
+
   _onClick(e) {
-    const hs = this._findHotspot(e);
+    this._handleClickAt(e.clientX, e.clientY);
+  }
+
+  _handleClickAt(clientX, clientY) {
+    const hs = this._findHotspotAt(clientX, clientY);
     const state = getState();
 
     if (!hs) {
@@ -289,11 +315,11 @@ export class InteractionSystem {
     else console.warn('[Interaction] No handler for:', handlerName);
   }
 
-  _findHotspot(e) {
+  _findHotspotAt(clientX, clientY) {
     if (!this._scene) return null;
     const rect = this._scene.getBoundingClientRect();
-    const pctX = ((e.clientX - rect.left) / rect.width)  * 100;
-    const pctY = ((e.clientY - rect.top)  / rect.height) * 100;
+    const pctX = ((clientX - rect.left) / rect.width)  * 100;
+    const pctY = ((clientY - rect.top)  / rect.height) * 100;
 
     // Search reverse so top-most (last rendered) wins
     for (let i = this._allHotspots.length - 1; i >= 0; i--) {

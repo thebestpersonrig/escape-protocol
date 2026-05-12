@@ -66,6 +66,7 @@
   font-size: 18px;
   height: 52px;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.1s ease;
   display: flex;
   align-items: center;
@@ -101,6 +102,7 @@
   align-items: center;
   justify-content: center;
   font-size: 26px;
+  touch-action: manipulation;
   transition: all 0.2s ease;
   perspective: 400px;
 }
@@ -145,6 +147,7 @@
   justify-content: center;
   cursor: pointer;
   position: relative;
+  touch-action: none; /* pointer capture needs none, not manipulation */
   transition: all 0.15s ease;
   background: var(--surface2);
 }
@@ -178,6 +181,7 @@
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all 0.2s ease;
 }
 
@@ -287,6 +291,7 @@
   border-radius: 10px;
   position: relative;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .lever-handle {
@@ -326,6 +331,7 @@
   font-size: 12px;
   letter-spacing: 0.1em;
   cursor: pointer;
+  touch-action: manipulation;
   transition: all var(--transition);
   text-transform: uppercase;
 }

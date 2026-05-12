@@ -55,6 +55,7 @@ body {
   flex: 1;
   overflow: hidden;
   background: #0e0e1a;
+  touch-action: none; /* prevent scroll from swallowing hotspot taps */
 }
 
 #room-background {
@@ -74,6 +75,7 @@ body {
 #room-objects .hotspot-object {
   position: absolute;
   pointer-events: all;
+  touch-action: manipulation; /* instant tap — no 300 ms delay */
 }
 
 #hotspot-highlight {
@@ -192,6 +194,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 4px 12px;
+  touch-action: manipulation;
   cursor: pointer;
   pointer-events: all;
   transition: all var(--transition);
@@ -320,6 +323,7 @@ body {
   background: var(--surface);
   display: flex;
   align-items: center;
+  touch-action: manipulation;
   justify-content: center;
   cursor: pointer;
   position: relative;
@@ -392,6 +396,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: manipulation;
   background: rgba(0,0,0,0.75);
   z-index: 80;
   opacity: 0;
@@ -484,6 +489,7 @@ body {
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
+  touch-action: manipulation;
   transition: color var(--transition);
 }
 
@@ -578,6 +584,7 @@ body {
   background: var(--surface);
   color: var(--text);
   font-family: var(--font-mono);
+  touch-action: manipulation;
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -885,6 +892,7 @@ body {
   border-radius: var(--radius);
   padding: 4px 12px;
   cursor: pointer;
+  touch-action: manipulation;
   pointer-events: all;
   transition: all var(--transition);
   font-family: var(--font-mono);
@@ -949,6 +957,7 @@ body {
   cursor: pointer;
   background: none;
   border: none;
+  touch-action: manipulation;
   transition: color var(--transition);
   line-height: 1;
   padding: 2px 6px;
