@@ -1,6 +1,6 @@
 import { getState, dispatch } from '../state.js';
 import { AudioSystem } from '../audio.js';
-import { showToast, updateObjectiveDisplay, triggerShake } from '../ui.js';
+import { showToast, updateObjectiveDisplay, triggerShake, flashObjective } from '../ui.js';
 import { AchievementSystem } from '../achievements.js';
 
 const PUZZLE_NAMES = {
@@ -115,7 +115,10 @@ export const PuzzleManager = {
       'terminal-hack': 'hack-terminal',
     };
     const objId = MAP[puzzleId];
-    if (objId) dispatch('COMPLETE_OBJECTIVE', { objectiveId: objId });
+    if (objId) {
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: objId });
+      flashObjective();
+    }
   },
 };
 

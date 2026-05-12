@@ -55,6 +55,7 @@ const DEFAULT_STATE = {
     "director-safe-door": "closed",
     "security-locker":    "closed",
     "chip-compartment":   "closed",
+    "secret-filing-cabinet": "closed",
   },
   objectives: [
     { id: "find-keycard",    text: "Find the lab access keycard",          done: false },

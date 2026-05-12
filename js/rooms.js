@@ -121,8 +121,8 @@ export class RoomRenderer {
         <div style="position:absolute;bottom:25%;left:10%;width:6%;height:8%;background:linear-gradient(to bottom,#182a1e,#101a12);border:1px solid #283e28;border-radius:3px 3px 0 0;"></div>
         <div style="position:absolute;bottom:25%;left:18%;width:3%;height:5%;background:#141e14;border:1px solid #283828;border-radius:2px;"></div>
         <!-- Green power indicators -->
-        <div style="position:absolute;bottom:28%;left:11%;width:0.5%;height:0.5%;background:#00ff44;border-radius:50%;box-shadow:0 0 8px #00ff44,0 0 16px rgba(0,255,68,0.4);"></div>
-        <div style="position:absolute;bottom:28%;left:19%;width:0.5%;height:0.5%;background:#00cc33;border-radius:50%;box-shadow:0 0 6px #00cc33;"></div>
+        <div class="led-blink" style="position:absolute;bottom:28%;left:11%;width:0.5%;height:0.5%;background:#00ff44;border-radius:50%;box-shadow:0 0 8px #00ff44,0 0 16px rgba(0,255,68,0.4);animation-delay:0.3s;"></div>
+        <div class="led-blink" style="position:absolute;bottom:28%;left:19%;width:0.5%;height:0.5%;background:#00cc33;border-radius:50%;box-shadow:0 0 6px #00cc33;animation-delay:1.1s;"></div>
         <!-- Overhead lighting bars -->
         <div style="position:absolute;top:0;left:15%;width:20%;height:3px;background:rgba(120,220,140,0.6);box-shadow:0 0 20px rgba(120,220,140,0.5),0 0 40px rgba(120,220,140,0.2);"></div>
         <div style="position:absolute;top:0;right:10%;width:25%;height:3px;background:rgba(120,220,140,0.5);box-shadow:0 0 16px rgba(120,220,140,0.4),0 0 30px rgba(120,220,140,0.15);"></div>
@@ -142,11 +142,11 @@ export class RoomRenderer {
         <div style="position:absolute;top:15%;left:8%;width:10%;height:65%;background:linear-gradient(to right,#201010,#1a0c0c);border:1px solid #3a1818;border-radius:2px;"></div>
         <div style="position:absolute;top:15%;left:20%;width:10%;height:65%;background:linear-gradient(to right,#201010,#1a0c0c);border:1px solid #3a1818;border-radius:2px;"></div>
         <!-- Server unit LEDs -->
-        <div style="position:absolute;top:20%;left:9%;width:8%;height:2px;background:rgba(255,80,0,0.9);box-shadow:0 0 6px rgba(255,80,0,0.7);"></div>
-        <div style="position:absolute;top:25%;left:9%;width:8%;height:2px;background:rgba(0,140,255,0.7);box-shadow:0 0 4px rgba(0,140,255,0.5);"></div>
+        <div class="led-blink" style="position:absolute;top:20%;left:9%;width:8%;height:2px;background:rgba(255,80,0,0.9);box-shadow:0 0 6px rgba(255,80,0,0.7);"></div>
+        <div class="led-blink" style="position:absolute;top:25%;left:9%;width:8%;height:2px;background:rgba(0,140,255,0.7);box-shadow:0 0 4px rgba(0,140,255,0.5);animation-delay:0.4s;"></div>
         <div style="position:absolute;top:30%;left:9%;width:8%;height:2px;background:rgba(255,80,0,0.6);"></div>
-        <div style="position:absolute;top:35%;left:9%;width:8%;height:2px;background:rgba(0,255,100,0.5);box-shadow:0 0 4px rgba(0,255,100,0.3);"></div>
-        <div style="position:absolute;top:20%;left:21%;width:8%;height:2px;background:rgba(255,160,0,0.8);box-shadow:0 0 6px rgba(255,160,0,0.5);"></div>
+        <div class="led-blink" style="position:absolute;top:35%;left:9%;width:8%;height:2px;background:rgba(0,255,100,0.5);box-shadow:0 0 4px rgba(0,255,100,0.3);animation-delay:1.2s;"></div>
+        <div class="led-blink" style="position:absolute;top:20%;left:21%;width:8%;height:2px;background:rgba(255,160,0,0.8);box-shadow:0 0 6px rgba(255,160,0,0.5);animation-delay:0.7s;"></div>
         <div style="position:absolute;top:28%;left:21%;width:8%;height:2px;background:rgba(255,80,0,0.6);"></div>
         <!-- Cable bundles -->
         <div style="position:absolute;top:40%;left:7%;width:25%;height:2%;background:repeating-linear-gradient(90deg,rgba(255,100,0,0.6),rgba(255,100,0,0.6) 2px,transparent 2px,transparent 6px);"></div>
@@ -427,7 +427,7 @@ export class RoomRenderer {
 
       'lab-terminal': (() => {
         const solved = state.puzzles['terminal-hack']?.solved;
-        return `<div style="width:100%;height:100%;background:#0c1a0e;border:1px solid ${solved ? '#00cc55' : '#1a3a1e'};border-radius:4px;display:flex;flex-direction:column;padding:6%;gap:4%;font-family:monospace;font-size:0.8vw;color:${solved ? '#00ee66' : '#2a6030'};">
+        return `<div class="terminal-scan" style="width:100%;height:100%;background:#0c1a0e;border:1px solid ${solved ? '#00cc55' : '#1a3a1e'};border-radius:4px;display:flex;flex-direction:column;padding:6%;gap:4%;font-family:monospace;font-size:0.8vw;color:${solved ? '#00ee66' : '#2a6030'};">
           <div>${solved ? '> ACCESS GRANTED' : '> SYSTEM OFFLINE'}</div>
           <div style="height:1px;background:${solved ? '#006633' : '#1a3a1e'};"></div>
           <div>${solved ? '> SECURITY DISABLED' : '> AWAITING POWER...'}</div>
@@ -565,9 +565,33 @@ export class RoomRenderer {
           <div style="color:rgba(180,140,60,0.35);font-size:2.5vw;">👤</div>
         </div>`,
 
+      // --- Secret Room ---
+      'secret-personal-effects': `
+        <div style="width:100%;height:100%;background:#0e0e1a;border:1px solid #1e1e30;border-radius:2px;padding:6%;display:flex;flex-direction:column;gap:8%;align-items:flex-start;">
+          <div style="width:40%;height:30%;background:#16161e;border:1px solid #2a2a3a;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(150,150,190,0.4);font-size:1vw;">☕</div>
+          <div style="color:rgba(140,140,180,0.3);font-family:monospace;font-size:0.5vw;letter-spacing:0.08em;">PERSONAL EFFECTS</div>
+        </div>`,
+
+      'secret-filing-cabinet': `
+        <div style="width:100%;height:100%;background:linear-gradient(to bottom,#14141e,#0e0e18);border:1px solid #222232;border-radius:2px;position:relative;">
+          <div style="position:absolute;top:30%;left:5%;right:5%;height:2px;background:#222232;"></div>
+          <div style="position:absolute;top:60%;left:5%;right:5%;height:2px;background:#222232;"></div>
+          ${objState === 'open' ? '<div style="position:absolute;inset:0;background:rgba(140,140,200,0.04);border:1px solid rgba(140,140,200,0.2);border-radius:2px;"></div>' : ''}
+          <div style="position:absolute;top:15%;left:50%;transform:translateX(-50%);width:12%;height:5%;background:#1e1e2e;border:1px solid #2e2e42;border-radius:1px;"></div>
+          <div style="position:absolute;top:45%;left:50%;transform:translateX(-50%);width:12%;height:5%;background:#1e1e2e;border:1px solid #2e2e42;border-radius:1px;"></div>
+        </div>`,
+
+      'secret-wall-schematic': `
+        <div style="width:100%;height:100%;background:#0e0e1a;border:1px solid #1e2030;border-radius:2px;padding:6%;position:relative;">
+          <div style="position:absolute;inset:8%;border:1px solid #1e2038;border-radius:1px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3px;padding:4px;">
+            ${Array(9).fill(0).map((_,i) => `<div style="background:${i===4?'rgba(0,200,180,0.12)':'rgba(30,30,50,0.8)'};border:1px solid #1e2038;border-radius:1px;"></div>`).join('')}
+          </div>
+          <div style="position:absolute;bottom:10%;right:10%;color:rgba(120,140,200,0.3);font-family:monospace;font-size:0.45vw;">SCHEMATIC</div>
+        </div>`,
+
       // --- Security Hub ---
       'cctv-console': `
-        <div style="width:100%;height:100%;background:#0a0e18;border:2px solid #1a2030;border-radius:3px;padding:4%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:4%;">
+        <div class="terminal-scan" style="width:100%;height:100%;background:#0a0e18;border:2px solid #1a2030;border-radius:3px;padding:4%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:4%;">
           ${[0,1,2,3,4,5].map(i=>`<div style="background:#060a10;border:1px solid #141c28;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(40,60,100,0.8);font-family:monospace;font-size:0.4vw;">${i===3?'NO SIG':i===5?'OFFLINE':''}</div>`).join('')}
         </div>`,
 
@@ -669,7 +693,8 @@ export class RoomRenderer {
       'maintenance-key':   `<div style="width:100%;height:100%;background:#0e1a14;border:1px solid rgba(0,200,120,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px rgba(0,200,120,0.2);"><span style="font-size:1.3vw;filter:drop-shadow(0 0 4px rgba(0,200,120,0.5));">🗝️</span></div>`,
       'office-id-card':    `<div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1008,#120c06);border:1px solid rgba(200,160,60,0.5);border-radius:3px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(200,150,40,0.25);"><span style="color:rgba(200,160,60,0.8);font-size:0.8vw;font-family:monospace;">ID</span></div>`,
       'security-pass':     `<div style="width:100%;height:100%;background:linear-gradient(135deg,#0e1428,#0a1020);border:1px solid rgba(80,140,255,0.55);border-radius:3px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(80,140,255,0.25);"><span style="color:rgba(80,140,255,0.8);font-size:0.7vw;font-family:monospace;">SEC</span></div>`,
-      'bypass-chip':       `<div style="width:100%;height:100%;background:#12100a;border:1px solid rgba(255,160,40,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px rgba(255,160,40,0.2);"><span style="font-size:1vw;filter:drop-shadow(0 0 3px rgba(255,160,40,0.5));">🔌</span></div>`,
+      'bypass-chip':          `<div style="width:100%;height:100%;background:#12100a;border:1px solid rgba(255,160,40,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px rgba(255,160,40,0.2);"><span style="font-size:1vw;filter:drop-shadow(0 0 3px rgba(255,160,40,0.5));">🔌</span></div>`,
+      'secret-classified-doc':`<div style="width:100%;height:100%;background:#0e0e18;border:1px solid rgba(200,50,50,0.5);border-radius:2px;display:flex;align-items:center;justify-content:center;transform:rotate(-2deg);box-shadow:0 0 6px rgba(200,0,0,0.2);"><span style="color:rgba(220,80,80,0.8);font-size:0.7vw;font-family:monospace;letter-spacing:0.1em;">CLASSIFIED</span></div>`,
     };
     return ITEM_SVGS[item.id] || `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><span style="font-size:1.2vw;opacity:0.7;">◆</span></div>`;
   }

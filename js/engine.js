@@ -1,5 +1,5 @@
 import { getState, dispatch, subscribe } from './state.js';
-import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast, clearJournal } from './ui.js';
+import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast, clearJournal, updateRoomIndicator } from './ui.js';
 import { RoomRenderer } from './rooms.js';
 import { InteractionSystem } from './interaction.js';
 import { InventoryRenderer } from './inventory.js';
@@ -53,6 +53,29 @@ export class Engine {
       this._paused = false;
       dispatch('RESET_STATE');
       this._menuEl?.classList.remove('hidden');
+    });
+
+    // Volume sliders in pause menu
+    const _wireSlider = (sliderId, valId, apply) => {
+      const slider = document.getElementById(sliderId);
+      const valEl  = document.getElementById(valId);
+      if (!slider) return;
+      slider.addEventListener('input', () => {
+        const v = parseInt(slider.value) / 100;
+        if (valEl) valEl.textContent = slider.value;
+        apply(v);
+      });
+    };
+    _wireSlider('vol-master', 'vol-master-val', v => {
+      this._audio._volume.master = v;
+      if (this._audio.masterGain) this._audio.masterGain.gain.value = v;
+    });
+    _wireSlider('vol-sfx', 'vol-sfx-val', v => {
+      this._audio._volume.sfx = v;
+    });
+    _wireSlider('vol-ambient', 'vol-ambient-val', v => {
+      this._audio._volume.ambient = v;
+      if (this._audio.ambientGain) this._audio.ambientGain.gain.value = v;
     });
 
     // P key to toggle pause
@@ -156,26 +179,52 @@ export class Engine {
     try { this._audio.ambientNode?.stop(); } catch (e) {}
     await this._fadeOut(800);
 
+    const st = getState();
+    const DIFF_TOTALS = { easy: 1800, medium: 1200, hard: 600 };
+    const totalSecs = DIFF_TOTALS[st.difficulty] ?? 1200;
+    const elapsed   = totalSecs - st.timerSeconds;
+    const fast      = elapsed < totalSecs * 0.35;
+    const noMistakes = st.mistakeCount === 0;
+    const noHints   = st.hintsUsed === 0;
+    const alarmOn   = st.alarmTriggered;
+
+    // ── Ending text variations ──────────────────────────────
     const ENDINGS = {
       escaped: {
         title: 'ESCAPE SUCCESSFUL',
         titleClass: 'success',
-        body: 'You burst through the exit door as the lab goes into lockdown. Fresh air rushes in. You made it.',
+        body: noMistakes && noHints
+          ? 'Flawless. Not one alarm tripped, not one hint taken. You solved Arcadia like you\'d been inside before.'
+          : noMistakes
+          ? 'Clean exit — no alarms, no fumbles. You walk out into the night like you were never here.'
+          : alarmOn
+          ? 'Security was seconds behind you. You barely cleared the exit before the doors sealed. Close — too close.'
+          : fast
+          ? 'You tore through the lab at speed. The exit door slams behind you before the facility even registers you were inside.'
+          : 'You burst through the exit as the lab goes into full lockdown. Fresh air. Freedom. You made it.',
       },
       'time-out': {
         title: 'TIME EXPIRED',
         titleClass: 'fail',
-        body: 'The lockdown sequence completes. The automated doors seal. You are trapped inside as the ventilation purges. Next time, move faster.',
+        body: st.mistakeCount > 8
+          ? 'You tripped every alarm in the building. The lockdown was already sealed long before the clock hit zero.'
+          : st.currentRoom === 'final-exit'
+          ? 'You were right there. The exit was in front of you. One more minute and you\'d have made it — but the facility doesn\'t negotiate.'
+          : 'The lockdown sequence completes. Automated doors seal. The ventilation system purges. You are still inside.',
       },
       'alarm-caught': {
         title: 'SECURITY RESPONSE',
         titleClass: 'fail',
-        body: 'Red lights flood the corridor. The security team arrives. You don\'t reach the exit in time.',
+        body: st.alarmSecondsLeft <= 5
+          ? 'You almost made it. Five more seconds and you\'d have cleared the exit. Security was that close.'
+          : 'Red lights. Boots on tile. The security team moves fast. You don\'t reach the exit in time.',
       },
       'secret-escape': {
         title: 'SHADOW EXIT',
         titleClass: 'success',
-        body: 'The hidden maintenance tunnel leads to daylight. No one will ever know you were here.',
+        body: noHints
+          ? 'The maintenance tunnel delivers you to open air. You found the way out that wasn\'t supposed to exist — without any help. Whatever K started, you finished it.'
+          : 'The hidden tunnel leads to daylight. Somewhere out there, K is owed an answer. You have the evidence. The rest is up to you.',
       },
     };
 
@@ -183,20 +232,34 @@ export class Engine {
     const titleEl = document.getElementById('ending-title');
     const bodyEl  = document.getElementById('ending-body');
     const statsEl = document.getElementById('ending-stats');
+    const scoreEl = document.getElementById('ending-score');
 
     if (titleEl) { titleEl.textContent = ending.title; titleEl.className = ending.titleClass; }
     if (bodyEl)  bodyEl.textContent = ending.body;
 
-    const st = getState();
-    const DIFF_TOTALS = { easy: 1800, medium: 1200, hard: 600 };
-    const totalSecs = DIFF_TOTALS[st.difficulty] ?? 1200;
-    const elapsed = totalSecs - st.timerSeconds;
     const min = Math.floor(elapsed / 60);
     const sec = elapsed % 60;
-    if (statsEl) statsEl.textContent = `Time elapsed: ${min}m ${sec}s  |  Hints used: ${st.hintsUsed}  |  Mistakes: ${st.mistakeCount}`;
+    if (statsEl) statsEl.textContent = `Time: ${min}m ${sec}s  ·  Hints: ${st.hintsUsed}  ·  Mistakes: ${st.mistakeCount}`;
+
+    // Score (only for success endings)
+    if (scoreEl) {
+      if (endingId === 'escaped' || endingId === 'secret-escape') {
+        const score = Math.max(0,
+          10000
+          - Math.round(elapsed / 60) * 80
+          - st.hintsUsed * 500
+          - st.mistakeCount * 200
+          + (endingId === 'secret-escape' ? 2000 : 0)
+        );
+        scoreEl.textContent = `SCORE: ${score.toLocaleString()}`;
+        scoreEl.style.display = 'block';
+      } else {
+        scoreEl.style.display = 'none';
+      }
+    }
 
     this._endEl?.classList.add('visible');
-    this._achievements.checkEnding(endingId);
+    this._achievements.checkEnding(endingId, st);
     SaveSystem.deleteSave();
     await this._fadeIn(800);
   }
@@ -219,6 +282,8 @@ export class Engine {
     if (config.ambientSound) {
       this._audio.setAmbient(config.ambientSound);
     }
+
+    updateRoomIndicator(config.name || roomId);
 
     if (config.narrativeOnEnter) {
       setTimeout(() => showNarrative(config.narrativeOnEnter), 600);

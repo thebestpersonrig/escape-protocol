@@ -114,6 +114,35 @@
   50%      { text-shadow: 0 0 30px var(--accent-glow), 0 0 90px rgba(0,255,224,0.25); }
 }
 
+@keyframes rattle {
+  0%,100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-6px) rotate(-0.5deg); }
+  40% { transform: translateX(6px)  rotate(0.5deg); }
+  60% { transform: translateX(-4px) rotate(-0.3deg); }
+  80% { transform: translateX(4px)  rotate(0.3deg); }
+}
+
+@keyframes obj-flash {
+  0%   { background: transparent; }
+  25%  { background: rgba(0,255,136,0.18); box-shadow: 0 0 14px rgba(0,255,136,0.35); }
+  100% { background: transparent; }
+}
+
+@keyframes led-blink {
+  0%,90%  { opacity: 1; }
+  92%     { opacity: 0.1; }
+  94%     { opacity: 1; }
+  96%     { opacity: 0.3; }
+  98%,100%{ opacity: 1; }
+}
+
+@keyframes terminal-scan {
+  0%,100% { opacity: 0.85; }
+  48%     { opacity: 0.85; }
+  50%     { opacity: 0.55; }
+  52%     { opacity: 0.85; }
+}
+
 /* ── Utility classes ─────────────────────────────────────── */
 .flicker      { animation: flicker 5s infinite; }
 .flicker-fast { animation: flicker-fast 2s infinite; }
@@ -122,3 +151,7 @@
 .shake-hard   { animation: shake-hard 0.65s ease; }
 .alarm-flash-border { animation: alarm-border-flash 0.5s ease 3; }
 .success-pop  { animation: success-pop 0.4s ease forwards; }
+.rattle       { animation: rattle 0.5s ease; }
+.obj-flash    { animation: obj-flash 1.2s ease forwards; }
+.led-blink    { animation: led-blink 3s ease-in-out infinite; }
+.terminal-scan{ animation: terminal-scan 4s ease-in-out infinite; }

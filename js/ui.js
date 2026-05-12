@@ -86,6 +86,12 @@ export function updateObjectiveDisplay() {
     : '<span style="color:var(--accent)">All objectives complete — find the exit!</span>';
 }
 
+// ── Room indicator ────────────────────────────────────────
+export function updateRoomIndicator(name) {
+  const el = document.getElementById('room-name-display');
+  if (el) el.textContent = (name || '—').toUpperCase();
+}
+
 // ── Hints ─────────────────────────────────────────────────
 const HINTS = {
   'lab-entry': [
@@ -94,35 +100,70 @@ const HINTS = {
     'The keypad code is somewhere in this room. Check every surface carefully.',
   ],
   'main-lab': [
-    'Look inside the cabinets. One of them might be unlocked.',
-    'The symbol puzzle on the wall corresponds to markings elsewhere in the room.',
-    'You need power restored before the terminal will respond.',
+    'Look inside the cabinets and the locker. Items are randomised each game.',
+    'The symbol puzzle on the wall controls both the server room and biology wing doors.',
+    'You need server power restored before the main terminal will respond.',
   ],
   'server-room': [
-    'The fuse box in the corner controls power to this section.',
-    'Wire colours on the server panel match the diagram taped to the wall.',
-    'Once power is restored, the terminal in the main lab will activate.',
+    'The fuse box in the corner controls power. You need a fuse from the main lab.',
+    'Wire colours on the server panel match the diagram found in the lab.',
+    'Once the wires are connected, check the security hub for the pass you\'ll need later.',
+  ],
+  'security-hub': [
+    'The access control panel on the right wall needs to be solved first.',
+    'Solve the symbol panel — the security locker below it will unlock automatically.',
+    'The security pass from this locker is required to enter the emergency corridor.',
+  ],
+  'utility-corridor': [
+    'Reset the power junction on the right — the compartment below it will unlock.',
+    'The bypass chip inside is needed to activate the laser grid in the final corridor.',
+    'Read the warning notice — it explains exactly how the bypass chip works.',
+  ],
+  'bio-lab': [
+    'Check the specimen fridge — there\'s a research note inside.',
+    'The vault sequence lock controls the key box below it.',
+    'The maintenance key from this room is needed to crawl through the server room vent.',
+  ],
+  'director-office': [
+    'The wall safe keypad is to the left — the code is in another room.',
+    'Check the bio lab fridge for the safe combination.',
+    'The emergency ID card in the safe is needed to open the maintenance hatch.',
   ],
   'final-exit': [
-    'The lever combination is based on the sequence you found earlier.',
-    'The laser beams move in patterns — time your movement carefully.',
-    'Have you found everything in all the rooms before trying the exit?',
+    'You need a bypass chip to activate the laser grid — check the utility corridor.',
+    'The lever combination was written on a diagram somewhere in the main lab.',
+    'The laser corridor moves — stay inside the safe zone and head right to the green exit.',
   ],
   'secret-room': [
-    'This room has its own escape route. Look carefully at the walls.',
-    'Combine what you found here with items from the main lab.',
-    'The exit code for the secret tunnel is different from the main keypad.',
+    'Read every piece of writing in this room — the story connects.',
+    'The hatch requires the emergency ID card from the director\'s office.',
+    'Look at the wall near the back — something was left here on purpose.',
   ],
 };
 
+let _hintCooldown = 0;
+let _hintCooldownInterval = null;
+
 export function showHint() {
   const st = getState();
-  if (st.hintsAvailable <= 0) return;
+  if (st.hintsAvailable <= 0 || _hintCooldown > 0) return;
 
   const roomHints = HINTS[st.currentRoom] || ['Keep exploring. There must be something you missed.'];
   const hintText = roomHints[Math.min(st.hintsUsed, roomHints.length - 1)] || roomHints[roomHints.length - 1];
 
   dispatch('USE_HINT');
+
+  // Start 30s cooldown
+  _hintCooldown = 30;
+  if (_hintCooldownInterval) clearInterval(_hintCooldownInterval);
+  _hintCooldownInterval = setInterval(() => {
+    _hintCooldown--;
+    updateHintButton();
+    if (_hintCooldown <= 0) {
+      clearInterval(_hintCooldownInterval);
+      _hintCooldownInterval = null;
+    }
+  }, 1000);
   updateHintButton();
 
   const popup = document.getElementById('hint-popup');
@@ -130,7 +171,7 @@ export function showHint() {
   if (!popup || !textEl) return;
   textEl.textContent = hintText;
   popup.classList.add('visible');
-  setTimeout(() => popup.classList.remove('visible'), 5000);
+  setTimeout(() => popup.classList.remove('visible'), 5500);
 }
 
 export function updateHintButton() {
@@ -140,10 +181,55 @@ export function updateHintButton() {
   if (st.hintsAvailable <= 0) {
     btn.textContent = 'No hints left';
     btn.classList.add('disabled');
+  } else if (_hintCooldown > 0) {
+    btn.textContent = `Hint (${_hintCooldown}s)`;
+    btn.classList.add('disabled');
   } else {
     btn.textContent = `Hint (${st.hintsAvailable} left)`;
     btn.classList.remove('disabled');
   }
+}
+
+// ── Objective flash ───────────────────────────────────────
+export function flashObjective() {
+  const el = document.getElementById('current-objective');
+  if (!el) return;
+  el.classList.remove('obj-flash');
+  void el.offsetWidth;
+  el.classList.add('obj-flash');
+  setTimeout(() => el.classList.remove('obj-flash'), 1200);
+}
+
+// ── Item pickup fly-to-inventory animation ────────────────
+export function animatePickup(srcEl, icon) {
+  if (!srcEl) return;
+  const rect   = srcEl.getBoundingClientRect();
+  const invBar = document.getElementById('inventory-bar');
+  if (!invBar) return;
+  const invRect = invBar.getBoundingClientRect();
+
+  const ghost = document.createElement('div');
+  ghost.style.cssText = [
+    'position:fixed',
+    `left:${rect.left + rect.width  / 2}px`,
+    `top:${rect.top  + rect.height / 2}px`,
+    'transform:translate(-50%,-50%)',
+    'font-size:22px',
+    'pointer-events:none',
+    'z-index:9999',
+    'transition:all 0.55s cubic-bezier(0.2,0.8,0.3,1)',
+    'filter:drop-shadow(0 0 8px rgba(0,255,224,0.8))',
+  ].join(';');
+  ghost.textContent = icon;
+  document.body.appendChild(ghost);
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    ghost.style.left    = (invRect.left + 28) + 'px';
+    ghost.style.top     = (invRect.top  + invRect.height / 2) + 'px';
+    ghost.style.opacity = '0';
+    ghost.style.transform = 'translate(-50%,-50%) scale(0.3)';
+  }));
+  setTimeout(() => ghost.remove(), 650);
 }
 
 // ── Screen shake ──────────────────────────────────────────
@@ -316,13 +402,36 @@ export function initUI() {
   updateHintButton();
 }
 
-// ── Module-level: wire journal controls immediately ────────
-// (buttons exist in DOM from page load; don't wait for game start)
+// ── Module-level: wire journal + keyboard shortcuts ────────
 document.getElementById('journal-button')?.addEventListener('click', () => toggleJournal());
 document.getElementById('journal-close')?.addEventListener('click', () => toggleJournal(false));
+
 document.addEventListener('keydown', e => {
-  if ((e.key === 'j' || e.key === 'J') && !e.ctrlKey && !e.metaKey) {
-    const puzzleOpen = document.getElementById('puzzle-overlay')?.classList.contains('visible');
-    if (!puzzleOpen) toggleJournal();
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const puzzleOpen = document.getElementById('puzzle-overlay')?.classList.contains('visible');
+  const st = getState();
+  if (!st.timerRunning && !st.alarmTriggered) return; // not in-game
+
+  // J — journal
+  if ((e.key === 'j' || e.key === 'J') && !puzzleOpen) {
+    toggleJournal();
+  }
+  // H — hint
+  if ((e.key === 'h' || e.key === 'H') && !puzzleOpen) {
+    showHint();
+  }
+  // 1–9 — select inventory slot
+  if (e.key >= '1' && e.key <= '9' && !puzzleOpen) {
+    const idx = parseInt(e.key) - 1;
+    const inv = st.inventory;
+    if (idx < inv.length) {
+      dispatch('SELECT_ITEM', { itemId: inv[idx] });
+      import('./inventory.js').then(m => {
+        const inv2 = document.createElement('div'); // trigger re-render
+        import('./engine.js').then(eng => {
+          eng.Engine.instance?._inventory?.render(getState());
+        });
+      });
+    }
   }
 });

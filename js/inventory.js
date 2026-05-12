@@ -1,7 +1,7 @@
 import { getState, dispatch } from './state.js';
 import { AudioSystem } from './audio.js';
 
-const ITEM_DEFS = {
+export const ITEM_DEFS = {
   'sticky-note':    { label: 'Sticky Note',     icon: '📝' },
   'screwdriver':    { label: 'Screwdriver',     icon: '🔧' },
   'keycard-a':      { label: 'Keycard A',       icon: '💳' },

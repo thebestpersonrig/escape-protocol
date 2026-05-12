@@ -210,6 +210,73 @@ body {
   cursor: not-allowed;
 }
 
+/* ── Room indicator ─────────────────────────────────────── */
+#room-indicator {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 3px 9px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,0.35);
+  white-space: nowrap;
+  pointer-events: none;
+  transition: color 0.4s ease;
+}
+
+/* ── Settings in pause card ─────────────────────────────── */
+#pause-settings {
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  min-width: 52px;
+}
+
+.vol-slider {
+  flex: 1;
+  height: 3px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.vol-val {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ── Score on ending ────────────────────────────────────── */
+#ending-score {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-shadow: 0 0 16px var(--accent-glow);
+  margin-top: 10px;
+}
+
 /* ── Inventory bar ───────────────────────────────────────── */
 #inventory-bar {
   position: absolute;

@@ -30,6 +30,7 @@
   <!-- ── Top HUD ────────────────────────────────────── -->
   <div id="hud-top">
     <div id="timer">60:00</div>
+    <div id="room-indicator"><span id="room-name-display">—</span></div>
     <div id="objective-tracker">
       <div id="current-objective"><span>Find the lab access keycard</span></div>
     </div>
@@ -112,6 +113,7 @@
     <h1 id="ending-title"></h1>
     <p id="ending-body"></p>
     <div id="ending-stats"></div>
+    <div id="ending-score"></div>
     <button class="menu-btn primary" id="ending-play-again" style="margin-top:28px;">Play Again</button>
   </div>
 
@@ -125,6 +127,23 @@
       <button class="menu-btn primary" id="pause-resume">▶ Resume</button>
       <button class="menu-btn" id="pause-restart">↺ Restart</button>
       <button class="menu-btn" id="pause-quit">⌂ Main Menu</button>
+      <div id="pause-settings">
+        <div class="settings-row">
+          <label class="settings-label">Master</label>
+          <input type="range" class="vol-slider" id="vol-master" min="0" max="100" value="70">
+          <span class="vol-val" id="vol-master-val">70</span>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">SFX</label>
+          <input type="range" class="vol-slider" id="vol-sfx" min="0" max="100" value="100">
+          <span class="vol-val" id="vol-sfx-val">100</span>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">Ambient</label>
+          <input type="range" class="vol-slider" id="vol-ambient" min="0" max="100" value="40">
+          <span class="vol-val" id="vol-ambient-val">40</span>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -133,6 +133,7 @@ export const AudioSystem = {
       lfoG.connect(osc1.frequency);
 
       gain.gain.value = this._volume.ambient;
+      this.ambientGain = gain; // expose for live volume adjustment
       osc1.connect(gain);
       osc2.connect(gain);
       gain.connect(this.masterGain);

@@ -1,5 +1,6 @@
 import { getState, dispatch } from './state.js';
-import { showToast, showInspection } from './ui.js';
+import { showToast, showInspection, animatePickup } from './ui.js';
+import { ITEM_DEFS } from './inventory.js';
 import { PuzzleManager } from './puzzles/puzzle-manager.js';
 import { SaveSystem } from './save.js';
 import { AudioSystem } from './audio.js';
@@ -102,6 +103,14 @@ export class InteractionSystem {
         }
         showToast(msg, 'error');
         AudioSystem.play('door-locked');
+        // Rattle the locked element for tactile feedback
+        const _lockedEl = document.querySelector(`[data-hotspot-id="${hs.id}"]`);
+        if (_lockedEl) {
+          _lockedEl.classList.remove('rattle');
+          void _lockedEl.offsetWidth;
+          _lockedEl.classList.add('rattle');
+          setTimeout(() => _lockedEl.classList.remove('rattle'), 600);
+        }
         return;
       }
     }
@@ -186,15 +195,20 @@ export class InteractionSystem {
         break;
       }
 
-      case 'pick-up':
+      case 'pick-up': {
+        // Capture element + icon BEFORE rerender removes it from DOM
+        const _pickupEl   = document.querySelector(`[data-hotspot-id="${action.itemId}"]`);
+        const _pickupDef  = ITEM_DEFS[action.itemId];
         dispatch('PICK_UP_ITEM', { itemId: action.itemId });
         dispatch('SET_OBJECT_STATE', { objectId: action.itemId, newState: 'taken' });
         AudioSystem.play('pick-up');
         showToast(`Picked up: ${hs.label || action.itemId}`, 'success');
+        if (_pickupEl && _pickupDef) animatePickup(_pickupEl, _pickupDef.icon);
         this._renderer.rerender();
         this._buildHotspotList(this._config, getState());
         SaveSystem.save(getState());
         break;
+      }
 
       default:
         console.warn('[Interaction] Unknown action type:', action.type);
