@@ -20,7 +20,12 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body {
   min-height: 100%;
   background: var(--bg);
   color: var(--text);
@@ -123,7 +128,7 @@ body::after {
   gap: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  margin: 28px 24px 0;
+  margin: 0 24px 40px;
   overflow: hidden;
   max-width: 700px;
   width: 100%;
