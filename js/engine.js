@@ -1,5 +1,5 @@
 import { getState, dispatch, subscribe } from './state.js';
-import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast } from './ui.js';
+import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast, clearJournal } from './ui.js';
 import { RoomRenderer } from './rooms.js';
 import { InteractionSystem } from './interaction.js';
 import { InventoryRenderer } from './inventory.js';
@@ -94,6 +94,7 @@ export class Engine {
     dispatch('START_TIMER');
     localStorage.setItem('ep-seed', String(seed));
     initClueLocations(seed);
+    clearJournal();
     await this._fadeOut();
     this._menuEl?.classList.add('hidden');
     initUI();
