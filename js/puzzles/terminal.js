@@ -1,6 +1,4 @@
-// Terminal hacking puzzle — type the correct password
-// Password is always PROMETHEUS — shown on the server-diagram clue in main lab
-const PASSWORD = 'PROMETHEUS';
+import { getState } from '../state.js';
 
 const BOOT_LINES = [
   '> ARCADIA RESEARCH SYSTEMS v4.2.1',
@@ -15,7 +13,7 @@ const BOOT_LINES = [
 ];
 
 export function init(container, puzzleState, callbacks) {
-  const password = PASSWORD;
+  const password = getState().terminalPassword || 'PROMETHEUS';
   let attempts   = puzzleState.attempts || 0;
   const MAX_ATT  = 3;
 

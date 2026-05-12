@@ -223,6 +223,12 @@ export class RoomRenderer {
   }
 
   _renderContentItem(item, state, parentContainerId) {
+    // If item has a clueSlot, only show it in the randomiser-assigned container
+    if (item.clueSlot && state.clueLocations && Object.keys(state.clueLocations).length > 0) {
+      const assigned = state.clueLocations[item.id];
+      if (assigned && assigned !== parentContainerId) return;
+    }
+
     // Check visibility condition
     if (item.visibleWhen) {
       const condState = state.objects[item.visibleWhen.objectState];

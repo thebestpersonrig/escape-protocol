@@ -39,6 +39,11 @@ export class InteractionSystem {
     for (const hs of config.hotspots || []) {
       this._allHotspots.push(hs);
       for (const item of hs.contents || []) {
+        // Only include item if clue randomiser assigned it to this container
+        if (item.clueSlot && state.clueLocations && Object.keys(state.clueLocations).length > 0) {
+          const assigned = state.clueLocations[item.id];
+          if (assigned && assigned !== hs.id) continue;
+        }
         // Check visibility
         if (item.visibleWhen) {
           const cond = state.objects[item.visibleWhen.objectState];
@@ -151,9 +156,18 @@ export class InteractionSystem {
 
       case 'inspect': {
         const _st = getState();
+        // Keypad code
         const _code = _st.keypadCode || '????';
         const _displayCode = _code.split('').join('-');
-        const _text = (action.text || '').replace(/\{\{keypad-code\}\}/g, _displayCode);
+        // Terminal password
+        const _pass = _st.terminalPassword || '?????????';
+        // Lever pattern  e.g. "[ ↑ ][ ↓ ][ ↑ ][ ↓ ]"
+        const _pat = (_st.leverPattern || [1,0,1,0])
+          .map(p => p ? '[ ↑ ]' : '[ ↓ ]').join('');
+        let _text = (action.text || '')
+          .replace(/\{\{keypad-code\}\}/g, _displayCode)
+          .replace(/\{\{terminal-password\}\}/g, _pass)
+          .replace(/\{\{lever-pattern\}\}/g, _pat);
         showInspection(_text, action.image || null, hs.id);
         AudioSystem.play('paper-rustle');
         if (action.unlocksRoom === 'secret-room') {

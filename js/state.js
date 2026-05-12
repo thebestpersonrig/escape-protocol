@@ -57,6 +57,8 @@ const DEFAULT_STATE = {
   hintsAvailable: 3,
   clueLocations: {},
   keypadCode: '4821',
+  leverPattern: [1, 0, 1, 0],
+  terminalPassword: 'PROMETHEUS',
   inspectedObjects: [],
   achievements: [],
   ending: null,
@@ -223,6 +225,14 @@ export function dispatch(action, payload = {}) {
 
     case "SET_KEYPAD_CODE":
       _state.keypadCode = payload.keypadCode;
+      break;
+
+    case "SET_LEVER_PATTERN":
+      _state.leverPattern = payload.pattern;
+      break;
+
+    case "SET_TERMINAL_PASSWORD":
+      _state.terminalPassword = payload.password;
       break;
 
     default:
