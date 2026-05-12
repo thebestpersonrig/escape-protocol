@@ -147,6 +147,10 @@
     </div>
   </div>
 
+  <!-- ── Achievements ──────────────────────────────────────── -->
+  <div class="hub-section-label">// Achievements</div>
+  <div id="hub-achievements"></div>
+
   <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer id="hub-footer">
     <div class="hub-footer-text">Escape Protocol · Operative Briefing System</div>
@@ -156,23 +160,47 @@
 </div><!-- #hub-wrap -->
 
 <script>
-  // Populate stats from localStorage
   (function () {
     const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
     const ach  = JSON.parse(localStorage.getItem('escape-protocol-achievements') || '[]');
 
-    const escapes  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
-    const attempts = seen.length;
+    // Stats
+    document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
+    document.getElementById('hstat-attempts').textContent = seen.length;
+    document.getElementById('hstat-ach').textContent      = ach.length + ' / 18';
+    const found = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => seen.includes(e)).length;
+    document.getElementById('arcadia-endings').textContent = found + ' / 4';
 
-    document.getElementById('hstat-escaped').textContent  = escapes;
-    document.getElementById('hstat-attempts').textContent = attempts;
-    document.getElementById('hstat-ach').textContent      = ach.length;
+    // Achievements grid
+    const DEFS = [
+      { id: 'first-escape',   name: 'First Steps Out',   desc: 'Complete the escape for the first time.' },
+      { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than half your time remaining.' },
+      { id: 'no-hints',       name: "I Don't Need Help",  desc: 'Escape without using any hints.' },
+      { id: 'no-mistakes',    name: 'Ghost Protocol',     desc: 'Escape without triggering the alarm.' },
+      { id: 'secret-escape',  name: 'Shadow Exit',        desc: 'Find and use the secret room exit.' },
+      { id: 'too-loud',       name: 'Too Loud',           desc: 'Escape while the alarm is still active.' },
+      { id: 'under-pressure', name: 'Under Pressure',     desc: 'Escape on Hard with the alarm active.' },
+      { id: 'time-out',       name: "Time's Up",          desc: 'Run out of time. Better luck next time.' },
+      { id: 'patient-zero',   name: 'Patient Zero',       desc: 'Trigger the security alarm.' },
+      { id: 'explorer',       name: 'Every Room',         desc: 'Visit at least 7 of the 9 rooms.' },
+      { id: 'cartographer',   name: 'Cartographer',       desc: 'Visit every room in the facility.' },
+      { id: 'lore-hunter',    name: 'Deep Dive',          desc: 'Inspect 18 or more unique objects.' },
+      { id: 'completionist',  name: 'Completionist',      desc: 'Inspect 20 or more objects in a single run.' },
+      { id: 'speedrun-hard',  name: 'Hard Boiled',        desc: 'Escape on Hard difficulty.' },
+      { id: 'no-hints-hard',  name: 'Purist',             desc: 'Escape on Hard without using any hints.' },
+      { id: 'wire-first-try', name: 'Electrician',        desc: 'Solve the wire puzzle on the first try.' },
+      { id: 'memory-master',  name: 'Memory Master',      desc: 'Complete the memory puzzle on the first try.' },
+      { id: 'safe-cracker',   name: 'Safe Cracker',       desc: "Crack the director's safe on the first attempt." },
+    ];
 
-    // Arcadia endings discovered
-    const arcadiaEndings = ['escaped','secret-escape','alarm-caught','time-out'];
-    const foundCount = arcadiaEndings.filter(e => seen.includes(e)).length;
-    document.getElementById('arcadia-endings').textContent =
-      foundCount > 0 ? `${foundCount} / 4` : '0 / 4';
+    const grid = document.getElementById('hub-achievements');
+    grid.innerHTML = DEFS.map(d => {
+      const unlocked = ach.includes(d.id);
+      return `<div class="hub-ach-card ${unlocked ? 'unlocked' : 'locked'}">
+        <div class="hub-ach-name">${unlocked ? d.name : '???'}</div>
+        <div class="hub-ach-desc">${unlocked ? d.desc : 'Keep playing to unlock.'}</div>
+      </div>`;
+    }).join('');
   })();
 </script>
 

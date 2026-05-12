@@ -426,6 +426,73 @@ body::after {
   color: var(--text-dim);
 }
 
+/* ── Achievements grid ────────────────────────────────────────── */
+#hub-achievements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 1120px;
+  width: 100%;
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 700px) {
+  #hub-achievements { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 420px) {
+  #hub-achievements { grid-template-columns: 1fr; }
+}
+
+.hub-ach-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hub-ach-card.unlocked {
+  border-color: rgba(0,255,224,0.15);
+}
+
+.hub-ach-card.unlocked::before {
+  content: '✦';
+  font-size: 8px;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.hub-ach-card.locked {
+  opacity: 0.35;
+}
+
+.hub-ach-name {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-bright);
+  text-transform: uppercase;
+}
+
+.hub-ach-card.unlocked .hub-ach-name {
+  color: var(--accent);
+}
+
+.hub-ach-desc {
+  font-size: 10px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  font-family: Georgia, serif;
+  letter-spacing: 0;
+}
+
+.hub-ach-card.unlocked .hub-ach-desc {
+  color: var(--text);
+}
+
 /* ── Footer ───────────────────────────────────────────────────── */
 #hub-footer {
   margin-top: auto;
