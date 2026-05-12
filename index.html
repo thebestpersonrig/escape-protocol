@@ -20,15 +20,13 @@
     <div class="hub-tagline">Select your assignment, operative</div>
   </header>
 
-  <!-- ── Active Missions ────────────────────────────────────── -->
+  <!-- ── Mission Cards ──────────────────────────────────────── -->
   <div class="hub-section-label">// Active Assignments</div>
 
   <div id="hub-grid">
 
-    <!-- ── Mission 01 — Arcadia ─────────────────────────────── -->
     <div class="hub-card available" onclick="location.href='arcadia.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
       <div class="hub-card-num">Mission 01</div>
-      <div class="hub-card-badge hub-badge-available">Available Now</div>
       <div class="hub-card-title">Arcadia Research<br>Facility</div>
       <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
       <div class="hub-card-desc">
@@ -38,27 +36,14 @@
         the lockdown becomes permanent.
       </div>
       <div class="hub-card-meta">
-        <div class="hub-card-stat">
-          <span class="meta-label">Time</span>
-          <span class="meta-val">20 min</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Puzzles</span>
-          <span class="meta-val">12</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Difficulty</span>
-          <span class="meta-val">★★★☆☆</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Endings</span>
-          <span class="meta-val" id="arcadia-endings">—</span>
-        </div>
+        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">20 min</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">12</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★☆☆</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="arcadia-endings">0 / 4</span></div>
       </div>
       <div class="hub-card-play">▶ Enter Facility</div>
     </div>
 
-    <!-- ── Mission 02 — Blackwood ───────────────────────────── -->
     <div class="hub-card coming-soon">
       <div class="hub-card-num">Mission 02</div>
       <div class="hub-card-badge hub-badge-soon">Coming Soon</div>
@@ -67,31 +52,17 @@
       <div class="hub-card-desc">
         Blackwood Psychiatric Institute has been sealed for 40 years.
         An anonymous tip sent you inside the east wing. The doors locked
-        behind you. Something in the dark is still active. You need to
-        get out before it finds you.
+        behind you. Something in the dark is still active.
       </div>
       <div class="hub-card-meta">
-        <div class="hub-card-stat">
-          <span class="meta-label">Time</span>
-          <span class="meta-val">25 min</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Puzzles</span>
-          <span class="meta-val">14</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Difficulty</span>
-          <span class="meta-val">★★★★☆</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Endings</span>
-          <span class="meta-val">4</span>
-        </div>
+        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">25 min</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">14</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★☆</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">4</span></div>
       </div>
       <div class="hub-card-play locked">// Classified</div>
     </div>
 
-    <!-- ── Mission 03 — Meridian ────────────────────────────── -->
     <div class="hub-card coming-soon">
       <div class="hub-card-num">Mission 03</div>
       <div class="hub-card-badge hub-badge-locked">Encrypted</div>
@@ -99,35 +70,21 @@
       <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
       <div class="hub-card-desc">
         Six hours from Earth orbit, Meridian Station has lost contact with
-        Mission Control. The main airlock is compromised and the life support
-        is failing. You have 30 minutes of oxygen. Find the emergency
-        broadcast array and signal for rescue.
+        Mission Control. The airlock is compromised, life support failing.
+        You have 30 minutes of oxygen.
       </div>
       <div class="hub-card-meta">
-        <div class="hub-card-stat">
-          <span class="meta-label">Time</span>
-          <span class="meta-val">30 min</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Puzzles</span>
-          <span class="meta-val">16</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Difficulty</span>
-          <span class="meta-val">★★★★★</span>
-        </div>
-        <div class="hub-card-stat">
-          <span class="meta-label">Endings</span>
-          <span class="meta-val">5</span>
-        </div>
+        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Puzzles</span><span class="meta-val">16</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">5</span></div>
       </div>
       <div class="hub-card-play locked">// Encrypted</div>
     </div>
 
   </div><!-- #hub-grid -->
 
-  <!-- ── Operative Record ────────────────────────────────────── -->
-  <div class="hub-section-label">// Operative Record</div>
+  <!-- ── Stat Bar ────────────────────────────────────────────── -->
   <div id="hub-stats">
     <div class="hub-stat">
       <span class="hub-stat-val" id="hstat-escaped">0</span>
@@ -141,15 +98,17 @@
       <span class="hub-stat-val" id="hstat-ach">0</span>
       <span class="hub-stat-lbl">Achievements</span>
     </div>
-    <div class="hub-stat">
-      <span class="hub-stat-val" id="hstat-rooms">1 / 3</span>
-      <span class="hub-stat-lbl">Rooms Available</span>
+    <div class="hub-stat hub-stat-btn" onclick="toggleAchievements()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleAchievements()">
+      <span class="hub-stat-val">⬡</span>
+      <span class="hub-stat-lbl">View Achievements</span>
     </div>
   </div>
 
-  <!-- ── Achievements ──────────────────────────────────────── -->
-  <div class="hub-section-label">// Achievements</div>
-  <div id="hub-achievements"></div>
+  <!-- ── Achievements panel (hidden by default) ─────────────── -->
+  <div id="hub-ach-panel">
+    <div class="hub-section-label" style="padding-top:0;">// Achievements</div>
+    <div id="hub-achievements"></div>
+  </div>
 
   <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer id="hub-footer">
@@ -164,14 +123,13 @@
     const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
     const ach  = JSON.parse(localStorage.getItem('escape-protocol-achievements') || '[]');
 
-    // Stats
     document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
     document.getElementById('hstat-attempts').textContent = seen.length;
     document.getElementById('hstat-ach').textContent      = ach.length + ' / 18';
+
     const found = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => seen.includes(e)).length;
     document.getElementById('arcadia-endings').textContent = found + ' / 4';
 
-    // Achievements grid
     const DEFS = [
       { id: 'first-escape',   name: 'First Steps Out',   desc: 'Complete the escape for the first time.' },
       { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than half your time remaining.' },
@@ -193,8 +151,7 @@
       { id: 'safe-cracker',   name: 'Safe Cracker',       desc: "Crack the director's safe on the first attempt." },
     ];
 
-    const grid = document.getElementById('hub-achievements');
-    grid.innerHTML = DEFS.map(d => {
+    document.getElementById('hub-achievements').innerHTML = DEFS.map(d => {
       const unlocked = ach.includes(d.id);
       return `<div class="hub-ach-card ${unlocked ? 'unlocked' : 'locked'}">
         <div class="hub-ach-name">${unlocked ? d.name : '???'}</div>
@@ -202,6 +159,14 @@
       </div>`;
     }).join('');
   })();
+
+  function toggleAchievements() {
+    const panel = document.getElementById('hub-ach-panel');
+    const btn   = document.querySelector('.hub-stat-btn .hub-stat-lbl');
+    const open  = panel.classList.toggle('open');
+    btn.textContent = open ? 'Hide Achievements' : 'View Achievements';
+    if (open) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 </script>
 
 </body>
