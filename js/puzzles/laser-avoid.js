@@ -7,7 +7,7 @@ export function init(container, puzzleState, callbacks) {
   if (_animId !== null) { cancelAnimationFrame(_animId); _animId = null; }
   _cleanup();
 
-  const W = 360, H = 260;
+  const W = 520, H = 340;
   let lives = 3;
   let won   = false;
 
@@ -37,7 +37,7 @@ export function init(container, puzzleState, callbacks) {
   const livesEl = container.querySelector('#laser-lives');
 
   // ── Corridor (two horizontal beams that move together) ────
-  const GAP      = 88;   // total gap height — comfortable for player r=7
+  const GAP      = 100;  // total gap height — comfortable for player r=7
   let   cY       = H / 2; // corridor centre
   let   cDY      = 0.7;   // corridor drift speed (slow enough to track)
   const C_MIN    = GAP / 2 + 10;   // minimum cY (top beam ≥ y=10)
@@ -47,7 +47,7 @@ export function init(container, puzzleState, callbacks) {
   let player = { x: 28, y: H / 2, r: 7, speed: 2.6 };
 
   // ── Exit ──────────────────────────────────────────────────
-  const exit = { x: W - 28, y: H / 2, r: 14 };
+  const exit = { x: W - 32, y: H / 2, r: 16 };
 
   // ── Key state ─────────────────────────────────────────────
   const keys = {};
