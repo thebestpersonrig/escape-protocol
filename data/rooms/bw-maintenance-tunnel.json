@@ -1,0 +1,47 @@
+{
+  "id": "bw-maintenance-tunnel",
+  "name": "Maintenance Tunnel",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A narrow stone passage, barely wide enough to walk through. Old pipes run along the ceiling. At the far end — light. Grey, pale, morning light. The kind that means outside.",
+  "particles": { "type": "dust", "density": 0.5 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-chapel",
+      "type": "door",
+      "label": "Back to Chapel",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-chapel" },
+      "contents": []
+    },
+    {
+      "id": "bw-tunnel-exit",
+      "type": "door",
+      "label": "Exit — Open Air",
+      "x": 60, "y": 10, "w": 32, "h": 80,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "secret-escaped" },
+      "contents": []
+    },
+    {
+      "id": "bw-tunnel-pipe",
+      "type": "inspect",
+      "label": "Old Pipes",
+      "x": 15, "y": 8, "w": 42, "h": 18,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Rusted iron pipes running the length of the tunnel. Some are cracked and dry. A few have been wrapped in cloth — someone passed through here before, taking care not to make noise.\n\nThe end of the tunnel is twenty metres ahead." },
+      "contents": []
+    },
+    {
+      "id": "bw-tunnel-scratching",
+      "type": "inspect",
+      "label": "Wall Scratching",
+      "x": 15, "y": 30, "w": 35, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Someone scratched into the stone wall:\n\n'Patient 07\n1972\nI found the way out.\nI left this for the next one.'\n\nBelow it, a small arrow pointing forward." },
+      "contents": []
+    }
+  ]
+}

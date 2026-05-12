@@ -143,12 +143,20 @@ const HINTS = {
 
 let _hintCooldown = 0;
 let _hintCooldownInterval = null;
+let _missionHints = {};
+
+export function setMissionHints(hints) {
+  _missionHints = hints || {};
+}
 
 export function showHint() {
   const st = getState();
   if (st.hintsAvailable <= 0 || _hintCooldown > 0) return;
 
-  const roomHints = HINTS[st.currentRoom] || ['Keep exploring. There must be something you missed.'];
+  const missionEntry = _missionHints[st.currentRoom];
+  const roomHints = missionEntry
+    ? (Array.isArray(missionEntry) ? missionEntry : [missionEntry])
+    : HINTS[st.currentRoom] || ['Keep exploring. There must be something you missed.'];
   const hintText = roomHints[Math.min(st.hintsUsed, roomHints.length - 1)] || roomHints[roomHints.length - 1];
 
   dispatch('USE_HINT');

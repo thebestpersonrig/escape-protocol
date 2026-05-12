@@ -1,0 +1,95 @@
+{
+  "id": "bw-east-foyer",
+  "name": "East Wing Foyer",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The heavy doors seal behind you with a magnetic thud. Emergency lighting — a dim, sickly amber — casts long shadows across the cracked tile floor. The reception desk is overturned. Somewhere deep in the building, something shifts.",
+  "particles": { "type": "dust", "density": 0.5 },
+
+  "hotspots": [
+    {
+      "id": "bw-corridor-gate",
+      "type": "door",
+      "label": "Corridor Gate",
+      "x": 55, "y": 10, "w": 20, "h": 72,
+      "cursor": "pointer",
+      "condition": { "hasItem": "bw-service-key" },
+      "action": { "type": "navigate", "to": "bw-patient-corridor" },
+      "lockedMessage": "A heavy iron gate. Locked. There must be a key somewhere in this room.",
+      "contents": []
+    },
+    {
+      "id": "bw-front-doors",
+      "type": "door",
+      "label": "Front Entrance",
+      "x": 2, "y": 15, "w": 14, "h": 65,
+      "cursor": "pointer",
+      "condition": { "hasItem": "bw-master-key" },
+      "action": { "type": "navigate", "to": "escaped" },
+      "lockedMessage": "The magnetic lock is engaged. You need the master key to disengage it.",
+      "contents": []
+    },
+    {
+      "id": "bw-reception-desk",
+      "type": "container",
+      "label": "Reception Desk",
+      "x": 22, "y": 48, "w": 26, "h": 32,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-reception-desk" },
+      "contents": [
+        {
+          "id": "bw-service-key",
+          "type": "pickupable",
+          "label": "Service Key",
+          "x": 28, "y": 55, "w": 7, "h": 8,
+          "visibleWhen": { "objectState": "bw-reception-desk", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "bw-service-key" }
+        },
+        {
+          "id": "bw-intake-log",
+          "type": "item",
+          "label": "Intake Log",
+          "x": 36, "y": 56, "w": 9, "h": 7,
+          "visibleWhen": { "objectState": "bw-reception-desk", "equals": "open" },
+          "action": { "type": "inspect", "text": "BLACKWOOD PSYCHIATRIC INSTITUTE\nPatient Intake Register — East Wing\n\nAdmissions are listed by patient number.\nPatient 04, Patient 07, Patient 11...\n\nLast entry: Patient 07. Admitted: March, 1972.\nStatus: ONGOING. Ward B assignment.\n\nA handwritten note in the margin:\n'Ward B gate — use service key from desk.'" }
+        }
+      ]
+    },
+    {
+      "id": "bw-bulletin-board",
+      "type": "container",
+      "label": "Bulletin Board",
+      "x": 80, "y": 20, "w": 16, "h": 40,
+      "cursor": "zoom-in",
+      "action": { "type": "toggle-container", "objectId": "bw-bulletin-board" },
+      "contents": [
+        {
+          "id": "bw-memo",
+          "type": "item",
+          "label": "Staff Memo",
+          "x": 81, "y": 22, "w": 14, "h": 16,
+          "visibleWhen": { "objectState": "bw-bulletin-board", "equals": "open" },
+          "action": { "type": "inspect", "text": "INTERNAL MEMO — DR. HARLAN, DIRECTOR\n\nFollowing the incident in Ward B, all personnel are reminded:\n\n— Records vault access requires power from the treatment room.\n— Director's office remains locked. Key issued to records staff only.\n— Chapel remains open to patients per therapeutic protocol.\n\nDo NOT discuss Ward B with visitors.\n\n— Administration, 1972" }
+        }
+      ]
+    },
+    {
+      "id": "bw-entry-intercom",
+      "type": "inspect",
+      "label": "Old Intercom",
+      "x": 78, "y": 62, "w": 6, "h": 10,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A wall-mounted intercom unit. The speaker grille is cracked. When you press the button, nothing happens — no power, no signal.\n\nSomeone has scratched four digits into the metal casing: 4-0-3-1.\n\nYou're not sure what they mean." },
+      "contents": []
+    },
+    {
+      "id": "bw-foyer-sign",
+      "type": "inspect",
+      "label": "Facility Map",
+      "x": 4, "y": 16, "w": 12, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "BLACKWOOD PSYCHIATRIC INSTITUTE\nEast Wing Floor Plan\n\nGround Floor:\n  → Reception / Foyer [YOU ARE HERE]\n  → Patient Corridor — Ward A & Ward B\n  → Chapel (East End)\n\nWard B (Gate-Locked):\n  → Nurses' Station\n  → Treatment Room\n  → Records Vault (requires power)\n\nDirector's Office — Second Floor\n  Access via Records Vault only." },
+      "contents": []
+    }
+  ]
+}

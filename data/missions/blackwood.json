@@ -1,0 +1,94 @@
+{
+  "id": "blackwood",
+  "label": "BLACKWOOD PSYCHIATRIC INSTITUTE",
+  "startRoom": "bw-east-foyer",
+  "saveKey": "blackwood-save",
+  "endingsSaveKey": "ep-blackwood-endings-seen",
+  "clueRandomization": false,
+  "difficulty": {
+    "easy":   { "seconds": 2100, "mistakes": 10, "label": "35 MIN · 10 MISTAKES" },
+    "medium": { "seconds": 1500, "mistakes": 5,  "label": "25 MIN · 5 MISTAKES" },
+    "hard":   { "seconds": 750,  "mistakes": 3,  "label": "12 MIN · 3 MISTAKES" }
+  },
+  "puzzles": {
+    "bw-ward-lock":       { "solved": false, "attempts": 0, "code": "4031" },
+    "bw-power-wires":     { "solved": false, "attempts": 0, "shuffledWires": [] },
+    "bw-nurses-terminal": { "solved": false, "attempts": 0 },
+    "bw-records-cipher":  { "solved": false, "attempts": 0, "cardOrder": [] },
+    "bw-director-safe":   { "solved": false, "attempts": 0, "code": "1972" },
+    "bw-chapel-bells":    { "solved": false, "attempts": 0, "leverPositions": [0,0,0,0] }
+  },
+  "objects": {
+    "bw-reception-desk":   "closed",
+    "bw-bulletin-board":   "closed",
+    "bw-room7-cabinet":    "closed",
+    "bw-medicine-cabinet": "closed",
+    "bw-treatment-panel":  "closed",
+    "bw-records-cabinet-a":"closed",
+    "bw-records-cabinet-b":"closed",
+    "bw-director-desk":    "closed",
+    "bw-director-safe-door":"closed",
+    "bw-chapel-alcove":    "closed"
+  },
+  "objectives": [
+    { "id": "bw-find-way-out",       "text": "Find a way through the locked corridor",  "done": false },
+    { "id": "bw-restore-power",      "text": "Restore power to Ward B",                 "done": false },
+    { "id": "bw-find-director-key",  "text": "Find the director's office key",           "done": false },
+    { "id": "bw-get-master-key",     "text": "Retrieve the master key from the safe",   "done": false },
+    { "id": "bw-escape",             "text": "Get out of Blackwood",                    "done": false }
+  ],
+  "initialValues": {
+    "keypadCode":       "4031",
+    "leverPattern":     [1, 0, 1, 0],
+    "terminalPassword": "BLACKWOOD"
+  },
+  "hints": {
+    "bw-east-foyer":       "The reception desk might not be as empty as it looks.",
+    "bw-patient-corridor": "The ward B gate uses a number code. Patient records sometimes list admission numbers.",
+    "bw-patient-room-7":   "Patient 7's file has an unusual number sequence circled in red.",
+    "bw-nurses-station":   "The terminal is old but functional. The password might be the name of this place.",
+    "bw-treatment-room":   "Match the wire colours to the diagram on the wall panel.",
+    "bw-records-vault":    "The symbol order on the filing cabinet labels mirrors the patient intake sequence.",
+    "bw-directors-office": "The director recorded everything. His notes are hidden, but the safe combination is in plain sight — if you know where to look.",
+    "bw-chapel":           "The bell mechanism responds to a four-beat pattern. Listen to the rhythm of the chimes.",
+    "bw-solitary-cell":    "Nothing useful here — only what they left behind."
+  },
+  "endings": {
+    "catalogue": [
+      { "id": "escaped",       "label": "East Wing Escape", "type": "success", "desc": "Escape through the front doors" },
+      { "id": "secret-escape", "label": "The Tunnel",        "type": "success", "desc": "Find and use the maintenance passage" },
+      { "id": "alarm-caught",  "label": "Caught",            "type": "fail",    "desc": "Security responds before you reach the exit" },
+      { "id": "time-out",      "label": "Locked In",         "type": "fail",    "desc": "The facility claims another soul" }
+    ],
+    "text": {
+      "escaped": {
+        "title": "ESCAPED",
+        "titleClass": "success",
+        "flawless": "The front doors groan open. Cold grey light. You step out into the morning without a single alarm raised, without a single mistake. Whatever lives in these walls stays in there.",
+        "clean":    "The master key turns. The lock disengages. You push through into the open air and don't look back.",
+        "alarm":    "The klaxon is still echoing as you clear the entrance. You run. The sound follows you three blocks before it fades.",
+        "fast":     "You were through Blackwood before it knew what was happening. The doors release and you're gone.",
+        "default":  "The front doors swing open. Pale morning light. Somewhere inside, something is still active — but you're out."
+      },
+      "secret-escape": {
+        "title": "THE TUNNEL",
+        "titleClass": "success",
+        "noHints":  "The maintenance passage leads to open air behind the grounds. You found the way out that no one was supposed to find — entirely on your own. Whatever happened in Blackwood forty years ago, you've seen enough.",
+        "default":  "The hidden passage opens onto a drainage ditch behind the grounds. You're out. The morning is silent. Whatever lives in those walls stays in there."
+      },
+      "time-out": {
+        "title": "LOCKED IN",
+        "titleClass": "fail",
+        "nearExit":    "You were at the front doors. The master key was in your hand. Then the failsafe triggered — and no key opens a magnetically sealed exit.",
+        "manyMistakes":"You triggered too many alarms. The lockdown sealed every exit long before the clock ran out.",
+        "default":     "The lights go out. The facility's failsafe triggers. A door seals somewhere that cannot be unsealed from inside. You are still in Blackwood."
+      },
+      "alarm-caught": {
+        "title": "CAUGHT",
+        "titleClass": "fail",
+        "nearEscape": "You had the exit in sight. Five more seconds and you'd have cleared the door. The security response was faster.",
+        "default":    "Heavy boots on old tile. The response is swift and certain. You don't reach the exit in time."
+      }
+    }
+  }
+}

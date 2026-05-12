@@ -1,0 +1,76 @@
+{
+  "id": "bw-chapel",
+  "name": "Chapel",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The institutional chapel. Rows of worn pews face a stone altar. A stained glass window — dark now — depicts something you can't quite make out. In the corner stands a bell mechanism: four handles, each connected by rusted wire to a bell above. A narrow door behind the altar is sealed with a heavy bolt.",
+  "particles": { "type": "dust", "density": 0.35 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-corridor-chapel",
+      "type": "door",
+      "label": "Back to Corridor",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-patient-corridor" },
+      "contents": []
+    },
+    {
+      "id": "bw-tunnel-entrance",
+      "type": "door",
+      "label": "Maintenance Passage",
+      "x": 80, "y": 25, "w": 12, "h": 58,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-chapel-bells" },
+      "action": { "type": "navigate", "to": "bw-maintenance-tunnel" },
+      "lockedMessage": "A heavy bolt seals this door. The bell mechanism nearby might control it.",
+      "contents": []
+    },
+    {
+      "id": "bw-chapel-bells-trigger",
+      "type": "puzzle-trigger",
+      "label": "Bell Mechanism",
+      "x": 60, "y": 30, "w": 16, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-chapel-bells" },
+      "contents": []
+    },
+    {
+      "id": "bw-chapel-alcove",
+      "type": "container",
+      "label": "Chapel Alcove",
+      "x": 12, "y": 25, "w": 14, "h": 48,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-chapel-alcove" },
+      "contents": [
+        {
+          "id": "bw-bells-note",
+          "type": "item",
+          "label": "Handwritten Sheet",
+          "x": 14, "y": 35, "w": 10, "h": 14,
+          "visibleWhen": { "objectState": "bw-chapel-alcove", "equals": "open" },
+          "action": { "type": "inspect", "text": "A sheet of paper, folded carefully.\n\n'The maintenance passage bolt is controlled by the bell sequence.\nThe pattern was agreed among staff who wanted a way out.\n\nPull the handles in this order:\nUp, Down, Up, Down\n(Handles 1, 2, 3, 4 — positions High, Low, High, Low)\n\nThe bolt will release after the correct sequence is played.'" }
+        }
+      ]
+    },
+    {
+      "id": "bw-altar",
+      "type": "inspect",
+      "label": "Stone Altar",
+      "x": 36, "y": 40, "w": 22, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A simple stone altar. A single candle — long since burned out — sits in the centre.\n\nA small plaque is embedded in the stone:\n'For those who could not leave.'\n\nBelow it, scratched with a nail: '1972. We tried.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-stained-glass",
+      "type": "inspect",
+      "label": "Stained Glass",
+      "x": 36, "y": 8, "w": 22, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A large stained glass window. The light that might once have made it beautiful is gone — the boards outside block everything.\n\nThe image, barely visible: a figure standing before an open door. Whether they're entering or leaving is unclear." },
+      "contents": []
+    }
+  ]
+}

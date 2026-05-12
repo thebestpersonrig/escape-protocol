@@ -1,0 +1,75 @@
+{
+  "id": "bw-nurses-station",
+  "name": "Nurses' Station",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A long medical counter runs the length of the room. Medicine cabinets line the wall behind it — most empty, some sealed. An old computer terminal sits in the corner, its amber screen still glowing faintly.",
+  "particles": { "type": "dust", "density": 0.25 },
+
+  "hotspots": [
+    {
+      "id": "bw-ward-back",
+      "type": "door",
+      "label": "Back to Corridor",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-patient-corridor" },
+      "contents": []
+    },
+    {
+      "id": "bw-to-treatment",
+      "type": "door",
+      "label": "Treatment Room",
+      "x": 82, "y": 20, "w": 14, "h": 65,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-treatment-room" },
+      "contents": []
+    },
+    {
+      "id": "bw-nurses-terminal-trigger",
+      "type": "puzzle-trigger",
+      "label": "Medical Terminal",
+      "x": 55, "y": 32, "w": 20, "h": 38,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-nurses-terminal" },
+      "contents": []
+    },
+    {
+      "id": "bw-medicine-cabinet",
+      "type": "container",
+      "label": "Medicine Cabinet",
+      "x": 14, "y": 22, "w": 18, "h": 48,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-medicine-cabinet" },
+      "contents": [
+        {
+          "id": "bw-cipher-key",
+          "type": "item",
+          "label": "Laminated Card",
+          "x": 16, "y": 30, "w": 12, "h": 12,
+          "clueSlot": "bw-cipher-key",
+          "visibleWhen": { "objectState": "bw-medicine-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "A laminated reference card — yellowed but legible.\n\nRECORDS VAULT — SYMBOL REFERENCE GUIDE\n(For authorised staff only)\n\nPatient intake symbols are filed in order:\nCross · Moon · Star · Eye\n\nMatch the symbols in that sequence on the vault cabinet to release the director's key." }
+        }
+      ]
+    },
+    {
+      "id": "bw-nurses-chart",
+      "type": "inspect",
+      "label": "Patient Charts",
+      "x": 34, "y": 24, "w": 18, "h": 10,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A stack of patient charts. Most are redacted or water-damaged.\n\nOne legible entry reads:\n'Patient 07 — behavioural changes noted following first treatment session. Patient remains agitated. Requesting review of Director Harlan's protocols.'\n\n'Nursing staff password for terminal system: BLACKWOOD'" },
+      "contents": []
+    },
+    {
+      "id": "bw-nurses-counter",
+      "type": "inspect",
+      "label": "Nurses' Counter",
+      "x": 10, "y": 72, "w": 40, "h": 16,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A long counter. Scattered across it: empty medication trays, a broken thermometer, a pen.\n\nSomething is carved into the countertop:\n'If you're reading this, find the vault.\nDirector Harlan's year of opening = safe code.\nBlackwood opened: 1972.'" },
+      "contents": []
+    }
+  ]
+}

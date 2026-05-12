@@ -1,0 +1,66 @@
+{
+  "id": "bw-patient-room-7",
+  "name": "Room 7",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "A small room. A bare mattress on an iron frame. The barred window is painted over. The walls are covered in scratched writing — the same four digits, repeated hundreds of times.",
+  "particles": { "type": "dust", "density": 0.2 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-corridor-r7",
+      "type": "door",
+      "label": "Back to Corridor",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-patient-corridor" },
+      "contents": []
+    },
+    {
+      "id": "bw-room7-cabinet",
+      "type": "container",
+      "label": "Bedside Cabinet",
+      "x": 76, "y": 45, "w": 18, "h": 38,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-room7-cabinet" },
+      "contents": [
+        {
+          "id": "bw-patient-file",
+          "type": "item",
+          "label": "Patient File",
+          "x": 78, "y": 50, "w": 12, "h": 12,
+          "clueSlot": "bw-patient-file",
+          "visibleWhen": { "objectState": "bw-room7-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "CONFIDENTIAL — PATIENT FILE\nPatient 07 — Blackwood Psychiatric Institute\n\nAdmission: March 14th, 1972\nWard B — Room 7\nDiagnosis: [REDACTED]\n\nDr. Harlan's handwritten note at the bottom:\n'Admission number assigned per standard protocol.\nGate combination = admission month + day reversed.\n4-0-3-1'\n\nCircled in red ink: 4031" }
+        }
+      ]
+    },
+    {
+      "id": "bw-wall-writing",
+      "type": "inspect",
+      "label": "Writing on Wall",
+      "x": 15, "y": 15, "w": 40, "h": 60,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Scratched into the plaster, over and over:\n\n4031 4031 4031 4031 4031\n4031 4031 4031 4031 4031\n\nAnd among them, other words:\n'THEY CHANGED THE LOCK'\n'I KNOW THE CODE'\n'I WILL GET OUT'\n\nAt the bottom, barely legible:\n'Records vault. Director. Master key. 1972.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-barred-window",
+      "type": "inspect",
+      "label": "Barred Window",
+      "x": 55, "y": 12, "w": 18, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Four thick iron bars. The glass behind them is painted over in grey. You can't see outside.\n\nOne of the bars has been worked at — there are scratch marks in the paint — but it hasn't moved." },
+      "contents": []
+    },
+    {
+      "id": "bw-mattress",
+      "type": "inspect",
+      "label": "Mattress",
+      "x": 14, "y": 60, "w": 36, "h": 25,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A bare mattress, stained and worn. Beneath it, a small hollow has been carved into the floorboards — empty now. Whatever was hidden here is gone." },
+      "contents": []
+    }
+  ]
+}

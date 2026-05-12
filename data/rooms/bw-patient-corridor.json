@@ -1,0 +1,86 @@
+{
+  "id": "bw-patient-corridor",
+  "name": "Patient Corridor",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A long corridor stretches ahead. Numbered doors line both sides — most sealed, a few ajar. A wheelchair sits motionless in the middle of the hall. The fluorescent tubes overhead flicker in and out of rhythm.",
+  "particles": { "type": "dust", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-foyer",
+      "type": "door",
+      "label": "Back to Foyer",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-east-foyer" },
+      "contents": []
+    },
+    {
+      "id": "bw-room7-door",
+      "type": "door",
+      "label": "Room 7",
+      "x": 12, "y": 30, "w": 10, "h": 45,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-patient-room-7" },
+      "contents": []
+    },
+    {
+      "id": "bw-solitary-door",
+      "type": "door",
+      "label": "Solitary Wing",
+      "x": 24, "y": 32, "w": 9, "h": 42,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-solitary-cell" },
+      "contents": []
+    },
+    {
+      "id": "bw-ward-b-gate",
+      "type": "door",
+      "label": "Ward B",
+      "x": 42, "y": 10, "w": 18, "h": 72,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-ward-lock" },
+      "action": { "type": "navigate", "to": "bw-nurses-station" },
+      "lockedMessage": "A padlocked gate — Ward B. The combination is four digits.",
+      "contents": []
+    },
+    {
+      "id": "bw-ward-lock-trigger",
+      "type": "puzzle-trigger",
+      "label": "Ward B Padlock",
+      "x": 60, "y": 38, "w": 8, "h": 14,
+      "cursor": "zoom-in",
+      "condition": { "not": { "puzzleSolved": "bw-ward-lock" } },
+      "action": { "type": "open-puzzle", "puzzleId": "bw-ward-lock" },
+      "contents": []
+    },
+    {
+      "id": "bw-chapel-door",
+      "type": "door",
+      "label": "Chapel",
+      "x": 76, "y": 12, "w": 16, "h": 72,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-chapel" },
+      "contents": []
+    },
+    {
+      "id": "bw-corridor-wheelchair",
+      "type": "inspect",
+      "label": "Wheelchair",
+      "x": 65, "y": 58, "w": 10, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "An old wheelchair. The leather is cracked and dry. Someone has tied a patient wristband to one armrest — it reads 'PATIENT 07 — WARD B'.\n\nOn the seat, scratched into the leather: 'They don't let us leave.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-corridor-placard",
+      "type": "inspect",
+      "label": "Ward B Sign",
+      "x": 34, "y": 22, "w": 6, "h": 8,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "WARD B — RESTRICTED ACCESS\nCode-Locked Gate\n\nA smaller notice below:\n'Padlock combination changed following the 1972 incident.\nNew code issued to Ward B staff only.\nSee Patient 07's intake notes for reference.'" },
+      "contents": []
+    }
+  ]
+}

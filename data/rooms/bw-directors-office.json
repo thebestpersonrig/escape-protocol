@@ -1,0 +1,95 @@
+{
+  "id": "bw-directors-office",
+  "name": "Director's Office",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A heavy oak desk. Floor-to-ceiling bookshelves. A portrait of the director hangs above a dormant fireplace. The room feels sealed — not abandoned, but deliberately closed. A wall safe sits recessed behind the portrait.",
+  "particles": { "type": "dust", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-vault",
+      "type": "door",
+      "label": "Back to Records Vault",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-records-vault" },
+      "contents": []
+    },
+    {
+      "id": "bw-to-foyer-from-office",
+      "type": "door",
+      "label": "Back to Foyer",
+      "x": 88, "y": 20, "w": 10, "h": 65,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-east-foyer" },
+      "contents": []
+    },
+    {
+      "id": "bw-director-safe-trigger",
+      "type": "puzzle-trigger",
+      "label": "Wall Safe",
+      "x": 56, "y": 18, "w": 16, "h": 26,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-director-safe" },
+      "contents": []
+    },
+    {
+      "id": "bw-director-desk",
+      "type": "container",
+      "label": "Director's Desk",
+      "x": 20, "y": 52, "w": 38, "h": 32,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-director-desk" },
+      "contents": [
+        {
+          "id": "bw-desk-journal",
+          "type": "item",
+          "label": "Personal Journal",
+          "x": 25, "y": 58, "w": 14, "h": 16,
+          "clueSlot": "bw-desk-journal",
+          "visibleWhen": { "objectState": "bw-director-desk", "equals": "open" },
+          "action": { "type": "inspect", "text": "DIRECTOR'S PERSONAL JOURNAL\nFinal Entry — November 1972\n\n'I have sealed the institute. The board will say it was the incident. But the truth is simpler: what we were doing here was wrong.\n\nThe master key is in my safe. To anyone who finds it:\nTake it. Get out.\n\nSafe combination: 1-9-7-2\n(The year I opened this place. The year I should have known better.)'" }
+        }
+      ]
+    },
+    {
+      "id": "bw-director-portrait",
+      "type": "inspect",
+      "label": "Director's Portrait",
+      "x": 55, "y": 10, "w": 18, "h": 8,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A formal oil portrait. The nameplate reads: 'DR. E. HARLAN, DIRECTOR — BLACKWOOD PSYCHIATRIC INSTITUTE, EST. 1972'.\n\nThe portrait is hinged slightly off the wall. The wall safe is recessed behind it." },
+      "contents": []
+    },
+    {
+      "id": "bw-master-key-pickup",
+      "type": "pickupable",
+      "label": "Master Key",
+      "x": 60, "y": 40, "w": 10, "h": 12,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-director-safe" },
+      "action": { "type": "pick-up", "itemId": "bw-master-key" },
+      "contents": []
+    },
+    {
+      "id": "bw-director-safe-door",
+      "type": "inspect",
+      "label": "Safe (Locked)",
+      "x": 56, "y": 18, "w": 16, "h": 26,
+      "cursor": "zoom-in",
+      "condition": { "not": { "puzzleSolved": "bw-director-safe" } },
+      "action": { "type": "inspect", "text": "A heavy steel wall safe. Four-digit combination lock. The dial is old but functional.\n\nNo clues in this room about the code — you'll need to have found that information elsewhere." },
+      "contents": []
+    },
+    {
+      "id": "bw-bookshelf",
+      "type": "inspect",
+      "label": "Bookshelves",
+      "x": 3, "y": 18, "w": 14, "h": 52,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Rows of psychiatric textbooks and clinical journals. Dates range from 1955 to 1972.\n\nOne book has been pulled slightly forward — a clinical study called 'Electroconvulsive Therapy: Progress & Ethics, 1972'.\n\nA small note is tucked inside the cover. It reads: 'This was a mistake from the beginning.'" },
+      "contents": []
+    }
+  ]
+}

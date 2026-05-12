@@ -1,12 +1,19 @@
-const SAVE_KEY   = 'escape-protocol-save';
-const ACH_KEY    = 'escape-protocol-achievements';
-const SETTINGS_KEY = 'escape-protocol-settings';
+const DEFAULT_SAVE_KEY    = 'escape-protocol-save';
+const DEFAULT_ENDINGS_KEY = 'ep-endings-seen';
+const ACH_KEY             = 'escape-protocol-achievements';
+const SETTINGS_KEY        = 'escape-protocol-settings';
+
+let _saveKey    = DEFAULT_SAVE_KEY;
+let _endingsKey = DEFAULT_ENDINGS_KEY;
 
 export const SaveSystem = {
+  setSaveKey(key)        { if (key) _saveKey    = key; },
+  setEndingsSaveKey(key) { if (key) _endingsKey = key; },
+
   save(state) {
     try {
       const data = { schemaVersion: 1, timestamp: Date.now(), state };
-      localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+      localStorage.setItem(_saveKey, JSON.stringify(data));
     } catch (e) {
       console.warn('[Save] Could not save:', e);
     }
@@ -14,7 +21,7 @@ export const SaveSystem = {
 
   load() {
     try {
-      const raw = localStorage.getItem(SAVE_KEY);
+      const raw = localStorage.getItem(_saveKey);
       if (!raw) return null;
       const data = JSON.parse(raw);
       return data.state || null;
@@ -25,11 +32,11 @@ export const SaveSystem = {
   },
 
   hasSave() {
-    return localStorage.getItem(SAVE_KEY) !== null;
+    return localStorage.getItem(_saveKey) !== null;
   },
 
   deleteSave() {
-    localStorage.removeItem(SAVE_KEY);
+    localStorage.removeItem(_saveKey);
   },
 
   saveAchievements(list) {
@@ -63,12 +70,12 @@ export const SaveSystem = {
   },
 
   saveEndingsSeen(list) {
-    try { localStorage.setItem('ep-endings-seen', JSON.stringify(list)); } catch (e) {}
+    try { localStorage.setItem(_endingsKey, JSON.stringify(list)); } catch (e) {}
   },
 
   loadEndingsSeen() {
     try {
-      const raw = localStorage.getItem('ep-endings-seen');
+      const raw = localStorage.getItem(_endingsKey);
       return raw ? JSON.parse(raw) : [];
     } catch (e) { return []; }
   },

@@ -1,0 +1,76 @@
+{
+  "id": "bw-treatment-room",
+  "name": "Treatment Room",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "An electroshock treatment table dominates the centre — leather restraints still buckled. A metal fuse panel on the far wall is open, wires hanging loose. A handwritten diagram is taped above it. The records vault requires power from this room.",
+  "particles": { "type": "dust", "density": 0.2 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-nurses",
+      "type": "door",
+      "label": "Back to Nurses' Station",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-nurses-station" },
+      "contents": []
+    },
+    {
+      "id": "bw-records-vault-door",
+      "type": "door",
+      "label": "Records Vault",
+      "x": 78, "y": 15, "w": 16, "h": 68,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-power-wires" },
+      "action": { "type": "navigate", "to": "bw-records-vault" },
+      "lockedMessage": "The vault door is electronically sealed — the lock needs power. Restore power from the fuse panel.",
+      "contents": []
+    },
+    {
+      "id": "bw-power-wires-trigger",
+      "type": "puzzle-trigger",
+      "label": "Fuse Panel",
+      "x": 52, "y": 22, "w": 20, "h": 48,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-power-wires" },
+      "contents": []
+    },
+    {
+      "id": "bw-wire-diagram",
+      "type": "inspect",
+      "label": "Wiring Diagram",
+      "x": 52, "y": 10, "w": 20, "h": 12,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A handwritten diagram taped above the fuse panel.\n\nIt shows four coloured wires and their correct connections:\nRed → Terminal A\nBlue → Terminal C\nGreen → Terminal B\nYellow → Terminal D\n\nA note underneath:\n'DO NOT cross red and blue — short circuit will trigger alarm.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-treatment-panel",
+      "type": "container",
+      "label": "Supply Drawer",
+      "x": 8, "y": 60, "w": 20, "h": 24,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-treatment-panel" },
+      "contents": [
+        {
+          "id": "bw-treatment-note",
+          "type": "item",
+          "label": "Handwritten Note",
+          "x": 10, "y": 65, "w": 14, "h": 12,
+          "visibleWhen": { "objectState": "bw-treatment-panel", "equals": "open" },
+          "action": { "type": "inspect", "text": "Note, unsigned:\n\n'Director Harlan has the master key. It's in his safe.\nThe safe code is the year Blackwood was founded.\n\nThe vault holds the office key. Fix the power first.'" }
+        }
+      ]
+    },
+    {
+      "id": "bw-treatment-table",
+      "type": "inspect",
+      "label": "Treatment Table",
+      "x": 20, "y": 35, "w": 30, "h": 40,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "An electroconvulsive therapy table. Thick leather restraint straps — still buckled — hold the shape of a body that is no longer there.\n\nThe table's steel surface is cold. Scratch marks run along the right side." },
+      "contents": []
+    }
+  ]
+}

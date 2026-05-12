@@ -1,0 +1,109 @@
+{
+  "id": "arcadia",
+  "label": "ARCADIA RESEARCH FACILITY",
+  "startRoom": "lab-entry",
+  "saveKey": "escape-protocol-save",
+  "endingsSaveKey": "ep-endings-seen",
+  "clueRandomization": true,
+  "difficulty": {
+    "easy":   { "seconds": 1800, "mistakes": 10, "label": "30 MIN · 10 MISTAKES" },
+    "medium": { "seconds": 1200, "mistakes": 5,  "label": "20 MIN · 5 MISTAKES" },
+    "hard":   { "seconds": 600,  "mistakes": 3,  "label": "10 MIN · 3 MISTAKES" }
+  },
+  "puzzles": {
+    "entry-keypad":    { "solved": false, "attempts": 0 },
+    "lab-symbol":      { "solved": false, "attempts": 0, "cardOrder": [] },
+    "server-wire":     { "solved": false, "attempts": 0, "shuffledWires": [] },
+    "memory-card":     { "solved": false, "attempts": 0 },
+    "terminal-hack":   { "solved": false, "attempts": 0 },
+    "lever-combo":     { "solved": false, "attempts": 0, "leverPositions": [0,0,0,0] },
+    "laser-avoid":     { "solved": false, "attempts": 0 },
+    "bio-switch":      { "solved": false, "attempts": 0, "pattern": [1,0,1,1] },
+    "director-safe":   { "solved": false, "attempts": 0, "code": "7391" },
+    "security-panel":  { "solved": false, "attempts": 0, "sequence": [2,0,3,1,2] },
+    "power-frequency": { "solved": false, "attempts": 0, "target": 500 },
+    "hatch-keypad":    { "solved": false, "attempts": 0 }
+  },
+  "objects": {
+    "entry-drawer":          "closed",
+    "entry-vent":            "closed",
+    "lab-cabinet-left":      "closed",
+    "lab-cabinet-right":     "closed",
+    "lab-locker":            "closed",
+    "server-panel":          "closed",
+    "fuse-box":              "closed",
+    "final-safe":            "closed",
+    "secret-panel":          "closed",
+    "bio-fridge":            "closed",
+    "bio-key-box":           "closed",
+    "director-desk":         "closed",
+    "director-safe-door":    "closed",
+    "security-locker":       "closed",
+    "chip-compartment":      "closed",
+    "secret-filing-cabinet": "closed"
+  },
+  "objectives": [
+    { "id": "find-keycard",  "text": "Find the lab access keycard",         "done": false },
+    { "id": "unlock-lab",    "text": "Unlock and enter the Main Lab",       "done": false },
+    { "id": "restore-power", "text": "Restore server room power",           "done": false },
+    { "id": "hack-terminal", "text": "Hack the security terminal",          "done": false },
+    { "id": "escape",        "text": "Reach the emergency exit and escape", "done": false }
+  ],
+  "initialValues": {
+    "keypadCode":       "4821",
+    "leverPattern":     [1, 0, 1, 0],
+    "terminalPassword": "PROMETHEUS",
+    "directorSafeCode": "7391",
+    "bioSwitchPattern": [1, 0, 1, 1],
+    "powerFrequency":   500
+  },
+  "hints": {
+    "lab-entry":         "There's a keypad on the right wall. The code might be written down somewhere in this room.",
+    "main-lab":          "The symbol diagram on the wall looks important. Find the matching cards.",
+    "server-room":       "The fuse box needs the right sequence. Check the cables.",
+    "bio-lab":           "The bio-switch needs a specific pattern. Study the specimens.",
+    "director-office":   "The safe combination is hidden in this room — look carefully.",
+    "security-hub":      "The security panel needs a sequence. Watch it carefully.",
+    "utility-corridor":  "Check the frequency reader — match the target shown elsewhere.",
+    "final-exit":        "Use everything you've collected. The exit is close.",
+    "secret-room":       "You found it. The hatch code is here somewhere."
+  },
+  "endings": {
+    "catalogue": [
+      { "id": "escaped",       "label": "Standard Escape",  "type": "success", "desc": "Escape through the main exit" },
+      { "id": "secret-escape", "label": "Shadow Exit",       "type": "success", "desc": "Find and use the hidden tunnel" },
+      { "id": "alarm-caught",  "label": "Security Response", "type": "fail",    "desc": "Caught by security after triggering the alarm" },
+      { "id": "time-out",      "label": "Time Expired",      "type": "fail",    "desc": "Facility lockdown completes before you escape" }
+    ],
+    "text": {
+      "escaped": {
+        "title": "ESCAPE SUCCESSFUL",
+        "titleClass": "success",
+        "flawless": "Flawless. Not one alarm tripped, not one hint taken. You solved Arcadia like you'd been inside before.",
+        "clean":    "Clean exit — no alarms, no fumbles. You walk out into the night like you were never here.",
+        "alarm":    "Security was seconds behind you. You barely cleared the exit before the doors sealed. Close — too close.",
+        "fast":     "You tore through the lab at speed. The exit door slams behind you before the facility even registers you were inside.",
+        "default":  "You burst through the exit as the lab goes into full lockdown. Fresh air. Freedom. You made it."
+      },
+      "secret-escape": {
+        "title": "SHADOW EXIT",
+        "titleClass": "success",
+        "noHints": "The maintenance tunnel delivers you to open air. You found the way out that wasn't supposed to exist — without any help. Whatever K started, you finished it.",
+        "default": "The hidden tunnel leads to daylight. Somewhere out there, K is owed an answer. You have the evidence. The rest is up to you."
+      },
+      "time-out": {
+        "title": "TIME EXPIRED",
+        "titleClass": "fail",
+        "manyMistakes": "You tripped every alarm in the building. The lockdown was already sealed long before the clock hit zero.",
+        "nearExit":     "You were right there. The exit was in front of you. One more minute and you'd have made it — but the facility doesn't negotiate.",
+        "default":      "The lockdown sequence completes. Automated doors seal. The ventilation system purges. You are still inside."
+      },
+      "alarm-caught": {
+        "title": "SECURITY RESPONSE",
+        "titleClass": "fail",
+        "nearEscape": "You almost made it. Five more seconds and you'd have cleared the exit. Security was that close.",
+        "default":    "Red lights. Boots on tile. The security team moves fast. You don't reach the exit in time."
+      }
+    }
+  }
+}

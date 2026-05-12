@@ -1,0 +1,47 @@
+{
+  "id": "bw-solitary-cell",
+  "name": "Solitary Cell",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "A tiny room, barely two metres across. The walls are padded — old foam, mouldering now — and the single overhead light is caged behind thick wire mesh. There is no window. There is no furniture. There is only the drain in the floor and a hook on the ceiling.",
+  "particles": { "type": "dust", "density": 0.15 },
+
+  "hotspots": [
+    {
+      "id": "bw-back-to-corridor-solitary",
+      "type": "door",
+      "label": "Back to Corridor",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-patient-corridor" },
+      "contents": []
+    },
+    {
+      "id": "bw-solitary-walls",
+      "type": "inspect",
+      "label": "Padded Walls",
+      "x": 10, "y": 10, "w": 80, "h": 70,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "The foam padding is rotting, pulling away from the wall in strips. Behind it: bare concrete.\n\nOn the concrete, scratched so deep it cut through the foam:\n\n'4031'\n\nAnd below it:\n\n'They will come back for us. They always come back.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-solitary-drain",
+      "type": "inspect",
+      "label": "Floor Drain",
+      "x": 42, "y": 78, "w": 14, "h": 15,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A rusted metal drain in the centre of the floor. Nothing more. You don't want to think about why it's there." },
+      "contents": []
+    },
+    {
+      "id": "bw-solitary-hook",
+      "type": "inspect",
+      "label": "Ceiling Hook",
+      "x": 44, "y": 5, "w": 10, "h": 18,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "An iron hook, bolted into the ceiling. No context provided. No context needed." },
+      "contents": []
+    }
+  ]
+}

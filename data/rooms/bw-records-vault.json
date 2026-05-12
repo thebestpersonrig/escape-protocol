@@ -1,0 +1,97 @@
+{
+  "id": "bw-records-vault",
+  "name": "Records Vault",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Filing cabinets from floor to ceiling. A single bare bulb swings overhead. Patient records going back decades — most sealed in manila folders, labelled with symbols rather than names. One cabinet is different: it has a symbol lock, and something hangs from its handle.",
+  "particles": { "type": "dust", "density": 0.4 },
+
+  "hotspots": [
+    {
+      "id": "bw-to-directors-office",
+      "type": "door",
+      "label": "Director's Office",
+      "x": 80, "y": 15, "w": 14, "h": 70,
+      "cursor": "pointer",
+      "condition": { "hasItem": "bw-director-key" },
+      "action": { "type": "navigate", "to": "bw-directors-office" },
+      "lockedMessage": "A heavy locked door — Director Harlan's office. You need his key.",
+      "contents": []
+    },
+    {
+      "id": "bw-back-to-treatment",
+      "type": "door",
+      "label": "Back to Treatment Room",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "bw-treatment-room" },
+      "contents": []
+    },
+    {
+      "id": "bw-cipher-cabinet-trigger",
+      "type": "puzzle-trigger",
+      "label": "Symbol Cabinet",
+      "x": 55, "y": 15, "w": 22, "h": 65,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-records-cipher" },
+      "contents": []
+    },
+    {
+      "id": "bw-records-cabinet-a",
+      "type": "container",
+      "label": "Filing Cabinet A",
+      "x": 10, "y": 20, "w": 16, "h": 60,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-records-cabinet-a" },
+      "contents": [
+        {
+          "id": "bw-harlan-memo",
+          "type": "item",
+          "label": "Director's Memo",
+          "x": 12, "y": 30, "w": 12, "h": 14,
+          "clueSlot": "bw-harlan-memo",
+          "visibleWhen": { "objectState": "bw-records-cabinet-a", "equals": "open" },
+          "action": { "type": "inspect", "text": "MEMORANDUM — DR. HARLAN, DIRECTOR\nBlackwood Psychiatric Institute\nFounded: 1972\n\nAccess to my personal office requires the key held in this vault.\nThe vault releases when the correct symbol sequence is entered.\n\nCorrect sequence: Cross, Moon, Star, Eye\n(Cross first, Eye last)\n\nMy safe code is the founding year of this institution: 1972." }
+        }
+      ]
+    },
+    {
+      "id": "bw-records-cabinet-b",
+      "type": "container",
+      "label": "Filing Cabinet B",
+      "x": 30, "y": 20, "w": 14, "h": 60,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bw-records-cabinet-b" },
+      "contents": [
+        {
+          "id": "bw-incident-report",
+          "type": "item",
+          "label": "Incident Report",
+          "x": 32, "y": 30, "w": 10, "h": 14,
+          "visibleWhen": { "objectState": "bw-records-cabinet-b", "equals": "open" },
+          "action": { "type": "inspect", "text": "INCIDENT REPORT — 1972\nClassification: INTERNAL ONLY\n\nOn the evening of November 3rd, Patient 07 attempted to access the records vault and the director's office. The attempt was unsuccessful.\n\nPatient 07 was returned to solitary confinement.\n\nNote: Patient demonstrated knowledge of the ward gate code (4031) and the vault symbol sequence. Source of this knowledge is under investigation.\n\nRecommendation: Director Harlan's office key must be secured in the vault at all times." }
+        }
+      ]
+    },
+    {
+      "id": "bw-director-key-locked",
+      "type": "inspect",
+      "label": "Sealed Compartment",
+      "x": 55, "y": 15, "w": 22, "h": 65,
+      "cursor": "zoom-in",
+      "condition": { "not": { "puzzleSolved": "bw-records-cipher" } },
+      "action": { "type": "inspect", "text": "A filing cabinet with a symbol combination lock. The four symbols on the lock dials can be rotated. A key hangs from the handle — locked inside a small wire cage that releases when the correct sequence is entered.\n\nThe symbols you can see on the dials: Cross, Eye, Moon, Star." },
+      "contents": []
+    },
+    {
+      "id": "bw-director-key-pickup",
+      "type": "pickupable",
+      "label": "Director's Office Key",
+      "x": 62, "y": 60, "w": 8, "h": 12,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-records-cipher" },
+      "action": { "type": "pick-up", "itemId": "bw-director-key" },
+      "contents": []
+    }
+  ]
+}

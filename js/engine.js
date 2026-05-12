@@ -1,5 +1,5 @@
 import { getState, dispatch, subscribe } from './state.js';
-import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast, clearJournal, updateRoomIndicator } from './ui.js';
+import { initUI, startTimer, stopTimer, updateObjectiveDisplay, updateTimerDisplay, showNarrative, showToast, showAchievementToast, clearJournal, updateRoomIndicator, setMissionHints } from './ui.js';
 import { RoomRenderer } from './rooms.js';
 import { InteractionSystem } from './interaction.js';
 import { InventoryRenderer } from './inventory.js';
@@ -12,6 +12,7 @@ import { initClueLocations } from './clue-randomiser.js';
 export class Engine {
   constructor() {
     Engine.instance = this;
+    this._missionConfig = null;
     this._fadeEl    = document.getElementById('fade-cover');
     this._menuEl    = document.getElementById('main-menu');
     this._endEl     = document.getElementById('ending-screen');
@@ -192,20 +193,26 @@ export class Engine {
     if (this._audio.ambientGain) this._audio.ambientGain.gain.value = this._audio._volume.ambient;
   }
 
+  setMissionConfig(config) {
+    this._missionConfig = config || null;
+    if (config?.hints) setMissionHints(config.hints);
+  }
+
   async startNewGame(difficulty = 'medium') {
     const seed = Date.now();
     dispatch('SET_SEED', { seed });
     dispatch('SET_DIFFICULTY', { difficulty });
     dispatch('START_TIMER');
     localStorage.setItem('ep-seed', String(seed));
-    initClueLocations(seed);
+    if (this._missionConfig?.clueRandomization !== false) initClueLocations(seed);
     clearJournal();
     await this._fadeOut();
     this._menuEl?.classList.add('hidden');
     initUI();
     await this._audio.init().catch(() => {});
     this._applyAudioToNodes();
-    await this._loadRoom('lab-entry');
+    const startRoom = this._missionConfig?.startRoom || 'lab-entry';
+    await this._loadRoom(startRoom);
     this._particles.init(document.getElementById('particle-canvas'));
     startTimer();
     await this._fadeIn();
@@ -272,49 +279,58 @@ export class Engine {
     const noHints   = st.hintsUsed === 0;
     const alarmOn   = st.alarmTriggered;
 
-    // ── Ending text variations ──────────────────────────────
+    // ── Ending text — from mission config or Arcadia fallback ──
+    const mText = this._missionConfig?.endings?.text || {};
+
+    function _pick(def, ...variants) {
+      for (const v of variants) if (def[v]) return def[v];
+      return def.default || '';
+    }
+
     const ENDINGS = {
-      escaped: {
-        title: 'ESCAPE SUCCESSFUL',
-        titleClass: 'success',
-        body: noMistakes && noHints
-          ? 'Flawless. Not one alarm tripped, not one hint taken. You solved Arcadia like you\'d been inside before.'
-          : noMistakes
-          ? 'Clean exit — no alarms, no fumbles. You walk out into the night like you were never here.'
-          : alarmOn
-          ? 'Security was seconds behind you. You barely cleared the exit before the doors sealed. Close — too close.'
-          : fast
-          ? 'You tore through the lab at speed. The exit door slams behind you before the facility even registers you were inside.'
-          : 'You burst through the exit as the lab goes into full lockdown. Fresh air. Freedom. You made it.',
-      },
-      'time-out': {
-        title: 'TIME EXPIRED',
-        titleClass: 'fail',
-        body: st.mistakeCount > 8
-          ? 'You tripped every alarm in the building. The lockdown was already sealed long before the clock hit zero.'
-          : st.currentRoom === 'final-exit'
-          ? 'You were right there. The exit was in front of you. One more minute and you\'d have made it — but the facility doesn\'t negotiate.'
-          : 'The lockdown sequence completes. Automated doors seal. The ventilation system purges. You are still inside.',
-      },
-      'alarm-caught': {
-        title: 'SECURITY RESPONSE',
-        titleClass: 'fail',
-        body: st.alarmSecondsLeft <= 5
-          ? 'You almost made it. Five more seconds and you\'d have cleared the exit. Security was that close.'
-          : 'Red lights. Boots on tile. The security team moves fast. You don\'t reach the exit in time.',
-      },
-      'secret-escape': {
-        title: 'SHADOW EXIT',
-        titleClass: 'success',
-        body: noHints
-          ? 'The maintenance tunnel delivers you to open air. You found the way out that wasn\'t supposed to exist — without any help. Whatever K started, you finished it.'
-          : 'The hidden tunnel leads to daylight. Somewhere out there, K is owed an answer. You have the evidence. The rest is up to you.',
-      },
+      escaped: (() => {
+        const d = mText.escaped || {};
+        return {
+          title:     d.title     || 'ESCAPE SUCCESSFUL',
+          titleClass:d.titleClass|| 'success',
+          body: noMistakes && noHints && d.flawless ? d.flawless
+              : noMistakes && d.clean              ? d.clean
+              : alarmOn && d.alarm                 ? d.alarm
+              : fast && d.fast                     ? d.fast
+              : d.default || 'You made it out.',
+        };
+      })(),
+      'secret-escape': (() => {
+        const d = mText['secret-escape'] || {};
+        return {
+          title:     d.title     || 'SHADOW EXIT',
+          titleClass:d.titleClass|| 'success',
+          body: noHints && d.noHints ? d.noHints : d.default || 'You found the hidden exit.',
+        };
+      })(),
+      'time-out': (() => {
+        const d = mText['time-out'] || {};
+        const startRoom = this._missionConfig?.startRoom || 'lab-entry';
+        return {
+          title:     d.title     || 'TIME EXPIRED',
+          titleClass:d.titleClass|| 'fail',
+          body: st.mistakeCount > 8 && d.manyMistakes                            ? d.manyMistakes
+              : (st.currentRoom === 'final-exit' || st.currentRoom === startRoom) && d.nearExit ? d.nearExit
+              : d.default || 'The lockdown sequence completes. You are still inside.',
+        };
+      })(),
+      'alarm-caught': (() => {
+        const d = mText['alarm-caught'] || {};
+        return {
+          title:     d.title     || 'SECURITY RESPONSE',
+          titleClass:d.titleClass|| 'fail',
+          body: st.alarmSecondsLeft <= 5 && d.nearEscape ? d.nearEscape : d.default || 'Security responds. You don\'t reach the exit.',
+        };
+      })(),
     };
 
-    // ── Ending catalogue (for "Ending X of 4" tag) ─────────
-    // Order: two successes first, two failures second
-    const ENDING_CATALOGUE = [
+    // ── Ending catalogue (for "Ending X of 4" pips) ────────
+    const ENDING_CATALOGUE = this._missionConfig?.endings?.catalogue || [
       { id: 'escaped',       label: 'Standard Escape',   type: 'success', desc: 'Escape through the main exit' },
       { id: 'secret-escape', label: 'Shadow Exit',        type: 'success', desc: 'Find and use the hidden tunnel' },
       { id: 'alarm-caught',  label: 'Security Response',  type: 'fail',    desc: 'Caught by security after triggering the alarm' },

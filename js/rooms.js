@@ -37,6 +37,17 @@ export class RoomRenderer {
         'director-office':   'linear-gradient(160deg,#1a140a 0%,#141008 40%,#0e0c06 100%)',
         'security-hub':      'linear-gradient(160deg,#0e1420 0%,#0a1018 40%,#080c14 100%)',
         'utility-corridor':  'linear-gradient(160deg,#141210 0%,#0e0c0a 40%,#090806 100%)',
+        // Blackwood rooms — warm amber/sepia tones
+        'bw-east-foyer':        'linear-gradient(160deg,#1e1208 0%,#160e06 40%,#100a04 100%)',
+        'bw-patient-corridor':  'linear-gradient(160deg,#1a1006 0%,#140c04 40%,#0e0802 100%)',
+        'bw-patient-room-7':    'linear-gradient(160deg,#1c0c06 0%,#160804 40%,#100604 100%)',
+        'bw-nurses-station':    'linear-gradient(160deg,#161208 0%,#120e06 40%,#0e0a04 100%)',
+        'bw-treatment-room':    'linear-gradient(160deg,#200c0c 0%,#180808 40%,#120606 100%)',
+        'bw-records-vault':     'linear-gradient(160deg,#141008 0%,#100c06 40%,#0c0a04 100%)',
+        'bw-directors-office':  'linear-gradient(160deg,#1c1408 0%,#160e04 40%,#100a02 100%)',
+        'bw-chapel':            'linear-gradient(160deg,#0e0a14 0%,#0a0810 40%,#080610 100%)',
+        'bw-solitary-cell':     'linear-gradient(160deg,#0a0808 0%,#060606 40%,#040404 100%)',
+        'bw-maintenance-tunnel':'linear-gradient(160deg,#0c0a06 0%,#080604 40%,#060402 100%)',
       };
       this._bgEl.style.backgroundImage = gradients[config.id] || gradients['lab-entry'];
     }
@@ -308,22 +319,270 @@ export class RoomRenderer {
 
       'utility-corridor': `
         <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#090806,transparent);"></div>
-        <!-- Narrow corridor depth: dark vignette on sides -->
         <div style="position:absolute;top:0;left:0;width:8%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.75),transparent);"></div>
         <div style="position:absolute;top:0;right:0;width:8%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.75),transparent);"></div>
-        <!-- Dim industrial ceiling fixture -->
         <div style="position:absolute;top:0;left:30%;width:30%;height:3px;background:linear-gradient(90deg,transparent,rgba(200,160,80,0.35),transparent);box-shadow:0 0 16px rgba(180,140,60,0.3);"></div>
-        <!-- Exposed pipes left wall -->
         <div style="position:absolute;top:18%;left:5%;width:12%;height:3%;background:linear-gradient(to bottom,#2a2018,#201810);border:1px solid #3a2e20;border-radius:2px;"></div>
         <div style="position:absolute;top:28%;left:5%;width:12%;height:2%;background:linear-gradient(to bottom,#202818,#182010);border:1px solid #283a20;border-radius:2px;"></div>
         <div style="position:absolute;top:40%;left:5%;width:12%;height:3%;background:linear-gradient(to bottom,#2a2018,#201810);border:1px solid #3a2e20;border-radius:2px;"></div>
-        <!-- Cable conduit right wall -->
         <div style="position:absolute;top:15%;right:4%;width:2%;height:55%;background:#1a1810;border:1px solid #2a2818;border-radius:1px;"></div>
         <div style="position:absolute;top:15%;right:7%;width:2%;height:55%;background:#1a1810;border:1px solid #282818;border-radius:1px;"></div>
-        <!-- Hazard stripes on floor -->
         <div style="position:absolute;bottom:20%;left:0;right:0;height:5px;background:repeating-linear-gradient(90deg,rgba(255,160,0,0.22),rgba(255,160,0,0.22) 24px,transparent 24px,transparent 48px);"></div>
-        <!-- Scorch mark centre wall (decorative) -->
         <div style="position:absolute;top:25%;left:28%;width:22%;height:35%;background:radial-gradient(ellipse,rgba(60,30,10,0.6) 0%,transparent 70%);border-radius:50%;"></div>
+      `,
+
+      // ── Blackwood Psychiatric Institute rooms ─────────────────
+      'bw-east-foyer': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#0e0804,transparent);"></div>
+        <!-- Cracked tile floor lines -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:repeating-linear-gradient(90deg,rgba(60,30,10,0.3),rgba(60,30,10,0.3) 1px,transparent 1px,transparent 12%),repeating-linear-gradient(rgba(60,30,10,0.2),rgba(60,30,10,0.2) 1px,transparent 1px,transparent 40px);"></div>
+        <!-- Amber emergency light, ceiling left -->
+        <div style="position:absolute;top:0;left:15%;width:25%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,160,40,0.55),transparent);box-shadow:0 0 20px rgba(255,140,20,0.35),0 0 50px rgba(255,120,0,0.12);"></div>
+        <!-- Amber light pool on floor -->
+        <div style="position:absolute;bottom:20%;left:18%;width:24%;height:14%;background:radial-gradient(ellipse,rgba(255,140,20,0.08) 0%,transparent 70%);"></div>
+        <!-- Reception desk outline -->
+        <div style="position:absolute;bottom:28%;left:22%;width:26%;height:5%;background:linear-gradient(to bottom,#2a1c0c,#1e1408);border-top:1px solid #3a2810;"></div>
+        <!-- Overturned chair -->
+        <div style="position:absolute;bottom:28%;left:50%;width:5%;height:8%;background:#1c1208;border:1px solid #2e1c0a;transform:rotate(-30deg);border-radius:2px;"></div>
+        <!-- Iron gate bars (decorative) -->
+        <div style="position:absolute;top:10%;left:53%;width:2%;height:72%;background:repeating-linear-gradient(90deg,#2a1a0a,#2a1a0a 4px,transparent 4px,transparent 14px);"></div>
+        <!-- Wall damage / staining -->
+        <div style="position:absolute;top:20%;right:25%;width:8%;height:20%;background:radial-gradient(ellipse,rgba(80,40,10,0.3) 0%,transparent 70%);"></div>
+        <!-- Facility sign (faded) -->
+        <div style="position:absolute;top:8%;left:3%;width:10%;height:6%;background:#1a1208;border:1px solid #2a1a0c;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(180,130,60,0.35);font-family:monospace;font-size:0.55vw;letter-spacing:0.08em;text-align:center;">BLACKWOOD</div>
+      `,
+
+      'bw-patient-corridor': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0c0804,transparent);"></div>
+        <!-- Corridor perspective vignette -->
+        <div style="position:absolute;top:0;left:0;width:6%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.7),transparent);"></div>
+        <div style="position:absolute;top:0;right:0;width:6%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.7),transparent);"></div>
+        <!-- Corridor depth gradient (far end darker) -->
+        <div style="position:absolute;top:0;right:0;width:30%;height:100%;background:linear-gradient(to right,transparent,rgba(0,0,0,0.5));"></div>
+        <!-- Flickering fluorescent tubes -->
+        <div style="position:absolute;top:0;left:20%;width:18%;height:3px;background:linear-gradient(90deg,transparent,rgba(220,200,160,0.6),transparent);box-shadow:0 0 18px rgba(220,200,140,0.3);animation:blink 3.5s step-end infinite;"></div>
+        <div style="position:absolute;top:0;left:50%;width:18%;height:3px;background:linear-gradient(90deg,transparent,rgba(220,200,160,0.4),transparent);box-shadow:0 0 14px rgba(220,200,140,0.2);"></div>
+        <!-- Left wall door frames -->
+        <div style="position:absolute;top:25%;left:12%;width:8%;height:48%;background:#1a100a;border:1px solid #2a1810;border-radius:2px 2px 0 0;"></div>
+        <div style="position:absolute;top:27%;left:24%;width:7%;height:44%;background:#181008;border:1px solid #281608;border-radius:2px 2px 0 0;"></div>
+        <!-- Floor tile cracks -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:repeating-linear-gradient(90deg,rgba(50,30,10,0.25),rgba(50,30,10,0.25) 1px,transparent 1px,transparent 10%),repeating-linear-gradient(rgba(50,30,10,0.15),rgba(50,30,10,0.15) 1px,transparent 1px,transparent 36px);"></div>
+        <!-- Number plaques on doors -->
+        <div style="position:absolute;top:28%;left:14.5%;width:3%;height:3%;background:#120c06;border:1px solid #241808;display:flex;align-items:center;justify-content:center;color:rgba(180,140,60,0.5);font-family:monospace;font-size:0.6vw;">7</div>
+        <div style="position:absolute;top:30%;left:26%;width:3%;height:3%;background:#120c06;border:1px solid #241808;display:flex;align-items:center;justify-content:center;color:rgba(180,140,60,0.4);font-family:monospace;font-size:0.6vw;">S</div>
+        <!-- Ward B gate bars -->
+        <div style="position:absolute;top:8%;left:40%;width:22%;height:80%;background:repeating-linear-gradient(90deg,rgba(60,30,10,0.8),rgba(60,30,10,0.8) 3px,transparent 3px,transparent 12px);border:1px solid #3a1e0c;"></div>
+      `,
+
+      'bw-patient-room-7': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#0e0806,transparent);"></div>
+        <!-- Side vignettes — oppressive feel -->
+        <div style="position:absolute;top:0;left:0;width:12%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.8),transparent);"></div>
+        <div style="position:absolute;top:0;right:0;width:12%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.8),transparent);"></div>
+        <!-- Painted-over window (right wall) -->
+        <div style="position:absolute;top:10%;left:52%;width:20%;height:32%;background:#141008;border:3px solid #2a1c08;"></div>
+        <!-- Window bars -->
+        <div style="position:absolute;top:10%;left:55%;width:1%;height:32%;background:#2a1c08;"></div>
+        <div style="position:absolute;top:10%;left:61%;width:1%;height:32%;background:#2a1c08;"></div>
+        <div style="position:absolute;top:10%;left:67%;width:1%;height:32%;background:#2a1c08;"></div>
+        <!-- Iron bed frame outline -->
+        <div style="position:absolute;bottom:28%;left:12%;width:35%;height:25%;background:#180e08;border:1px solid #2a1808;border-radius:2px;"></div>
+        <!-- Wall text texture (many scratches) -->
+        <div style="position:absolute;top:12%;left:12%;width:35%;height:55%;background:repeating-linear-gradient(12deg,rgba(60,30,10,0.12),rgba(60,30,10,0.12) 1px,transparent 1px,transparent 6px),repeating-linear-gradient(-8deg,rgba(60,30,10,0.1),rgba(60,30,10,0.1) 1px,transparent 1px,transparent 9px);"></div>
+        <!-- Room number plate -->
+        <div style="position:absolute;top:8%;left:80%;width:8%;height:8%;background:#1a1008;border:1px solid #2e1c0c;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.6);font-family:monospace;font-size:1.4vw;font-weight:bold;">7</div>
+        <!-- Dim ceiling bulb -->
+        <div style="position:absolute;top:2%;left:47%;width:3%;height:4%;background:radial-gradient(ellipse,rgba(255,200,100,0.2) 0%,transparent 70%);"></div>
+      `,
+
+      'bw-nurses-station': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0e0a06,transparent);"></div>
+        <!-- Long medical counter -->
+        <div style="position:absolute;bottom:25%;left:8%;right:15%;height:4%;background:linear-gradient(to bottom,#2a1e10,#1e1608);border-top:1px solid #3a2818;"></div>
+        <!-- Medicine cabinet bank (left wall) -->
+        <div style="position:absolute;top:18%;left:12%;width:18%;height:52%;background:#1a1208;border:1px solid #2e1c0c;border-radius:2px;"></div>
+        <div style="position:absolute;top:18%;left:12%;width:18%;height:1px;background:#2e1c0c;top:32%;"></div>
+        <div style="position:absolute;top:18%;left:12%;width:18%;height:1px;background:#2e1c0c;top:46%;"></div>
+        <div style="position:absolute;top:18%;left:12%;width:18%;height:1px;background:#2e1c0c;top:58%;"></div>
+        <!-- Cabinet handles -->
+        <div style="position:absolute;top:26%;left:18%;width:5%;height:2px;background:#3a2a18;border-radius:1px;"></div>
+        <div style="position:absolute;top:40%;left:18%;width:5%;height:2px;background:#3a2a18;border-radius:1px;"></div>
+        <div style="position:absolute;top:53%;left:18%;width:5%;height:2px;background:#3a2a18;border-radius:1px;"></div>
+        <!-- Old terminal (right side) -->
+        <div style="position:absolute;top:22%;left:52%;width:22%;height:32%;background:#120e08;border:1px solid #241a0c;border-radius:2px;"></div>
+        <div style="position:absolute;top:24%;left:54%;width:18%;height:18%;background:#0c0906;border:1px solid #1c1408;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(255,160,40,0.4);font-family:monospace;font-size:0.5vw;">BLACKWOOD MED SYS</div>
+        <!-- Amber monitor glow -->
+        <div style="position:absolute;top:24%;left:54%;width:18%;height:18%;background:radial-gradient(ellipse,rgba(255,140,20,0.06) 0%,transparent 80%);"></div>
+        <!-- Patient chart clipboard on counter -->
+        <div style="position:absolute;bottom:29%;left:32%;width:9%;height:14%;background:#1e1408;border:1px solid #2e1c0c;border-radius:1px;"></div>
+        <!-- Ceiling light (amber) -->
+        <div style="position:absolute;top:0;left:25%;width:35%;height:3px;background:linear-gradient(90deg,transparent,rgba(255,160,40,0.45),transparent);box-shadow:0 0 22px rgba(255,140,20,0.3),0 0 50px rgba(255,120,0,0.1);"></div>
+      `,
+
+      'bw-treatment-room': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#0e0606,transparent);"></div>
+        <!-- Reddish emergency tint -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(100,10,10,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+        <!-- Treatment table -->
+        <div style="position:absolute;bottom:28%;left:18%;width:32%;height:6%;background:linear-gradient(to bottom,#2e1c1c,#201010);border-top:1px solid #4a2020;border-radius:2px;"></div>
+        <!-- Table legs -->
+        <div style="position:absolute;bottom:22%;left:20%;width:2%;height:7%;background:#1a0c0c;border:1px solid #2a1010;"></div>
+        <div style="position:absolute;bottom:22%;left:46%;width:2%;height:7%;background:#1a0c0c;border:1px solid #2a1010;"></div>
+        <!-- Restraint straps (horizontal) -->
+        <div style="position:absolute;bottom:34%;left:22%;width:9%;height:1px;background:rgba(80,40,20,0.6);"></div>
+        <div style="position:absolute;bottom:34%;left:36%;width:9%;height:1px;background:rgba(80,40,20,0.6);"></div>
+        <!-- Fuse panel (right wall) -->
+        <div style="position:absolute;top:20%;left:50%;width:22%;height:44%;background:#1a0e0e;border:1px solid #3a1010;border-radius:2px;"></div>
+        <div style="position:absolute;top:25%;left:52%;width:18%;height:1px;background:#3a1010;"></div>
+        <div style="position:absolute;top:35%;left:52%;width:18%;height:1px;background:#3a1010;"></div>
+        <div style="position:absolute;top:45%;left:52%;width:18%;height:1px;background:#3a1010;"></div>
+        <!-- Dangling wires from panel -->
+        <div style="position:absolute;top:53%;left:54%;width:1%;height:8%;background:rgba(255,80,0,0.5);border-radius:1px;transform:rotate(5deg);"></div>
+        <div style="position:absolute;top:53%;left:58%;width:1%;height:10%;background:rgba(0,100,200,0.5);border-radius:1px;transform:rotate(-8deg);"></div>
+        <div style="position:absolute;top:53%;left:62%;width:1%;height:7%;background:rgba(0,180,60,0.5);border-radius:1px;transform:rotate(3deg);"></div>
+        <!-- Dim red overhead fixture -->
+        <div style="position:absolute;top:0;left:30%;width:22%;height:3px;background:linear-gradient(90deg,transparent,rgba(200,40,40,0.4),transparent);box-shadow:0 0 16px rgba(200,30,30,0.3);animation:blink 4s step-end infinite;"></div>
+        <!-- Vault door outline (right) -->
+        <div style="position:absolute;top:14%;left:78%;width:16%;height:70%;background:#140808;border:2px solid #2a1010;border-radius:2px;"></div>
+        <div style="position:absolute;top:42%;left:79%;width:4%;height:5%;background:#1c0c0c;border:1px solid #3a1010;border-radius:50%;"></div>
+      `,
+
+      'bw-records-vault': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0c0a06,transparent);"></div>
+        <!-- Side vignettes — enclosed feeling -->
+        <div style="position:absolute;top:0;left:0;width:8%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.65),transparent);"></div>
+        <div style="position:absolute;top:0;right:0;width:8%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.65),transparent);"></div>
+        <!-- Bare bulb ceiling fixture -->
+        <div style="position:absolute;top:0;left:47%;width:4%;height:8%;background:linear-gradient(to bottom,#1a1408,transparent);border-left:1px solid #2a1e0c;border-right:1px solid #2a1e0c;"></div>
+        <div style="position:absolute;top:7%;left:47.5%;width:3%;height:3%;background:radial-gradient(circle,rgba(255,200,100,0.35) 0%,transparent 70%);border-radius:50%;box-shadow:0 0 20px rgba(255,180,60,0.2);"></div>
+        <!-- Filing cabinets — left bank -->
+        <div style="position:absolute;top:15%;left:8%;width:14%;height:60%;background:#1a1208;border:1px solid #2e1c0c;"></div>
+        <div style="position:absolute;top:15%;left:8%;width:14%;height:1px;background:#2e1c0c;top:28%;"></div>
+        <div style="position:absolute;top:15%;left:8%;width:14%;height:1px;background:#2e1c0c;top:42%;"></div>
+        <div style="position:absolute;top:15%;left:8%;width:14%;height:1px;background:#2e1c0c;top:56%;"></div>
+        <!-- Drawer handles -->
+        <div style="position:absolute;top:22%;left:12%;width:5%;height:2px;background:#3a2a18;"></div>
+        <div style="position:absolute;top:36%;left:12%;width:5%;height:2px;background:#3a2a18;"></div>
+        <div style="position:absolute;top:50%;left:12%;width:5%;height:2px;background:#3a2a18;"></div>
+        <!-- Second cabinet bank -->
+        <div style="position:absolute;top:15%;left:28%;width:12%;height:60%;background:#181008;border:1px solid #281808;"></div>
+        <div style="position:absolute;top:28%;left:28%;width:12%;height:1px;background:#281808;"></div>
+        <div style="position:absolute;top:42%;left:28%;width:12%;height:1px;background:#281808;"></div>
+        <!-- Symbol cipher cabinet (centre-right, distinctive) -->
+        <div style="position:absolute;top:13%;left:53%;width:22%;height:64%;background:#1c1208;border:2px solid #3a2010;border-radius:2px;"></div>
+        <!-- Four symbol dials on the cabinet -->
+        <div style="position:absolute;top:32%;left:55%;width:4%;height:5%;background:#120e06;border:1px solid #2e1c08;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.6);font-size:0.8vw;">✝</div>
+        <div style="position:absolute;top:32%;left:61%;width:4%;height:5%;background:#120e06;border:1px solid #2e1c08;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.5);font-size:0.8vw;">☽</div>
+        <div style="position:absolute;top:32%;left:67%;width:4%;height:5%;background:#120e06;border:1px solid #2e1c08;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.5);font-size:0.8vw;">★</div>
+        <div style="position:absolute;top:32%;left:73%;width:4%;height:5%;background:#120e06;border:1px solid #2e1c08;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.4);font-size:0.8vw;">◉</div>
+        <!-- Key cage on cabinet handle -->
+        <div style="position:absolute;top:55%;left:62%;width:4%;height:5%;background:#0e0a06;border:1px solid rgba(200,150,60,0.3);border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(200,150,60,0.4);font-size:0.7vw;">🔑</div>
+        <!-- Dust motes (visual texture) -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(80,50,20,0.06) 0%,transparent 60%);pointer-events:none;"></div>
+      `,
+
+      'bw-directors-office': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#100a04,transparent);"></div>
+        <!-- Warmer ceiling light — office is maintained -->
+        <div style="position:absolute;top:0;left:20%;width:45%;height:4px;background:linear-gradient(90deg,transparent,rgba(255,190,100,0.65),transparent);box-shadow:0 0 28px rgba(255,170,80,0.4),0 0 60px rgba(255,150,60,0.12);"></div>
+        <!-- Warm floor glow -->
+        <div style="position:absolute;bottom:20%;left:18%;width:55%;height:14%;background:radial-gradient(ellipse,rgba(255,160,60,0.06) 0%,transparent 70%);"></div>
+        <!-- Wood panel wall lines (warmth) -->
+        <div style="position:absolute;top:8%;left:0;right:0;height:60%;border-bottom:1px solid rgba(100,70,30,0.2);"></div>
+        <div style="position:absolute;top:8%;left:18%;width:1px;height:60%;background:linear-gradient(to bottom,transparent,rgba(120,80,30,0.15),transparent);"></div>
+        <div style="position:absolute;top:8%;left:40%;width:1px;height:60%;background:linear-gradient(to bottom,transparent,rgba(120,80,30,0.15),transparent);"></div>
+        <div style="position:absolute;top:8%;left:62%;width:1px;height:60%;background:linear-gradient(to bottom,transparent,rgba(120,80,30,0.15),transparent);"></div>
+        <!-- Portrait frame above safe -->
+        <div style="position:absolute;top:8%;left:52%;width:20%;height:12%;background:#1c1408;border:2px solid #3a2810;"></div>
+        <!-- Safe recessed behind portrait (subtle) -->
+        <div style="position:absolute;top:9%;left:53.5%;width:17%;height:10%;background:#140e06;border:1px solid #2e2010;"></div>
+        <!-- Keypad dots on safe -->
+        <div style="position:absolute;top:11%;left:58%;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;width:5%;height:5%;">
+          ${[...Array(9)].map(() => `<div style="background:#0e0a04;border:1px solid #2a1e08;border-radius:1px;"></div>`).join('')}
+        </div>
+        <!-- Heavy desk centre -->
+        <div style="position:absolute;bottom:25%;left:18%;width:46%;height:5%;background:linear-gradient(to bottom,#2e1e0c,#201408);border-top:2px solid #3e2a14;"></div>
+        <!-- Director nameplate -->
+        <div style="position:absolute;bottom:30%;left:28%;width:18%;height:4%;background:#1a1008;border:1px solid #3a2010;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(220,170,80,0.45);font-family:monospace;font-size:0.5vw;letter-spacing:0.12em;">DR. E. HARLAN</div>
+        <!-- Bookshelves (left) -->
+        <div style="position:absolute;top:10%;left:2%;width:14%;height:58%;background:#180e06;border:1px solid #2a1808;border-radius:1px;"></div>
+        <div style="position:absolute;top:20%;left:2%;width:14%;height:1px;background:#2a1808;"></div>
+        <div style="position:absolute;top:35%;left:2%;width:14%;height:1px;background:#2a1808;"></div>
+        <div style="position:absolute;top:50%;left:2%;width:14%;height:1px;background:#2a1808;"></div>
+      `,
+
+      'bw-chapel': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#08060e,transparent);"></div>
+        <!-- Gothic purple-dark ceiling -->
+        <div style="position:absolute;top:0;left:0;right:0;height:12%;background:linear-gradient(to bottom,rgba(20,10,30,0.7),transparent);"></div>
+        <!-- Stained glass window (centre-top, dark) -->
+        <div style="position:absolute;top:6%;left:34%;width:24%;height:30%;background:#0e0a14;border:2px solid #2a1830;border-radius:2px 2px 50% 50%;"></div>
+        <!-- Dark glass pane colours -->
+        <div style="position:absolute;top:8%;left:36%;width:6%;height:12%;background:rgba(50,20,60,0.5);border-radius:1px;"></div>
+        <div style="position:absolute;top:8%;left:43%;width:8%;height:14%;background:rgba(40,30,60,0.4);border-radius:1px;"></div>
+        <div style="position:absolute;top:8%;left:52%;width:5%;height:11%;background:rgba(30,20,50,0.5);border-radius:1px;"></div>
+        <!-- Pews (left and right) -->
+        <div style="position:absolute;bottom:28%;left:5%;width:28%;height:3%;background:linear-gradient(to bottom,#1a1008,#120c06);border-top:1px solid #2e1c0c;"></div>
+        <div style="position:absolute;bottom:38%;left:5%;width:28%;height:3%;background:linear-gradient(to bottom,#1a1008,#120c06);border-top:1px solid #2e1c0c;"></div>
+        <div style="position:absolute;bottom:48%;left:5%;width:28%;height:3%;background:linear-gradient(to bottom,#1a1008,#120c06);border-top:1px solid #2e1c0c;"></div>
+        <!-- Stone altar (centre) -->
+        <div style="position:absolute;bottom:28%;left:36%;width:22%;height:8%;background:linear-gradient(to bottom,#282028,#1c1820);border-top:2px solid #3a2838;"></div>
+        <!-- Altar candle (burnt out) -->
+        <div style="position:absolute;bottom:36%;left:45%;width:1.5%;height:4%;background:#2a1818;border-radius:1px;"></div>
+        <!-- Bell mechanism (right) -->
+        <div style="position:absolute;top:15%;right:8%;width:14%;height:55%;background:#1a1008;border:1px solid #2e1c0c;border-radius:2px;"></div>
+        <div style="position:absolute;top:20%;right:9%;width:12%;height:1px;background:#2e1c0c;"></div>
+        <div style="position:absolute;top:30%;right:9%;width:12%;height:1px;background:#2e1c0c;"></div>
+        <div style="position:absolute;top:40%;right:9%;width:12%;height:1px;background:#2e1c0c;"></div>
+        <!-- Bell handle indicators -->
+        ${[0,1,2,3].map(i => `<div style="position:absolute;top:${50+i*5}%;right:${10+i*3}%;width:1%;height:6%;background:#3a2010;border-radius:1px;transform:rotate(${i%2===0?5:-5}deg);"></div>`).join('')}
+        <!-- Maintenance door (far right) -->
+        <div style="position:absolute;top:22%;right:1%;width:12%;height:62%;background:#140e08;border:1px solid #2a1808;border-radius:2px;"></div>
+        <div style="position:absolute;top:50%;right:3%;width:2%;height:3%;background:#1e1208;border:1px solid #3a2010;border-radius:50%;"></div>
+        <!-- Faint purple ambient -->
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 47% 20%,rgba(60,30,80,0.08) 0%,transparent 55%);pointer-events:none;"></div>
+      `,
+
+      'bw-solitary-cell': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,#040404,transparent);"></div>
+        <!-- Heavy corner vignettes — claustrophobic -->
+        <div style="position:absolute;top:0;left:0;width:20%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.85),transparent);"></div>
+        <div style="position:absolute;top:0;right:0;width:20%;height:100%;background:linear-gradient(to left,rgba(0,0,0,0.85),transparent);"></div>
+        <div style="position:absolute;top:0;left:0;right:0;height:20%;background:linear-gradient(to bottom,rgba(0,0,0,0.7),transparent);"></div>
+        <!-- Caged ceiling light bulb -->
+        <div style="position:absolute;top:4%;left:45%;width:8%;height:10%;background:#0e0808;border:1px solid #1e1010;border-radius:2px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:30%;height:40%;background:rgba(255,140,40,0.15);border-radius:50%;box-shadow:0 0 12px rgba(255,120,20,0.1);"></div>
+        </div>
+        <!-- Padded wall texture (mouldering foam) -->
+        <div style="position:absolute;top:15%;left:18%;right:18%;height:60%;background:repeating-linear-gradient(0deg,rgba(30,20,10,0.3),rgba(30,20,10,0.3) 1px,transparent 1px,transparent 12%),repeating-linear-gradient(90deg,rgba(30,20,10,0.25),rgba(30,20,10,0.25) 1px,transparent 1px,transparent 18%);border:1px solid #1e1208;"></div>
+        <!-- Peeling pad edges -->
+        <div style="position:absolute;top:22%;left:22%;width:6%;height:8%;background:#18100a;transform:rotate(-4deg);border:1px solid #281808;"></div>
+        <div style="position:absolute;top:40%;right:22%;width:5%;height:10%;background:#140e08;transform:rotate(6deg);border:1px solid #221408;"></div>
+        <!-- Floor drain -->
+        <div style="position:absolute;bottom:20%;left:44%;width:8%;height:6%;background:#0a0808;border:1px solid #201010;border-radius:50%;"></div>
+        <div style="position:absolute;bottom:21%;left:46%;width:4%;height:3%;background:repeating-linear-gradient(90deg,#180e0e,#180e0e 1px,transparent 1px,transparent 4px);"></div>
+        <!-- Ceiling hook -->
+        <div style="position:absolute;top:14%;left:47%;width:4%;height:6%;background:linear-gradient(to bottom,#1e1010,transparent);border-radius:0 0 50% 50%;border:1px solid #2a1010;"></div>
+      `,
+
+      'bw-maintenance-tunnel': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#0a0804,transparent);"></div>
+        <!-- Tunnel vignette sides -->
+        <div style="position:absolute;top:0;left:0;width:10%;height:100%;background:linear-gradient(to right,rgba(0,0,0,0.8),transparent);"></div>
+        <!-- Light at end of tunnel (right) -->
+        <div style="position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(to right,transparent,rgba(180,180,140,0.12));"></div>
+        <div style="position:absolute;top:15%;right:0;width:30%;height:70%;background:radial-gradient(ellipse at 100% 50%,rgba(200,200,160,0.15) 0%,transparent 70%);"></div>
+        <!-- Stone/brick wall texture left -->
+        <div style="position:absolute;top:10%;left:8%;right:60%;height:80%;background:repeating-linear-gradient(rgba(50,35,20,0.3),rgba(50,35,20,0.3) 1px,transparent 1px,transparent 14px),repeating-linear-gradient(90deg,rgba(50,35,20,0.2),rgba(50,35,20,0.2) 1px,transparent 1px,transparent 22px);border:1px solid #2e1e0c;"></div>
+        <!-- Ceiling pipes -->
+        <div style="position:absolute;top:6%;left:8%;width:55%;height:3%;background:linear-gradient(to bottom,#2a1e10,#1e1408);border-radius:2px;border:1px solid #3a2818;"></div>
+        <div style="position:absolute;top:12%;left:8%;width:50%;height:2%;background:linear-gradient(to bottom,#1e1610,#18120c);border-radius:2px;border:1px solid #2e2010;"></div>
+        <!-- Cloth-wrapped pipe section -->
+        <div style="position:absolute;top:6%;left:30%;width:12%;height:3%;background:repeating-linear-gradient(90deg,rgba(60,40,20,0.7),rgba(60,40,20,0.7) 3px,rgba(40,28,14,0.7) 3px,rgba(40,28,14,0.7) 6px);border-radius:2px;"></div>
+        <!-- Wall text scratching (subtle) -->
+        <div style="position:absolute;top:40%;left:10%;width:14%;height:14%;background:repeating-linear-gradient(15deg,rgba(60,30,10,0.2),rgba(60,30,10,0.2) 1px,transparent 1px,transparent 4px);border-radius:1px;"></div>
+        <!-- Arrow carved into wall -->
+        <div style="position:absolute;top:48%;left:12%;color:rgba(180,120,40,0.35);font-size:1.5vw;font-family:monospace;">→</div>
       `,
     };
     return svgs[roomId] || '';

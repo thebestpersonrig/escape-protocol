@@ -1,0 +1,108 @@
+/* ── Blackwood Psychiatric Institute — Theme Override ─────── */
+:root {
+  --accent:      #c0392b;
+  --accent-glow: rgba(192, 57, 43, 0.40);
+  --accent-dim:  rgba(192, 57, 43, 0.08);
+  --accent-rgb:  192,57,43;
+  --bg:          #060303;
+  --surface:     #0d0807;
+  --surface2:    #120a08;
+  --border:      #221210;
+  --border2:     #2e1612;
+  --text:        #b8a8a0;
+  --text-bright: #e0d0c8;
+  --text-dim:    #503028;
+  --warn:        #c07830;
+}
+
+/* Warmer background grid tint */
+body::before {
+  background:
+    repeating-linear-gradient(
+      rgba(60,20,10,0.20), rgba(60,20,10,0.20) 1px,
+      transparent 1px, transparent 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(60,20,10,0.20), rgba(60,20,10,0.20) 1px,
+      transparent 1px, transparent 80px
+    );
+}
+
+/* Slightly warmer scanlines */
+body::after {
+  background: repeating-linear-gradient(
+    rgba(20,0,0,0.08), rgba(20,0,0,0.08) 1px,
+    transparent 1px, transparent 3px
+  );
+}
+
+/* Main menu title glow — red instead of cyan */
+@keyframes menu-title-glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(192,57,43,0.3), 0 0 40px rgba(192,57,43,0.1); }
+  50%       { text-shadow: 0 0 30px rgba(192,57,43,0.5), 0 0 60px rgba(192,57,43,0.2); }
+}
+
+/* HUD timer — red when alarm */
+#timer { color: var(--text-bright); }
+
+/* Alarm overlay — slightly more amber than pure red */
+#alarm-overlay {
+  background: rgba(30, 5, 5, 0.92);
+}
+
+/* Diff buttons — use crimson accent for selected state */
+.diff-btn.selected {
+  border-color: var(--accent) !important;
+  background: rgba(192,57,43,0.12) !important;
+  color: var(--accent) !important;
+}
+
+/* Puzzle overlay backdrop — warmer dark */
+#puzzle-overlay {
+  background: rgba(8, 3, 2, 0.96);
+}
+
+/* Hint popup — amber tint for gothic feel */
+#hint-popup {
+  border-color: rgba(192,57,43,0.3);
+  background: rgba(18, 8, 6, 0.98);
+}
+
+#hint-popup-label {
+  color: var(--accent);
+}
+
+/* Achievement toast */
+#achievement-toast {
+  border-color: rgba(192,57,43,0.4);
+}
+.ach-toast-label { color: var(--accent); }
+
+/* Menu primary button */
+.menu-btn.primary {
+  border-color: rgba(192,57,43,0.5);
+  background: rgba(192,57,43,0.1);
+  color: var(--accent);
+}
+.menu-btn.primary:hover {
+  background: rgba(192,57,43,0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(192,57,43,0.25);
+}
+
+/* Inventory selected item — red glow */
+.inv-slot.selected {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 10px rgba(192,57,43,0.3) !important;
+}
+
+/* Room narrative text */
+#room-narrative {
+  border-left-color: rgba(192,57,43,0.4);
+}
+
+/* Journal overlay */
+#journal-panel {
+  border-color: rgba(192,57,43,0.2);
+}

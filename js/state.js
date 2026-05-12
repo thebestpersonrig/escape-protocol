@@ -1,10 +1,10 @@
-const DIFFICULTY_TIMERS = {
-  easy:   1800,   // 30 min
-  medium: 1200,   // 20 min
-  hard:    600,   // 10 min
+let DIFFICULTY_TIMERS = {
+  easy:   1800,
+  medium: 1200,
+  hard:    600,
 };
 
-const DIFFICULTY_MISTAKE_LIMITS = {
+let DIFFICULTY_MISTAKE_LIMITS = {
   easy:   10,
   medium:  5,
   hard:    3,
@@ -279,6 +279,36 @@ export function dispatch(action, payload = {}) {
 
 export function resetState() {
   dispatch("RESET_STATE");
+}
+
+export function initMission(config) {
+  if (!config) return;
+
+  // Difficulty timers & limits
+  if (config.difficulty) {
+    ['easy', 'medium', 'hard'].forEach(d => {
+      if (config.difficulty[d]?.seconds  != null) DIFFICULTY_TIMERS[d]        = config.difficulty[d].seconds;
+      if (config.difficulty[d]?.mistakes != null) DIFFICULTY_MISTAKE_LIMITS[d] = config.difficulty[d].mistakes;
+    });
+  }
+
+  // Mission-specific state defaults
+  DEFAULT_STATE.currentRoom  = config.startRoom || DEFAULT_STATE.currentRoom;
+  DEFAULT_STATE.puzzles      = JSON.parse(JSON.stringify(config.puzzles  || DEFAULT_STATE.puzzles));
+  DEFAULT_STATE.objects      = JSON.parse(JSON.stringify(config.objects  || DEFAULT_STATE.objects));
+  DEFAULT_STATE.objectives   = (config.objectives || DEFAULT_STATE.objectives).map(o => ({...o}));
+
+  // Initial randomisable values
+  const iv = config.initialValues || {};
+  if (iv.keypadCode       != null) DEFAULT_STATE.keypadCode       = iv.keypadCode;
+  if (iv.leverPattern     != null) DEFAULT_STATE.leverPattern     = [...iv.leverPattern];
+  if (iv.terminalPassword != null) DEFAULT_STATE.terminalPassword = iv.terminalPassword;
+  if (iv.directorSafeCode != null) DEFAULT_STATE.directorSafeCode = iv.directorSafeCode;
+  if (iv.bioSwitchPattern != null) DEFAULT_STATE.bioSwitchPattern = [...iv.bioSwitchPattern];
+  if (iv.powerFrequency   != null) DEFAULT_STATE.powerFrequency   = iv.powerFrequency;
+
+  // Reset live state so next RESET_STATE pulls these new defaults
+  _state = JSON.parse(JSON.stringify(DEFAULT_STATE));
 }
 
 export { DEFAULT_STATE };
