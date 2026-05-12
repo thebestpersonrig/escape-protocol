@@ -20,6 +20,26 @@
     <div class="hub-tagline">Select your assignment, operative</div>
   </header>
 
+  <!-- ── Operative Stats ────────────────────────────────────── -->
+  <div id="hub-stats">
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-escaped">0</span>
+      <span class="hub-stat-lbl">Successful Escapes</span>
+    </div>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-attempts">0</span>
+      <span class="hub-stat-lbl">Missions Attempted</span>
+    </div>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-ach">0</span>
+      <span class="hub-stat-lbl">Achievements</span>
+    </div>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-rooms">1 / 3</span>
+      <span class="hub-stat-lbl">Rooms Available</span>
+    </div>
+  </div>
+
   <!-- ── Active Missions ────────────────────────────────────── -->
   <div class="hub-section-label">// Active Assignments</div>
 
@@ -29,13 +49,13 @@
     <div class="hub-card available" onclick="location.href='arcadia.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
       <div class="hub-card-num">Mission 01</div>
       <div class="hub-card-badge hub-badge-available">Available Now</div>
-      <div class="hub-card-title">Arcadia Research Facility</div>
+      <div class="hub-card-title">Arcadia Research<br>Facility</div>
       <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
       <div class="hub-card-desc">
         Arcadia's underground research facility went dark 72 hours ago.
-        An emergency lockdown has sealed all exits. Navigate the labs,
-        restore power, and find the override codes before the lockdown
-        becomes permanent.
+        An emergency lockdown has sealed all exits. You have one hour to
+        navigate the labs, restore power, and find the override codes before
+        the lockdown becomes permanent.
       </div>
       <div class="hub-card-meta">
         <div class="hub-card-stat">
@@ -52,7 +72,7 @@
         </div>
         <div class="hub-card-stat">
           <span class="meta-label">Endings</span>
-          <span class="meta-val" id="arcadia-endings">0 / 4</span>
+          <span class="meta-val" id="arcadia-endings">—</span>
         </div>
       </div>
       <div class="hub-card-play">▶ Enter Facility</div>
@@ -62,12 +82,13 @@
     <div class="hub-card coming-soon">
       <div class="hub-card-num">Mission 02</div>
       <div class="hub-card-badge hub-badge-soon">Coming Soon</div>
-      <div class="hub-card-title">Blackwood Asylum</div>
+      <div class="hub-card-title">Blackwood<br>Asylum</div>
       <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
       <div class="hub-card-desc">
         Blackwood Psychiatric Institute has been sealed for 40 years.
         An anonymous tip sent you inside the east wing. The doors locked
-        behind you. Something in the dark is still active.
+        behind you. Something in the dark is still active. You need to
+        get out before it finds you.
       </div>
       <div class="hub-card-meta">
         <div class="hub-card-stat">
@@ -94,12 +115,13 @@
     <div class="hub-card coming-soon">
       <div class="hub-card-num">Mission 03</div>
       <div class="hub-card-badge hub-badge-locked">Encrypted</div>
-      <div class="hub-card-title">Meridian Station Alpha</div>
+      <div class="hub-card-title">Meridian<br>Station Alpha</div>
       <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
       <div class="hub-card-desc">
         Six hours from Earth orbit, Meridian Station has lost contact with
-        Mission Control. The airlock is compromised, life support is failing.
-        You have 30 minutes of oxygen.
+        Mission Control. The main airlock is compromised and the life support
+        is failing. You have 30 minutes of oxygen. Find the emergency
+        broadcast array and signal for rescue.
       </div>
       <div class="hub-card-meta">
         <div class="hub-card-stat">
@@ -124,28 +146,6 @@
 
   </div><!-- #hub-grid -->
 
-  <!-- ── Operative Stats (bottom) ───────────────────────────── -->
-  <div class="hub-section-label">// Operative Record</div>
-
-  <div id="hub-stats">
-    <div class="hub-stat">
-      <span class="hub-stat-val" id="hstat-escaped">0</span>
-      <span class="hub-stat-lbl">Successful Escapes</span>
-    </div>
-    <div class="hub-stat">
-      <span class="hub-stat-val" id="hstat-attempts">0</span>
-      <span class="hub-stat-lbl">Missions Attempted</span>
-    </div>
-    <div class="hub-stat">
-      <span class="hub-stat-val" id="hstat-ach">0</span>
-      <span class="hub-stat-lbl">Achievements</span>
-    </div>
-    <div class="hub-stat">
-      <span class="hub-stat-val">1 / 3</span>
-      <span class="hub-stat-lbl">Rooms Unlocked</span>
-    </div>
-  </div>
-
   <!-- ── Footer ─────────────────────────────────────────────── -->
   <footer id="hub-footer">
     <div class="hub-footer-text">Escape Protocol · Operative Briefing System</div>
@@ -155,17 +155,23 @@
 </div><!-- #hub-wrap -->
 
 <script>
+  // Populate stats from localStorage
   (function () {
     const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
     const ach  = JSON.parse(localStorage.getItem('escape-protocol-achievements') || '[]');
 
-    document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
-    document.getElementById('hstat-attempts').textContent = seen.length;
+    const escapes  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
+    const attempts = seen.length;
+
+    document.getElementById('hstat-escaped').textContent  = escapes;
+    document.getElementById('hstat-attempts').textContent = attempts;
     document.getElementById('hstat-ach').textContent      = ach.length;
 
-    const arcadiaAll   = ['escaped','secret-escape','alarm-caught','time-out'];
-    const arcadiaFound = arcadiaAll.filter(e => seen.includes(e)).length;
-    document.getElementById('arcadia-endings').textContent = arcadiaFound + ' / 4';
+    // Arcadia endings discovered
+    const arcadiaEndings = ['escaped','secret-escape','alarm-caught','time-out'];
+    const foundCount = arcadiaEndings.filter(e => seen.includes(e)).length;
+    document.getElementById('arcadia-endings').textContent =
+      foundCount > 0 ? `${foundCount} / 4` : '0 / 4';
   })();
 </script>
 
