@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Protocol</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/transitions.css" />
+  <link rel="stylesheet" href="css/inventory.css" />
+  <link rel="stylesheet" href="css/puzzles.css" />
+</head>
+<body>
+
+<div id="game-wrapper">
+
+  <!-- ── Scene ──────────────────────────────────────── -->
+  <div id="scene-container">
+    <div id="room-background"></div>
+    <div id="room-objects"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div id="hotspot-highlight"></div>
+    <div id="hotspot-tooltip"></div>
+    <div id="room-narrative"></div>
+    <div id="scanlines"></div>
+    <div id="fade-cover"></div>
+  </div>
+
+  <!-- ── Top HUD ────────────────────────────────────── -->
+  <div id="hud-top">
+    <div id="timer">60:00</div>
+    <div id="room-indicator"><span id="room-name-display">—</span></div>
+    <div id="objective-tracker">
+      <div id="current-objective"><span>Find the lab access keycard</span></div>
+    </div>
+    <button id="hint-button">Hint (3 left)</button>
+    <button id="journal-button">📓 Journal</button>
+  </div>
+
+  <!-- ── Inventory ──────────────────────────────────── -->
+  <div id="inventory-bar">
+    <div id="inventory-label">INVENTORY</div>
+    <div id="inventory-slots"></div>
+    <div id="inv-description"></div>
+  </div>
+
+  <!-- ── Toast ──────────────────────────────────────── -->
+  <div id="toast"></div>
+
+  <!-- ── Hint popup ────────────────────────────────── -->
+  <div id="hint-popup">
+    <div id="hint-popup-label">💡 HINT</div>
+    <div id="hint-popup-text"></div>
+  </div>
+
+  <!-- ── Inspection popup ───────────────────────────── -->
+  <div id="inspection-popup">
+    <div id="inspection-card">
+      <img id="inspection-image" src="" alt="" />
+      <div id="inspection-text"></div>
+      <div id="inspection-close">[ Click anywhere to close ]</div>
+      <button id="inspection-note-btn">📓 Note it</button>
+    </div>
+  </div>
+
+  <!-- ── Journal overlay ─────────────────────────────── -->
+  <div id="journal-overlay">
+    <div id="journal-panel">
+      <div id="journal-header">
+        <div id="journal-title">📓 FIELD JOURNAL</div>
+        <button id="journal-close">✕</button>
+      </div>
+      <div id="journal-clues-section">
+        <div id="journal-clues-label">DISCOVERED CLUES</div>
+        <div id="journal-clues-list"><div id="journal-clues-empty">No clues noted yet — inspect objects and click "Note it".</div></div>
+      </div>
+      <div id="journal-notes-section">
+        <div id="journal-notes-label">MY NOTES</div>
+        <textarea id="journal-textarea" placeholder="Write your own notes here..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Puzzle overlay ─────────────────────────────── -->
+  <div id="puzzle-overlay">
+    <div id="puzzle-container"></div>
+    <button id="puzzle-close" title="Close (ESC)">✕</button>
+  </div>
+
+  <!-- ── Alarm overlay ──────────────────────────────── -->
+  <div id="alarm-overlay">
+    <div id="alarm-text">⚠ ALARM TRIGGERED ⚠</div>
+    <div id="alarm-reason"></div>
+    <div id="alarm-countdown"></div>
+  </div>
+
+  <!-- ── Achievement toast ──────────────────────────── -->
+  <div id="achievement-toast">
+    <div class="ach-toast-label">🏆 Achievement Unlocked</div>
+    <div class="ach-toast-name"></div>
+  </div>
+
+  <!-- ── Achievements screen ────────────────────────── -->
+  <div id="achievements-screen">
+    <h2>⬡ ACHIEVEMENTS ⬡</h2>
+    <div class="achievement-grid"></div>
+    <button class="menu-btn" id="ach-back-btn" style="margin-top:20px;">← Back</button>
+  </div>
+
+  <!-- ── Ending screen ──────────────────────────────── -->
+  <div id="ending-screen">
+    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">ARCADIA RESEARCH FACILITY</div>
+    <div id="ending-tag"></div>
+    <h1 id="ending-title"></h1>
+    <p id="ending-body"></p>
+    <div id="ending-stats"></div>
+    <div id="ending-score"></div>
+    <div style="display:flex;gap:10px;margin-top:28px;justify-content:center;flex-wrap:wrap;">
+      <button class="menu-btn primary" id="ending-play-again">▶ Play Again</button>
+      <button class="menu-btn" id="ending-main-menu">⌂ Main Menu</button>
+    </div>
+  </div>
+
+  <!-- ── Main menu ──────────────────────────────────── -->
+
+  <!-- Pause menu -->
+  <div id="pause-menu">
+    <div id="pause-card">
+      <div id="pause-title">⏸ PAUSED</div>
+      <div id="pause-subtitle">ARCADIA RESEARCH FACILITY</div>
+      <button class="menu-btn primary" id="pause-resume">▶ Resume</button>
+      <button class="menu-btn" id="pause-restart">↺ Restart</button>
+      <button class="menu-btn" id="pause-quit">⌂ Main Menu</button>
+      <div id="pause-settings">
+        <div class="settings-row">
+          <label class="settings-label">Master</label>
+          <input type="range" class="vol-slider" id="vol-master" min="0" max="100" value="70">
+          <span class="vol-val" id="vol-master-val">70</span>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">SFX</label>
+          <input type="range" class="vol-slider" id="vol-sfx" min="0" max="100" value="100">
+          <span class="vol-val" id="vol-sfx-val">100</span>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label">Ambient</label>
+          <input type="range" class="vol-slider" id="vol-ambient" min="0" max="100" value="40">
+          <span class="vol-val" id="vol-ambient-val">40</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main-menu">
+    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:4px;">ARCADIA RESEARCH FACILITY</div>
+    <h1 style="animation:menu-title-glow 3s ease-in-out infinite;">ESCAPE PROTOCOL</h1>
+    <div class="subtitle">CLASSIFIED · LEVEL 5 CLEARANCE REQUIRED</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+      <div style="display:flex;gap:6px;justify-content:center;">
+        <button class="diff-btn" data-diff="easy"   style="flex:1;max-width:68px;padding:7px 0;border:1px solid #2a2a3a;border-radius:6px;background:#111118;color:#5a6070;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">EASY</button>
+        <button class="diff-btn selected" data-diff="medium" style="flex:1;max-width:68px;padding:7px 0;border:1px solid #00ffe0;border-radius:6px;background:rgba(0,255,224,.1);color:#00ffe0;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">MEDIUM</button>
+        <button class="diff-btn" data-diff="hard"   style="flex:1;max-width:68px;padding:7px 0;border:1px solid #2a2a3a;border-radius:6px;background:#111118;color:#5a6070;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">HARD</button>
+      </div>
+      <div id="diff-label" style="text-align:center;font-family:'Courier New',monospace;font-size:10px;color:#5a6070;letter-spacing:.1em;margin-top:-4px;">20 MIN · 5 MISTAKES</div>
+      <button class="menu-btn primary" id="btn-new-game">▶ New Game</button>
+      <button class="menu-btn" id="btn-continue" disabled>⟳ Continue</button>
+      <button class="menu-btn" id="btn-achievements">⬡ Achievements</button>
+    </div>
+    <a href="index.html" style="display:block;margin-top:18px;font-family:'Courier New',monospace;font-size:10px;color:#2e2e4a;letter-spacing:0.15em;text-decoration:none;text-transform:uppercase;transition:color 0.2s;" onmouseover="this.style.color='#4a4a6a'" onmouseout="this.style.color='#2e2e4a'">← All Missions</a>
+  </div>
+
+</div><!-- #game-wrapper -->
+
+<!-- Catch any JS errors before module loads and show them visually -->
+<script>
+  window.addEventListener('error', function(e) {
+    var btn = document.getElementById('btn-new-game');
+    if (btn) btn.textContent = '⚠ JS Error — see console';
+    console.error('[EP Fatal]', e.message, e.filename, e.lineno);
+  });
+  window.addEventListener('unhandledrejection', function(e) {
+    console.error('[EP Unhandled]', e.reason);
+  });
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

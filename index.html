@@ -3,185 +3,177 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escape Protocol</title>
+  <title>Escape Protocol — Mission Select</title>
   <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/animations.css" />
-  <link rel="stylesheet" href="css/transitions.css" />
-  <link rel="stylesheet" href="css/inventory.css" />
-  <link rel="stylesheet" href="css/puzzles.css" />
+  <link rel="stylesheet" href="css/hub.css" />
 </head>
 <body>
 
-<div id="game-wrapper">
+<div id="hub-wrap">
 
-  <!-- ── Scene ──────────────────────────────────────── -->
-  <div id="scene-container">
-    <div id="room-background"></div>
-    <div id="room-objects"></div>
-    <canvas id="particle-canvas"></canvas>
-    <div id="hotspot-highlight"></div>
-    <div id="hotspot-tooltip"></div>
-    <div id="room-narrative"></div>
-    <div id="scanlines"></div>
-    <div id="fade-cover"></div>
-  </div>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header id="hub-header">
+    <div class="hub-eyebrow">Classified · Operative Briefing Terminal · v2.0</div>
+    <h1 class="hub-logo-title">
+      <span class="hub-logo-accent">ESCAPE</span> PROTOCOL<span class="hub-cursor">_</span>
+    </h1>
+    <div class="hub-tagline">Select your assignment, operative</div>
+  </header>
 
-  <!-- ── Top HUD ────────────────────────────────────── -->
-  <div id="hud-top">
-    <div id="timer">60:00</div>
-    <div id="room-indicator"><span id="room-name-display">—</span></div>
-    <div id="objective-tracker">
-      <div id="current-objective"><span>Find the lab access keycard</span></div>
+  <!-- ── Operative Stats ────────────────────────────────────── -->
+  <div id="hub-stats">
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-escaped">0</span>
+      <span class="hub-stat-lbl">Successful Escapes</span>
     </div>
-    <button id="hint-button">Hint (3 left)</button>
-    <button id="journal-button">📓 Journal</button>
-  </div>
-
-  <!-- ── Inventory ──────────────────────────────────── -->
-  <div id="inventory-bar">
-    <div id="inventory-label">INVENTORY</div>
-    <div id="inventory-slots"></div>
-    <div id="inv-description"></div>
-  </div>
-
-  <!-- ── Toast ──────────────────────────────────────── -->
-  <div id="toast"></div>
-
-  <!-- ── Hint popup ────────────────────────────────── -->
-  <div id="hint-popup">
-    <div id="hint-popup-label">💡 HINT</div>
-    <div id="hint-popup-text"></div>
-  </div>
-
-  <!-- ── Inspection popup ───────────────────────────── -->
-  <div id="inspection-popup">
-    <div id="inspection-card">
-      <img id="inspection-image" src="" alt="" />
-      <div id="inspection-text"></div>
-      <div id="inspection-close">[ Click anywhere to close ]</div>
-      <button id="inspection-note-btn">📓 Note it</button>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-attempts">0</span>
+      <span class="hub-stat-lbl">Missions Attempted</span>
+    </div>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-ach">0</span>
+      <span class="hub-stat-lbl">Achievements</span>
+    </div>
+    <div class="hub-stat">
+      <span class="hub-stat-val" id="hstat-rooms">1 / 3</span>
+      <span class="hub-stat-lbl">Rooms Available</span>
     </div>
   </div>
 
-  <!-- ── Journal overlay ─────────────────────────────── -->
-  <div id="journal-overlay">
-    <div id="journal-panel">
-      <div id="journal-header">
-        <div id="journal-title">📓 FIELD JOURNAL</div>
-        <button id="journal-close">✕</button>
+  <!-- ── Active Missions ────────────────────────────────────── -->
+  <div class="hub-section-label">// Active Assignments</div>
+
+  <div id="hub-grid">
+
+    <!-- ── Mission 01 — Arcadia ─────────────────────────────── -->
+    <div class="hub-card available" onclick="location.href='arcadia.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
+      <div class="hub-card-num">Mission 01</div>
+      <div class="hub-card-badge hub-badge-available">Available Now</div>
+      <div class="hub-card-title">Arcadia Research<br>Facility</div>
+      <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
+      <div class="hub-card-desc">
+        Arcadia's underground research facility went dark 72 hours ago.
+        An emergency lockdown has sealed all exits. You have one hour to
+        navigate the labs, restore power, and find the override codes before
+        the lockdown becomes permanent.
       </div>
-      <div id="journal-clues-section">
-        <div id="journal-clues-label">DISCOVERED CLUES</div>
-        <div id="journal-clues-list"><div id="journal-clues-empty">No clues noted yet — inspect objects and click "Note it".</div></div>
-      </div>
-      <div id="journal-notes-section">
-        <div id="journal-notes-label">MY NOTES</div>
-        <textarea id="journal-textarea" placeholder="Write your own notes here..."></textarea>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── Puzzle overlay ─────────────────────────────── -->
-  <div id="puzzle-overlay">
-    <div id="puzzle-container"></div>
-    <button id="puzzle-close" title="Close (ESC)">✕</button>
-  </div>
-
-  <!-- ── Alarm overlay ──────────────────────────────── -->
-  <div id="alarm-overlay">
-    <div id="alarm-text">⚠ ALARM TRIGGERED ⚠</div>
-    <div id="alarm-reason"></div>
-    <div id="alarm-countdown"></div>
-  </div>
-
-  <!-- ── Achievement toast ──────────────────────────── -->
-  <div id="achievement-toast">
-    <div class="ach-toast-label">🏆 Achievement Unlocked</div>
-    <div class="ach-toast-name"></div>
-  </div>
-
-  <!-- ── Achievements screen ────────────────────────── -->
-  <div id="achievements-screen">
-    <h2>⬡ ACHIEVEMENTS ⬡</h2>
-    <div class="achievement-grid"></div>
-    <button class="menu-btn" id="ach-back-btn" style="margin-top:20px;">← Back</button>
-  </div>
-
-  <!-- ── Ending screen ──────────────────────────────── -->
-  <div id="ending-screen">
-    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">ARCADIA RESEARCH FACILITY</div>
-    <div id="ending-tag"></div>
-    <h1 id="ending-title"></h1>
-    <p id="ending-body"></p>
-    <div id="ending-stats"></div>
-    <div id="ending-score"></div>
-    <div style="display:flex;gap:10px;margin-top:28px;justify-content:center;flex-wrap:wrap;">
-      <button class="menu-btn primary" id="ending-play-again">▶ Play Again</button>
-      <button class="menu-btn" id="ending-main-menu">⌂ Main Menu</button>
-    </div>
-  </div>
-
-  <!-- ── Main menu ──────────────────────────────────── -->
-
-  <!-- Pause menu -->
-  <div id="pause-menu">
-    <div id="pause-card">
-      <div id="pause-title">⏸ PAUSED</div>
-      <div id="pause-subtitle">ARCADIA RESEARCH FACILITY</div>
-      <button class="menu-btn primary" id="pause-resume">▶ Resume</button>
-      <button class="menu-btn" id="pause-restart">↺ Restart</button>
-      <button class="menu-btn" id="pause-quit">⌂ Main Menu</button>
-      <div id="pause-settings">
-        <div class="settings-row">
-          <label class="settings-label">Master</label>
-          <input type="range" class="vol-slider" id="vol-master" min="0" max="100" value="70">
-          <span class="vol-val" id="vol-master-val">70</span>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">20 min</span>
         </div>
-        <div class="settings-row">
-          <label class="settings-label">SFX</label>
-          <input type="range" class="vol-slider" id="vol-sfx" min="0" max="100" value="100">
-          <span class="vol-val" id="vol-sfx-val">100</span>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">12</span>
         </div>
-        <div class="settings-row">
-          <label class="settings-label">Ambient</label>
-          <input type="range" class="vol-slider" id="vol-ambient" min="0" max="100" value="40">
-          <span class="vol-val" id="vol-ambient-val">40</span>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★☆☆</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val" id="arcadia-endings">—</span>
         </div>
       </div>
+      <div class="hub-card-play">▶ Enter Facility</div>
     </div>
-  </div>
 
-  <div id="main-menu">
-    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:4px;">ARCADIA RESEARCH FACILITY</div>
-    <h1 style="animation:menu-title-glow 3s ease-in-out infinite;">ESCAPE PROTOCOL</h1>
-    <div class="subtitle">CLASSIFIED · LEVEL 5 CLEARANCE REQUIRED</div>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
-      <div style="display:flex;gap:6px;justify-content:center;">
-        <button class="diff-btn" data-diff="easy"   style="flex:1;max-width:68px;padding:7px 0;border:1px solid #2a2a3a;border-radius:6px;background:#111118;color:#5a6070;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">EASY</button>
-        <button class="diff-btn selected" data-diff="medium" style="flex:1;max-width:68px;padding:7px 0;border:1px solid #00ffe0;border-radius:6px;background:rgba(0,255,224,.1);color:#00ffe0;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">MEDIUM</button>
-        <button class="diff-btn" data-diff="hard"   style="flex:1;max-width:68px;padding:7px 0;border:1px solid #2a2a3a;border-radius:6px;background:#111118;color:#5a6070;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">HARD</button>
+    <!-- ── Mission 02 — Blackwood ───────────────────────────── -->
+    <div class="hub-card coming-soon">
+      <div class="hub-card-num">Mission 02</div>
+      <div class="hub-card-badge hub-badge-soon">Coming Soon</div>
+      <div class="hub-card-title">Blackwood<br>Asylum</div>
+      <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
+      <div class="hub-card-desc">
+        Blackwood Psychiatric Institute has been sealed for 40 years.
+        An anonymous tip sent you inside the east wing. The doors locked
+        behind you. Something in the dark is still active. You need to
+        get out before it finds you.
       </div>
-      <div id="diff-label" style="text-align:center;font-family:'Courier New',monospace;font-size:10px;color:#5a6070;letter-spacing:.1em;margin-top:-4px;">20 MIN · 5 MISTAKES</div>
-      <button class="menu-btn primary" id="btn-new-game">▶ New Game</button>
-      <button class="menu-btn" id="btn-continue" disabled>⟳ Continue</button>
-      <button class="menu-btn" id="btn-achievements">⬡ Achievements</button>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">25 min</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">14</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★★☆</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val">4</span>
+        </div>
+      </div>
+      <div class="hub-card-play locked">// Classified</div>
     </div>
-  </div>
 
-</div><!-- #game-wrapper -->
+    <!-- ── Mission 03 — Meridian ────────────────────────────── -->
+    <div class="hub-card coming-soon">
+      <div class="hub-card-num">Mission 03</div>
+      <div class="hub-card-badge hub-badge-locked">Encrypted</div>
+      <div class="hub-card-title">Meridian<br>Station Alpha</div>
+      <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
+      <div class="hub-card-desc">
+        Six hours from Earth orbit, Meridian Station has lost contact with
+        Mission Control. The main airlock is compromised and the life support
+        is failing. You have 30 minutes of oxygen. Find the emergency
+        broadcast array and signal for rescue.
+      </div>
+      <div class="hub-card-meta">
+        <div class="hub-card-stat">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">30 min</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Puzzles</span>
+          <span class="meta-val">16</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-val">★★★★★</span>
+        </div>
+        <div class="hub-card-stat">
+          <span class="meta-label">Endings</span>
+          <span class="meta-val">5</span>
+        </div>
+      </div>
+      <div class="hub-card-play locked">// Encrypted</div>
+    </div>
 
-<!-- Catch any JS errors before module loads and show them visually -->
+  </div><!-- #hub-grid -->
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer id="hub-footer">
+    <div class="hub-footer-text">Escape Protocol · Operative Briefing System</div>
+    <div class="hub-footer-sub">All scenarios are classified. Unauthorized access is logged and reported.</div>
+  </footer>
+
+</div><!-- #hub-wrap -->
+
 <script>
-  window.addEventListener('error', function(e) {
-    var btn = document.getElementById('btn-new-game');
-    if (btn) btn.textContent = '⚠ JS Error — see console';
-    console.error('[EP Fatal]', e.message, e.filename, e.lineno);
-  });
-  window.addEventListener('unhandledrejection', function(e) {
-    console.error('[EP Unhandled]', e.reason);
-  });
+  // Populate stats from localStorage
+  (function () {
+    const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
+    const ach  = JSON.parse(localStorage.getItem('escape-protocol-achievements') || '[]');
+
+    const escapes  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
+    const attempts = seen.length;
+
+    document.getElementById('hstat-escaped').textContent  = escapes;
+    document.getElementById('hstat-attempts').textContent = attempts;
+    document.getElementById('hstat-ach').textContent      = ach.length;
+
+    // Arcadia endings discovered
+    const arcadiaEndings = ['escaped','secret-escape','alarm-caught','time-out'];
+    const foundCount = arcadiaEndings.filter(e => seen.includes(e)).length;
+    document.getElementById('arcadia-endings').textContent =
+      foundCount > 0 ? `${foundCount} / 4` : '0 / 4';
+  })();
 </script>
-<script type="module" src="js/main.js"></script>
+
 </body>
 </html>
