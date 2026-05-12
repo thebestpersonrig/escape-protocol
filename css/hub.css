@@ -553,6 +553,24 @@ body::after {
   color: var(--text);
 }
 
+/* ── Back button ──────────────────────────────────────────────── */
+.hub-back-btn {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  transition: color 0.15s, border-color 0.15s;
+}
+.hub-back-btn:hover {
+  color: var(--accent);
+  border-color: rgba(0,255,224,0.3);
+}
+
 /* ── Footer ───────────────────────────────────────────────────── */
 #hub-footer {
   margin-top: auto;

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escape Protocol — Achievements</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/hub.css" />
+</head>
+<body>
+<div id="hub-wrap">
+
+  <header id="hub-header">
+    <div class="hub-eyebrow">Operative Dossier · Achievement Record</div>
+    <h1 class="hub-logo-title">
+      <span class="hub-logo-accent">ACHIEVEMENTS</span><span class="hub-cursor">_</span>
+    </h1>
+    <div class="hub-tagline"><span id="ach-count">0 / 18</span> unlocked</div>
+  </header>
+
+  <div class="hub-section-label">// Arcadia Research Facility</div>
+  <div id="hub-achievements"></div>
+
+  <div style="padding: 0 24px 40px; width: 100%; max-width: 1120px;">
+    <a href="index.html" class="hub-back-btn">← Back to Mission Select</a>
+  </div>
+
+  <footer id="hub-footer">
+    <div class="hub-footer-text">Escape Protocol · Operative Briefing System</div>
+    <div class="hub-footer-sub">All scenarios are classified. Unauthorized access is logged and reported.</div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    const raw = localStorage.getItem('escape-protocol-achievements');
+    const ach = raw ? (JSON.parse(raw).unlocked || []) : [];
+
+    document.getElementById('ach-count').textContent = ach.length + ' / 18';
+
+    const DEFS = [
+      { id: 'first-escape',   name: 'First Steps Out',   desc: 'Complete the escape for the first time.' },
+      { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than half your time remaining.' },
+      { id: 'no-hints',       name: "I Don't Need Help",  desc: 'Escape without using any hints.' },
+      { id: 'no-mistakes',    name: 'Ghost Protocol',     desc: 'Escape without triggering the alarm.' },
+      { id: 'secret-escape',  name: 'Shadow Exit',        desc: 'Find and use the secret room exit.' },
+      { id: 'too-loud',       name: 'Too Loud',           desc: 'Escape while the alarm is still active.' },
+      { id: 'under-pressure', name: 'Under Pressure',     desc: 'Escape on Hard with the alarm active.' },
+      { id: 'time-out',       name: "Time's Up",          desc: 'Run out of time. Better luck next time.' },
+      { id: 'patient-zero',   name: 'Patient Zero',       desc: 'Trigger the security alarm.' },
+      { id: 'explorer',       name: 'Every Room',         desc: 'Visit at least 7 of the 9 rooms.' },
+      { id: 'cartographer',   name: 'Cartographer',       desc: 'Visit every room in the facility.' },
+      { id: 'lore-hunter',    name: 'Deep Dive',          desc: 'Inspect 18 or more unique objects.' },
+      { id: 'completionist',  name: 'Completionist',      desc: 'Inspect 20 or more objects in a single run.' },
+      { id: 'speedrun-hard',  name: 'Hard Boiled',        desc: 'Escape on Hard difficulty.' },
+      { id: 'no-hints-hard',  name: 'Purist',             desc: 'Escape on Hard without using any hints.' },
+      { id: 'wire-first-try', name: 'Electrician',        desc: 'Solve the wire puzzle on the first try.' },
+      { id: 'memory-master',  name: 'Memory Master',      desc: 'Complete the memory puzzle on the first try.' },
+      { id: 'safe-cracker',   name: 'Safe Cracker',       desc: "Crack the director's safe on the first attempt." },
+    ];
+
+    document.getElementById('hub-achievements').innerHTML = DEFS.map(d => {
+      const unlocked = ach.includes(d.id);
+      return `<div class="hub-ach-card ${unlocked ? 'unlocked' : 'locked'}">
+        <div class="hub-ach-name">${unlocked ? d.name : '???'}</div>
+        <div class="hub-ach-desc">${unlocked ? d.desc : 'Keep playing to unlock.'}</div>
+      </div>`;
+    }).join('');
+  })();
+</script>
+</body>
+</html>
