@@ -40,7 +40,9 @@
       "label": "Laser Grid — Bypass",
       "x": 35, "y": 25, "w": 30, "h": 60,
       "cursor": "zoom-in",
+      "condition": { "hasItem": "bypass-chip" },
       "action": { "type": "open-puzzle", "puzzleId": "laser-avoid" },
+      "lockedMessage": "The laser grid control port needs a bypass chip. Find one in the utility systems.",
       "contents": []
     },
     {

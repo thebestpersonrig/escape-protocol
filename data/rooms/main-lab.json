@@ -192,9 +192,15 @@
       "label": "Emergency Corridor →",
       "x": 54, "y": 12, "w": 13, "h": 22,
       "cursor": "pointer",
-      "condition": { "puzzleSolved": "terminal-hack" },
+      "condition": { "all": [
+        { "puzzleSolved": "terminal-hack" },
+        { "hasItem": "security-pass" }
+      ] },
       "action": { "type": "navigate", "to": "final-exit" },
-      "lockedMessage": "The corridor is sealed. Hack the security terminal to disengage the lock.",
+      "lockedMessages": [
+        "The corridor is sealed. Hack the security terminal to disengage the lock.",
+        "Terminal hacked — but the corridor needs a security pass to open. Find one."
+      ],
       "contents": []
     }
   ]

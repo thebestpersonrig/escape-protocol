@@ -13,6 +13,8 @@ const ITEM_DEFS = {
   'lever-diagram':   { label: 'Lever Diagram',     icon: '📄' },
   'maintenance-key': { label: 'Maintenance Key',   icon: '🗝️' },
   'office-id-card':  { label: 'Emergency ID Card', icon: '🪪' },
+  'security-pass':   { label: 'Security Pass',     icon: '🔐' },
+  'bypass-chip':     { label: 'Bypass Chip',       icon: '🔌' },
 };
 
 export class InventoryRenderer {

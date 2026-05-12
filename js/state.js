@@ -34,8 +34,10 @@ const DEFAULT_STATE = {
     "terminal-hack": { solved: false, attempts: 0 },
     "lever-combo":   { solved: false, attempts: 0, leverPositions: [0, 0, 0, 0] },
     "laser-avoid":   { solved: false, attempts: 0 },
-    "bio-memory":    { solved: false, attempts: 0 },
-    "director-safe": { solved: false, attempts: 0, code: '7391' },
+    "bio-memory":       { solved: false, attempts: 0 },
+    "director-safe":   { solved: false, attempts: 0, code: '7391' },
+    "security-panel":  { solved: false, attempts: 0 },
+    "power-junction":  { solved: false, attempts: 0 },
   },
   objects: {
     "entry-drawer":       "closed",
@@ -51,6 +53,8 @@ const DEFAULT_STATE = {
     "bio-key-box":        "closed",
     "director-desk":      "closed",
     "director-safe-door": "closed",
+    "security-locker":    "closed",
+    "chip-compartment":   "closed",
   },
   objectives: [
     { id: "find-keycard",    text: "Find the lab access keycard",          done: false },

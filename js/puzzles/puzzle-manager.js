@@ -11,8 +11,10 @@ const PUZZLE_NAMES = {
   'terminal-hack': 'Terminal Hack',
   'lever-combo':   'Lever Controls',
   'laser-avoid':   'Laser Grid',
-  'bio-memory':    'Specimen Vault',
-  'director-safe': 'Director\'s Safe',
+  'bio-memory':     'Specimen Vault',
+  'director-safe':  'Director\'s Safe',
+  'security-panel': 'Access Control',
+  'power-junction': 'Power Junction',
 };
 
 const _ach = new AchievementSystem();
@@ -26,8 +28,10 @@ const PUZZLE_MODULES = {
   'terminal-hack': () => import('./terminal.js'),
   'lever-combo':   () => import('./lever-combo.js'),
   'laser-avoid':   () => import('./laser-avoid.js'),
-  'bio-memory':    () => import('./memory-card.js'),
-  'director-safe': () => import('./keypad.js'),
+  'bio-memory':      () => import('./memory-card.js'),
+  'director-safe':   () => import('./keypad.js'),
+  'security-panel':  () => import('./symbol-match.js'),
+  'power-junction':  () => import('./memory-card.js'),
 };
 
 let _currentModule = null;

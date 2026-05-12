@@ -48,6 +48,17 @@
       "contents": []
     },
     {
+      "id": "server-door-security",
+      "type": "door",
+      "label": "Security Hub →",
+      "x": 38, "y": 12, "w": 14, "h": 20,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "server-wire" },
+      "action": { "type": "navigate", "to": "security-hub" },
+      "lockedMessage": "The security hub is locked down. Restore server power first.",
+      "contents": []
+    },
+    {
       "id": "server-door-director",
       "type": "door",
       "label": "Director's Office",

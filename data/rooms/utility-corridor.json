@@ -1,0 +1,67 @@
+{
+  "id": "utility-corridor",
+  "name": "Utility Corridor",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A narrow service corridor behind the main lab. Exposed conduits, cable runs, the smell of burnt insulation. A power junction at the far end is still partially alive — flickering. The bypass chips for the laser grid are stored here.",
+  "particles": { "type": "smoke", "density": 0.5 },
+
+  "hotspots": [
+    {
+      "id": "utility-warning",
+      "type": "inspect",
+      "label": "Warning Notice",
+      "x": 4, "y": 16, "w": 18, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "HIGH VOLTAGE — AUTHORISED PERSONNEL ONLY\n\nPower Junction PJ-7\nEmergency bypass chips stored in lower compartment.\nFor use only in authorised grid bypass procedures.\n\nIf the Emergency Exit Corridor laser grid is active:\nInsert bypass chip into the laser control port to initiate manual override sequence.\n\nDO NOT reset junction sequence without proper PPE." },
+      "contents": []
+    },
+    {
+      "id": "utility-burn-mark",
+      "type": "inspect",
+      "label": "Burn Mark",
+      "x": 28, "y": 26, "w": 22, "h": 34,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A large scorch mark spreads up from a melted cable junction. The fire suppression system cut in at some point — faint white residue on the floor below.\n\nScratched into the soot with something sharp:\n\n'K WAS HERE'\n\nAnd below it, barely visible:\n\n'I tried to warn them. They didn't listen.\nIf you find this — finish what I started.'" },
+      "contents": []
+    },
+    {
+      "id": "power-junction-trigger",
+      "type": "puzzle-trigger",
+      "label": "Power Junction — Sequence Reset",
+      "x": 60, "y": 18, "w": 22, "h": 42,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "power-junction" },
+      "contents": []
+    },
+    {
+      "id": "chip-compartment",
+      "type": "container",
+      "label": "Bypass Chip Compartment",
+      "x": 60, "y": 60, "w": 22, "h": 18,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "power-junction" },
+      "action": { "type": "toggle-container", "objectId": "chip-compartment" },
+      "lockedMessage": "The compartment is locked by the junction — reset the power sequence above first.",
+      "contents": [
+        {
+          "id": "bypass-chip",
+          "type": "pickupable",
+          "label": "Bypass Chip",
+          "x": 61, "y": 64, "w": 10, "h": 10,
+          "visibleWhen": { "objectState": "chip-compartment", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "bypass-chip" }
+        }
+      ]
+    },
+    {
+      "id": "utility-back",
+      "type": "door",
+      "label": "← Back to Security Hub",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "security-hub" },
+      "contents": []
+    }
+  ]
+}

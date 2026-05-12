@@ -1,0 +1,76 @@
+{
+  "id": "security-hub",
+  "name": "Security Hub",
+  "ambientSound": "ambient-server",
+  "lighting": "flicker-fast",
+  "narrativeOnEnter": "The security monitoring station. A row of dead CCTV screens lines one wall. Everything froze at 03:41. The access control panel on the far wall is still active — someone left it running on backup power.",
+  "particles": { "type": "smoke", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "cctv-console",
+      "type": "inspect",
+      "label": "CCTV Console",
+      "x": 18, "y": 14, "w": 38, "h": 32,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A bank of security monitors, all frozen on the same timestamp: 03:41:22. Every camera cut out simultaneously.\n\nCamera 4 — Bio Wing B — shows only white.\nCamera 7 — Director's Office — is black.\nCamera 9 — Main Corridor — shows a blurry figure sprinting toward the exit. Too low resolution to identify.\nCamera 12 — Lab Entry — the door is wide open, swinging.\n\nOn the desk below the monitors, a sticky note:\n'IF CAMERAS GO DOWN — CHECK BIO WING FIRST. DO NOT GO ALONE. — Torres'" },
+      "contents": []
+    },
+    {
+      "id": "guard-logbook",
+      "type": "inspect",
+      "label": "Guard's Logbook",
+      "x": 4, "y": 46, "w": 13, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "SECURITY LOG — GUARD STATION 1\nShift: Night, 22:00–06:00 | Guard: M. Torres\n\n22:14 — Routine patrol complete. All clear.\n23:55 — Bio Wing B containment alarm. Alerted Dr. Chen. No response.\n00:12 — Escalated to Director Harkins.\n00:28 — Director authorised full facility lockdown. Non-essential personnel evacuating.\n01:03 — All personnel clear except [REDACTED].\n03:41 — Power anomaly. All cameras offline.\n\n[Final entry — handwritten, shaky]\n'Something got out. I don't know what. I'm not staying to find out.\nIf anyone reads this — the emergency corridor needs a security pass.\nI left mine in the locker. Panel code is in the access control unit.'" },
+      "contents": []
+    },
+    {
+      "id": "security-panel-trigger",
+      "type": "puzzle-trigger",
+      "label": "Access Control Panel",
+      "x": 74, "y": 14, "w": 16, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "security-panel" },
+      "contents": []
+    },
+    {
+      "id": "security-locker",
+      "type": "container",
+      "label": "Security Locker",
+      "x": 74, "y": 44, "w": 16, "h": 32,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "security-panel" },
+      "action": { "type": "toggle-container", "objectId": "security-locker" },
+      "lockedMessage": "The locker is electronically sealed — it must be linked to the access control panel above.",
+      "contents": [
+        {
+          "id": "security-pass",
+          "type": "pickupable",
+          "label": "Security Pass",
+          "x": 75, "y": 50, "w": 8, "h": 10,
+          "visibleWhen": { "objectState": "security-locker", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "security-pass" }
+        }
+      ]
+    },
+    {
+      "id": "security-hub-back",
+      "type": "door",
+      "label": "← Back to Server Room",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "server-room" },
+      "contents": []
+    },
+    {
+      "id": "security-hub-to-utility",
+      "type": "door",
+      "label": "Utility Corridor →",
+      "x": 87, "y": 12, "w": 10, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "utility-corridor" },
+      "contents": []
+    }
+  ]
+}
