@@ -21,6 +21,13 @@ export class Engine {
     this._restartArmed = false;
     this._restartTimer = null;
 
+    this._renderer    = new RoomRenderer();
+    this._interaction = new InteractionSystem(this._renderer);
+    this._inventory   = new InventoryRenderer();
+    this._particles   = new ParticleSystem();
+    this._audio       = AudioSystem;
+    this._achievements = new AchievementSystem();
+
     // Pre-load saved volume settings so sliders and audio start at correct levels
     {
       const _s = SaveSystem.loadSettings();
@@ -28,13 +35,6 @@ export class Engine {
       this._audio._volume.sfx     = _s.sfxVolume     ?? 1.0;
       this._audio._volume.ambient = _s.ambientVolume  ?? 0.4;
     }
-
-    this._renderer    = new RoomRenderer();
-    this._interaction = new InteractionSystem(this._renderer);
-    this._inventory   = new InventoryRenderer();
-    this._particles   = new ParticleSystem();
-    this._audio       = AudioSystem;
-    this._achievements = new AchievementSystem();
 
     subscribe((state, action) => this._onStateChange(state, action));
 
