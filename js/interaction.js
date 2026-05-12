@@ -172,10 +172,12 @@ export class InteractionSystem {
         // Lever pattern  e.g. "[ ↑ ][ ↓ ][ ↑ ][ ↓ ]"
         const _pat = (_st.leverPattern || [1,0,1,0])
           .map(p => p ? '[ ↑ ]' : '[ ↓ ]').join('');
+        const _dirCode = _st.directorSafeCode || '????';
         let _text = (action.text || '')
           .replace(/\{\{keypad-code\}\}/g, _displayCode)
           .replace(/\{\{terminal-password\}\}/g, _pass)
-          .replace(/\{\{lever-pattern\}\}/g, _pat);
+          .replace(/\{\{lever-pattern\}\}/g, _pat)
+          .replace(/\{\{director-safe-code\}\}/g, _dirCode);
         showInspection(_text, action.image || null, hs.id);
         AudioSystem.play('paper-rustle');
         if (action.unlocksRoom === 'secret-room') {

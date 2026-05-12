@@ -34,6 +34,8 @@ const DEFAULT_STATE = {
     "terminal-hack": { solved: false, attempts: 0 },
     "lever-combo":   { solved: false, attempts: 0, leverPositions: [0, 0, 0, 0] },
     "laser-avoid":   { solved: false, attempts: 0 },
+    "bio-memory":    { solved: false, attempts: 0 },
+    "director-safe": { solved: false, attempts: 0, code: '7391' },
   },
   objects: {
     "entry-drawer":       "closed",
@@ -45,6 +47,10 @@ const DEFAULT_STATE = {
     "fuse-box":           "closed",
     "final-safe":         "closed",
     "secret-panel":       "closed",
+    "bio-fridge":         "closed",
+    "bio-key-box":        "closed",
+    "director-desk":      "closed",
+    "director-safe-door": "closed",
   },
   objectives: [
     { id: "find-keycard",    text: "Find the lab access keycard",          done: false },
@@ -59,6 +65,7 @@ const DEFAULT_STATE = {
   keypadCode: '4821',
   leverPattern: [1, 0, 1, 0],
   terminalPassword: 'PROMETHEUS',
+  directorSafeCode: '7391',
   inspectedObjects: [],
   achievements: [],
   ending: null,
@@ -233,6 +240,11 @@ export function dispatch(action, payload = {}) {
 
     case "SET_TERMINAL_PASSWORD":
       _state.terminalPassword = payload.password;
+      break;
+
+    case "SET_DIRECTOR_SAFE_CODE":
+      _state.directorSafeCode = payload.code;
+      _state.puzzles["director-safe"].code = payload.code;
       break;
 
     default:

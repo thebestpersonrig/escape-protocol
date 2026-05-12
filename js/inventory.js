@@ -9,8 +9,10 @@ const ITEM_DEFS = {
   'fuse':           { label: 'Fuse',            icon: '⚡' },
   'server-diagram': { label: 'Wiring Diagram',  icon: '📋' },
   'access-card-b':  { label: 'Keycard B',       icon: '💳' },
-  'laser-key':      { label: 'Laser Key',       icon: '🔑' },
-  'lever-diagram':  { label: 'Lever Diagram',   icon: '📄' },
+  'laser-key':       { label: 'Laser Key',         icon: '🔑' },
+  'lever-diagram':   { label: 'Lever Diagram',     icon: '📄' },
+  'maintenance-key': { label: 'Maintenance Key',   icon: '🗝️' },
+  'office-id-card':  { label: 'Emergency ID Card', icon: '🪪' },
 };
 
 export class InventoryRenderer {

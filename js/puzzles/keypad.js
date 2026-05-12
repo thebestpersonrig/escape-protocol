@@ -2,7 +2,7 @@ import { AudioSystem } from '../audio.js';
 import { getState } from '../state.js';
 
 export function init(container, puzzleState, callbacks) {
-  const code = getState().keypadCode || '4821';
+  const code = puzzleState.code || getState().keypadCode || '4821';
   let input = '';
 
   container.innerHTML = `

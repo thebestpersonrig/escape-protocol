@@ -1,0 +1,85 @@
+{
+  "id": "bio-lab",
+  "name": "Biology Wing",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The biology wing reeks of chemicals and something worse. Sample racks, overturned microscopes, a dead centrifuge. Whoever worked here left in a panic. A specimen vault sits in the corner — still locked.",
+  "particles": { "type": "smoke", "density": 0.4 },
+
+  "hotspots": [
+    {
+      "id": "bio-fridge",
+      "type": "container",
+      "label": "Specimen Fridge",
+      "x": 4, "y": 16, "w": 14, "h": 60,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "bio-fridge" },
+      "contents": [
+        {
+          "id": "bio-research-note",
+          "type": "item",
+          "label": "Research Note",
+          "x": 5, "y": 32, "w": 10, "h": 12,
+          "visibleWhen": { "objectState": "bio-fridge", "equals": "open" },
+          "action": { "type": "inspect", "text": "SPECIMEN LOG — DR. REEVES\n\nSample B-7 shows accelerated cellular growth well beyond projections. Cross-contamination with Batch C is highly probable.\n\nDirector Harkins has ordered remote lockdown of the specimen vault and his office. His personal safe override:\n{{director-safe-code}}\n\nDo NOT leave this note in the fridge. Seriously, K." }
+        }
+      ]
+    },
+    {
+      "id": "bio-vault-lock",
+      "type": "puzzle-trigger",
+      "label": "Specimen Vault — Sequence Lock",
+      "x": 33, "y": 18, "w": 22, "h": 46,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bio-memory" },
+      "contents": []
+    },
+    {
+      "id": "bio-key-box",
+      "type": "container",
+      "label": "Maintenance Key Box",
+      "x": 33, "y": 64, "w": 22, "h": 16,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "bio-memory" },
+      "action": { "type": "toggle-container", "objectId": "bio-key-box" },
+      "lockedMessage": "The key box is magnetically sealed — must be linked to the vault sequence lock.",
+      "contents": [
+        {
+          "id": "maintenance-key",
+          "type": "pickupable",
+          "label": "Maintenance Key",
+          "x": 35, "y": 68, "w": 8, "h": 8,
+          "visibleWhen": { "objectState": "bio-key-box", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "maintenance-key" }
+        }
+      ]
+    },
+    {
+      "id": "bio-microscope",
+      "type": "inspect",
+      "label": "Microscope",
+      "x": 62, "y": 38, "w": 16, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A high-power fluorescence microscope. The slide still in place shows something deeply wrong. The cells are hexagonal — almost crystalline. Nothing organic grows like this.\n\nA sticky note on the eyepiece reads:\n'DO NOT LOOK DIRECTLY. WEAR GOGGLES AT ALL TIMES.\n— Dr. Chen'" },
+      "contents": []
+    },
+    {
+      "id": "bio-incident-board",
+      "type": "inspect",
+      "label": "Incident Board",
+      "x": 78, "y": 10, "w": 18, "h": 65,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "ARCADIA RESEARCH — INTERNAL INCIDENT REPORT #41\n\nDate: [REDACTED]\nIncident: Uncontrolled replication event — Bio Wing B.\nContainment status: PARTIAL.\nFacility lockdown: AUTHORISED.\n\nPersonnel status:\n— Dr. Reeves: Evacuated (verified)\n— Dr. Chen: Location UNKNOWN\n— Lab Technician K: [REDACTED]\n\nNote appended by Director Harkins:\n'Do not discuss with external parties under any circumstances. This file is sealed.'" },
+      "contents": []
+    },
+    {
+      "id": "bio-back-door",
+      "type": "door",
+      "label": "← Back to Main Lab",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "main-lab" },
+      "contents": []
+    }
+  ]
+}

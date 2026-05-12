@@ -1,0 +1,93 @@
+{
+  "id": "director-office",
+  "name": "Director's Office",
+  "ambientSound": "ambient-hum",
+  "lighting": "normal",
+  "narrativeOnEnter": "Harkins' office. Suspiciously intact — no sign of panic here. Mahogany desk, a wall safe, rows of pristine folders. The director clearly had time to prepare before leaving.",
+  "particles": { "type": "dust", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "director-desk",
+      "type": "container",
+      "label": "Director's Desk",
+      "x": 28, "y": 46, "w": 38, "h": 30,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "director-desk" },
+      "contents": [
+        {
+          "id": "director-memo",
+          "type": "item",
+          "label": "Internal Memo",
+          "x": 30, "y": 55, "w": 14, "h": 12,
+          "visibleWhen": { "objectState": "director-desk", "equals": "open" },
+          "action": { "type": "inspect", "text": "ARCADIA RESEARCH — EYES ONLY\n\nTo: Board of Directors\nFrom: Director R. Harkins\n\nThe Bio Wing B incident has been contained. Or rather — it will be, once the facility is fully sealed.\n\nI have deleted the primary project files. Externally this will appear as a systems failure.\n\nThe staff have been... reassigned.\n\nThe facility will self-seal 90 minutes after full lockdown initiation.\n\nI trust you will honour our arrangement.\n\n— R. Harkins\n\nP.S. Do not reply to this address." }
+        }
+      ]
+    },
+    {
+      "id": "director-safe-lock",
+      "type": "puzzle-trigger",
+      "label": "Wall Safe — Keypad",
+      "x": 4, "y": 22, "w": 14, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "director-safe" },
+      "contents": []
+    },
+    {
+      "id": "director-safe-door",
+      "type": "container",
+      "label": "Wall Safe",
+      "x": 4, "y": 44, "w": 14, "h": 18,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "director-safe" },
+      "action": { "type": "toggle-container", "objectId": "director-safe-door" },
+      "lockedMessage": "The safe is locked. There must be a keypad nearby.",
+      "contents": [
+        {
+          "id": "office-id-card",
+          "type": "pickupable",
+          "label": "Emergency ID Card",
+          "x": 5, "y": 48, "w": 8, "h": 8,
+          "visibleWhen": { "objectState": "director-safe-door", "equals": "open" },
+          "action": { "type": "pick-up", "itemId": "office-id-card" }
+        },
+        {
+          "id": "director-safe-note",
+          "type": "item",
+          "label": "Sealed Envelope",
+          "x": 5, "y": 57, "w": 8, "h": 8,
+          "visibleWhen": { "objectState": "director-safe-door", "equals": "open" },
+          "action": { "type": "inspect", "text": "A laminated card inside a sealed envelope:\n\nARCADIA RESEARCH — EMERGENCY ACCESS\nMAINTENANCE HATCH OVERRIDE\n\nThis ID card grants bypass access to the maintenance tunnel hatch.\nFor authorised personnel only.\n\nIf found outside authorised use, return to Director Harkins immediately.\n\n(Someone has written in small, shaky handwriting on the back:\n'If you found this — use it. Get out. Tell someone what happened here. — K')" }
+        }
+      ]
+    },
+    {
+      "id": "director-bookshelf",
+      "type": "inspect",
+      "label": "Bookshelf",
+      "x": 75, "y": 10, "w": 22, "h": 68,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Floor-to-ceiling shelves packed with corporate reports — 'Q3 Projections', 'Risk Assessment Framework', 'Arcadia Phase II Proposal'.\n\nBut there, sandwiched between two thick binders:\n\n'On the Ethics of Non-Consensual Biological Research'\n\nA bookmark marks a page halfway through. In the margin, one word in red ink:\n\n'Necessary.'" },
+      "contents": []
+    },
+    {
+      "id": "director-portrait",
+      "type": "inspect",
+      "label": "Portrait",
+      "x": 40, "y": 6, "w": 18, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "An oil portrait of a stern man in his sixties. Silver hair, cold eyes. Brass plaque below:\n\n'DIRECTOR RAYMOND HARKINS\nARCADIA RESEARCH INSTITUTE\nFounded in service of progress'\n\nSomeone has drawn a small X in black marker over his eyes. Neatly, deliberately." },
+      "contents": []
+    },
+    {
+      "id": "director-back-door",
+      "type": "door",
+      "label": "← Back to Server Room",
+      "x": 0, "y": 12, "w": 4, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "server-room" },
+      "contents": []
+    }
+  ]
+}

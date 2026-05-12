@@ -48,6 +48,17 @@
       "contents": []
     },
     {
+      "id": "server-door-director",
+      "type": "door",
+      "label": "Director's Office",
+      "x": 57, "y": 18, "w": 18, "h": 46,
+      "cursor": "pointer",
+      "condition": { "hasItem": "access-card-b" },
+      "action": { "type": "navigate", "to": "director-office" },
+      "lockedMessage": "The director's office is badge-locked. You'd need his access card.",
+      "contents": []
+    },
+    {
       "id": "server-rack-note",
       "type": "inspect",
       "label": "Server Rack Log",
@@ -80,9 +91,15 @@
       "label": "Crawl Through Vent",
       "x": 43, "y": 82, "w": 14, "h": 10,
       "cursor": "pointer",
-      "condition": { "secretRoomUnlocked": true },
+      "condition": { "all": [
+        { "secretRoomUnlocked": true },
+        { "hasItem": "maintenance-key" }
+      ] },
       "action": { "type": "navigate", "to": "secret-room" },
-      "lockedMessage": "Inspect the ventilation shaft first.",
+      "lockedMessages": [
+        "Inspect the ventilation shaft first.",
+        "The vent is passable — but you need the maintenance key to release the inner grate."
+      ],
       "contents": []
     }
   ]

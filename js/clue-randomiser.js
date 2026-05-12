@@ -52,4 +52,10 @@ export function initClueLocations(seed) {
     pattern = [0, 1, 2, 3].map(() => Math.floor(rng() * 2));
   } while (pattern.every(p => p === 0) || pattern.every(p => p === 1));
   dispatch('SET_LEVER_PATTERN', { pattern });
+
+  // --- Director's safe code (4 digits, no leading zero) ---
+  const dFirst = Math.floor(rng() * 9) + 1;
+  const dRest  = Array.from({ length: 3 }, () => Math.floor(rng() * 10));
+  const directorSafeCode = [dFirst, ...dRest].join('');
+  dispatch('SET_DIRECTOR_SAFE_CODE', { code: directorSafeCode });
 }
