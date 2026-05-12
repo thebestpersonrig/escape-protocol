@@ -152,6 +152,8 @@ export class Engine {
 
   async showEnding(endingId) {
     stopTimer();
+    this._audio.stopAlarm();
+    try { this._audio.ambientNode?.stop(); } catch (e) {}
     await this._fadeOut(800);
 
     const ENDINGS = {
