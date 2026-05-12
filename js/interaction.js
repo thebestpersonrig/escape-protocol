@@ -97,6 +97,14 @@ export class InteractionSystem {
   }
 
   _checkCondition(condition, state) {
+    // AND — every sub-condition must pass
+    if (condition.all) {
+      return condition.all.every(c => this._checkCondition(c, state));
+    }
+    // OR — at least one sub-condition must pass
+    if (condition.any) {
+      return condition.any.some(c => this._checkCondition(c, state));
+    }
     if (condition.puzzleSolved) {
       return state.puzzles[condition.puzzleSolved]?.solved === true;
     }
@@ -107,7 +115,6 @@ export class InteractionSystem {
       return state.secretRoomUnlocked === true;
     }
     if (condition.objectState) {
-      // Support both { objectState: { id, equals } } and { objectState: "id", equals: "val" }
       if (typeof condition.objectState === 'object') {
         return state.objects[condition.objectState.id] === condition.objectState.equals;
       }
@@ -181,16 +188,15 @@ export class InteractionSystem {
         this._buildHotspotList(this._config, getState());
       },
       swipeKeycardEntryDoor: () => {
-        // Door only opens if keypad is solved
         const st = getState();
-        if (st.puzzles['entry-keypad']?.solved) {
-          dispatch('DESELECT_ITEM');
-          AudioSystem.play('door-unlock');
-          import('./engine.js').then(m => m.Engine.instance?.navigateTo('main-lab'));
-        } else {
-          showToast('The keypad must be solved first.', 'error');
+        if (!st.puzzles['entry-keypad']?.solved) {
+          showToast('The keypad light is red. Solve the access code first.', 'error');
           AudioSystem.play('door-locked');
+          return;
         }
+        dispatch('DESELECT_ITEM');
+        AudioSystem.play('door-unlock');
+        import('./engine.js').then(m => m.Engine.instance?.navigateTo('main-lab'));
       },
       openServerPanel: () => {
         dispatch('SET_OBJECT_STATE', { objectId: 'server-panel', newState: 'open' });
@@ -218,14 +224,19 @@ export class InteractionSystem {
       },
       openFinalDoor: () => {
         const st = getState();
-        if (st.puzzles['lever-combo']?.solved) {
-          dispatch('DESELECT_ITEM');
-          AudioSystem.play('door-unlock');
-          import('./engine.js').then(m => m.Engine.instance?.navigateTo('escaped'));
-        } else {
-          showToast('The lever combination must be set first.', 'error');
+        if (!st.puzzles['lever-combo']?.solved) {
+          showToast('Set the lever combination first.', 'error');
           AudioSystem.play('door-locked');
+          return;
         }
+        if (!st.puzzles['laser-avoid']?.solved) {
+          showToast('You must bypass the laser grid before the exit will open.', 'error');
+          AudioSystem.play('door-locked');
+          return;
+        }
+        dispatch('DESELECT_ITEM');
+        AudioSystem.play('door-unlock');
+        import('./engine.js').then(m => m.Engine.instance?.navigateTo('escaped'));
       },
       activateLaserPuzzle: () => {
         PuzzleManager.open('laser-avoid', getState(), () => {

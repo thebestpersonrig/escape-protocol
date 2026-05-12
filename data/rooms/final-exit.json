@@ -22,9 +22,12 @@
       "label": "Emergency Exit",
       "x": 78, "y": 12, "w": 18, "h": 70,
       "cursor": "pointer",
-      "condition": { "puzzleSolved": "lever-combo" },
+      "condition": { "all": [
+        { "puzzleSolved": "lever-combo" },
+        { "puzzleSolved": "laser-avoid" }
+      ] },
       "action": { "type": "navigate", "to": "escaped" },
-      "lockedMessage": "The electromagnetic lock is engaged. Set the lever combination first.",
+      "lockedMessage": "The path is blocked — disengage the lever locks and bypass the laser grid.",
       "contents": []
     },
     {
