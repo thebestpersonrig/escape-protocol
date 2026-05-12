@@ -21,8 +21,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  overflow-x: hidden;
-  overflow-y: scroll;
+  height: 100%;
 }
 
 body {
@@ -31,6 +30,7 @@ body {
   color: var(--text);
   font-family: var(--font-mono);
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ── Background grid ──────────────────────────────────────────── */
@@ -128,10 +128,10 @@ body::after {
   gap: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  margin: 0 24px 40px;
+  margin: 0 0 40px;
   overflow: hidden;
   max-width: 700px;
-  width: 100%;
+  width: calc(100% - 48px);
 }
 
 .hub-stat {
