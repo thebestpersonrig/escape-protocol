@@ -48,6 +48,18 @@ export class RoomRenderer {
         'bw-chapel':            'linear-gradient(160deg,#0e0a14 0%,#0a0810 40%,#080610 100%)',
         'bw-solitary-cell':     'linear-gradient(160deg,#0a0808 0%,#060606 40%,#040404 100%)',
         'bw-maintenance-tunnel':'linear-gradient(160deg,#0c0a06 0%,#080604 40%,#060402 100%)',
+        // Meridian Station Alpha — cool steel-blue tones
+        'ms-airlock-bay':      'linear-gradient(160deg,#020810 0%,#03101a 40%,#020810 100%)',
+        'ms-corridor-a':       'linear-gradient(160deg,#030c18 0%,#020a14 40%,#020810 100%)',
+        'ms-crew-quarters':    'linear-gradient(160deg,#040c14 0%,#030a10 40%,#02080e 100%)',
+        'ms-med-bay':          'linear-gradient(160deg,#040e18 0%,#030c14 40%,#030a12 100%)',
+        'ms-engineering':      'linear-gradient(160deg,#080a04 0%,#060802 40%,#040602 100%)',
+        'ms-cargo-bay':        'linear-gradient(160deg,#080a06 0%,#060804 40%,#040604 100%)',
+        'ms-reactor-deck':     'linear-gradient(160deg,#180402 0%,#140302 40%,#100202 100%)',
+        'ms-command-deck':     'linear-gradient(160deg,#020c1a 0%,#020a16 40%,#020810 100%)',
+        'ms-comms-array':      'linear-gradient(160deg,#030a14 0%,#020810 40%,#020608 100%)',
+        'ms-escape-pod-bay':   'linear-gradient(160deg,#020810 0%,#030c1a 40%,#020810 100%)',
+        'ms-lower-corridor':   'linear-gradient(160deg,#040a10 0%,#030810 40%,#020610 100%)',
       };
       this._bgEl.style.backgroundImage = gradients[config.id] || gradients['lab-entry'];
     }
@@ -583,6 +595,246 @@ export class RoomRenderer {
         <div style="position:absolute;top:40%;left:10%;width:14%;height:14%;background:repeating-linear-gradient(15deg,rgba(60,30,10,0.2),rgba(60,30,10,0.2) 1px,transparent 1px,transparent 4px);border-radius:1px;"></div>
         <!-- Arrow carved into wall -->
         <div style="position:absolute;top:48%;left:12%;color:rgba(180,120,40,0.35);font-size:1.5vw;font-family:monospace;">→</div>
+      `,
+
+      // ── Meridian Station Alpha ────────────────────────────────
+      'ms-airlock-bay': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:26%;background:linear-gradient(to top,#010508,transparent);"></div>
+        <!-- Emergency blue strip lights ceiling -->
+        <div style="position:absolute;top:0;left:5%;width:35%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,120,200,0.8),transparent);box-shadow:0 0 16px rgba(0,120,200,0.5),0 0 32px rgba(0,120,200,0.2);"></div>
+        <div style="position:absolute;top:0;right:5%;width:28%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,120,200,0.7),transparent);box-shadow:0 0 12px rgba(0,120,200,0.4),0 0 24px rgba(0,120,200,0.15);"></div>
+        <!-- Outer airlock hatch (left) -->
+        <div style="position:absolute;top:20%;left:2%;width:7%;height:60%;background:linear-gradient(to right,#0a1828,#060e18);border:2px solid #1a3450;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:60%;height:60%;border:2px solid #2a4060;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <div style="width:40%;height:40%;background:#0e2030;border:1px solid #2a3a50;border-radius:50%;"></div>
+          </div>
+        </div>
+        <!-- Inner door (right) -->
+        <div style="position:absolute;top:12%;right:0;width:16%;height:72%;background:linear-gradient(to right,#060e18,#0a1828);border-left:2px solid #1a3450;border-top:2px solid #1a3450;border-bottom:2px solid #1a3450;border-radius:3px 0 0 3px;"></div>
+        <!-- Pressure warning lights -->
+        <div style="position:absolute;top:10%;left:20%;width:1%;height:1%;background:#ff4444;border-radius:50%;box-shadow:0 0 8px rgba(255,68,68,0.9),0 0 16px rgba(255,68,68,0.4);animation:alarm-flash 1.5s ease-in-out infinite;"></div>
+        <div style="position:absolute;top:12%;left:22%;width:1%;height:1%;background:#ff8800;border-radius:50%;box-shadow:0 0 6px rgba(255,136,0,0.8);animation:alarm-flash 2s ease-in-out infinite;animation-delay:0.5s;"></div>
+        <!-- Floor grid pattern -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:22%;background:repeating-linear-gradient(90deg,rgba(0,60,100,0.15),rgba(0,60,100,0.15) 1px,transparent 1px,transparent 8%);"></div>
+        <!-- Wall panel conduits -->
+        <div style="position:absolute;top:15%;left:30%;width:2%;height:45%;background:linear-gradient(to bottom,#0e2030,#0a1828);border-left:1px solid #1a3450;border-right:1px solid #1a3450;"></div>
+      `,
+
+      'ms-corridor-a': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(to top,#020810,transparent);"></div>
+        <!-- Corridor perspective -->
+        <div style="position:absolute;top:30%;left:40%;right:40%;bottom:25%;background:linear-gradient(to bottom,#030c18,#020810);border-left:1px solid #0e2030;border-right:1px solid #0e2030;"></div>
+        <!-- Overhead strip lights -->
+        <div style="position:absolute;top:0;left:12%;width:28%;height:3px;background:rgba(0,140,220,0.7);box-shadow:0 0 18px rgba(0,140,220,0.5),0 0 36px rgba(0,140,220,0.2);"></div>
+        <div style="position:absolute;top:0;right:12%;width:22%;height:3px;background:rgba(0,140,220,0.6);box-shadow:0 0 14px rgba(0,140,220,0.4),0 0 28px rgba(0,140,220,0.15);"></div>
+        <!-- Door frames left side -->
+        <div style="position:absolute;top:18%;left:12%;width:12%;height:56%;background:#060e18;border:1px solid #0e2030;border-radius:2px;"></div>
+        <div style="position:absolute;top:20%;left:28%;width:10%;height:54%;background:#060e18;border:1px solid #0e2030;border-radius:2px;"></div>
+        <!-- Engineering hatch in floor -->
+        <div style="position:absolute;bottom:22%;left:48%;width:18%;height:12%;background:#060c14;border:2px solid #0e2030;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+          <div style="color:rgba(0,120,200,0.35);font-family:monospace;font-size:0.6vw;letter-spacing:0.1em;">ENGINEERING ↓</div>
+        </div>
+        <!-- Command blast door right -->
+        <div style="position:absolute;top:15%;right:0;width:14%;height:60%;background:linear-gradient(to right,#060e18,#0a1828);border-left:2px solid #0e2030;border-top:1px solid #0e2030;border-bottom:1px solid #0e2030;border-radius:3px 0 0 3px;"></div>
+        <!-- Emergency indicator -->
+        <div class="led-blink" style="position:absolute;top:8%;left:42%;width:1%;height:1.5%;background:#ff4040;border-radius:50%;box-shadow:0 0 10px rgba(255,64,64,0.7);"></div>
+      `,
+
+      'ms-crew-quarters': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:24%;background:linear-gradient(to top,#030a10,transparent);"></div>
+        <!-- Ceiling light - softer in crew quarters -->
+        <div style="position:absolute;top:0;left:25%;width:50%;height:2px;background:rgba(0,120,180,0.5);box-shadow:0 0 20px rgba(0,120,180,0.3),0 0 40px rgba(0,120,180,0.1);"></div>
+        <!-- Bunk bed frames -->
+        <div style="position:absolute;top:18%;left:14%;width:22%;height:22%;background:linear-gradient(to bottom,#0a1620,#060e18);border:1px solid #0e2030;border-radius:2px;"></div>
+        <div style="position:absolute;top:42%;left:14%;width:22%;height:22%;background:linear-gradient(to bottom,#0a1620,#060e18);border:1px solid #0e2030;border-radius:2px;"></div>
+        <div style="position:absolute;top:18%;left:38%;width:22%;height:22%;background:#060e18;border:1px solid #0e2030;border-radius:2px;"></div>
+        <div style="position:absolute;top:42%;left:38%;width:22%;height:22%;background:#060e18;border:1px solid #0e2030;border-radius:2px;"></div>
+        <!-- Personal items on bunk -->
+        <div style="position:absolute;top:22%;left:20%;width:6%;height:8%;background:#0e1e30;border:1px solid #1a3040;border-radius:1px;display:flex;align-items:center;justify-content:center;color:rgba(0,160,220,0.4);font-size:0.8vw;">📱</div>
+        <!-- Locker unit right -->
+        <div style="position:absolute;top:20%;right:0;width:20%;height:62%;background:linear-gradient(to right,#060e18,#0a1828);border-left:2px solid #0e2030;border-radius:3px 0 0 3px;">
+          <div style="position:absolute;top:30%;left:35%;width:12%;height:18%;background:#0a1828;border:1px solid #142840;border-radius:50%;"></div>
+        </div>
+      `,
+
+      'ms-med-bay': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:25%;background:linear-gradient(to top,#030c14,transparent);"></div>
+        <!-- Med bay has cleaner, brighter lighting -->
+        <div style="position:absolute;top:0;left:8%;width:80%;height:3px;background:rgba(0,160,240,0.65);box-shadow:0 0 24px rgba(0,160,240,0.45),0 0 48px rgba(0,160,240,0.15);"></div>
+        <!-- Light pools on floor -->
+        <div style="position:absolute;bottom:25%;left:20%;width:60%;height:10%;background:radial-gradient(ellipse,rgba(0,140,200,0.08) 0%,transparent 70%);"></div>
+        <!-- Medical counter -->
+        <div style="position:absolute;bottom:22%;left:5%;right:5%;height:4%;background:linear-gradient(to bottom,#0e2030,#0a1828);border-top:1px solid #1a3a50;"></div>
+        <!-- Terminal on counter -->
+        <div style="position:absolute;bottom:26%;left:50%;width:22%;height:40%;background:#080e18;border:1px solid #102030;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:80%;height:65%;background:#040c14;border:1px solid #0e2030;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,140,200,0.5);font-family:monospace;font-size:0.9vw;">MERIDIAN</div>
+        </div>
+        <!-- Med cabinet left -->
+        <div style="position:absolute;top:22%;left:10%;width:18%;height:54%;background:#060e18;border:1px solid #0e2030;border-radius:2px;position:relative;">
+          <div style="position:absolute;top:50%;right:8%;width:6%;height:8%;background:#0e2030;border:1px solid #1a3040;border-radius:50%;transform:translateY(-50%);"></div>
+        </div>
+        <!-- Medical cross symbol -->
+        <div style="position:absolute;top:8%;left:42%;width:12%;height:18%;display:flex;align-items:center;justify-content:center;color:rgba(0,140,200,0.25);font-size:2vw;">✚</div>
+      `,
+
+      'ms-engineering': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:26%;background:linear-gradient(to top,#050604,transparent);"></div>
+        <!-- Warm industrial lighting — less blue here -->
+        <div style="position:absolute;top:0;left:15%;width:40%;height:2px;background:rgba(180,160,80,0.5);box-shadow:0 0 16px rgba(180,160,80,0.3);"></div>
+        <!-- Conduit bundles ceiling -->
+        <div style="position:absolute;top:4%;left:8%;width:65%;height:2%;background:repeating-linear-gradient(90deg,rgba(80,100,40,0.7),rgba(80,100,40,0.7) 3px,rgba(60,70,30,0.7) 3px,rgba(60,70,30,0.7) 8px);border-radius:2px;"></div>
+        <!-- Open junction panel (centre) -->
+        <div style="position:absolute;top:20%;left:38%;width:24%;height:50%;background:#050808;border:2px solid #1a2010;border-radius:3px;">
+          <div style="position:absolute;top:10%;left:15%;right:15%;height:80%;display:flex;flex-direction:column;justify-content:space-around;">
+            <div style="height:2px;background:rgba(255,80,40,0.7);box-shadow:0 0 4px rgba(255,80,40,0.5);"></div>
+            <div style="height:2px;background:rgba(40,100,255,0.6);box-shadow:0 0 4px rgba(40,100,255,0.4);"></div>
+            <div style="height:2px;background:rgba(40,200,80,0.6);box-shadow:0 0 4px rgba(40,200,80,0.4);"></div>
+            <div style="height:2px;background:rgba(255,200,40,0.5);box-shadow:0 0 4px rgba(255,200,40,0.3);"></div>
+          </div>
+        </div>
+        <!-- Equipment console left -->
+        <div style="position:absolute;top:25%;left:8%;width:20%;height:50%;background:#060a06;border:1px solid #141c10;border-radius:2px;"></div>
+        <!-- Cargo hatch right -->
+        <div style="position:absolute;top:28%;right:0;width:14%;height:56%;background:#070a06;border-left:2px solid #141c0e;border-radius:3px 0 0 3px;"></div>
+        <!-- Lower corridor hatch — faint opening -->
+        <div style="position:absolute;top:14%;right:14%;width:12%;height:56%;background:#050808;border-left:1px solid #0e1810;border-radius:2px 0 0 2px;"></div>
+      `,
+
+      'ms-cargo-bay': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#060806,transparent);"></div>
+        <!-- Loading rail overhead -->
+        <div style="position:absolute;top:8%;left:5%;right:5%;height:2%;background:linear-gradient(to bottom,#1a1e14,#121410);border-radius:2px;border-top:1px solid #2a2e20;"></div>
+        <!-- Cargo containers stacked left -->
+        <div style="position:absolute;top:22%;left:10%;width:22%;height:32%;background:linear-gradient(to bottom,#0e1410,#0a100c);border:1px solid #1a2016;border-radius:2px;"></div>
+        <div style="position:absolute;top:56%;left:10%;width:22%;height:20%;background:linear-gradient(to bottom,#0a1008,#080c06);border:1px solid #141c10;border-radius:2px;"></div>
+        <!-- Freight lock panel (centre-right) -->
+        <div style="position:absolute;top:33%;left:55%;width:18%;height:30%;background:#080c08;border:2px solid #1a2010;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:4% 8%;">
+          ${[0,1,2,3].map(i=>`<div style="width:70%;height:18%;background:#0e1810;border:1px solid #1e2c18;border-radius:2px;display:flex;align-items:center;justify-content:flex-end;padding-right:12%;"><div style="width:14%;height:60%;background:#0a1408;border:1px solid #162010;border-radius:1px;"></div></div>`).join('')}
+        </div>
+        <!-- Magnetic clamp indicator -->
+        <div class="led-blink" style="position:absolute;top:30%;left:57%;width:0.8%;height:0.8%;background:#ff4040;border-radius:50%;box-shadow:0 0 6px rgba(255,64,64,0.8);animation-delay:0.3s;"></div>
+        <!-- Reactor access door right -->
+        <div style="position:absolute;top:15%;right:0;width:16%;height:72%;background:#060808;border-left:2px solid #141810;border-radius:3px 0 0 3px;"></div>
+      `,
+
+      'ms-reactor-deck': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:28%;background:linear-gradient(to top,#100202,transparent);"></div>
+        <!-- Red emergency light flood -->
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(160,20,20,0.06);pointer-events:none;"></div>
+        <!-- Reactor housing (right) -->
+        <div style="position:absolute;top:12%;right:4%;width:18%;height:60%;background:linear-gradient(to bottom,#200808,#180404);border:2px solid #3a1010;border-radius:3px;box-shadow:0 0 20px rgba(200,40,20,0.2);">
+          <div style="position:absolute;inset:8%;background:repeating-linear-gradient(45deg,rgba(200,40,20,0.15),rgba(200,40,20,0.15) 4px,transparent 4px,transparent 12px);border-radius:2px;"></div>
+          <div style="position:absolute;top:40%;left:10%;right:10%;height:2%;background:rgba(255,80,40,0.5);box-shadow:0 0 8px rgba(255,80,40,0.6);"></div>
+          <div style="position:absolute;top:55%;left:10%;right:10%;height:2%;background:rgba(255,120,40,0.4);box-shadow:0 0 6px rgba(255,120,40,0.5);"></div>
+        </div>
+        <!-- Reactor sequence panel (centre) -->
+        <div style="position:absolute;top:18%;left:42%;width:24%;height:52%;background:#100404;border:1px solid #2a0c0c;border-radius:3px;">
+          <div style="position:absolute;top:12%;left:10%;right:10%;bottom:12%;display:grid;grid-template-columns:1fr 1fr;gap:6%;">
+            ${['A','B','C','D'].map(l=>`<div style="background:#1a0808;border:1px solid #2e1010;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(200,80,60,0.4);font-family:monospace;font-size:0.9vw;">${l}</div>`).join('')}
+          </div>
+        </div>
+        <!-- Safety manual / console left -->
+        <div style="position:absolute;top:30%;left:14%;width:22%;height:40%;background:#0c0808;border:1px solid #1e1010;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(200,80,60,0.2);font-size:1.5vw;">📋</div>
+        <!-- Slumped figure indicator (subtle) -->
+        <div style="position:absolute;top:45%;right:25%;width:12%;height:28%;background:linear-gradient(to bottom,#1a0808,transparent);border-radius:8px 8px 0 0;opacity:0.4;"></div>
+        <!-- Sparks from reactor -->
+        <div class="led-blink" style="position:absolute;top:22%;right:6%;width:1%;height:1%;background:#ff8040;border-radius:50%;box-shadow:0 0 12px rgba(255,128,64,0.9);"></div>
+        <div class="led-blink" style="position:absolute;top:40%;right:8%;width:0.8%;height:0.8%;background:#ffb040;border-radius:50%;box-shadow:0 0 8px rgba(255,176,64,0.8);animation-delay:0.4s;"></div>
+      `,
+
+      'ms-command-deck': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:24%;background:linear-gradient(to top,#020810,transparent);"></div>
+        <!-- Wide viewport (left) — stars and space -->
+        <div style="position:absolute;top:16%;left:14%;width:30%;height:44%;background:radial-gradient(ellipse at 60% 40%,rgba(0,40,80,0.4) 0%,rgba(0,10,20,0.95) 70%);border:1px solid #0e2030;border-radius:3px;overflow:hidden;">
+          <!-- Stars -->
+          <div style="position:absolute;top:15%;left:20%;width:0.5%;height:0.5%;background:#a0c8e0;border-radius:50%;box-shadow:0 0 4px rgba(160,200,224,0.8);"></div>
+          <div style="position:absolute;top:60%;left:70%;width:0.5%;height:0.5%;background:#c0d8f0;border-radius:50%;box-shadow:0 0 3px rgba(192,216,240,0.7);"></div>
+          <div style="position:absolute;top:30%;left:55%;width:0.3%;height:0.3%;background:#d0e8ff;border-radius:50%;"></div>
+          <!-- Rescue shuttle shape (distant) -->
+          <div style="position:absolute;top:35%;right:15%;width:4%;height:2%;background:rgba(100,160,200,0.4);border-radius:1px;box-shadow:0 0 8px rgba(100,160,200,0.3);"></div>
+        </div>
+        <!-- Command stations -->
+        <div style="position:absolute;bottom:22%;left:14%;width:28%;height:18%;background:#06101a;border-top:1px solid #0e2030;border-radius:3px 3px 0 0;display:flex;align-items:center;justify-content:space-around;padding:0 5%;">
+          <div style="width:18%;height:50%;background:#04080e;border:1px solid #0e1828;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,140,200,0.3);font-size:0.5vw;">NAV</div>
+          <div style="width:18%;height:50%;background:#04080e;border:1px solid #0e1828;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,140,200,0.3);font-size:0.5vw;">SYS</div>
+        </div>
+        <!-- Captain's locker right -->
+        <div style="position:absolute;top:28%;left:55%;width:18%;height:48%;background:#06101a;border:1px solid #0e2030;border-radius:2px;">
+          <div style="position:absolute;top:50%;left:50%;width:8%;height:10%;background:#060e18;border:1px solid #0e1828;border-radius:50%;transform:translate(-50%,-50%);"></div>
+        </div>
+        <!-- Ceiling light -->
+        <div style="position:absolute;top:0;left:20%;right:20%;height:2px;background:rgba(0,120,200,0.55);box-shadow:0 0 20px rgba(0,120,200,0.35);"></div>
+        <!-- Comms door right -->
+        <div style="position:absolute;top:20%;right:0;width:12%;height:65%;background:#060e18;border-left:1px solid #0e2030;border-radius:3px 0 0 3px;"></div>
+      `,
+
+      'ms-comms-array': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:26%;background:linear-gradient(to top,#020810,transparent);"></div>
+        <!-- Equipment racks -->
+        <div style="position:absolute;top:18%;left:10%;width:16%;height:60%;background:#040c14;border:1px solid #0a1e30;border-radius:2px;">
+          <div class="led-blink" style="position:absolute;top:15%;left:15%;width:70%;height:3%;background:rgba(0,160,255,0.6);border-radius:1px;box-shadow:0 0 4px rgba(0,160,255,0.5);"></div>
+          <div style="position:absolute;top:30%;left:15%;width:70%;height:2%;background:rgba(0,160,255,0.4);border-radius:1px;"></div>
+          <div style="position:absolute;top:44%;left:15%;width:70%;height:2%;background:rgba(0,120,200,0.3);border-radius:1px;"></div>
+          <div class="led-blink" style="position:absolute;top:60%;left:15%;width:70%;height:3%;background:rgba(0,200,120,0.5);border-radius:1px;box-shadow:0 0 4px rgba(0,200,120,0.4);animation-delay:0.6s;"></div>
+        </div>
+        <!-- Transmitter console (left-centre) -->
+        <div style="position:absolute;top:28%;left:10%;width:22%;height:44%;background:#030a12;border:1px solid #0a1828;border-radius:2px;display:flex;align-items:center;justify-content:center;">
+          <div style="color:rgba(0,160,255,0.25);font-size:2vw;">📡</div>
+        </div>
+        <!-- Comms cabinet (centre) -->
+        <div style="position:absolute;top:22%;left:36%;width:22%;height:48%;background:#040c14;border:1px solid #0a1e30;border-radius:2px;">
+          <div style="position:absolute;top:50%;left:50%;width:8%;height:10%;background:#060e1a;border:1px solid #0e2030;border-radius:50%;transform:translate(-50%,-50%);"></div>
+        </div>
+        <!-- Distress beacon — orange pulse -->
+        <div class="led-blink" style="position:absolute;top:10%;left:44%;width:1.2%;height:2%;background:#ff8800;border-radius:2px;box-shadow:0 0 10px rgba(255,136,0,0.8),0 0 24px rgba(255,136,0,0.3);animation-delay:0.2s;"></div>
+        <!-- External airlock door (right) — glows when reactor solved -->
+        <div style="position:absolute;top:20%;right:0;width:14%;height:65%;background:#040c14;border-left:2px solid #0a1e30;border-radius:3px 0 0 3px;display:flex;align-items:center;justify-content:center;">
+          <div style="width:50%;height:50%;border:2px solid #0e2030;border-radius:50%;"></div>
+        </div>
+        <!-- EVA status panel -->
+        <div style="position:absolute;bottom:24%;right:4%;width:16%;height:18%;background:#030a10;border:1px solid #081820;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,136,0,0.4);font-family:monospace;font-size:0.5vw;letter-spacing:0.05em;text-align:center;">EVA<br/>LOCKED</div>
+      `,
+
+      'ms-escape-pod-bay': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:24%;background:linear-gradient(to top,#020810,transparent);"></div>
+        <!-- Ceiling — high bay -->
+        <div style="position:absolute;top:0;left:5%;right:5%;height:2px;background:rgba(0,140,220,0.6);box-shadow:0 0 20px rgba(0,140,220,0.4);"></div>
+        <!-- Escape pod body (centre) -->
+        <div style="position:absolute;top:18%;left:38%;width:26%;height:52%;background:linear-gradient(to bottom,#0a1828,#060e18);border:2px solid #1a3450;border-radius:40% 40% 20% 20%;overflow:hidden;box-shadow:0 0 20px rgba(0,80,140,0.3);">
+          <div style="position:absolute;top:20%;left:20%;right:20%;height:30%;background:#040c14;border:1px solid #0e2030;border-radius:3px;display:flex;align-items:center;justify-content:center;color:rgba(0,120,200,0.4);font-family:monospace;font-size:0.7vw;letter-spacing:0.1em;">POD-01</div>
+        </div>
+        <!-- Launch panel (right of pod) -->
+        <div style="position:absolute;top:20%;left:55%;width:20%;height:40%;background:#060e18;border:1px solid #0e2030;border-radius:3px;">
+          <div style="position:absolute;top:20%;left:20%;right:20%;height:30%;background:#04080e;border:1px solid #0a1828;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,100,180,0.35);font-family:monospace;font-size:1.2vw;letter-spacing:0.3em;">_</div>
+          <div style="position:absolute;bottom:15%;left:50%;transform:translateX(-50%);width:40%;height:15%;background:#0a1828;border:1px solid #142840;border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(0,120,200,0.5);font-family:monospace;font-size:0.5vw;">LAUNCH</div>
+        </div>
+        <!-- Blast window right -->
+        <div style="position:absolute;top:18%;right:4%;width:18%;height:50%;background:radial-gradient(ellipse at 40% 30%,rgba(0,30,60,0.6) 0%,rgba(0,5,15,0.95) 70%);border:1px solid #0e2030;border-radius:3px;overflow:hidden;">
+          <!-- Earth glow -->
+          <div style="position:absolute;bottom:-10%;right:-10%;width:60%;height:60%;background:radial-gradient(circle,rgba(20,80,160,0.4) 0%,transparent 70%);border-radius:50%;"></div>
+          <!-- Stars -->
+          <div style="position:absolute;top:20%;left:30%;width:0.4%;height:0.4%;background:#c0e0ff;border-radius:50%;"></div>
+          <div style="position:absolute;top:50%;left:15%;width:0.3%;height:0.3%;background:#d0eeff;border-radius:50%;"></div>
+        </div>
+        <!-- Status indicator -->
+        <div class="led-blink" style="position:absolute;top:14%;left:60%;width:1%;height:1.2%;background:#ff8800;border-radius:50%;box-shadow:0 0 8px rgba(255,136,0,0.7);"></div>
+      `,
+
+      'ms-lower-corridor': `
+        <div style="position:absolute;bottom:0;left:0;right:0;height:26%;background:linear-gradient(to top,#030810,transparent);"></div>
+        <!-- Darker, heavier lower deck -->
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,20,50,0.04);pointer-events:none;"></div>
+        <!-- Overhead corridor lights — dimmer -->
+        <div style="position:absolute;top:0;left:20%;width:18%;height:2px;background:rgba(0,100,160,0.5);box-shadow:0 0 12px rgba(0,100,160,0.3);"></div>
+        <div style="position:absolute;top:0;right:18%;width:15%;height:2px;background:rgba(0,100,160,0.4);box-shadow:0 0 10px rgba(0,100,160,0.25);"></div>
+        <!-- Wall shielding texture (reactor proximity) -->
+        <div style="position:absolute;top:15%;left:48%;right:0%;height:70%;background:repeating-linear-gradient(90deg,rgba(0,20,40,0.3),rgba(0,20,40,0.3) 1px,transparent 1px,transparent 5%);"></div>
+        <!-- Door frames -->
+        <div style="position:absolute;top:18%;left:12%;width:14%;height:62%;background:#040c14;border:1px solid #0a1a28;border-radius:2px;"></div>
+        <div style="position:absolute;top:18%;left:30%;width:14%;height:64%;background:#040c14;border:1px solid #0a1a28;border-radius:2px;"></div>
+        <div style="position:absolute;top:14%;left:50%;width:22%;height:72%;background:#040c10;border:1px solid #0a1820;border-radius:2px;"></div>
+        <!-- Radiation warning sign -->
+        <div style="position:absolute;top:25%;right:5%;width:8%;height:12%;background:#0a0e08;border:1px solid rgba(255,136,0,0.3);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,136,0,0.45);font-size:1.5vw;">☢</div>
       `,
     };
     return svgs[roomId] || '';

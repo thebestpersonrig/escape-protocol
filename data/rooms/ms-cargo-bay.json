@@ -1,0 +1,68 @@
+{
+  "id": "ms-cargo-bay",
+  "name": "Cargo Bay",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Stacked containers, magnetic clamps, a loading rail overhead. One section is blocked by a freight security lock — four-position switch, red light blinking. Beyond it, a passage to the reactor deck. A clipboard with a freight manifest hangs on the wall.",
+  "particles": { "type": "dust", "density": 0.25 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-engineering",
+      "type": "door",
+      "label": "Back to Engineering",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-engineering" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-reactor-deck",
+      "type": "door",
+      "label": "Reactor Deck",
+      "x": 78, "y": 15, "w": 16, "h": 72,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-cargo-lock" },
+      "action": { "type": "navigate", "to": "ms-reactor-deck" },
+      "lockedMessage": "Freight security lock is engaged on this passage. The lock switch sequence is on the cargo manifest.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "ms-cargo-lock" },
+      "contents": []
+    },
+    {
+      "id": "ms-cargo-lock-trigger",
+      "type": "puzzle-trigger",
+      "label": "Freight Lock",
+      "x": 56, "y": 35, "w": 18, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "ms-cargo-lock" },
+      "contents": []
+    },
+    {
+      "id": "ms-cargo-manifest",
+      "type": "container",
+      "label": "Freight Manifest",
+      "x": 14, "y": 28, "w": 22, "h": 40,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-cargo-manifest" },
+      "contents": [
+        {
+          "id": "ms-freight-note",
+          "type": "item",
+          "label": "Freight Note",
+          "x": 16, "y": 36, "w": 16, "h": 14,
+          "visibleWhen": { "objectState": "ms-cargo-manifest", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION — CARGO MANIFEST\nDelivery Ref: MA-7743-C\n\nFreight security lock sequence for this section:\nSwitch positions must be set HIGH, HIGH, LOW, LOW\n(Positions 1–4)\n\nNote from logistics:\n'This sequence was changed after the last incident.\nDo not reset to default.'\n\nThe switches engage a magnetic clamp release on the passage\nto Reactor Deck." }
+        }
+      ]
+    },
+    {
+      "id": "ms-cargo-containers",
+      "type": "inspect",
+      "label": "Cargo Containers",
+      "x": 10, "y": 70, "w": 40, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Sealed cargo containers, secured with magnetic clamps. Labels read:\n'REACTOR COMPONENTS — HANDLE WITH CARE'\n'MEDICAL SUPPLIES — COLD STORAGE'\n'PERSONAL EFFECTS — CREW ROTATION 7'\n\nOne container has a cracked seal. Inside: vacuum-packed ration packs. Probably not useful right now." },
+      "contents": []
+    }
+  ]
+}

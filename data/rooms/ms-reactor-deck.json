@@ -1,0 +1,65 @@
+{
+  "id": "ms-reactor-deck",
+  "name": "Reactor Deck",
+  "ambientSound": "ambient-hum",
+  "lighting": "red-alert",
+  "narrativeOnEnter": "Red. Everything is red. Emergency lighting, warning strobes, the heat shimmer off the reactor housing. A figure slumped at the control station — Kovalev. Not moving. The reactor sequence panel is unlocked, access code already entered. A safety manual sits open on the console.",
+  "particles": { "type": "sparks", "density": 0.4 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-cargo",
+      "type": "door",
+      "label": "Back to Cargo Bay",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-cargo-bay" },
+      "contents": []
+    },
+    {
+      "id": "ms-reactor-sequence-trigger",
+      "type": "puzzle-trigger",
+      "label": "Reactor Sequence Panel",
+      "x": 44, "y": 20, "w": 22, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "ms-reactor-sequence" },
+      "contents": []
+    },
+    {
+      "id": "ms-reactor-panel",
+      "type": "container",
+      "label": "Safety Manual",
+      "x": 14, "y": 32, "w": 22, "h": 40,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-reactor-panel" },
+      "contents": [
+        {
+          "id": "ms-safety-manual",
+          "type": "item",
+          "label": "Safety Manual",
+          "x": 16, "y": 38, "w": 16, "h": 18,
+          "visibleWhen": { "objectState": "ms-reactor-panel", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION — REACTOR SAFETY MANUAL\nSection 7: Emergency Stabilisation Sequence\n\nIn the event of a thermal runaway warning:\nPress the sequence panels in this exact order:\n\n  B → D → A → C → B\n  (Panel 2, Panel 4, Panel 1, Panel 3, Panel 2)\n\nThis triggers a controlled coolant flush.\nDo NOT deviate from this order — incorrect sequence\nwill accelerate thermal cascade." }
+        }
+      ]
+    },
+    {
+      "id": "ms-kovalev-inspect",
+      "type": "inspect",
+      "label": "Engineer Kovalev",
+      "x": 70, "y": 40, "w": 20, "h": 40,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Dmitri Kovalev, Chief Engineer. He's alive — barely. Pulse is weak. He inhaled reactor coolant vapour; without a functional med bay, there's nothing you can do for him here.\n\nHis hand is resting on the control panel. He got as far as unlocking the sequence before he collapsed.\n\nA scrawled note in his hand:\n'Sequence manual — top drawer — B,D,A,C,B — do it in order'\n\nHis eyes open briefly. He looks at you. Nods. Closes them again." },
+      "contents": []
+    },
+    {
+      "id": "ms-reactor-housing",
+      "type": "inspect",
+      "label": "Reactor Housing",
+      "x": 76, "y": 15, "w": 16, "h": 35,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "The reactor housing is hot — radiating heat even through the shielding. Warning indicators are spiking into the red.\n\nTemperature: 847°C (CRITICAL — threshold 900°C)\n\nYou have minutes, not hours. Complete the stabilisation sequence before it cascades." },
+      "contents": []
+    }
+  ]
+}

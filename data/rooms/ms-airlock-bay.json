@@ -1,0 +1,76 @@
+{
+  "id": "ms-airlock-bay",
+  "name": "Airlock Bay",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Emergency lighting bathes everything in cold blue. The outer airlock is sealed — standard for a station on lockdown. A pressure warning blinks on the wall panel. Somewhere above, a hull alarm is cycling. You have oxygen. For now.",
+  "particles": { "type": "dust", "density": 0.2 },
+
+  "hotspots": [
+    {
+      "id": "ms-to-corridor-a",
+      "type": "door",
+      "label": "Corridor A",
+      "x": 78, "y": 12, "w": 16, "h": 72,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-airlock-seal" },
+      "action": { "type": "navigate", "to": "ms-corridor-a" },
+      "lockedMessage": "Emergency seal is engaged. The inner airlock door won't open until the seal code is entered.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "ms-airlock-seal" },
+      "contents": []
+    },
+    {
+      "id": "ms-airlock-keypad-trigger",
+      "type": "puzzle-trigger",
+      "label": "Seal Override Panel",
+      "x": 56, "y": 30, "w": 14, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "ms-airlock-seal" },
+      "contents": []
+    },
+    {
+      "id": "ms-supply-locker",
+      "type": "container",
+      "label": "Supply Locker",
+      "x": 8, "y": 30, "w": 18, "h": 52,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-supply-locker" },
+      "contents": [
+        {
+          "id": "ms-emergency-card",
+          "type": "item",
+          "label": "Emergency Card",
+          "x": 10, "y": 40, "w": 12, "h": 10,
+          "visibleWhen": { "objectState": "ms-supply-locker", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA\nEmergency Procedures — Airlock Bay\n\nIn the event of lockdown, the inner airlock seal engages automatically.\nOverride code: 7743\n\n(Standard crew safety requirement — code must be posted at all emergency stations.)\n\nLife support status board is in Corridor A.\nEngineering is accessible from Corridor A, lower hatch." }
+        },
+        {
+          "id": "ms-oxygen-meter",
+          "type": "item",
+          "label": "O2 Monitor",
+          "x": 18, "y": 42, "w": 8, "h": 8,
+          "visibleWhen": { "objectState": "ms-supply-locker", "equals": "open" },
+          "action": { "type": "inspect", "text": "STATION O2 MONITOR — HANDHELD\nCurrent Reading: 19.2% (NOMINAL)\nStation Life Support: OFFLINE\n\nWarning: Without life support, O2 levels will drop below safe threshold in approximately 30 minutes.\n\nRestore power to life support from Engineering Deck immediately." }
+        }
+      ]
+    },
+    {
+      "id": "ms-airlock-warning",
+      "type": "inspect",
+      "label": "Warning Panel",
+      "x": 36, "y": 60, "w": 18, "h": 24,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "EMERGENCY STATUS — MERIDIAN STATION ALPHA\n\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] COMMS — PARTIAL\n\nStation lockdown initiated: 03:14 GST\nCrew status: UNKNOWN\n\nAll personnel: proceed to emergency muster stations." },
+      "contents": []
+    },
+    {
+      "id": "ms-outer-airlock",
+      "type": "inspect",
+      "label": "Outer Airlock",
+      "x": 2, "y": 15, "w": 6, "h": 68,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "The outer airlock is sealed and vacuum-locked. Standard procedure during station emergencies.\n\nThrough the small porthole: open space. Stars. A distant shape — a rescue shuttle, holding position at 800 metres. They're out there. They're waiting.\n\nYou need to find a way to signal them, or get to them." },
+      "contents": []
+    }
+  ]
+}

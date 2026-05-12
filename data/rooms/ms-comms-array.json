@@ -1,0 +1,67 @@
+{
+  "id": "ms-comms-array",
+  "name": "Comms Array",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A tight room — just equipment racks, a transmitter console, and a satellite dish control terminal. The distress beacon is blinking orange: active, but unconfirmed. A cabinet on the wall has an external airlock indicator behind a cracked glass panel.",
+  "particles": { "type": "dust", "density": 0.1 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-command",
+      "type": "door",
+      "label": "Back to Command Deck",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-command-deck" },
+      "contents": []
+    },
+    {
+      "id": "ms-external-airlock-door",
+      "type": "door",
+      "label": "External Airlock",
+      "x": 80, "y": 20, "w": 14, "h": 65,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-reactor-sequence" },
+      "action": { "type": "navigate", "to": "secret-escaped" },
+      "lockedMessage": "External airlock is in emergency lockdown — reactor instability prevents safe EVA. Stabilise the reactor first.",
+      "contents": []
+    },
+    {
+      "id": "ms-comms-cabinet",
+      "type": "container",
+      "label": "Comms Cabinet",
+      "x": 36, "y": 24, "w": 22, "h": 48,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-comms-cabinet" },
+      "contents": [
+        {
+          "id": "ms-beacon-manual",
+          "type": "item",
+          "label": "Beacon Manual",
+          "x": 38, "y": 32, "w": 16, "h": 14,
+          "visibleWhen": { "objectState": "ms-comms-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION — DISTRESS BEACON PROTOCOL\n\nBeacon is active. Rescue shuttle is in position.\nTo confirm evacuation and authorise approach:\n\n1. Stabilise reactor (required for safe beacon confirmation)\n2. Access the escape pod bay for passenger manifest upload\n3. OR: use external airlock EVA route to dock directly\n   (EVA route requires reactor stabilisation — no active radiation fields)\n\nEmergency beacon transmission will automatically signal shuttle\nupon reactor stabilisation completion." }
+        }
+      ]
+    },
+    {
+      "id": "ms-transmitter-console",
+      "type": "inspect",
+      "label": "Transmitter Console",
+      "x": 10, "y": 30, "w": 22, "h": 44,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "The transmitter console shows the distress beacon is active on standard emergency frequency.\n\nSHUTTLE MERIDIAN-3 RESPONSE:\n'Station acknowledged. Holding position. Awaiting confirmation of crew manifest and reactor status before approach.\nSending response to EVA channel: airlock accessible from Comms Array once radiation clear.'\n\nThey know you're here. They're waiting for the reactor to be safe." },
+      "contents": []
+    },
+    {
+      "id": "ms-external-airlock-panel",
+      "type": "inspect",
+      "label": "EVA Status Panel",
+      "x": 76, "y": 65, "w": 16, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "EXTERNAL AIRLOCK — EVA STATUS\n\nStatus: LOCKED (Reactor radiation field active)\nClearance required: Reactor deck — NOMINAL status\n\nOnce reactor is stabilised, this airlock will automatically unlock.\nDistance to rescue shuttle: 40 metres. EVA tether required." },
+      "contents": []
+    }
+  ]
+}

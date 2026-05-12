@@ -245,6 +245,7 @@ export class Engine {
       // Complete whichever escape objective this mission uses
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'escape' });
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'bw-escape' });
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'ms-escape' });
       dispatch('SET_ENDING', { ending: 'escaped' });
       await this.showEnding('escaped');
       return;
@@ -253,8 +254,16 @@ export class Engine {
     if (roomId === 'secret-escaped') {
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'escape' });
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'bw-escape' });
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'ms-escape' });
       dispatch('SET_ENDING', { ending: 'secret-escape' });
       await this.showEnding('secret-escape');
+      return;
+    }
+    // Special: 'self-sacrificed' — Meridian self-sacrifice ending
+    if (roomId === 'self-sacrificed') {
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'ms-escape' });
+      dispatch('SET_ENDING', { ending: 'self-sacrifice' });
+      await this.showEnding('self-sacrifice');
       return;
     }
     const st = getState();
@@ -330,6 +339,14 @@ export class Engine {
           title:     d.title     || 'SECURITY RESPONSE',
           titleClass:d.titleClass|| 'fail',
           body: st.alarmSecondsLeft <= 5 && d.nearEscape ? d.nearEscape : d.default || 'Security responds. You don\'t reach the exit.',
+        };
+      })(),
+      'self-sacrifice': (() => {
+        const d = mText['self-sacrifice'] || {};
+        return {
+          title:     d.title     || 'LAST TRANSMISSION',
+          titleClass:d.titleClass|| 'success',
+          body: d.default || 'The station holds. The crew escapes. You do not.',
         };
       })(),
     };

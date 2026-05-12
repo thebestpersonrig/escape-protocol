@@ -1,0 +1,60 @@
+{
+  "id": "ms-lower-corridor",
+  "name": "Lower Deck Corridor",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The lower deck runs stern to bow. Heavier construction here — reactor shielding in the walls. Emergency lighting is dimmer. The escape pod bay is aft, comms array forward. Access to engineering is via the hatch above.",
+  "particles": { "type": "dust", "density": 0.2 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-engineering-lower",
+      "type": "door",
+      "label": "Engineering Hatch (Up)",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-engineering" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-escape-pod",
+      "type": "door",
+      "label": "Escape Pod Bay",
+      "x": 12, "y": 20, "w": 14, "h": 60,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-escape-pod-bay" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-comms-lower",
+      "type": "door",
+      "label": "Comms Array",
+      "x": 30, "y": 18, "w": 14, "h": 64,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-power-reroute" },
+      "action": { "type": "navigate", "to": "ms-comms-array" },
+      "lockedMessage": "Comms array access requires main power restored.",
+      "contents": []
+    },
+    {
+      "id": "ms-reactor-access-lower",
+      "type": "door",
+      "label": "Reactor Deck Access",
+      "x": 50, "y": 15, "w": 22, "h": 72,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-cargo-lock" },
+      "action": { "type": "navigate", "to": "ms-reactor-deck" },
+      "lockedMessage": "Reactor deck access is sealed through the cargo bay. Clear the freight lock first.",
+      "contents": []
+    },
+    {
+      "id": "ms-lower-warning",
+      "type": "inspect",
+      "label": "Radiation Warning",
+      "x": 76, "y": 28, "w": 18, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "RADIATION WARNING — REACTOR DECK ADJACENT\n\nCurrent reading: ELEVATED (Class 2)\nSafe exposure limit: 15 minutes cumulative\n\nPersonnel accessing Reactor Deck: proceed directly.\nDo not linger in this corridor.\n\nReactor stabilisation will clear the radiation field." },
+      "contents": []
+    }
+  ]
+}

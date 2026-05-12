@@ -1,0 +1,78 @@
+{
+  "id": "ms-corridor-a",
+  "name": "Corridor A — Upper Deck",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The main corridor of the upper deck. Modular wall panels, conduit runs, yellow caution markings. Emergency lights pulse at the far end. Access hatches lead in three directions — some sealed, some not.",
+  "particles": { "type": "dust", "density": 0.15 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-airlock",
+      "type": "door",
+      "label": "Back to Airlock Bay",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-airlock-bay" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-crew-quarters",
+      "type": "door",
+      "label": "Crew Quarters",
+      "x": 12, "y": 18, "w": 12, "h": 56,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-crew-quarters" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-med-bay",
+      "type": "door",
+      "label": "Medical Bay",
+      "x": 28, "y": 20, "w": 10, "h": 54,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-med-bay" },
+      "contents": []
+    },
+    {
+      "id": "ms-engineering-hatch",
+      "type": "door",
+      "label": "Engineering Hatch",
+      "x": 48, "y": 55, "w": 18, "h": 36,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-airlock-seal" },
+      "action": { "type": "navigate", "to": "ms-engineering" },
+      "lockedMessage": "The engineering hatch needs the emergency seal cleared first.",
+      "contents": []
+    },
+    {
+      "id": "ms-to-command",
+      "type": "door",
+      "label": "Command Deck",
+      "x": 70, "y": 15, "w": 14, "h": 60,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-power-reroute" },
+      "action": { "type": "navigate", "to": "ms-command-deck" },
+      "lockedMessage": "Command deck blast doors are sealed — requires main power restored.",
+      "contents": []
+    },
+    {
+      "id": "ms-life-support-board",
+      "type": "inspect",
+      "label": "Life Support Board",
+      "x": 85, "y": 30, "w": 12, "h": 36,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "LIFE SUPPORT STATUS — MERIDIAN ALPHA\n\nPrimary scrubbers: OFFLINE (no power)\nCO2 filters: OFFLINE\nO2 generation: OFFLINE\nBackup tanks: 22% (approximately 28 minutes)\n\nPower reroute required from Engineering Deck.\nStandard reroute sequence is in the Engineering manual.\nBlast door override will engage once power is restored." },
+      "contents": []
+    },
+    {
+      "id": "ms-corridor-placard",
+      "type": "inspect",
+      "label": "Station Directory",
+      "x": 38, "y": 18, "w": 8, "h": 10,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — DECK DIRECTORY\n\nUpper Deck:\n  → Airlock Bay (Stern)\n  → Crew Quarters (Port)\n  → Medical Bay (Starboard)\n  → Command Deck (Bow) [BLAST DOOR SEALED]\n  → Engineering Hatch [Lower Deck]\n\nLower Deck:\n  → Engineering\n  → Cargo Bay\n  → Reactor Deck [RESTRICTED]\n  → Comms Array\n  → Escape Pod Bay (Stern)" },
+      "contents": []
+    }
+  ]
+}

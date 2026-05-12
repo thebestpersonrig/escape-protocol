@@ -60,9 +60,8 @@
       <div class="hub-card-play">▶ Enter Asylum</div>
     </div>
 
-    <div class="hub-card coming-soon">
+    <div class="hub-card available" onclick="location.href='meridian.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='meridian.html'">
       <div class="hub-card-num">Mission 03</div>
-      <div class="hub-card-badge hub-badge-locked">Encrypted</div>
       <div class="hub-card-title">Meridian<br>Station Alpha</div>
       <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
       <div class="hub-card-desc">
@@ -73,9 +72,9 @@
       <div class="hub-card-meta">
         <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
         <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">5</span></div>
+        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="meridian-endings">0 / 5</span></div>
       </div>
-      <div class="hub-card-play locked">// Encrypted</div>
+      <div class="hub-card-play">▶ Board the Station</div>
     </div>
 
   </div><!-- #hub-grid -->
@@ -124,6 +123,10 @@
     const bwSeen = JSON.parse(localStorage.getItem('ep-blackwood-endings-seen') || '[]');
     const bwFound = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => bwSeen.includes(e)).length;
     document.getElementById('blackwood-endings').textContent = bwFound + ' / 4';
+
+    const msSeen = JSON.parse(localStorage.getItem('ep-meridian-endings-seen') || '[]');
+    const msFound = ['escaped','secret-escape','self-sacrifice','alarm-caught','time-out'].filter(e => msSeen.includes(e)).length;
+    document.getElementById('meridian-endings').textContent = msFound + ' / 5';
 
   })();
 </script>

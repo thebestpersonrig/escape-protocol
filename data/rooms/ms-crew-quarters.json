@@ -1,0 +1,74 @@
+{
+  "id": "ms-crew-quarters",
+  "name": "Crew Quarters",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Four bunks, two occupied with personal effects. Lockers, a small desk, a mirror cracked at the corner. Personal items are scattered — whoever left did so quickly. One bunk has a data pad on the pillow.",
+  "particles": { "type": "dust", "density": 0.15 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-corridor-crew",
+      "type": "door",
+      "label": "Back to Corridor A",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-corridor-a" },
+      "contents": []
+    },
+    {
+      "id": "ms-crew-cabinet",
+      "type": "container",
+      "label": "Crew Locker",
+      "x": 74, "y": 22, "w": 18, "h": 58,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-crew-cabinet" },
+      "contents": [
+        {
+          "id": "ms-crew-id",
+          "type": "item",
+          "label": "Crew ID Tag",
+          "x": 76, "y": 32, "w": 10, "h": 8,
+          "clueSlot": "ms-crew-id",
+          "visibleWhen": { "objectState": "ms-crew-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — CREW IDENTIFICATION\n\nName: CHEN, YUKI\nRole: Navigation Officer\nCrew ID: #0447\n\nNavigation terminal password: MERIDIAN (station default)\n\nHandwritten note on the back:\n'Pod bay code — last four of mission stamp: 5519\nDO NOT WRITE DOWN — but I always forget it.'" }
+        },
+        {
+          "id": "ms-personal-photo",
+          "type": "item",
+          "label": "Photograph",
+          "x": 78, "y": 48, "w": 8, "h": 8,
+          "visibleWhen": { "objectState": "ms-crew-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "A personal photograph. Four crew members in orange jumpsuits, posing in front of an airlock. They're smiling.\n\nWritten on the back in blue ink:\n'Meridian Alpha, Launch Day — Year 3'\n\nOne of them has a name tag: CHEN." }
+        }
+      ]
+    },
+    {
+      "id": "ms-bunk-datapad",
+      "type": "inspect",
+      "label": "Data Pad",
+      "x": 18, "y": 42, "w": 20, "h": 28,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "PERSONAL LOG — CHEN, YUKI — ENTRY 44\n\n'Station's been acting up for two days. Reactor deck is throwing warnings I've never seen before. Kovalev thinks it's a coolant calibration issue. He's gone down to check.\n\nIf this goes sideways:\n— Engineering wiring schematic is taped inside the panel cover\n— Reactor sequence is in the safety manual on Reactor Deck\n— Cargo lock pattern is on the freight manifest in the Cargo Bay\n\nEscape pod bay is stern lower deck. Code is on my ID tag. I keep forgetting.'" },
+      "contents": []
+    },
+    {
+      "id": "ms-bunk-a",
+      "type": "inspect",
+      "label": "Bunk A",
+      "x": 14, "y": 20, "w": 20, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A regulation bunk, stripped down. Whoever slept here took their belongings. A sticky note is attached to the frame:\n\n'Reactor sequence override code: ask Kovalev. He knows.'" },
+      "contents": []
+    },
+    {
+      "id": "ms-bunk-b",
+      "type": "inspect",
+      "label": "Bunk B",
+      "x": 38, "y": 20, "w": 20, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "A bunk with a rumpled sleep sack. A worn paperback book is wedged at the pillow end.\n\nInside the front cover: a name. 'KOVALEV, D.' And below it:\n\n'Station callsign: MERIDIAN. All terminal passwords default to station callsign on first login.'" },
+      "contents": []
+    }
+  ]
+}

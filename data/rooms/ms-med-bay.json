@@ -1,0 +1,66 @@
+{
+  "id": "ms-med-bay",
+  "name": "Medical Bay",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Clean, white, cold. Medical equipment lines the walls. A diagnostic terminal sits on the main counter, screen still active. The med cabinet is sealed — biometric lock is offline, but the manual override is visible.",
+  "particles": { "type": "dust", "density": 0.1 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-corridor-med",
+      "type": "door",
+      "label": "Back to Corridor A",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-corridor-a" },
+      "contents": []
+    },
+    {
+      "id": "ms-nav-terminal-trigger",
+      "type": "puzzle-trigger",
+      "label": "Medical Terminal",
+      "x": 50, "y": 28, "w": 22, "h": 40,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "ms-nav-terminal" },
+      "contents": []
+    },
+    {
+      "id": "ms-med-bay-cabinet",
+      "type": "container",
+      "label": "Med Cabinet",
+      "x": 10, "y": 24, "w": 18, "h": 54,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-med-bay-cabinet" },
+      "contents": [
+        {
+          "id": "ms-station-schematics",
+          "type": "item",
+          "label": "Station Schematics",
+          "x": 12, "y": 32, "w": 12, "h": 14,
+          "clueSlot": "ms-station-schematics",
+          "visibleWhen": { "objectState": "ms-med-bay-cabinet", "equals": "open" },
+          "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — ENGINEERING SCHEMATIC\nLife Support Power Reroute — Emergency Procedure\n\nTo restore life support power:\n1. Open the engineering junction panel\n2. Match wire connections:\n   Red   → Junction A\n   Blue  → Junction D\n   Green → Junction B\n   Yellow→ Junction C\n\nNote: This reroutes power from secondary systems.\nCommand deck blast doors will unseal upon completion." }
+        }
+      ]
+    },
+    {
+      "id": "ms-medical-chart",
+      "type": "inspect",
+      "label": "Medical Chart",
+      "x": 76, "y": 28, "w": 16, "h": 40,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "CREW MEDICAL STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — Last scan: 48h ago. Status: EVACUATED\nKOVALEV, D. — Last scan: 6h ago. Status: UNKNOWN (Reactor Deck)\nPATEL, S.  — Last scan: 48h ago. Status: EVACUATED\nDIAZ, M.   — Last scan: 48h ago. Status: EVACUATED\n\nNote: Kovalev remained on station to attempt manual reactor stabilisation.\nIf he succeeded, structural integrity of the station was preserved.\nIf not — the reactor will cascade in approximately 30 minutes from lockdown." },
+      "contents": []
+    },
+    {
+      "id": "ms-defibrillator",
+      "type": "inspect",
+      "label": "Defibrillator",
+      "x": 76, "y": 70, "w": 14, "h": 18,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "An automated defibrillator unit. Charged and ready. Station-issue.\n\nA label on the side:\n'MERIDIAN STATION — MEDICAL INVENTORY #7'\n\nYou do not need this right now. Hopefully." },
+      "contents": []
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "meridian",
+  "label": "MERIDIAN STATION ALPHA",
+  "startRoom": "ms-airlock-bay",
+  "saveKey": "meridian-save",
+  "endingsSaveKey": "ep-meridian-endings-seen",
+  "clueRandomization": false,
+  "difficulty": {
+    "easy":   { "seconds": 2400, "mistakes": 10, "label": "40 MIN · 10 MISTAKES" },
+    "medium": { "seconds": 1800, "mistakes": 5,  "label": "30 MIN · 5 MISTAKES" },
+    "hard":   { "seconds": 900,  "mistakes": 3,  "label": "15 MIN · 3 MISTAKES" }
+  },
+  "puzzles": {
+    "ms-airlock-seal":    { "solved": false, "attempts": 0, "code": "7743" },
+    "ms-power-reroute":   { "solved": false, "attempts": 0, "shuffledWires": [] },
+    "ms-nav-terminal":    { "solved": false, "attempts": 0 },
+    "ms-cargo-lock":      { "solved": false, "attempts": 0, "leverPositions": [0,0,0,0] },
+    "ms-reactor-sequence":{ "solved": false, "attempts": 0, "sequence": [1,3,0,2,1] },
+    "ms-escape-pod-code": { "solved": false, "attempts": 0, "code": "5519" }
+  },
+  "objects": {
+    "ms-supply-locker":    "closed",
+    "ms-crew-cabinet":     "closed",
+    "ms-med-bay-cabinet":  "closed",
+    "ms-data-console":     "closed",
+    "ms-cargo-manifest":   "closed",
+    "ms-reactor-panel":    "closed",
+    "ms-comms-cabinet":    "closed",
+    "ms-command-locker":   "closed"
+  },
+  "objectives": [
+    { "id": "ms-restore-life-support", "text": "Restore life support systems",        "done": false },
+    { "id": "ms-reach-reactor",        "text": "Reach the reactor deck",               "done": false },
+    { "id": "ms-stabilise-reactor",    "text": "Stabilise the reactor",                "done": false },
+    { "id": "ms-find-escape-route",    "text": "Find a route off the station",         "done": false },
+    { "id": "ms-escape",               "text": "Evacuate Meridian Station",            "done": false }
+  ],
+  "initialValues": {
+    "keypadCode":       "7743",
+    "leverPattern":     [1, 1, 0, 0],
+    "terminalPassword": "MERIDIAN"
+  },
+  "hints": {
+    "ms-airlock-bay":      "The emergency seal code was posted for crew safety — check the posted notices.",
+    "ms-corridor-a":       "Life support is offline. The engineering deck below has the power reroute panel.",
+    "ms-crew-quarters":    "Personal logs sometimes contain operational codes. Check the bunks.",
+    "ms-med-bay":          "The pharmacist's terminal has restricted access. The password is the station name.",
+    "ms-engineering":      "Match the wire colours to the schematic. Red is always high-voltage — don't cross it.",
+    "ms-cargo-bay":        "The cargo lock uses a four-position switch — the manifest lists the correct freight lock sequence.",
+    "ms-reactor-deck":     "The reactor sequence panel requires pressing buttons in a specific order. The safety manual has the protocol.",
+    "ms-command-deck":     "Command override codes are stored in the captain's locker. Navigation terminal access requires crew ID.",
+    "ms-comms-array":      "The distress beacon frequency is listed in standard emergency protocols — check the comms cabinet.",
+    "ms-escape-pod-bay":   "Escape pod launch codes are tied to crew manifest numbers. The captain's log has the authorisation."
+  },
+  "endings": {
+    "catalogue": [
+      { "id": "escaped",        "label": "Evacuation",         "type": "success", "desc": "Launch escape pod before station collapses" },
+      { "id": "secret-escape",  "label": "Drifting",           "type": "success", "desc": "Reach the external airlock and drift to the rescue shuttle" },
+      { "id": "self-sacrifice",  "label": "Last Transmission",  "type": "success", "desc": "Stabilise the reactor to save the crew — at a cost" },
+      { "id": "alarm-caught",   "label": "Depressurisation",   "type": "fail",    "desc": "Station integrity fails before you reach the exit" },
+      { "id": "time-out",       "label": "Oxygen Depleted",    "type": "fail",    "desc": "Life support fails completely" }
+    ],
+    "text": {
+      "escaped": {
+        "title": "EVACUATION SUCCESSFUL",
+        "titleClass": "success",
+        "flawless": "Pod bay doors open. You're in the seat, harness locked, countdown running. The pod fires clean and Meridian Station shrinks behind you into the dark. Every system nominal. Every decision correct.",
+        "clean":    "The escape pod clears the station with twelve seconds to spare. Through the porthole: Meridian Station, venting atmosphere, spinning slowly on a broken axis. You made it.",
+        "alarm":    "The station is already venting when the pod fires. You clear the debris field with damage to the heat shield — survivable. The rescue shuttle picks you up six hours later.",
+        "fast":     "You were through Meridian in under fifteen minutes. The pod fires before the station even knows it's lost.",
+        "default":  "Escape pod launch successful. Meridian Station Alpha recedes into darkness behind you. Somewhere ahead: rescue, atmosphere, ground."
+      },
+      "secret-escape": {
+        "title": "DRIFTING",
+        "titleClass": "success",
+        "noHints":  "You found the external airlock on your own — no guidance, no crew, no manual. Forty seconds of open space between you and the rescue shuttle. You count every one. Then the hatch opens and you're in.",
+        "default":  "The external airlock discharges you into open space. Forty metres to the rescue shuttle. The tether holds. You make it across without looking back."
+      },
+      "self-sacrifice": {
+        "title": "LAST TRANSMISSION",
+        "titleClass": "success",
+        "default":  "The reactor stabilises. Station integrity holds. The crew evacuation completes with seven minutes to spare.\n\nYour last transmission: coordinates, status, all clear.\n\nThe rescue shuttle arrives twelve hours later. They find the station intact, the crew in the pod, and one empty seat at the command terminal.\n\nThe log entry reads: 'Unknown operative. No ID. Station saved.'"
+      },
+      "time-out": {
+        "title": "OXYGEN DEPLETED",
+        "titleClass": "fail",
+        "nearExit":     "You were at the pod bay. The launch sequence was halfway through. Then the O2 alarm went critical and the pod auto-aborted. The station goes dark around you.",
+        "manyMistakes": "Too many system failures triggered the emergency shutdown. Life support cut out station-wide before you reached the exit.",
+        "default":      "The emergency lighting fades. The last O2 warning pulses three times and goes silent. Meridian Station has one fewer occupant than it should."
+      },
+      "alarm-caught": {
+        "title": "DEPRESSURISATION",
+        "titleClass": "fail",
+        "nearEscape": "You had the pod bay in sight. Then hull breach alarms, rapid decompression, and the blast doors sealed — including the one between you and the exit.",
+        "default":    "Hull integrity fails before you reach safety. Emergency blast doors seal the station section by section. You are on the wrong side of the last one."
+      }
+    }
+  }
+}

@@ -23,6 +23,13 @@ const PUZZLE_NAMES = {
   'bw-records-cipher':  'Symbol Cipher',
   'bw-director-safe':   "Director's Safe",
   'bw-chapel-bells':    'Bell Mechanism',
+  // Meridian
+  'ms-airlock-seal':     'Airlock Override',
+  'ms-power-reroute':    'Power Reroute',
+  'ms-nav-terminal':     'Navigation Terminal',
+  'ms-cargo-lock':       'Freight Lock',
+  'ms-reactor-sequence': 'Reactor Sequence',
+  'ms-escape-pod-code':  'Pod Launch Code',
 };
 
 const _ach = new AchievementSystem();
@@ -48,6 +55,13 @@ const PUZZLE_MODULES = {
   'bw-records-cipher':  () => import('./symbol-sequence.js'),
   'bw-director-safe':   () => import('./keypad.js'),
   'bw-chapel-bells':    () => import('./lever-combo.js'),
+  // Meridian
+  'ms-airlock-seal':     () => import('./keypad.js'),
+  'ms-power-reroute':    () => import('./wire-connect.js'),
+  'ms-nav-terminal':     () => import('./terminal.js'),
+  'ms-cargo-lock':       () => import('./lever-combo.js'),
+  'ms-reactor-sequence': () => import('./sequence-panel.js'),
+  'ms-escape-pod-code':  () => import('./keypad.js'),
 };
 
 let _currentModule = null;
@@ -135,6 +149,11 @@ export const PuzzleManager = {
       'bw-power-wires':    'bw-restore-power',
       'bw-records-cipher': 'bw-find-director-key',
       'bw-director-safe':  'bw-get-master-key',
+      // Meridian
+      'ms-power-reroute':    'ms-restore-life-support',
+      'ms-cargo-lock':       'ms-reach-reactor',
+      'ms-reactor-sequence': 'ms-stabilise-reactor',
+      'ms-escape-pod-code':  'ms-escape',
     };
     const objId = MAP[puzzleId];
     if (objId) {

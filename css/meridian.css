@@ -1,0 +1,109 @@
+/* ── Meridian Station Alpha — Theme Override ────────────── */
+:root {
+  --accent:      #00bfff;
+  --accent-glow: rgba(0, 191, 255, 0.40);
+  --accent-dim:  rgba(0, 191, 255, 0.08);
+  --accent-rgb:  0,191,255;
+  --bg:          #020508;
+  --surface:     #060c12;
+  --surface2:    #0a1420;
+  --border:      #0e2030;
+  --border2:     #142840;
+  --text:        #90b8cc;
+  --text-bright: #c8e4f0;
+  --text-dim:    #1e4058;
+  --warn:        #ff8c00;
+}
+
+/* Deep space grid — cool blue tint */
+body::before {
+  background:
+    repeating-linear-gradient(
+      rgba(0,40,80,0.18), rgba(0,40,80,0.18) 1px,
+      transparent 1px, transparent 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,40,80,0.18), rgba(0,40,80,0.18) 1px,
+      transparent 1px, transparent 80px
+    );
+}
+
+/* Cool scanlines */
+body::after {
+  background: repeating-linear-gradient(
+    rgba(0,20,40,0.1), rgba(0,20,40,0.1) 1px,
+    transparent 1px, transparent 3px
+  );
+}
+
+/* Main menu title glow — ice blue */
+@keyframes menu-title-glow {
+  0%, 100% { text-shadow: 0 0 20px rgba(0,191,255,0.3), 0 0 40px rgba(0,191,255,0.1); }
+  50%       { text-shadow: 0 0 30px rgba(0,191,255,0.5), 0 0 60px rgba(0,191,255,0.2); }
+}
+
+/* HUD timer */
+#timer { color: var(--text-bright); }
+
+/* Alarm overlay — deep space red */
+#alarm-overlay {
+  background: rgba(5, 2, 10, 0.94);
+}
+#alarm-text {
+  color: #ff4060;
+  text-shadow: 0 0 20px rgba(255,64,96,0.5);
+}
+
+/* Diff buttons */
+.diff-btn.selected {
+  border-color: var(--accent) !important;
+  background: rgba(0,191,255,0.1) !important;
+  color: var(--accent) !important;
+}
+
+/* Puzzle overlay backdrop */
+#puzzle-overlay {
+  background: rgba(2, 5, 10, 0.97);
+}
+
+/* Hint popup */
+#hint-popup {
+  border-color: rgba(0,191,255,0.25);
+  background: rgba(4, 10, 20, 0.98);
+}
+#hint-popup-label { color: var(--accent); }
+
+/* Achievement toast */
+#achievement-toast { border-color: rgba(0,191,255,0.4); }
+.ach-toast-label   { color: var(--accent); }
+
+/* Menu primary button */
+.menu-btn.primary {
+  border-color: rgba(0,191,255,0.4);
+  background: rgba(0,191,255,0.08);
+  color: var(--accent);
+}
+.menu-btn.primary:hover {
+  background: rgba(0,191,255,0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(0,191,255,0.22);
+}
+
+/* Inventory selected */
+.inv-slot.selected {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 10px rgba(0,191,255,0.3) !important;
+}
+
+/* Room narrative */
+#room-narrative { border-left-color: rgba(0,191,255,0.35); }
+
+/* Journal overlay */
+#journal-panel { border-color: rgba(0,191,255,0.15); }
+
+/* Hotspot highlight — blue tint */
+#hotspot-highlight {
+  border-color: rgba(0,191,255,0.5);
+  background: rgba(0,191,255,0.05);
+}

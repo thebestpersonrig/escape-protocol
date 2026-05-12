@@ -1,0 +1,65 @@
+{
+  "id": "ms-engineering",
+  "name": "Engineering Deck",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "Cramped and hot. Conduit panels cover every wall. The main junction box hangs open — someone started the reroute and stopped. A wiring schematic is taped inside the panel cover. Below, an access tunnel leads to the cargo bay and reactor.",
+  "particles": { "type": "dust", "density": 0.3 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-corridor-eng",
+      "type": "door",
+      "label": "Back to Corridor A",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-corridor-a" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-lower-corridor",
+      "type": "door",
+      "label": "Lower Deck Corridor",
+      "x": 68, "y": 15, "w": 12, "h": 55,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-lower-corridor" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-cargo-bay",
+      "type": "door",
+      "label": "Cargo Bay",
+      "x": 80, "y": 30, "w": 14, "h": 55,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-cargo-bay" },
+      "contents": []
+    },
+    {
+      "id": "ms-power-wires-trigger",
+      "type": "puzzle-trigger",
+      "label": "Junction Panel",
+      "x": 38, "y": 22, "w": 24, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "ms-power-reroute" },
+      "contents": []
+    },
+    {
+      "id": "ms-wiring-schematic",
+      "type": "inspect",
+      "label": "Wiring Schematic",
+      "x": 38, "y": 10, "w": 24, "h": 12,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "LIFE SUPPORT POWER REROUTE — ENGINEERING MANUAL\nTaped inside panel cover — DO NOT REMOVE\n\nEmergency connection order:\n  Red   → Junction A  (High voltage — connect first)\n  Blue  → Junction D\n  Green → Junction B\n  Yellow→ Junction C  (Low voltage — connect last)\n\nIncorrect wiring will trip the breaker and count as a system fault.\nComplete sequence restores life support and unseals command blast doors." },
+      "contents": []
+    },
+    {
+      "id": "ms-engineering-log",
+      "type": "inspect",
+      "label": "Engineer's Log",
+      "x": 8, "y": 50, "w": 22, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "ENGINEERING LOG — KOVALEV, D.\nEntry 112\n\n'Reactor temperature readings are off by 40%. Started the wiring reroute but had to abort — reactor alarm triggered while I was mid-sequence.\n\nGone to Reactor Deck to manually stabilise. If anyone finds this:\n— Finish the wiring first (schematic is on the panel)\n— Cargo Bay lock sequence is on the freight manifest\n— Reactor stabilisation sequence is in the safety manual on Reactor Deck\n\nIf I don't make it back, pod bay code is on Chen's ID.'" },
+      "contents": []
+    }
+  ]
+}

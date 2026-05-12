@@ -1,0 +1,76 @@
+{
+  "id": "ms-command-deck",
+  "name": "Command Deck",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "The nerve centre of Meridian Station. Wide viewport looking out at open space — the rescue shuttle is clearly visible, holding position. Navigation terminals, captain's station, comms systems. A locked command locker sits against the far wall.",
+  "particles": { "type": "dust", "density": 0.1 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-corridor-cmd",
+      "type": "door",
+      "label": "Back to Corridor A",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-corridor-a" },
+      "contents": []
+    },
+    {
+      "id": "ms-to-comms-array",
+      "type": "door",
+      "label": "Comms Array",
+      "x": 82, "y": 20, "w": 12, "h": 65,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-comms-array" },
+      "contents": []
+    },
+    {
+      "id": "ms-command-locker",
+      "type": "container",
+      "label": "Captain's Locker",
+      "x": 55, "y": 30, "w": 18, "h": 48,
+      "cursor": "pointer",
+      "action": { "type": "toggle-container", "objectId": "ms-command-locker" },
+      "contents": [
+        {
+          "id": "ms-captain-log",
+          "type": "item",
+          "label": "Captain's Log",
+          "x": 57, "y": 38, "w": 12, "h": 14,
+          "visibleWhen": { "objectState": "ms-command-locker", "equals": "open" },
+          "action": { "type": "inspect", "text": "CAPTAIN'S LOG — FINAL ENTRY\n\n'Reactor alarm at 03:10. Ordered full crew evacuation — Kovalev stayed to attempt manual stabilisation. I should have ordered everyone off.\n\nDistress beacon is active via the comms array — rescue shuttle is holding at 800m.\nEscape pod launch code is 5519 — Kovalev and Chen both know it.\n\nIf anyone finds this log: stabilise the reactor first.\nThen get to the pod bay. Then go home.\n\n— Captain Diaz, Meridian Station Alpha'" }
+        }
+      ]
+    },
+    {
+      "id": "ms-viewport",
+      "type": "inspect",
+      "label": "Viewport",
+      "x": 14, "y": 18, "w": 30, "h": 42,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "The rescue shuttle is visible through the viewport — holding at exactly 800 metres. Standard evacuation protocol: hold position, wait for beacon signal, approach on confirmation.\n\nThey're out there. Waiting. They've been waiting since 03:14.\n\nThrough the external hull, you can just make out an access port. It's an external airlock — rarely used, but it connects directly to the docking ring. If the station's internal systems are compromised, that might be your backup route." },
+      "contents": []
+    },
+    {
+      "id": "ms-nav-console",
+      "type": "inspect",
+      "label": "Navigation Console",
+      "x": 14, "y": 62, "w": 28, "h": 10,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Navigation console for Meridian Station Alpha. Orbital positioning, thruster control, docking systems.\n\nAll systems showing nominal — the station's position is stable.\n\nOne readout is blinking: 'RESCUE SHUTTLE MERIDIAN-3 — HOLDING. AWAITING BEACON CONFIRMATION.'\n\nThe distress beacon is in the Comms Array." },
+      "contents": []
+    },
+    {
+      "id": "ms-self-sacrifice-trigger",
+      "type": "door",
+      "label": "Lock Station & Signal All Clear",
+      "x": 18, "y": 75, "w": 20, "h": 10,
+      "cursor": "pointer",
+      "condition": { "puzzleSolved": "ms-reactor-sequence" },
+      "action": { "type": "navigate", "to": "self-sacrificed" },
+      "lockedMessage": "Reactor must be stabilised before you can lock the station down.",
+      "contents": []
+    }
+  ]
+}

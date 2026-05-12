@@ -1,0 +1,50 @@
+{
+  "id": "ms-escape-pod-bay",
+  "name": "Escape Pod Bay",
+  "ambientSound": "ambient-hum",
+  "lighting": "flicker",
+  "narrativeOnEnter": "A single escape pod — standard crew evacuation vehicle, rated for four. The launch panel is active. A keypad requires the authorisation code before the pod will launch. Through the blast window: open space, stars, the distant glow of Earth.",
+  "particles": { "type": "dust", "density": 0.1 },
+
+  "hotspots": [
+    {
+      "id": "ms-back-to-lower-corridor",
+      "type": "door",
+      "label": "Back to Lower Corridor",
+      "x": 0, "y": 15, "w": 8, "h": 70,
+      "cursor": "pointer",
+      "action": { "type": "navigate", "to": "ms-lower-corridor" },
+      "contents": []
+    },
+    {
+      "id": "ms-escape-pod-door",
+      "type": "door",
+      "label": "Escape Pod — Launch Panel",
+      "x": 55, "y": 22, "w": 20, "h": 40,
+      "cursor": "zoom-in",
+      "condition": { "puzzleSolved": "ms-escape-pod-code" },
+      "action": { "type": "navigate", "to": "escaped" },
+      "lockedMessage": "Launch sequence locked. Enter the authorisation code on the keypad.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "ms-escape-pod-code" },
+      "contents": []
+    },
+    {
+      "id": "ms-pod-status-panel",
+      "type": "inspect",
+      "label": "Pod Status",
+      "x": 20, "y": 28, "w": 28, "h": 44,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "ESCAPE POD — MERIDIAN ALPHA — STATUS\n\nFuel: 100%\nLife support: NOMINAL (14 hours)\nCapacity: 4 persons\nCurrent occupancy: 0\n\nLaunch authorisation code required.\nCode is tied to crew manifest numbers.\nSee crew personnel files for reference.\n\nPOD TRAJECTORY: Automatic — Earth orbit intercept, 6.2 hours." },
+      "contents": []
+    },
+    {
+      "id": "ms-blast-window",
+      "type": "inspect",
+      "label": "Blast Window",
+      "x": 76, "y": 20, "w": 18, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Through the blast-proof glass: open space. The Earth hangs in the lower quadrant — blue and enormous. The rescue shuttle is not visible from this angle.\n\nA small plaque is mounted below the window:\n\n'MERIDIAN STATION ALPHA\nConstructed: Year 1, Station Era\nDesigned to last: 25 years\n\nFor the crew who gave it life.'" },
+      "contents": []
+    }
+  ]
+}
