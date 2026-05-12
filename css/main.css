@@ -991,6 +991,59 @@ body {
   pointer-events: none;
 }
 
+/* ── Mobile / touch responsive ──────────────────────────── */
+@media (max-width: 600px), (max-height: 500px) {
+  #hud-top {
+    padding: 0 8px;
+    gap: 8px;
+    height: 40px;
+  }
+  #timer {
+    font-size: 16px;
+    min-width: 60px;
+  }
+  #hint-button,
+  #journal-button {
+    font-size: 10px;
+    padding: 3px 8px;
+    letter-spacing: 0;
+  }
+  #current-objective {
+    font-size: 10px;
+  }
+  .inv-slot {
+    width: 52px;
+    height: 52px;
+  }
+  #inventory-bar {
+    padding: 0 8px;
+    gap: 6px;
+  }
+  #inventory-label {
+    font-size: 8px;
+  }
+  #toast {
+    font-size: 11px;
+    padding: 6px 14px;
+    max-width: 80%;
+  }
+  #puzzle-container {
+    padding: 16px;
+    max-height: 96%;
+  }
+  #journal-panel {
+    width: 90vw;
+  }
+  #pause-card {
+    padding: 24px 28px;
+  }
+  .menu-btn {
+    width: 180px;
+    padding: 12px 0;
+    font-size: 12px;
+  }
+}
+
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface); }
