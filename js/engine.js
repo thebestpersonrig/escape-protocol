@@ -242,7 +242,9 @@ export class Engine {
   async navigateTo(roomId) {
     // Special: 'escaped' means trigger the win ending
     if (roomId === 'escaped') {
+      // Complete whichever escape objective this mission uses
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'escape' });
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'bw-escape' });
       dispatch('SET_ENDING', { ending: 'escaped' });
       await this.showEnding('escaped');
       return;
@@ -250,6 +252,7 @@ export class Engine {
     // Special: 'secret-escaped' means secret ending
     if (roomId === 'secret-escaped') {
       dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'escape' });
+      dispatch('COMPLETE_OBJECTIVE', { objectiveId: 'bw-escape' });
       dispatch('SET_ENDING', { ending: 'secret-escape' });
       await this.showEnding('secret-escape');
       return;
@@ -272,7 +275,9 @@ export class Engine {
 
     const st = getState();
     const DIFF_TOTALS = { easy: 1800, medium: 1200, hard: 600 };
-    const totalSecs = DIFF_TOTALS[st.difficulty] ?? 1200;
+    const totalSecs = this._missionConfig?.difficulty?.[st.difficulty]?.seconds
+      ?? DIFF_TOTALS[st.difficulty]
+      ?? 1200;
     const elapsed   = totalSecs - st.timerSeconds;
     const fast      = elapsed < totalSecs * 0.35;
     const noMistakes = st.mistakeCount === 0;

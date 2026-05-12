@@ -43,16 +43,7 @@
       "condition": { "puzzleSolved": "bw-ward-lock" },
       "action": { "type": "navigate", "to": "bw-nurses-station" },
       "lockedMessage": "A padlocked gate — Ward B. The combination is four digits.",
-      "contents": []
-    },
-    {
-      "id": "bw-ward-lock-trigger",
-      "type": "puzzle-trigger",
-      "label": "Ward B Padlock",
-      "x": 60, "y": 38, "w": 8, "h": 14,
-      "cursor": "zoom-in",
-      "condition": { "not": { "puzzleSolved": "bw-ward-lock" } },
-      "action": { "type": "open-puzzle", "puzzleId": "bw-ward-lock" },
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-ward-lock" },
       "contents": []
     },
     {

@@ -158,6 +158,12 @@ export function dispatch(action, payload = {}) {
       }
       break;
 
+    case "UPDATE_DIAL_POSITIONS":
+      if (_state.puzzles[payload.puzzleId]) {
+        _state.puzzles[payload.puzzleId].dialPositions = payload.positions;
+      }
+      break;
+
     case "TICK_TIMER":
       if (_state.timerRunning && _state.timerSeconds > 0) {
         _state.timerSeconds--;

@@ -15,6 +15,9 @@ export const ITEM_DEFS = {
   'office-id-card': { label: 'Emergency ID Card',icon: '🪪', desc: 'An authorised ID card. Required to activate the maintenance hatch override.' },
   'security-pass':  { label: 'Security Pass',    icon: '🔐', desc: "A guard's pass. Needed to unlock the emergency exit corridor." },
   'bypass-chip':    { label: 'Bypass Chip',      icon: '🔌', desc: 'Inserts into the laser grid control port to initiate bypass.' },
+  // Blackwood
+  'bw-service-key': { label: 'Service Key',      icon: '🗝️', desc: 'An old service key. Opens the iron gate to the patient corridor.' },
+  'bw-master-key':  { label: 'Master Key',       icon: '🔑', desc: "The institute's master key. Disengages the magnetic lock on the front doors." },
 };
 
 export class InventoryRenderer {

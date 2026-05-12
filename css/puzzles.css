@@ -503,3 +503,75 @@
   border-color: var(--accent);
   box-shadow: 0 0 6px var(--accent-glow);
 }
+
+/* ── Symbol sequence (Blackwood cipher) ─────────────────── */
+.sym-lock-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.sym-dial-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sym-arrow {
+  width: 34px;
+  height: 26px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  font-size: 13px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sym-arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.sym-dial {
+  width: 60px;
+  height: 72px;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sym-face {
+  font-size: 26px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.sym-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sym-position {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}

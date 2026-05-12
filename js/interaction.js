@@ -119,6 +119,12 @@ export class InteractionSystem {
     // Check condition
     if (hs.condition) {
       if (!this._checkCondition(hs.condition, state)) {
+        // If the hotspot declares a lockedAction, fire it instead of showing a toast
+        // (e.g. a locked door that should open its own puzzle when clicked)
+        if (hs.lockedAction) {
+          this._executeAction(hs.lockedAction, hs, state);
+          return;
+        }
         // For 'all' conditions, find the first failing sub-condition and use its message
         let msg = hs.lockedMessage || 'This is locked.';
         if (hs.condition.all && hs.lockedMessages) {

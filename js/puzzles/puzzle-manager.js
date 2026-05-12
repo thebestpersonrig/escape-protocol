@@ -16,6 +16,13 @@ const PUZZLE_NAMES = {
   'security-panel':  'Access Control',
   'power-frequency': 'Frequency Stabiliser',
   'hatch-keypad':    'Hatch Override',
+  // Blackwood
+  'bw-ward-lock':       'Ward B Padlock',
+  'bw-power-wires':     'Power Wiring',
+  'bw-nurses-terminal': 'Nurses Terminal',
+  'bw-records-cipher':  'Symbol Cipher',
+  'bw-director-safe':   "Director's Safe",
+  'bw-chapel-bells':    'Bell Mechanism',
 };
 
 const _ach = new AchievementSystem();
@@ -34,6 +41,13 @@ const PUZZLE_MODULES = {
   'security-panel':  () => import('./sequence-panel.js'),
   'power-frequency': () => import('./frequency-tuner.js'),
   'hatch-keypad':    () => import('./keypad.js'),
+  // Blackwood
+  'bw-ward-lock':       () => import('./keypad.js'),
+  'bw-power-wires':     () => import('./wire-connect.js'),
+  'bw-nurses-terminal': () => import('./terminal.js'),
+  'bw-records-cipher':  () => import('./symbol-sequence.js'),
+  'bw-director-safe':   () => import('./keypad.js'),
+  'bw-chapel-bells':    () => import('./lever-combo.js'),
 };
 
 let _currentModule = null;
@@ -97,7 +111,7 @@ export const PuzzleManager = {
       },
     };
 
-    mod.init(container, getState().puzzles[puzzleId] || {}, callbacks);
+    mod.init(container, getState().puzzles[puzzleId] || {}, callbacks, puzzleId);
     overlay.classList.add('visible');
   },
 
@@ -113,8 +127,14 @@ export const PuzzleManager = {
 
   _checkObjectives(puzzleId) {
     const MAP = {
+      // Arcadia
       'entry-keypad':  'unlock-lab',
       'terminal-hack': 'hack-terminal',
+      // Blackwood
+      'bw-ward-lock':      'bw-find-way-out',
+      'bw-power-wires':    'bw-restore-power',
+      'bw-records-cipher': 'bw-find-director-key',
+      'bw-director-safe':  'bw-get-master-key',
     };
     const objId = MAP[puzzleId];
     if (objId) {
