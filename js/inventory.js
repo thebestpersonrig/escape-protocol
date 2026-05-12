@@ -2,19 +2,19 @@ import { getState, dispatch } from './state.js';
 import { AudioSystem } from './audio.js';
 
 export const ITEM_DEFS = {
-  'sticky-note':    { label: 'Sticky Note',     icon: '📝' },
-  'screwdriver':    { label: 'Screwdriver',     icon: '🔧' },
-  'keycard-a':      { label: 'Keycard A',       icon: '💳' },
-  'wire-cutter':    { label: 'Wire Cutter',     icon: '✂️' },
-  'fuse':           { label: 'Fuse',            icon: '⚡' },
-  'server-diagram': { label: 'Wiring Diagram',  icon: '📋' },
-  'access-card-b':  { label: 'Keycard B',       icon: '💳' },
-  'laser-key':       { label: 'Laser Key',         icon: '🔑' },
-  'lever-diagram':   { label: 'Lever Diagram',     icon: '📄' },
-  'maintenance-key': { label: 'Maintenance Key',   icon: '🗝️' },
-  'office-id-card':  { label: 'Emergency ID Card', icon: '🪪' },
-  'security-pass':   { label: 'Security Pass',     icon: '🔐' },
-  'bypass-chip':     { label: 'Bypass Chip',       icon: '🔌' },
+  'sticky-note':    { label: 'Sticky Note',      icon: '📝', desc: 'A note with a code scrawled on it. Inspect it for clues.' },
+  'screwdriver':    { label: 'Screwdriver',      icon: '🔧', desc: 'Use on the ventilation grate in the lab entry.' },
+  'keycard-a':      { label: 'Keycard A',        icon: '💳', desc: 'A staff keycard. Swipe on the main lab door.' },
+  'wire-cutter':    { label: 'Wire Cutter',      icon: '✂️', desc: 'Use on the server panel cover to open it.' },
+  'fuse':           { label: 'Fuse',             icon: '⚡', desc: 'A replacement fuse. Insert into the server room fuse box.' },
+  'server-diagram': { label: 'Wiring Diagram',   icon: '📋', desc: 'A diagram showing correct wire connections on the server panel.' },
+  'access-card-b':  { label: 'Keycard B',        icon: '💳', desc: "A senior staff keycard. Opens the director's office." },
+  'laser-key':      { label: 'Laser Key',        icon: '🔑', desc: 'Activates the laser grid bypass port in the final corridor.' },
+  'lever-diagram':  { label: 'Lever Diagram',    icon: '📄', desc: 'Shows the correct lever positions for the emergency exit panel.' },
+  'maintenance-key':{ label: 'Maintenance Key',  icon: '🗝️', desc: 'Releases the inner grate of the ventilation shaft in the server room.' },
+  'office-id-card': { label: 'Emergency ID Card',icon: '🪪', desc: 'An authorised ID card. Required to activate the maintenance hatch override.' },
+  'security-pass':  { label: 'Security Pass',    icon: '🔐', desc: "A guard's pass. Needed to unlock the emergency exit corridor." },
+  'bypass-chip':    { label: 'Bypass Chip',      icon: '🔌', desc: 'Inserts into the laser grid control port to initiate bypass.' },
 };
 
 export class InventoryRenderer {
@@ -33,7 +33,7 @@ export class InventoryRenderer {
     this._slotsEl.innerHTML = '';
 
     for (const itemId of state.inventory) {
-      const def  = ITEM_DEFS[itemId] || { label: itemId, icon: '◆' };
+      const def  = ITEM_DEFS[itemId] || { label: itemId, icon: '◆', desc: '' };
       const slot = document.createElement('div');
       slot.className = 'inv-slot' + (state.selectedItem === itemId ? ' selected' : '');
       slot.title = def.label;
@@ -48,6 +48,19 @@ export class InventoryRenderer {
         this._updateCursor(getState());
       });
       this._slotsEl.appendChild(slot);
+    }
+
+    // Show description of selected item
+    const descEl = document.getElementById('inv-description');
+    if (descEl) {
+      const selDef = state.selectedItem ? ITEM_DEFS[state.selectedItem] : null;
+      if (selDef) {
+        descEl.textContent = `${selDef.icon}  ${selDef.label} — ${selDef.desc}`;
+        descEl.classList.add('visible');
+      } else {
+        descEl.textContent = '';
+        descEl.classList.remove('visible');
+      }
     }
 
     this._updateCursor(state);

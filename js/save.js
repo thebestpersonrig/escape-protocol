@@ -61,4 +61,15 @@ export const SaveSystem = {
       localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     } catch (e) {}
   },
+
+  saveEndingsSeen(list) {
+    try { localStorage.setItem('ep-endings-seen', JSON.stringify(list)); } catch (e) {}
+  },
+
+  loadEndingsSeen() {
+    try {
+      const raw = localStorage.getItem('ep-endings-seen');
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return []; }
+  },
 };

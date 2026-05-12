@@ -315,6 +315,28 @@ body {
 
 #inventory-slots::-webkit-scrollbar { display: none; }
 
+/* Item description strip — appears when an inventory item is selected */
+#inv-description {
+  display: none;
+  position: absolute;
+  bottom: var(--inv-h);
+  left: 0; right: 0;
+  padding: 5px 14px;
+  background: rgba(10,10,20,0.92);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid rgba(0,255,224,0.12);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  z-index: 31;
+}
+#inv-description.visible { display: block; }
+
 .inv-slot {
   width: 64px;
   height: 64px;
@@ -609,6 +631,13 @@ body {
   color: var(--accent);
 }
 
+/* Danger state — used for restart confirmation */
+.menu-btn.danger-btn {
+  border-color: var(--danger) !important;
+  color: var(--danger) !important;
+  background: rgba(255,48,64,0.08) !important;
+}
+
 /* ── Ending screen ───────────────────────────────────────── */
 #ending-screen {
   position: absolute;
@@ -668,6 +697,56 @@ body {
   color: var(--text-dim);
   font-style: italic;
 }
+
+/* Endings-discovered pip row */
+.ending-seen-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ending-seen-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.ending-seen-pip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+.ending-seen-pip.seen    { opacity: 1; }
+.ending-seen-pip.current { opacity: 1; }
+
+.pip-mark {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.ending-seen-pip.seen    .pip-mark { color: var(--accent); }
+.ending-seen-pip.current .pip-mark { color: var(--accent); text-shadow: 0 0 6px var(--accent-glow); }
+.ending-seen-pip.fail    .pip-mark { color: var(--danger); }
+.ending-seen-pip.seen.fail    .pip-mark { color: var(--danger); }
+.ending-seen-pip.current.fail .pip-mark { color: var(--danger); text-shadow: 0 0 6px rgba(255,48,64,0.5); }
+
+.pip-name {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ending-seen-pip.seen    .pip-name { color: var(--text); }
+.ending-seen-pip.current .pip-name { color: var(--text-bright); }
 
 #ending-title {
   font-family: var(--font-mono);

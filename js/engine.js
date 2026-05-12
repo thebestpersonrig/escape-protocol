@@ -18,6 +18,16 @@ export class Engine {
     this._achScreenEl = document.getElementById('achievements-screen');
     this._pauseEl   = document.getElementById('pause-menu');
     this._paused    = false;
+    this._restartArmed = false;
+    this._restartTimer = null;
+
+    // Pre-load saved volume settings so sliders and audio start at correct levels
+    {
+      const _s = SaveSystem.loadSettings();
+      this._audio._volume.master  = _s.masterVolume  ?? 0.7;
+      this._audio._volume.sfx     = _s.sfxVolume     ?? 1.0;
+      this._audio._volume.ambient = _s.ambientVolume  ?? 0.4;
+    }
 
     this._renderer    = new RoomRenderer();
     this._interaction = new InteractionSystem(this._renderer);
@@ -29,14 +39,18 @@ export class Engine {
     subscribe((state, action) => this._onStateChange(state, action));
 
     document.getElementById('ending-play-again')?.addEventListener('click', () => {
+      const _diff = getState().difficulty;
       this._endEl?.classList.remove('visible');
       this._menuEl?.classList.remove('hidden');
+      window.dispatchEvent(new CustomEvent('ep:show-menu', { detail: { difficulty: _diff } }));
     });
 
     document.getElementById('ending-main-menu')?.addEventListener('click', () => {
+      const _diff = getState().difficulty; // capture before reset wipes it
       this._endEl?.classList.remove('visible');
       dispatch('RESET_STATE');
       this._menuEl?.classList.remove('hidden');
+      window.dispatchEvent(new CustomEvent('ep:show-menu', { detail: { difficulty: _diff } }));
     });
 
     document.getElementById('ach-back-btn')?.addEventListener('click', () => {
@@ -46,19 +60,38 @@ export class Engine {
 
     // Pause menu buttons
     document.getElementById('pause-resume')?.addEventListener('click', () => this.togglePause());
-    document.getElementById('pause-restart')?.addEventListener('click', () => {
-      this._hidePause();
-      this._endEl?.classList.remove('visible');
-      this._paused = false;
-      dispatch('RESET_STATE');
-      this._menuEl?.classList.remove('hidden');
+    const _restartBtn = document.getElementById('pause-restart');
+    _restartBtn?.addEventListener('click', () => {
+      if (!this._restartArmed) {
+        // First click — arm; revert automatically after 2.5 s
+        this._restartArmed = true;
+        if (_restartBtn) { _restartBtn.textContent = '⚠ Confirm restart?'; _restartBtn.classList.add('danger-btn'); }
+        this._restartTimer = setTimeout(() => {
+          this._restartArmed = false;
+          if (_restartBtn) { _restartBtn.textContent = '↺ Restart'; _restartBtn.classList.remove('danger-btn'); }
+        }, 2500);
+      } else {
+        // Second click — execute
+        clearTimeout(this._restartTimer);
+        const _diff = getState().difficulty;
+        this._restartArmed = false;
+        if (_restartBtn) { _restartBtn.textContent = '↺ Restart'; _restartBtn.classList.remove('danger-btn'); }
+        this._hidePause();
+        this._paused = false;
+        stopTimer();
+        dispatch('RESET_STATE');
+        this._menuEl?.classList.remove('hidden');
+        window.dispatchEvent(new CustomEvent('ep:show-menu', { detail: { difficulty: _diff } }));
+      }
     });
     document.getElementById('pause-quit')?.addEventListener('click', () => {
+      const _diff = getState().difficulty;
       this._hidePause();
       stopTimer();
       this._paused = false;
       dispatch('RESET_STATE');
       this._menuEl?.classList.remove('hidden');
+      window.dispatchEvent(new CustomEvent('ep:show-menu', { detail: { difficulty: _diff } }));
     });
 
     // Volume sliders in pause menu
@@ -75,14 +108,20 @@ export class Engine {
     _wireSlider('vol-master', 'vol-master-val', v => {
       this._audio._volume.master = v;
       if (this._audio.masterGain) this._audio.masterGain.gain.value = v;
+      this._saveSettings();
     });
     _wireSlider('vol-sfx', 'vol-sfx-val', v => {
       this._audio._volume.sfx = v;
+      this._saveSettings();
     });
     _wireSlider('vol-ambient', 'vol-ambient-val', v => {
       this._audio._volume.ambient = v;
       if (this._audio.ambientGain) this._audio.ambientGain.gain.value = v;
+      this._saveSettings();
     });
+
+    // Sync slider UI to the values we just loaded from settings
+    this._syncPauseSliders();
 
     // P key to toggle pause
     document.addEventListener('keydown', e => {
@@ -106,6 +145,7 @@ export class Engine {
     if (this._paused) {
       stopTimer();
       this._pauseEl?.classList.add('visible');
+      this._syncPauseSliders(); // always reflect current audio state on open
     } else {
       this._hidePause();
       startTimer();
@@ -114,6 +154,42 @@ export class Engine {
 
   _hidePause() {
     this._pauseEl?.classList.remove('visible');
+    // Reset restart confirmation if it was armed
+    if (this._restartArmed) {
+      clearTimeout(this._restartTimer);
+      this._restartArmed = false;
+      const btn = document.getElementById('pause-restart');
+      if (btn) { btn.textContent = '↺ Restart'; btn.classList.remove('danger-btn'); }
+    }
+  }
+
+  // ── Settings helpers ──────────────────────────────────────
+
+  _saveSettings() {
+    SaveSystem.saveSettings({
+      masterVolume:  this._audio._volume.master,
+      sfxVolume:     this._audio._volume.sfx,
+      ambientVolume: this._audio._volume.ambient,
+    });
+  }
+
+  _syncPauseSliders() {
+    const sync = (sliderId, valId, value) => {
+      const pct    = Math.round(value * 100);
+      const slider = document.getElementById(sliderId);
+      const valEl  = document.getElementById(valId);
+      if (slider) slider.value = pct;
+      if (valEl)  valEl.textContent = pct;
+    };
+    sync('vol-master',  'vol-master-val',  this._audio._volume.master);
+    sync('vol-sfx',     'vol-sfx-val',     this._audio._volume.sfx);
+    sync('vol-ambient', 'vol-ambient-val', this._audio._volume.ambient);
+  }
+
+  _applyAudioToNodes() {
+    // Called after AudioSystem.init() so gain nodes exist
+    if (this._audio.masterGain)  this._audio.masterGain.gain.value  = this._audio._volume.master;
+    if (this._audio.ambientGain) this._audio.ambientGain.gain.value = this._audio._volume.ambient;
   }
 
   async startNewGame(difficulty = 'medium') {
@@ -127,7 +203,8 @@ export class Engine {
     await this._fadeOut();
     this._menuEl?.classList.add('hidden');
     initUI();
-    this._audio.init().catch(() => {});
+    await this._audio.init().catch(() => {});
+    this._applyAudioToNodes();
     await this._loadRoom('lab-entry');
     this._particles.init(document.getElementById('particle-canvas'));
     startTimer();
@@ -141,7 +218,8 @@ export class Engine {
     await this._fadeOut();
     this._menuEl?.classList.add('hidden');
     initUI();
-    this._audio.init().catch(() => {});
+    await this._audio.init().catch(() => {});
+    this._applyAudioToNodes();
     await this._loadRoom(st.currentRoom);
     this._particles.init(document.getElementById('particle-canvas'));
     startTimer();
@@ -245,6 +323,11 @@ export class Engine {
     const catIdx  = ENDING_CATALOGUE.findIndex(e => e.id === endingId);
     const catEntry = catIdx >= 0 ? ENDING_CATALOGUE[catIdx] : null;
 
+    // Persist this ending as seen
+    const seenEndings = SaveSystem.loadEndingsSeen();
+    if (!seenEndings.includes(endingId)) seenEndings.push(endingId);
+    SaveSystem.saveEndingsSeen(seenEndings);
+
     const ending = ENDINGS[endingId] || ENDINGS.escaped;
     const titleEl  = document.getElementById('ending-title');
     const bodyEl   = document.getElementById('ending-body');
@@ -252,12 +335,30 @@ export class Engine {
     const scoreEl  = document.getElementById('ending-score');
     const tagEl    = document.getElementById('ending-tag');
 
-    // Populate the "Ending X of 4" tag
+    // Populate the "Ending X of 4" tag with discovery pips
     if (tagEl && catEntry) {
+      const pips = ENDING_CATALOGUE.map(e => {
+        const seen    = seenEndings.includes(e.id);
+        const current = e.id === endingId;
+        const cls     = [
+          'ending-seen-pip',
+          seen    ? 'seen'    : '',
+          current ? 'current' : '',
+          e.type,
+        ].filter(Boolean).join(' ');
+        return `<span class="${cls}" title="${e.label}">
+          <span class="pip-mark">${seen ? '◆' : '◇'}</span>
+          <span class="pip-name">${e.label}</span>
+        </span>`;
+      }).join('');
       tagEl.innerHTML = `
         <span class="ending-num">ENDING ${catIdx + 1} OF ${ENDING_CATALOGUE.length}</span>
         <span class="ending-cat-label ${catEntry.type}">${catEntry.label}</span>
         <span class="ending-cat-desc">${catEntry.desc}</span>
+        <div class="ending-seen-row">
+          <span class="ending-seen-label">Discovered:</span>
+          ${pips}
+        </div>
       `;
     }
 

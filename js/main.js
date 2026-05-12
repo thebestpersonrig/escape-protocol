@@ -32,21 +32,26 @@ function showButtonError(btn, msg) {
 // Difficulty selection
 const DIFF_LABELS = { easy: '30 MIN · 10 MISTAKES', medium: '20 MIN · 5 MISTAKES', hard: '10 MIN · 3 MISTAKES' };
 const _diffLabel = document.getElementById('diff-label');
-document.querySelectorAll('.diff-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    _selectedDifficulty = this.dataset.diff;
-    document.querySelectorAll('.diff-btn').forEach(b => {
-      b.classList.remove('selected');
-      b.style.borderColor = '#2a2a3a';
-      b.style.background  = '#111118';
-      b.style.color       = '#5a6070';
-    });
-    this.classList.add('selected');
-    this.style.borderColor = '#00ffe0';
-    this.style.background  = 'rgba(0,255,224,.1)';
-    this.style.color       = '#00ffe0';
-    if (_diffLabel) _diffLabel.textContent = DIFF_LABELS[_selectedDifficulty] || '';
+
+function _applyDiffButtons(diff) {
+  _selectedDifficulty = diff;
+  document.querySelectorAll('.diff-btn').forEach(b => {
+    const active = b.dataset.diff === diff;
+    b.classList.toggle('selected', active);
+    b.style.borderColor = active ? '#00ffe0' : '#2a2a3a';
+    b.style.background  = active ? 'rgba(0,255,224,.1)' : '#111118';
+    b.style.color       = active ? '#00ffe0' : '#5a6070';
   });
+  if (_diffLabel) _diffLabel.textContent = DIFF_LABELS[diff] || '';
+}
+
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', function() { _applyDiffButtons(this.dataset.diff); });
+});
+
+// When the engine returns to the main menu, re-select the last-used difficulty
+window.addEventListener('ep:show-menu', e => {
+  _applyDiffButtons(e.detail?.difficulty || 'medium');
 });
 
 // Check for existing save
