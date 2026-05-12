@@ -234,11 +234,32 @@ export class Engine {
       },
     };
 
+    // ── Ending catalogue (for "Ending X of 4" tag) ─────────
+    // Order: two successes first, two failures second
+    const ENDING_CATALOGUE = [
+      { id: 'escaped',       label: 'Standard Escape',   type: 'success', desc: 'Escape through the main exit' },
+      { id: 'secret-escape', label: 'Shadow Exit',        type: 'success', desc: 'Find and use the hidden tunnel' },
+      { id: 'alarm-caught',  label: 'Security Response',  type: 'fail',    desc: 'Caught by security after triggering the alarm' },
+      { id: 'time-out',      label: 'Time Expired',       type: 'fail',    desc: 'Facility lockdown completes before you escape' },
+    ];
+    const catIdx  = ENDING_CATALOGUE.findIndex(e => e.id === endingId);
+    const catEntry = catIdx >= 0 ? ENDING_CATALOGUE[catIdx] : null;
+
     const ending = ENDINGS[endingId] || ENDINGS.escaped;
-    const titleEl = document.getElementById('ending-title');
-    const bodyEl  = document.getElementById('ending-body');
-    const statsEl = document.getElementById('ending-stats');
-    const scoreEl = document.getElementById('ending-score');
+    const titleEl  = document.getElementById('ending-title');
+    const bodyEl   = document.getElementById('ending-body');
+    const statsEl  = document.getElementById('ending-stats');
+    const scoreEl  = document.getElementById('ending-score');
+    const tagEl    = document.getElementById('ending-tag');
+
+    // Populate the "Ending X of 4" tag
+    if (tagEl && catEntry) {
+      tagEl.innerHTML = `
+        <span class="ending-num">ENDING ${catIdx + 1} OF ${ENDING_CATALOGUE.length}</span>
+        <span class="ending-cat-label ${catEntry.type}">${catEntry.label}</span>
+        <span class="ending-cat-desc">${catEntry.desc}</span>
+      `;
+    }
 
     if (titleEl) { titleEl.textContent = ending.title; titleEl.className = ending.titleClass; }
     if (bodyEl)  bodyEl.textContent = ending.body;
