@@ -1134,6 +1134,13 @@ body {
   box-shadow: 0 0 8px var(--accent-dim);
 }
 
+.key-hint {
+  font-size: 9px;
+  opacity: 0.35;
+  letter-spacing: 0;
+  margin-left: 2px;
+}
+
 /* ── Journal overlay ─────────────────────────────────────── */
 #journal-overlay {
   position: absolute;
