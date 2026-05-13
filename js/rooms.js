@@ -23,10 +23,14 @@ export class RoomRenderer {
 
   _applyBackground(config) {
     if (!this._bgEl) return;
+    // Remove old environment overlay
+    const oldEnv = document.getElementById('room-env-overlay');
+    if (oldEnv) oldEnv.remove();
+
     if (config.background) {
       this._bgEl.style.backgroundImage = `url('${config.background}')`;
     } else {
-      // CSS-drawn fallback room — use gradient based on room id
+      // CSS-drawn procedural room — layered gradients + patterns
       const gradients = {
         'lab-entry':         'linear-gradient(160deg,#1e1e38 0%,#18223a 40%,#111830 100%)',
         'main-lab':          'linear-gradient(160deg,#182820 0%,#142418 40%,#0e1a10 100%)',
@@ -37,7 +41,6 @@ export class RoomRenderer {
         'director-office':   'linear-gradient(160deg,#1a140a 0%,#141008 40%,#0e0c06 100%)',
         'security-hub':      'linear-gradient(160deg,#0e1420 0%,#0a1018 40%,#080c14 100%)',
         'utility-corridor':  'linear-gradient(160deg,#141210 0%,#0e0c0a 40%,#090806 100%)',
-        // Blackwood rooms — warm amber/sepia tones
         'bw-east-foyer':        'linear-gradient(160deg,#1e1208 0%,#160e06 40%,#100a04 100%)',
         'bw-patient-corridor':  'linear-gradient(160deg,#1a1006 0%,#140c04 40%,#0e0802 100%)',
         'bw-patient-room-7':    'linear-gradient(160deg,#1c0c06 0%,#160804 40%,#100604 100%)',
@@ -48,7 +51,6 @@ export class RoomRenderer {
         'bw-chapel':            'linear-gradient(160deg,#0e0a14 0%,#0a0810 40%,#080610 100%)',
         'bw-solitary-cell':     'linear-gradient(160deg,#0a0808 0%,#060606 40%,#040404 100%)',
         'bw-maintenance-tunnel':'linear-gradient(160deg,#0c0a06 0%,#080604 40%,#060402 100%)',
-        // Meridian Station Alpha — cool steel-blue tones
         'ms-airlock-bay':      'linear-gradient(160deg,#020810 0%,#03101a 40%,#020810 100%)',
         'ms-corridor-a':       'linear-gradient(160deg,#030c18 0%,#020a14 40%,#020810 100%)',
         'ms-crew-quarters':    'linear-gradient(160deg,#040c14 0%,#030a10 40%,#02080e 100%)',
@@ -62,6 +64,77 @@ export class RoomRenderer {
         'ms-lower-corridor':   'linear-gradient(160deg,#040a10 0%,#030810 40%,#020610 100%)',
       };
       this._bgEl.style.backgroundImage = gradients[config.id] || gradients['lab-entry'];
+
+      // Add environment atmosphere overlay (grid lines, noise, vignette)
+      const envStyles = {
+        // Arcadia — lab grid pattern
+        'lab-entry':        'grid',
+        'main-lab':         'grid',
+        'server-room':      'grid-warm',
+        'security-hub':     'grid',
+        'utility-corridor': 'grid-warm',
+        'bio-lab':          'grid',
+        'director-office':  'noise',
+        'final-exit':       'grid',
+        'secret-room':      'noise',
+        // Blackwood — aged texture
+        'bw-east-foyer':        'noise-warm',
+        'bw-patient-corridor':  'noise-warm',
+        'bw-patient-room-7':    'noise-warm',
+        'bw-nurses-station':    'noise-warm',
+        'bw-treatment-room':    'noise-warm',
+        'bw-records-vault':     'noise-warm',
+        'bw-directors-office':  'noise-warm',
+        'bw-chapel':            'noise',
+        'bw-solitary-cell':     'noise',
+        'bw-maintenance-tunnel':'noise',
+        // Meridian — tech panels
+        'ms-airlock-bay':      'panels',
+        'ms-corridor-a':       'panels',
+        'ms-crew-quarters':    'panels',
+        'ms-med-bay':          'panels',
+        'ms-engineering':      'panels-warm',
+        'ms-cargo-bay':        'panels-warm',
+        'ms-reactor-deck':     'panels-danger',
+        'ms-command-deck':     'panels',
+        'ms-comms-array':      'panels',
+        'ms-escape-pod-bay':   'panels',
+        'ms-lower-corridor':   'panels',
+      };
+
+      const envType = envStyles[config.id] || 'grid';
+      const envEl = document.createElement('div');
+      envEl.id = 'room-env-overlay';
+      envEl.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;';
+
+      const patterns = {
+        grid: `background:
+          repeating-linear-gradient(rgba(100,140,200,0.03),rgba(100,140,200,0.03) 1px,transparent 1px,transparent 40px),
+          repeating-linear-gradient(90deg,rgba(100,140,200,0.03),rgba(100,140,200,0.03) 1px,transparent 1px,transparent 60px);`,
+        'grid-warm': `background:
+          repeating-linear-gradient(rgba(200,140,80,0.03),rgba(200,140,80,0.03) 1px,transparent 1px,transparent 40px),
+          repeating-linear-gradient(90deg,rgba(200,140,80,0.03),rgba(200,140,80,0.03) 1px,transparent 1px,transparent 60px);`,
+        noise: `background:
+          radial-gradient(ellipse at 20% 80%,rgba(80,120,180,0.04) 0%,transparent 50%),
+          radial-gradient(ellipse at 80% 20%,rgba(80,120,180,0.03) 0%,transparent 40%);`,
+        'noise-warm': `background:
+          radial-gradient(ellipse at 30% 70%,rgba(180,120,40,0.05) 0%,transparent 50%),
+          radial-gradient(ellipse at 70% 30%,rgba(120,60,20,0.04) 0%,transparent 40%);`,
+        panels: `background:
+          repeating-linear-gradient(rgba(40,100,180,0.04),rgba(40,100,180,0.04) 1px,transparent 1px,transparent 32px),
+          repeating-linear-gradient(90deg,rgba(40,100,180,0.04),rgba(40,100,180,0.04) 1px,transparent 1px,transparent 48px),
+          radial-gradient(ellipse at 50% 100%,rgba(0,120,255,0.03) 0%,transparent 60%);`,
+        'panels-warm': `background:
+          repeating-linear-gradient(rgba(140,120,40,0.04),rgba(140,120,40,0.04) 1px,transparent 1px,transparent 32px),
+          repeating-linear-gradient(90deg,rgba(140,120,40,0.04),rgba(140,120,40,0.04) 1px,transparent 1px,transparent 48px),
+          radial-gradient(ellipse at 50% 100%,rgba(180,140,0,0.03) 0%,transparent 60%);`,
+        'panels-danger': `background:
+          repeating-linear-gradient(rgba(200,40,40,0.04),rgba(200,40,40,0.04) 1px,transparent 1px,transparent 32px),
+          repeating-linear-gradient(90deg,rgba(200,40,40,0.04),rgba(200,40,40,0.04) 1px,transparent 1px,transparent 48px),
+          radial-gradient(ellipse at 50% 50%,rgba(255,40,20,0.06) 0%,transparent 50%);`,
+      };
+      envEl.style.cssText += patterns[envType] || patterns.grid;
+      document.getElementById('scene-container')?.appendChild(envEl);
     }
     this._bgEl.style.backgroundSize = 'cover';
     this._bgEl.style.backgroundPosition = 'center';

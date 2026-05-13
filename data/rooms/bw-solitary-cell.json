@@ -4,7 +4,7 @@
   "ambientSound": "ambient-creep",
   "lighting": "flicker-fast",
   "narrativeOnEnter": "A tiny room, barely two metres across. The walls are padded — old foam, mouldering now — and the single overhead light is caged behind thick wire mesh. There is no window. There is no furniture. There is only the drain in the floor and a hook on the ceiling.",
-  "particles": { "type": "dust", "density": 0.15 },
+  "particles": { "type": "fog", "density": 0.3 },
 
   "hotspots": [
     {

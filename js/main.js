@@ -1,5 +1,6 @@
 import { dispatch, initMission } from './state.js';
 import { SaveSystem } from './save.js';
+import './map.js'; // Room map overlay (M key)
 
 let _engine = null;
 let _selectedDifficulty = 'medium';

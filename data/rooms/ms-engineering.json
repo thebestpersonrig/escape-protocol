@@ -4,7 +4,7 @@
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
   "narrativeOnEnter": "Cramped and hot. Conduit panels cover every wall. The main junction box hangs open — someone started the reroute and stopped. A wiring schematic is taped inside the panel cover. Below, an access tunnel leads to the cargo bay and reactor.",
-  "particles": { "type": "dust", "density": 0.3 },
+  "particles": { "type": "electric", "density": 0.3 },
 
   "hotspots": [
     {

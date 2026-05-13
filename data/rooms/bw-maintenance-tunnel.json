@@ -4,7 +4,7 @@
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
   "narrativeOnEnter": "A narrow stone passage, barely wide enough to walk through. Old pipes run along the ceiling. At the far end — light. Grey, pale, morning light. The kind that means outside.",
-  "particles": { "type": "dust", "density": 0.5 },
+  "particles": { "type": "fog", "density": 0.4 },
 
   "hotspots": [
     {

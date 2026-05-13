@@ -4,7 +4,7 @@
   "ambientSound": "ambient-creep",
   "lighting": "flicker",
   "narrativeOnEnter": "The institutional chapel. Rows of worn pews face a stone altar. A stained glass window — dark now — depicts something you can't quite make out. In the corner stands a bell mechanism: four handles, each connected by rusted wire to a bell above. A narrow door behind the altar is sealed with a heavy bolt.",
-  "particles": { "type": "dust", "density": 0.35 },
+  "particles": { "type": "fog", "density": 0.5 },
 
   "hotspots": [
     {

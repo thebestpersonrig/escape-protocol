@@ -4,7 +4,7 @@
   "ambientSound": "ambient-hum",
   "lighting": "red-alert",
   "narrativeOnEnter": "Red. Everything is red. Emergency lighting, warning strobes, the heat shimmer off the reactor housing. A figure slumped at the control station — Kovalev. Not moving. The reactor sequence panel is unlocked, access code already entered. A safety manual sits open on the console.",
-  "particles": { "type": "sparks", "density": 0.4 },
+  "particles": { "type": "ember", "density": 0.6 },
 
   "hotspots": [
     {

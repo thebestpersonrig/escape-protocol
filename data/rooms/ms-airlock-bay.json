@@ -4,7 +4,7 @@
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
   "narrativeOnEnter": "Emergency lighting bathes everything in cold blue. The outer airlock is sealed — standard for a station on lockdown. A pressure warning blinks on the wall panel. Somewhere above, a hull alarm is cycling. You have oxygen. For now.",
-  "particles": { "type": "dust", "density": 0.2 },
+  "particles": { "type": "snowflake", "density": 0.25 },
 
   "hotspots": [
     {

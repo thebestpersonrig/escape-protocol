@@ -4,7 +4,7 @@
   "ambientSound": "ambient-final",
   "lighting": "red-alert",
   "narrativeOnEnter": "The final corridor. Laser grid active. You can see the emergency exit door at the far end. So close.",
-  "particles": { "type": "dust", "density": 0.6 },
+  "particles": { "type": "ember", "density": 0.5 },
 
   "hotspots": [
     {
