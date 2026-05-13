@@ -29,7 +29,7 @@
       "id": "bw-director-safe-trigger",
       "type": "puzzle-trigger",
       "label": "Wall Safe",
-      "x": 56, "y": 18, "w": 16, "h": 26,
+      "x": 56, "y": 18, "w": 16, "h": 38,
       "cursor": "zoom-in",
       "action": { "type": "open-puzzle", "puzzleId": "bw-director-safe" },
       "contents": []
@@ -66,20 +66,12 @@
       "id": "bw-master-key-pickup",
       "type": "pickupable",
       "label": "Master Key",
-      "x": 60, "y": 40, "w": 10, "h": 12,
+      "x": 60, "y": 44, "w": 10, "h": 12,
       "cursor": "pointer",
       "condition": { "puzzleSolved": "bw-director-safe" },
+      "lockedMessage": "The safe is locked. Crack the combination first.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-director-safe" },
       "action": { "type": "pick-up", "itemId": "bw-master-key" },
-      "contents": []
-    },
-    {
-      "id": "bw-director-safe-door",
-      "type": "inspect",
-      "label": "Safe (Locked)",
-      "x": 56, "y": 18, "w": 16, "h": 26,
-      "cursor": "zoom-in",
-      "condition": { "not": { "puzzleSolved": "bw-director-safe" } },
-      "action": { "type": "inspect", "text": "A heavy steel wall safe. Four-digit combination lock. The dial is old but functional.\n\nNo clues in this room about the code — you'll need to have found that information elsewhere." },
       "contents": []
     },
     {

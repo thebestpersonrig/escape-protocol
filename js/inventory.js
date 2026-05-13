@@ -16,8 +16,11 @@ export const ITEM_DEFS = {
   'security-pass':  { label: 'Security Pass',    icon: '🔐', desc: "A guard's pass. Needed to unlock the emergency exit corridor." },
   'bypass-chip':    { label: 'Bypass Chip',      icon: '🔌', desc: 'Inserts into the laser grid control port to initiate bypass.' },
   // Blackwood
-  'bw-service-key': { label: 'Service Key',      icon: '🗝️', desc: 'An old service key. Opens the iron gate to the patient corridor.' },
-  'bw-master-key':  { label: 'Master Key',       icon: '🔑', desc: "The institute's master key. Disengages the magnetic lock on the front doors." },
+  'bw-service-key':   { label: 'Service Key',   icon: '🗝️', desc: 'An old service key. Opens the iron gate to the patient corridor.' },
+  'bw-director-key':  { label: "Director's Key", icon: '🗝️', desc: "A heavy brass key. Unlocks Director Harlan's office." },
+  'bw-master-key':    { label: 'Master Key',     icon: '🔑', desc: "The institute's master key. Disengages the magnetic lock on the front doors." },
+  // Meridian
+  'ms-crew-id':       { label: 'Crew ID Tag',    icon: '🪪',  desc: 'Navigation Officer Chen\'s ID. Contains terminal password and pod bay code.' },
 };
 
 export class InventoryRenderer {

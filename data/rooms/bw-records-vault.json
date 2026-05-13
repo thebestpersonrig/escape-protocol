@@ -31,7 +31,7 @@
       "id": "bw-cipher-cabinet-trigger",
       "type": "puzzle-trigger",
       "label": "Symbol Cabinet",
-      "x": 55, "y": 15, "w": 22, "h": 65,
+      "x": 55, "y": 15, "w": 22, "h": 42,
       "cursor": "zoom-in",
       "action": { "type": "open-puzzle", "puzzleId": "bw-records-cipher" },
       "contents": []
@@ -74,22 +74,14 @@
       ]
     },
     {
-      "id": "bw-director-key-locked",
-      "type": "inspect",
-      "label": "Sealed Compartment",
-      "x": 55, "y": 15, "w": 22, "h": 65,
-      "cursor": "zoom-in",
-      "condition": { "not": { "puzzleSolved": "bw-records-cipher" } },
-      "action": { "type": "inspect", "text": "A filing cabinet with a symbol combination lock. The four symbols on the lock dials can be rotated. A key hangs from the handle — locked inside a small wire cage that releases when the correct sequence is entered.\n\nThe symbols you can see on the dials: Cross, Eye, Moon, Star." },
-      "contents": []
-    },
-    {
       "id": "bw-director-key-pickup",
       "type": "pickupable",
       "label": "Director's Office Key",
-      "x": 62, "y": 60, "w": 8, "h": 12,
+      "x": 55, "y": 60, "w": 22, "h": 20,
       "cursor": "pointer",
       "condition": { "puzzleSolved": "bw-records-cipher" },
+      "lockedMessage": "The key cage is locked. Solve the symbol cabinet to release it.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-records-cipher" },
       "action": { "type": "pick-up", "itemId": "bw-director-key" },
       "contents": []
     }

@@ -159,6 +159,10 @@ export class InteractionSystem {
     if (condition.any) {
       return condition.any.some(c => this._checkCondition(c, state));
     }
+    // NOT — negate the inner condition
+    if (condition.not) {
+      return !this._checkCondition(condition.not, state);
+    }
     if (condition.puzzleSolved) {
       return state.puzzles[condition.puzzleSolved]?.solved === true;
     }
@@ -228,6 +232,11 @@ export class InteractionSystem {
       }
 
       case 'pick-up': {
+        // Guard: if already in inventory, don't pick up again
+        if (state.inventory.includes(action.itemId)) {
+          showToast(`Already carrying: ${hs.label || action.itemId}`, 'info');
+          return;
+        }
         // Capture element + icon BEFORE rerender removes it from DOM
         const _pickupEl   = document.querySelector(`[data-hotspot-id="${action.itemId}"]`);
         const _pickupDef  = ITEM_DEFS[action.itemId];
