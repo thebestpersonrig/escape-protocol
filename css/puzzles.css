@@ -2,11 +2,14 @@
 .puzzle-title {
   font-family: var(--font-mono);
   font-size: 14px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: 0 0 12px var(--accent-glow);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,255,224,0.12);
 }
 
 .puzzle-subtitle {
@@ -15,6 +18,7 @@
   text-align: center;
   margin-bottom: 16px;
   margin-top: -14px;
+  letter-spacing: 0.04em;
 }
 
 /* ── Keypad ──────────────────────────────────────────────── */
@@ -27,7 +31,7 @@
 
 .keypad-display {
   width: 220px;
-  background: #050510;
+  background: #030308;
   border: 2px solid var(--accent);
   border-radius: var(--radius);
   padding: 10px 16px;
@@ -36,11 +40,12 @@
   letter-spacing: 0.3em;
   color: var(--accent);
   text-align: center;
-  text-shadow: 0 0 8px var(--accent-glow);
+  text-shadow: 0 0 10px var(--accent-glow);
   min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: inset 0 0 20px rgba(0,255,224,0.04), 0 0 12px rgba(0,255,224,0.06);
 }
 
 .keypad-display.error {
@@ -226,6 +231,21 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: inset 0 0 40px rgba(0,170,68,0.04), 0 0 20px rgba(0,170,68,0.08);
+  position: relative;
+}
+
+/* CRT scanlines on terminal */
+.terminal-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    rgba(0,0,0,0.06), rgba(0,0,0,0.06) 1px,
+    transparent 1px, transparent 2px
+  );
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 .terminal-output {

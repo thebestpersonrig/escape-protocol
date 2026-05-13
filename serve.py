@@ -10,8 +10,12 @@ Usage:
 """
 
 import sys
+import os
 import http.server
 import socketserver
+
+# Always serve from the directory this script lives in
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
 
