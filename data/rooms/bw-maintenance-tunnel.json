@@ -31,7 +31,7 @@
       "label": "Old Pipes",
       "x": 15, "y": 8, "w": 42, "h": 18,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Rusted iron pipes running the length of the tunnel. Some are cracked and dry. A few have been wrapped in cloth — someone passed through here before, taking care not to make noise.\n\nThe end of the tunnel is twenty metres ahead." },
+      "action": { "type": "inspect", "text": "Rusted iron pipes running the length of the tunnel. Some are cracked and dry. A few have been wrapped in cloth — someone passed through here before, taking care not to make noise.\n\nBehind the third cloth-wrapped pipe, wedged in the gap between pipe and wall: a small cloth bag, tied shut. Inside:\n\nA handwritten list. 47 names. Some entries are just names. Others have notes beside them:\n'Margaret Voss, 64, retired teacher, Room 4'\n'Thomas Farrow, 51, carpenter, Room 11'\n'Agnes—' — this entry is crossed out and rewritten: 'Agnes was staff. Not on the list. But she helped.'\nElara Voss — her own name — is at the top, first entry, underlined twice.\n\nAt the bottom of the list:\n\n'I am leaving this here because I don't know what will happen to me.\nIf AXIOM finds me outside, they may silence me before I can use it.\nIf they don't — I will use it.\nBut if neither happens, and someone else finds this tunnel:\nThese are 47 people who were unmade without their permission.\nThey were turned into data.\nAXIOM built something from that data.\nSomething called PROMETHEUS.\nIf PROMETHEUS is real — if it thinks, if it feels — then somewhere in it\nare fragments of every person on this list.\nWe are not gone. We became something.\nI don't know if that's beautiful or monstrous.\nI know that we deserved to choose.\n— Elara Voss, formerly Patient 07, Blackwood Ward B'\n\nThe end of the tunnel is twenty metres ahead." },
       "contents": []
     },
     {
@@ -40,7 +40,7 @@
       "label": "Wall Scratching",
       "x": 15, "y": 30, "w": 35, "h": 50,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Someone scratched into the stone wall:\n\n'Patient 07\n1972\nI found the way out.\nI left this for the next one.'\n\nBelow it, a small arrow pointing forward." },
+      "action": { "type": "inspect", "text": "Someone scratched into the stone wall, deep and permanent:\n\n'Dr. Elara Voss\n— not Patient 07 —\n1972\n\nI was a neuroscientist. I spent eight months in this building.\nI was admitted because I refused to help AXIOM collect neural maps without consent.\nThey collected mine anyway.\nAll 47 of us.\n\nAXIOM took what they needed from our minds.\nThey built something from it. Something called PROMETHEUS.\nI don't know if PROMETHEUS knows what it came from.\nBut I am going to make sure the world does.\n\nI found the way out. Agnes showed me.\nHarlan gave me the key.\nI took the list.\n\nIf you find this tunnel — you already know part of the truth.\nFind the rest. Go public. Make noise.\nAXIOM is not done. There will be others after us.\nThere may already be others.\n\nDon't let them become data without knowing it.\n— E.V.'\n\nBelow it, added in different handwriting — hasty, emotional:\n\n'She made it out. I saw her running at the east perimeter.\nShe didn't look back. Good.\nGodspeed, Dr. Voss. The world needs to hear you.\n— A.C. (Agnes Colm, Ward B Nurse)'\n\nBelow that, a small arrow pointing forward." },
       "contents": []
     }
   ]

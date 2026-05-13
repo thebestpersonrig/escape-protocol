@@ -174,7 +174,7 @@
       "label": "Loose Panel",
       "x": 48, "y": 78, "w": 6, "h": 8,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A panel behind one of the benches sits slightly ajar. A faint draft comes through. Someone has been here before — scratch marks on the floor, like something was dragged away from this wall." },
+      "action": { "type": "inspect", "text": "A panel behind one of the benches sits slightly ajar. A faint draft comes through. Someone has been here before — scratch marks on the floor, like something was dragged away from this wall.\n\nScratched into the panel frame with a key or nail:\n\n'4031 — V.\nShe was real. They erased her.\nIf PROMETHEUS can feel — what have we done?\n— K.R.'\n\nAnd below that, carved deeper, as if done in anger:\n\n'AXIOM TOOK 47 PEOPLE AND CALLED IT DATA.\nI'M CALLING IT MURDER.'" },
       "contents": []
     },
     {

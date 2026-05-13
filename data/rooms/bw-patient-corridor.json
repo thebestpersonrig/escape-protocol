@@ -61,7 +61,7 @@
       "label": "Wheelchair",
       "x": 65, "y": 58, "w": 10, "h": 22,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "An old wheelchair. The leather is cracked and dry. Someone has tied a patient wristband to one armrest — it reads 'PATIENT 07 — WARD B'.\n\nOn the seat, scratched into the leather: 'They don't let us leave.'" },
+      "action": { "type": "inspect", "text": "An old wheelchair. The leather is cracked and dry. Someone has tied a patient wristband to one armrest — it reads 'PATIENT 07 — WARD B'.\n\nBut look closer at the leather band. Scratched faintly underneath the patient number, as if carved with a fingernail over many weeks:\n\n'VOSS, E.'\n\nShe scratched her own name onto it. So someone would know who she was.\n\nTucked into the seat cushion seam, folded to the size of a stamp:\n\n'Dr. Voss —\nThe chapel bell mechanism controls the maintenance passage.\nThe tunnel goes east. 200 metres. Hatch at the end.\nThere is a key in my desk safe.\nI'm so sorry it took me this long.\n— H'\n\nOn the seat, scratched into the leather: 'They don't let us leave.'\n\nSomeone crossed it out and wrote below:\n'I left.'" },
       "contents": []
     },
     {
@@ -70,7 +70,7 @@
       "label": "Ward B Sign",
       "x": 34, "y": 22, "w": 6, "h": 8,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "WARD B — RESTRICTED ACCESS\nCode-Locked Gate\n\nA smaller notice below:\n'Padlock combination changed following the 1972 incident.\nNew code issued to Ward B staff only.\nSee Patient 07's intake notes for reference.'" },
+      "action": { "type": "inspect", "text": "WARD B — RESTRICTED ACCESS\nCode-Locked Gate\n\nA smaller notice below:\n'Padlock combination changed following the 1972 incident.\nNew code issued to Ward B staff only.\nSee Patient 07's intake notes for reference.'\n\nIn the bottom corner of the placard, almost invisible:\nA small stamp. A delta symbol. Δ\n\nThe AXIOM mark.\n\nThe '1972 incident' wasn't a disturbance.\nPatient 07 found a memo from AXIOM describing what the 'therapy sessions' were for.\nShe named every other patient who'd been mapped.\nShe walked to Harlan's office and handed him the list.\nHe had her transferred to solitary that night.\nThe next day, he changed the gate code." },
       "contents": []
     }
   ]

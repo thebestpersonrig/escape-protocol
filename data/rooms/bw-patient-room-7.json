@@ -31,7 +31,7 @@
           "x": 78, "y": 50, "w": 12, "h": 12,
           "clueSlot": "bw-patient-file",
           "visibleWhen": { "objectState": "bw-room7-cabinet", "equals": "open" },
-          "action": { "type": "inspect", "text": "CONFIDENTIAL — PATIENT FILE\nPatient 07 — Blackwood Psychiatric Institute\n\nAdmission: March 14th, 1972\nWard B — Room 7\nDiagnosis: [REDACTED]\n\nDr. Harlan's handwritten note at the bottom:\n'Admission number assigned per standard protocol.\nGate combination = admission month + day reversed.\n4-0-3-1'\n\nCircled in red ink: 4031" }
+          "action": { "type": "inspect", "text": "CONFIDENTIAL — PATIENT FILE\nPatient 07 — Blackwood Psychiatric Institute\n\nFull name: VOSS, ELARA — formerly Dr. E. Voss, Neuroscientist\n(Previous affiliation: [REDACTED — see AXIOM restricted file])\nAdmission: March 14th, 1972 | Involuntary\nWard B — Room 7\nDiagnosis: 'Persecutory ideation, non-compliant disposition'\n(Diagnosis issued on recommendation of AXIOM Group — see attached referral)\n\nTreatment notes:\n— 'Therapeutic EEG sessions' scheduled weekly. Duration: 90 min.\n— Patient is uncooperative. Physically restrained for sessions.\n— Neural mapping quality: EXCELLENT (AXIOM notation, appended to file).\n\nDr. Harlan's handwritten note at the bottom:\n'Admission number assigned per standard protocol.\nGate combination = admission month + day reversed.\n4-0-3-1\n\nI know what she used to be before they sent her here.\nShe was a neuroscientist. She refused to work with AXIOM.\nSo they had her committed and mapped her anyway.\n\nShe was right about everything she accused us of.\nI'm writing this down. When she gets out — and I intend to let her — \nI want there to be a record that she told the truth.'\n\nSecond note, different ink, weeks later:\n'She got out last night. I didn't tell anyone.\nGod forgive me for waiting this long. — H'" }
         }
       ]
     },
@@ -41,7 +41,7 @@
       "label": "Writing on Wall",
       "x": 15, "y": 15, "w": 40, "h": 60,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Scratched into the plaster, over and over:\n\n4031 4031 4031 4031 4031\n4031 4031 4031 4031 4031\n\nAnd among them, other words:\n'THEY CHANGED THE LOCK'\n'I KNOW THE CODE'\n'I WILL GET OUT'\n\nAt the bottom, barely legible:\n'Records vault. Director. Master key. 1972.'" },
+      "action": { "type": "inspect", "text": "Scratched into the plaster, over and over, by something sharp and patient:\n\n4031 4031 4031 4031 4031\n4031 4031 4031 4031 4031\n\nAnd among them, other words, written in layers over months:\n'THEY CHANGED THE LOCK'\n'I KNOW THE CODE'\n'I WILL GET OUT'\n\n'MY NAME IS ELARA VOSS'\n'I WAS A SCIENTIST BEFORE THEY MADE ME A PATIENT'\n'I REFUSED TO HELP AXIOM MAP NEURAL PATTERNS WITHOUT CONSENT'\n'SO THEY HAD ME COMMITTED AND DID IT TO ME ANYWAY'\n\n'THERE ARE 47 OF US IN WARD B'\n'THEY CALL IT THERAPY'\n'IT IS NOT THERAPY'\n'WE ARE DATA TO THEM'\n\n'RECORDS VAULT — DIRECTOR — MASTER KEY — 1972'\n'THE TRUTH IS IN HARLAN'S FILES'\n'AXIOM GROUP — PROJECT HELIOS — PHASE 1'\n'WE WILL NOT BE FORGOTTEN'\n\nAt the very bottom, in much smaller, steadier handwriting — different from the rest:\n\n'She got out. I watched her go.\n— Agnes Colm, Ward B Nurse, November 1972'" },
       "contents": []
     },
     {
@@ -59,7 +59,7 @@
       "label": "Mattress",
       "x": 14, "y": 60, "w": 36, "h": 25,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A bare mattress, stained and worn. Beneath it, a small hollow has been carved into the floorboards — empty now. Whatever was hidden here is gone." },
+      "action": { "type": "inspect", "text": "A bare mattress, stained and worn. Beneath it, a small hollow has been carved into the floorboards — not quite empty.\n\nA torn scrap of paper, missed in the dark:\n\nIt's a list. Names. 47 rows, handwritten small. Some crossed out. Some circled. One name at the top is underlined:\n'VOSS, ELARA — Patient 07 — Neural map session 1 complete.'\n\nEach entry is stamped: 'AXIOM — HELIOS Phase 1 — confirmed.'\n\nAt the bottom, in Voss's handwriting:\n'They mapped all of us. Every session. 90 minutes in a chair.\nThey told us it was therapy.\nI know now what it was for.\nThey're building something from what they took.\nI don't know what.\nBut I will find out.\nAnd when I do — I will make them answer for every name on this list.\n— E. Voss'" },
       "contents": []
     }
   ]

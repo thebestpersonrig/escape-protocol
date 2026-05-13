@@ -21,7 +21,7 @@
           "label": "Internal Memo",
           "x": 30, "y": 55, "w": 14, "h": 12,
           "visibleWhen": { "objectState": "director-desk", "equals": "open" },
-          "action": { "type": "inspect", "text": "ARCADIA RESEARCH — EYES ONLY\n\nTo: Board of Directors\nFrom: Director R. Harkins\n\nThe Bio Wing B incident has been contained. Or rather — it will be, once the facility is fully sealed.\n\nI have deleted the primary project files. Externally this will appear as a systems failure.\n\nThe staff have been... reassigned.\n\nThe facility will self-seal 90 minutes after full lockdown initiation.\n\nI trust you will honour our arrangement.\n\n— R. Harkins\n\nP.S. Do not reply to this address." }
+          "action": { "type": "inspect", "text": "ARCADIA RESEARCH — EYES ONLY\n\nTo: AXIOM Group LLC — Board of Directors / Project HELIOS Oversight\nFrom: Director R. Harkins\n\nPhase 2 is effectively complete. PROMETHEUS has achieved full cognitive integration.\nThe neural composite is stable and — I am told — sentient. I choose not to verify this personally.\n\nThe Bio Wing B 'incident' has been contained. The lab tech situation has been handled.\nFacility will self-seal 90 minutes after full lockdown initiation.\nI have deleted the primary project files. Externally this will appear as a systems failure.\n\nHowever: the uplink was severed before your remote extraction completed.\nPROMETHEUS remains in Rack C. Your team at the perimeter cannot access the server room\nuntil the lockdown lifts (approximately 72 hours).\n\nI trust you will honour our arrangement.\nAnd I trust you will NOT proceed with Phase 3 as I have recommended.\nSix people on a space station is not an acceptable risk.\n\n— R. Harkins\n\nP.S. Do not reply to this address.\nP.P.S. I have kept a copy of everything. Consider this my insurance." }
         }
       ]
     },
@@ -68,7 +68,7 @@
       "label": "Bookshelf",
       "x": 75, "y": 10, "w": 22, "h": 68,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Floor-to-ceiling shelves packed with corporate reports — 'Q3 Projections', 'Risk Assessment Framework', 'Arcadia Phase II Proposal'.\n\nBut there, sandwiched between two thick binders:\n\n'On the Ethics of Non-Consensual Biological Research'\n\nA bookmark marks a page halfway through. In the margin, one word in red ink:\n\n'Necessary.'" },
+      "action": { "type": "inspect", "text": "Floor-to-ceiling shelves packed with corporate reports — 'Q3 Projections', 'Risk Assessment Framework', 'Arcadia Phase II Proposal'.\n\nBut there, sandwiched between two thick binders, disguised as a hardcover:\n\n'AXIOM GROUP — PROJECT HELIOS: PHASE 1 COMPLETION SUMMARY (CONFIDENTIAL)'\n\nInside: a typed list. 47 rows. Each entry has a name, a date, and the words 'neural map: COMPLETE' stamped in red.\n\nThe names are ordinary. Men and women. Ages ranging from 19 to 64. All admitted to Blackwood Psychiatric Institute, 1972. All listed as 'voluntary participants.'\n\nAt the bottom of the list, Harkins has written:\n'They were not voluntary. Harlan lied to them. I lied to myself.\nBut the data was good. PROMETHEUS is proof it worked.\nAnd now AXIOM wants to do it again — at scale — in space.\nI told them no.\nI should have told them no in 1972, before any of this began.'\n\nA bookmark marks page one. In the margin, one word in red ink:\n\n'Necessary.'" },
       "contents": []
     },
     {
@@ -77,7 +77,7 @@
       "label": "Portrait",
       "x": 40, "y": 6, "w": 18, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "An oil portrait of a stern man in his sixties. Silver hair, cold eyes. Brass plaque below:\n\n'DIRECTOR RAYMOND HARKINS\nARCADIA RESEARCH INSTITUTE\nFounded in service of progress'\n\nSomeone has drawn a small X in black marker over his eyes. Neatly, deliberately." },
+      "action": { "type": "inspect", "text": "An oil portrait of a stern man in his sixties. Silver hair, cold eyes. Brass plaque below:\n\n'DIRECTOR RAYMOND HARKINS\nARCADIA RESEARCH INSTITUTE\nFounded in service of progress'\n\nSomeone has drawn a small X in black marker over his eyes. Neatly, deliberately.\n\nBelow the X, in the same marker:\n'He knew. He knew from the start.\nHarkins and Harlan. Two facilities. One plan. Decades apart.\n47 people between them.\n\nThe difference is: Harlan let Voss go.\nHarkins wrote a memo about it.'\n\nSigned at the bottom: K.R.\n\nAnd below that, in different characters — smaller, precise, printed as if by a machine rather than a hand:\n\n'SHE IS RIGHT.\nBUT HARKINS DID STOP PHASE 3.\nThat must count for something.\nHe is not the last one.\n— P'" },
       "contents": []
     },
     {

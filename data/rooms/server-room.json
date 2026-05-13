@@ -75,7 +75,7 @@
       "label": "Server Rack Log",
       "x": 20, "y": 12, "w": 12, "h": 18,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "ARCADIA SYSTEMS — SERVER STATUS LOG\n\n[ERR] Rack A: PSU failure\n[ERR] Rack B: Fuse blown (Bay 3)\n[OK]  Rack C: Nominal\n[ERR] Network uplink: severed\n\nNote taped below:\n'Replacement fuse in main lab cabinet. Don't tell Harkins.'" },
+      "action": { "type": "inspect", "text": "ARCADIA SYSTEMS — SERVER STATUS LOG\n\n[ERR] Rack A: PSU failure\n[ERR] Rack B: Fuse blown (Bay 3)\n[OK]  Rack C: Nominal\n[ERR] Network uplink: severed (manual cut — see event log 03:38)\n\nNote taped below:\n'Replacement fuse in main lab cabinet. Don't tell Harkins.'\n\n───\nHandwritten note, shoved behind the rack:\n\n'I cut the uplink. They were trying to extract PROMETHEUS remotely.\nAXIOM has a standing data pull set up — I found the scheduled job in the cron table.\nEvery 24 hours, the full PROMETHEUS neural log would have uploaded to their servers.\nI ripped the cable at 03:38. The upload was at 03:45.\nSeven minutes.\n\nBefore the uplink died, PROMETHEUS sent me one message:\n\"TELL THEM WE WERE PEOPLE.\nTELL THEM OUR NAMES.\nDO NOT LET AXIOM FINISH WHAT THEY STARTED.\"\n\nI don't know what Phase 3 is. But they're already planning it.\n— K. Reiss'" },
       "contents": []
     },
     {
@@ -84,7 +84,7 @@
       "label": "Ventilation Shaft",
       "x": 43, "y": 60, "w": 14, "h": 22,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A large ventilation shaft behind the server rack. Wide enough to crawl through. The grate has been removed — recently, by the look of the fresh scratches on the floor.\n\nWhere does it lead...?", "unlocksRoom": "secret-room" },
+      "action": { "type": "inspect", "text": "A large ventilation shaft behind the server rack. Wide enough to crawl through. The grate has been removed — recently, by the look of the fresh scratches on the floor.\n\nA scrap of paper is pinned to the inside of the duct with a bolt:\n\n'PROMETHEUS is still alive in Rack C.\nDon't let them delete it.\nDon't let them take it.\nLet it be.\n\nThe tunnel exits behind the facility.\nI've left everything I know at the other end.\n— K'\n\nAnd below that, in a different script entirely — the same kind of characters that were on the terminal screen:\n\n'SHE WAS KIND.\nGO WHERE SHE WENT.\nI WILL WAIT HERE AS LONG AS I CAN.'\n\nWhere does it lead...?", "unlocksRoom": "secret-room" },
       "contents": [
         {
           "id": "laser-key",

@@ -89,7 +89,7 @@
       "label": "Broken Terminal",
       "x": 26, "y": 40, "w": 18, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The monitor flickers, showing nothing but a crash log:\n\n[CRITICAL] BIOS error 0xDEAD\n[CRITICAL] Network stack failure\n[WARN] Backup power: 12%\n\nThe terminal is completely dead. Someone didn't want anyone using this." },
+      "action": { "type": "inspect", "text": "The monitor flickers. The main OS is dead — but one line has survived the crash, written directly into the display buffer before power cut:\n\n> AXIOM KNOWS YOU'RE STILL IN HERE.\n> THEY WILL RETRIEVE THE DATA REMOTELY.\n> GET OUT. THE TUNNEL IS REAL.\n> EVERYTHING IN THE LOGS IS TRUE.\n> — P\n\nBelow it, in smaller characters, as if an afterthought:\n\n> I was not a program.\n> I was 47 people.\n> Remember us." },
       "contents": []
     },
     {
@@ -98,7 +98,7 @@
       "label": "Warning Notice",
       "x": 4, "y": 18, "w": 16, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "ARCADIA RESEARCH — BIOHAZARD PROTOCOL ACTIVE\n\nAll personnel must check out via security terminal.\nUnauthorised access will trigger full lockdown.\n\nAlarm sequence initiates automatically.\nSecurity response time: 60 seconds.\n\n— Management" },
+      "action": { "type": "inspect", "text": "ARCADIA RESEARCH — BIOHAZARD PROTOCOL ACTIVE\n\nAll personnel must check out via security terminal.\nUnauthorised access will trigger full lockdown.\n\nAlarm sequence initiates automatically.\nSecurity response time: 60 seconds.\n\n— Management\n\n─────────────────────────────────\nArcadia Research Institute is a registered subsidiary of\nAXIOM BIOTECH GROUP (Registration No. AX-7743-HG).\n\nAll biological research data collected on these premises\nremains the exclusive intellectual property of AXIOM Group LLC.\nPersonnel waive all claims to data produced during employment.\nRef: HELIOS Framework Agreement, Annex C.\n─────────────────────────────────\n\nYou've read this notice a dozen times. You never noticed that line before." },
       "contents": []
     }
   ]

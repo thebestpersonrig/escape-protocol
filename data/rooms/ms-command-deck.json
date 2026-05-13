@@ -49,7 +49,7 @@
       "label": "Viewport",
       "x": 14, "y": 18, "w": 30, "h": 42,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The rescue shuttle is visible through the viewport — holding at exactly 800 metres. Standard evacuation protocol: hold position, wait for beacon signal, approach on confirmation.\n\nThey're out there. Waiting. They've been waiting since 03:14.\n\nThrough the external hull, you can just make out an access port. It's an external airlock — rarely used, but it connects directly to the docking ring. If the station's internal systems are compromised, that might be your backup route." },
+      "action": { "type": "inspect", "text": "Two shapes in the dark.\n\nThe closer one — 800 metres, running full lights — is MERIDIAN-3. Standard shuttle profile. It's been holding position for over an hour. Steady. Patient.\n\nThe farther one — 3 kilometres, running dark — is smaller. No lights, no transponder ping. But it's there. And twice, as you watch, it blinks.\n\nTwice. Pause. Three times. Pause. Once.\n\nMorse. W-E—A-R-E—H-E-R-E.\n\nWe are here.\n\nThey know someone's still aboard.\nThey're not moving.\nThey're waiting to see which ship you signal.\n\nThrough the external hull below the viewport: an access port. An external airlock — rarely used, but it connects directly to the docking ring. If the station's internal systems are compromised, that might be your backup route." },
       "contents": []
     },
     {
@@ -58,7 +58,7 @@
       "label": "Navigation Console",
       "x": 14, "y": 62, "w": 28, "h": 10,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Navigation console for Meridian Station Alpha. Orbital positioning, thruster control, docking systems.\n\nAll systems showing nominal — the station's position is stable.\n\nOne readout is blinking: 'RESCUE SHUTTLE MERIDIAN-3 — HOLDING. AWAITING BEACON CONFIRMATION.'\n\nThe distress beacon is in the Comms Array." },
+      "action": { "type": "inspect", "text": "Navigation console for Meridian Station Alpha. Orbital positioning, thruster control, docking systems.\n\nAll systems showing nominal — the station's position is stable.\n\nTwo contacts on the proximity display:\n\nCONTACT ALPHA — 'RESCUE SHUTTLE MERIDIAN-3 — HOLDING. AWAITING BEACON CONFIRMATION.'\nRegistered to: HELIOS GROUP (subsidiary charter)\nDistance: 800m. Running standard lights. Crew complement: 4.\n\nCONTACT BETA — UNKNOWN VESSEL\nRegistered to: [NO TRANSPONDER]\nDistance: 3.1km. Running dark. Crew complement: unknown.\nFirst detected: 03:08 GST — 6 minutes before station lockdown.\n\nSomeone has annotated the display in yellow grease pencil:\n\n'Contact B = CALLISTO. Don't signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. They are NOT rescue.\nWait for Contact B. 148.350 MHz.'\n\nThe distress beacon is in the Comms Array." },
       "contents": []
     },
     {

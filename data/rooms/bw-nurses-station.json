@@ -59,7 +59,7 @@
       "label": "Patient Charts",
       "x": 34, "y": 24, "w": 18, "h": 10,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A stack of patient charts. Most are redacted or water-damaged.\n\nOne legible entry reads:\n'Patient 07 — behavioural changes noted following first treatment session. Patient remains agitated. Requesting review of Director Harlan's protocols.'\n\n'Nursing staff password for terminal system: BLACKWOOD'" },
+      "action": { "type": "inspect", "text": "A stack of patient charts. Most are redacted or water-damaged.\n\nOne legible entry reads:\n'Patient 07 — behavioural changes noted following first treatment session. Patient remains agitated. Requesting review of Director Harlan's protocols.'\n\nBut someone has annotated this entry in a different pen:\n'Treatment sessions are listed as ECT in the official chart.\nBut I was on duty for three of them. There was no ECT equipment in that room.\nThere was a machine I didn't recognise — medical-looking, but not standard.\nThe sessions lasted 90 minutes. ECT takes 10–20.\nI asked Dr. Harlan. He told me it was an \"advanced therapeutic protocol.\" He would not say more.\n\nI cross-referenced the session dates with the maintenance log:\nevery session, external equipment was brought in via the service entrance.\nThe delivery company: Δ Medical Dynamics — a subsidiary I looked up.\nParent company: AXIOM Group.\n\nI don't know what they were doing to her.\nI'm requesting a formal review and I'm keeping a copy of this note.\n— A. Colm, RN'\n\nNursing staff password for terminal system: BLACKWOOD" },
       "contents": []
     },
     {
@@ -68,7 +68,7 @@
       "label": "Nurses' Counter",
       "x": 10, "y": 72, "w": 40, "h": 16,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A long counter. Scattered across it: empty medication trays, a broken thermometer, a pen.\n\nSomething is carved into the countertop:\n'If you're reading this, find the vault.\nDirector Harlan's year of opening = safe code.\nBlackwood opened: 1972.'" },
+      "action": { "type": "inspect", "text": "A long counter. Scattered across it: empty medication trays, a broken thermometer, a pen.\n\nSomething is carved into the countertop — a long message, made with a scalpel tip, carefully:\n\n'If you're reading this, find the vault.\nDirector Harlan's year of opening = safe code.\nBlackwood opened: 1972.\n\nThe vault has the proof. AXIOM. Project HELIOS.\nThey called it a neural mapping study.\nThey ran it on involuntary patients.\n47 of them. All in Ward B.\n\nI submitted my formal objection to Dr. Harlan in October.\nHe destroyed it.\nI submitted it again in November.\nHe sent me on mandatory leave.\n\nI came back the night Patient 07 left.\nHarlan asked me why I was there.\nI said: I wanted to make sure she got out safely.\nHe didn't stop me.\nI think he was relieved.\n\nI helped her.\nI showed her the tunnel.\nI told her: take the list and go.\nShe took it.\nShe ran.\n\nI'm not sorry.\n— Agnes Colm, Ward B Nurse, 14 November 1972'" },
       "contents": []
     }
   ]

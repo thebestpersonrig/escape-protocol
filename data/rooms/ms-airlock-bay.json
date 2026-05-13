@@ -60,7 +60,7 @@
       "label": "Warning Panel",
       "x": 36, "y": 60, "w": 18, "h": 24,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "EMERGENCY STATUS — MERIDIAN STATION ALPHA\n\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] COMMS — PARTIAL\n\nStation lockdown initiated: 03:14 GST\nCrew status: UNKNOWN\n\nAll personnel: proceed to emergency muster stations." },
+      "action": { "type": "inspect", "text": "EMERGENCY STATUS — MERIDIAN STATION ALPHA\n\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] COMMS — PARTIAL\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL (standby mode)\n\nStation lockdown initiated: 03:14 GST\nCrew status: UNKNOWN\n\nAll personnel: proceed to emergency muster stations.\n\n───\nYou read it twice before it registers.\n\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL (standby mode)\n\nNeural Extraction Array.\nOn a space station.\nIn a section of the status board between hull integrity and comms,\nas if it belongs there.\n\nAs if it's standard equipment." },
       "contents": []
     },
     {
@@ -69,7 +69,7 @@
       "label": "Outer Airlock",
       "x": 2, "y": 15, "w": 6, "h": 68,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The outer airlock is sealed and vacuum-locked. Standard procedure during station emergencies.\n\nThrough the small porthole: open space. Stars. A distant shape — a rescue shuttle, holding position at 800 metres. They're out there. They're waiting.\n\nYou need to find a way to signal them, or get to them." },
+      "action": { "type": "inspect", "text": "The outer airlock is sealed and vacuum-locked. Standard procedure during station emergencies.\n\nThrough the small porthole: open space. Stars.\n\nTwo shapes.\n\nThe closer one — 800 metres, running full lights — is MERIDIAN-3. Standard rescue shuttle configuration. The registry markings are barely visible but legible: HELIOS GROUP, Registration No. HG-3301.\n\nThe farther one — 3 kilometres out, beyond visual without the porthole magnifier — is dark. Running no lights, no transponder. Smaller than MERIDIAN-3. Holding position precisely, as if it's watching.\n\nYou don't know what it is.\nYou don't know why it's running dark.\nBut it's been there since before you woke up.\nAnd it hasn't moved.\n\nSomeone out there is watching to see how this ends." },
       "contents": []
     }
   ]

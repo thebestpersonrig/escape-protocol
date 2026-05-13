@@ -49,7 +49,7 @@
       "label": "Data Pad",
       "x": 18, "y": 42, "w": 20, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "PERSONAL LOG — CHEN, YUKI — ENTRY 44\n\n'Station's been acting up for two days. Reactor deck is throwing warnings I've never seen before. Kovalev thinks it's a coolant calibration issue. He's gone down to check.\n\nIf this goes sideways:\n— Engineering wiring schematic is taped inside the panel cover\n— Reactor sequence is in the safety manual on Reactor Deck\n— Cargo lock pattern is on the freight manifest in the Cargo Bay\n\nEscape pod bay is stern lower deck. Code is on my ID tag. I keep forgetting.'" },
+      "action": { "type": "inspect", "text": "PERSONAL LOG — CHEN, YUKI\n\nEntry 44:\n'Station's been acting up for two days. Reactor deck is throwing warnings I've never seen before. Kovalev thinks it's a coolant calibration issue. He's gone down to check.\n\nIf this goes sideways:\n— Engineering wiring schematic is taped inside the panel cover\n— Reactor sequence is in the safety manual on Reactor Deck\n— Cargo lock pattern is on the freight manifest in the Cargo Bay\n\nEscape pod bay is stern lower deck. Code is on my ID tag. I keep forgetting.'\n\n──\nEntry 45 (next day):\n'I was in the cargo bay checking the anomalous weight readings. Found a container we never logged. Seal was from a company called Δ Medical Dynamics. Inside: six devices. Compact. Medical-looking. Wire mounts — like they were designed to be attached to something permanent. Kovalev came in while I was looking. He went very quiet.\n\nHe said: I already know what those are.\nHe said: They're called Synaptic Response Recorders.\nHe said: There's one behind the vent panel in every crew quarters. Including mine. Including yours.\nHe said: They've been running since we launched. 63 days.\n\nI asked him: Running what?\nHe didn't answer. He just said: I'm going to fix it.'\n\n──\nEntry 46 (last entry, handwriting shaky):\n'Kovalev told me what he's going to do. I told him to stop. He won't.\nHe says the data in the buffer has to burn. That's the only way.\nMaybe he's right. Maybe it doesn't matter if he's right.\nThe other ship is at 148.350 MHz — I found it on the cargo lading manifest, flagged by someone called CALLISTO.\nIf MERIDIAN-3 boards us: do not trust them.\nWait for the other one.\n— Yuki Chen'" },
       "contents": []
     },
     {
@@ -58,7 +58,7 @@
       "label": "Bunk A",
       "x": 14, "y": 20, "w": 20, "h": 20,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A regulation bunk, stripped down. Whoever slept here took their belongings. A sticky note is attached to the frame:\n\n'Reactor sequence override code: ask Kovalev. He knows.'" },
+      "action": { "type": "inspect", "text": "A regulation bunk, stripped down. Whoever slept here took their belongings. A sticky note is attached to the frame:\n\n'Reactor sequence override code: ask Kovalev. He knows.'\n\nOn the floor beside the bunk, face-down: a second note, torn from a personal log.\n\n'148.350 MHz — CALLISTO — transmit only after reactor is stable.\nDo NOT signal MERIDIAN-3. Their charter is HELIOS GROUP.\nKovalev traced it: HELIOS GROUP = AXIOM.\nThe shuttle isn't rescue. It's extraction.\nThey're coming for the buffer data.\nDon't let them dock.\n\nCALLISTO has the Blackwood files. They know what AXIOM does with neural data.\nThey know about PROMETHEUS.\nContact them. They'll come in.'" },
       "contents": []
     },
     {

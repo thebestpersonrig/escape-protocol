@@ -49,7 +49,7 @@
       "label": "Engineer Kovalev",
       "x": 70, "y": 40, "w": 20, "h": 40,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Dmitri Kovalev, Chief Engineer. He's alive — barely. Pulse is weak. He inhaled reactor coolant vapour; without a functional med bay, there's nothing you can do for him here.\n\nHis hand is resting on the control panel. He got as far as unlocking the sequence before he collapsed.\n\nA scrawled note in his hand:\n'Sequence manual — top drawer — B,D,A,C,B — do it in order'\n\nHis eyes open briefly. He looks at you. Nods. Closes them again." },
+      "action": { "type": "inspect", "text": "Dmitri Kovalev, Chief Engineer. He's alive — barely. Pulse is weak. He inhaled reactor coolant vapour; without a functional med bay, there's nothing you can do for him here.\n\nHis hand is resting on the control panel. He got as far as unlocking the sequence before he collapsed.\n\nA note, folded small, clutched in his other hand:\n\n'If you're reading this — I did what I could.\n\nThe SRRs are hard-mounted in the reactor housing superstructure. Buffer is in the main network bus.\nRunning the stabilisation sequence will trigger a controlled thermal spike — hot enough to wipe the buffer.\nAXIOM wanted to extract our data via MERIDIAN-3. Their shuttle has a portable extraction unit aboard.\nDo not let them dock. Do not board MERIDIAN-3.\n\nCALLISTO is on 148.350 MHz.\nThey have the Blackwood files — they know what AXIOM built from 47 people who never knew.\nThey know about PROMETHEUS.\nWhen the reactor stabilises, transmit on that frequency. Tell them: Kovalev says the buffer is clean.\nThey will understand. They will come in.\n\nChen knew. She got out with the others.\nShe made the right call. She always did.\n\nSequence manual is in the top drawer. B,D,A,C,B — in order.\n\nI'm sorry I couldn't finish it myself.\n— Dmitri Kovalev'\n\nHis eyes open briefly. He looks at you. Nods. Closes them again." },
       "contents": []
     },
     {
@@ -58,7 +58,7 @@
       "label": "Reactor Housing",
       "x": 76, "y": 15, "w": 16, "h": 35,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The reactor housing is hot — radiating heat even through the shielding. Warning indicators are spiking into the red.\n\nTemperature: 847°C (CRITICAL — threshold 900°C)\n\nYou have minutes, not hours. Complete the stabilisation sequence before it cascades." },
+      "action": { "type": "inspect", "text": "The reactor housing is hot — radiating heat even through the shielding. Warning indicators are spiking into the red.\n\nTemperature: 847°C (CRITICAL — threshold 900°C)\n\nBut there — at the base of the housing, partially hidden behind a conduit cover that Kovalev has already partially removed — a series of small black devices are hard-mounted to the superstructure. Six of them, evenly spaced. Each no larger than a fist. Each wired into the main network bus with a thin, shielded cable.\n\nEach one has a small LED. All six are red: BUFFER FULL.\n\nThey don't have an AXIOM logo. They have the Δ mark.\n\nSynaptic Response Recorders.\nOne for each crew member.\nSixty-three days of neural pattern data, compressed and waiting.\n\nWhen the reactor sequence runs, the thermal spike will hit the buffer housing first.\nThe data will be gone in seconds.\n\nKovalev planned this exactly.\n\nYou have minutes, not hours. Complete the stabilisation sequence before it cascades." },
       "contents": []
     }
   ]
