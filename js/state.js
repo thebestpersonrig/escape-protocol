@@ -68,6 +68,7 @@ const DEFAULT_STATE = {
   hintsUsed: 0,
   hintsAvailable: 5,
   speedRunMode: false,
+  newGamePlus: false,
   scoreMultiplier: 1,
   clueLocations: {},
   keypadCode: '4821',
@@ -203,6 +204,10 @@ export function dispatch(action, payload = {}) {
       _state.speedRunMode = true;
       _state.hintsAvailable = 0;
       _state.scoreMultiplier = 2;
+      break;
+
+    case "SET_NEW_GAME_PLUS":
+      _state.newGamePlus = true;
       break;
 
     case "COMPLETE_OBJECTIVE": {

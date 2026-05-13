@@ -121,6 +121,8 @@ body {
 
 #room-narrative.visible {
   opacity: 1;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 /* ── Tooltip ─────────────────────────────────────────────── */
@@ -710,6 +712,33 @@ body {
   font-size: 7px;
   letter-spacing: 0.12em;
   color: rgba(255,176,32,0.5);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* New Game+ button */
+.menu-btn.ng-plus-btn {
+  border-color: #cc66ff;
+  color: #cc66ff;
+  background: rgba(180,80,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.menu-btn.ng-plus-btn:hover:not(:disabled) {
+  background: rgba(180,80,255,0.14);
+  border-color: #dd88ff;
+  box-shadow: 0 0 12px rgba(180,80,255,0.2);
+  transform: translateY(-1px);
+}
+.menu-btn.ng-plus-btn::after {
+  content: 'REMIXED PUZZLES · ALL CODES CHANGED';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  color: rgba(180,80,255,0.5);
   text-align: center;
   pointer-events: none;
 }

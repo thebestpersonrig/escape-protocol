@@ -378,13 +378,47 @@ export function showAchievementToast(name) {
   _achTimer = setTimeout(() => toast.classList.remove('visible'), 4000);
 }
 
-// ── Narrative ─────────────────────────────────────────────
+// ── Narrative (typewriter) ────────────────────────────────
+let _narrativeTimer = null;
+let _narrativeHideTimer = null;
+
 export function showNarrative(text) {
   const el = document.getElementById('room-narrative');
   if (!el) return;
-  el.textContent = text;
+
+  // Clear any running typewriter
+  if (_narrativeTimer) { clearInterval(_narrativeTimer); _narrativeTimer = null; }
+  if (_narrativeHideTimer) { clearTimeout(_narrativeHideTimer); _narrativeHideTimer = null; }
+
+  el.textContent = '';
   el.classList.add('visible');
-  setTimeout(() => el.classList.remove('visible'), 4500);
+
+  let i = 0;
+  const speed = 22; // ms per character
+  _narrativeTimer = setInterval(() => {
+    if (i < text.length) {
+      el.textContent += text[i];
+      i++;
+    } else {
+      clearInterval(_narrativeTimer);
+      _narrativeTimer = null;
+      // Hold for a moment after typing finishes, then fade out
+      _narrativeHideTimer = setTimeout(() => el.classList.remove('visible'), 3500);
+    }
+  }, speed);
+
+  // Click to skip typewriter and show full text immediately
+  const _skip = () => {
+    if (_narrativeTimer) {
+      clearInterval(_narrativeTimer);
+      _narrativeTimer = null;
+      el.textContent = text;
+      if (_narrativeHideTimer) clearTimeout(_narrativeHideTimer);
+      _narrativeHideTimer = setTimeout(() => el.classList.remove('visible'), 3500);
+    }
+    el.removeEventListener('click', _skip);
+  };
+  el.addEventListener('click', _skip);
 }
 
 // ── Journal ───────────────────────────────────────────────
@@ -463,15 +497,22 @@ export function initUI() {
     if (e.target.id === 'inspection-popup') hideInspection();
   });
 
-  // Speed Run badge in HUD
+  // Mode badges in HUD
   const st = getState();
-  if (st.speedRunMode) {
-    const hud = document.getElementById('hud-top');
-    if (hud && !document.getElementById('speed-run-badge')) {
+  const hud = document.getElementById('hud-top');
+  if (hud) {
+    if (st.speedRunMode && !document.getElementById('speed-run-badge')) {
       const badge = document.createElement('div');
       badge.id = 'speed-run-badge';
       badge.textContent = '⚡ SPEED RUN';
       badge.style.cssText = 'font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;color:#ffb020;text-shadow:0 0 8px rgba(255,176,32,0.5);pointer-events:none;white-space:nowrap;';
+      hud.insertBefore(badge, hud.firstChild);
+    }
+    if (st.newGamePlus && !document.getElementById('ngplus-badge')) {
+      const badge = document.createElement('div');
+      badge.id = 'ngplus-badge';
+      badge.textContent = '+ NEW GAME+';
+      badge.style.cssText = 'font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;color:#cc66ff;text-shadow:0 0 8px rgba(180,80,255,0.5);pointer-events:none;white-space:nowrap;';
       hud.insertBefore(badge, hud.firstChild);
     }
   }

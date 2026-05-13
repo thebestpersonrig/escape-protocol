@@ -74,9 +74,10 @@ window.addEventListener('ep:show-menu', e => {
 const btnCont = document.getElementById('btn-continue');
 if (SaveSystem.hasSave(_missionId) && btnCont) btnCont.disabled = false;
 
-// Speed Run: only show if mission completed at least once
+// Speed Run & New Game+: only show if mission completed at least once
 const _btnSpeedRun = document.getElementById('btn-speed-run');
-if (_btnSpeedRun) {
+const _btnNGPlus = document.getElementById('btn-ng-plus');
+{
   const _endingsKeys = {
     arcadia: 'ep-endings-seen',
     blackwood: 'ep-blackwood-endings-seen',
@@ -87,8 +88,8 @@ if (_btnSpeedRun) {
     const _seenEndings = JSON.parse(localStorage.getItem(_eKey) || '[]');
     const _hasWon = _seenEndings.some(e => e === 'escaped' || e === 'secret-escape' || e === 'self-sacrifice');
     if (_hasWon) {
-      _btnSpeedRun.style.display = '';
-      _btnSpeedRun.disabled = false;
+      if (_btnSpeedRun) { _btnSpeedRun.style.display = ''; _btnSpeedRun.disabled = false; }
+      if (_btnNGPlus) { _btnNGPlus.style.display = ''; _btnNGPlus.disabled = false; }
     }
   } catch (e) {}
 }
@@ -132,6 +133,29 @@ btnCont?.addEventListener('click', async function() {
     await engine.resumeGame();
   } catch (e) {
     console.error('[EP] Resume failed:', e);
+  }
+});
+
+// ── New Game+ ────────────────────────────────────────────────
+_btnNGPlus?.addEventListener('click', async function() {
+  const btn = this;
+  btn.dataset.label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Remixing...';
+  try {
+    const config = _missionConfig || await _missionConfigPromise;
+    if (config) {
+      initMission(config);
+      SaveSystem.setSaveKey(config.saveKey);
+      SaveSystem.setEndingsSaveKey(config.endingsSaveKey);
+    }
+    const engine = await getEngine();
+    engine.setMissionConfig(config);
+    SaveSystem.deleteSave();
+    dispatch('RESET_STATE');
+    await engine.startNewGame(_selectedDifficulty, false, true); // true = NG+
+  } catch (e) {
+    showButtonError(btn, e?.message || String(e));
   }
 });
 

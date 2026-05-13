@@ -8,6 +8,7 @@ import { AudioSystem } from './audio.js';
 import { ParticleSystem } from './particles.js';
 import { AchievementSystem } from './achievements.js';
 import { initClueLocations } from './clue-randomiser.js';
+import { remixPuzzles } from './remix.js';
 
 export class Engine {
   constructor() {
@@ -198,15 +199,18 @@ export class Engine {
     if (config?.hints) setMissionHints(config.hints);
   }
 
-  async startNewGame(difficulty = 'medium', speedRun = false) {
+  async startNewGame(difficulty = 'medium', speedRun = false, newGamePlus = false) {
     const seed = Date.now();
     dispatch('SET_SEED', { seed });
     dispatch('SET_DIFFICULTY', { difficulty });
     if (speedRun) {
-      // Speed Run: halve the timer, disable hints, 2x score
       dispatch('SET_SPEED_RUN');
       const st = getState();
       dispatch('DEDUCT_TIME', { seconds: Math.floor(st.timerSeconds / 2) });
+    }
+    if (newGamePlus) {
+      dispatch('SET_NEW_GAME_PLUS');
+      remixPuzzles(seed);
     }
     dispatch('START_TIMER');
     localStorage.setItem('ep-seed', String(seed));
