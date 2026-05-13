@@ -66,7 +66,9 @@ const DEFAULT_STATE = {
     { id: "escape",          text: "Reach the emergency exit and escape",  done: false },
   ],
   hintsUsed: 0,
-  hintsAvailable: 3,
+  hintsAvailable: 5,
+  speedRunMode: false,
+  scoreMultiplier: 1,
   clueLocations: {},
   keypadCode: '4821',
   leverPattern: [1, 0, 1, 0],
@@ -191,6 +193,16 @@ export function dispatch(action, payload = {}) {
         _state.hintsAvailable--;
         _state.hintsUsed++;
       }
+      break;
+
+    case "DEDUCT_TIME":
+      _state.timerSeconds = Math.max(0, _state.timerSeconds - (payload.seconds || 0));
+      break;
+
+    case "SET_SPEED_RUN":
+      _state.speedRunMode = true;
+      _state.hintsAvailable = 0;
+      _state.scoreMultiplier = 2;
       break;
 
     case "COMPLETE_OBJECTIVE": {

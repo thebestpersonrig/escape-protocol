@@ -58,15 +58,49 @@
     "powerFrequency":   500
   },
   "hints": {
-    "lab-entry":         "There's a keypad on the right wall. The code might be written down somewhere in this room.",
-    "main-lab":          "The symbol diagram on the wall looks important. Find the matching cards.",
-    "server-room":       "The fuse box needs the right sequence. Check the cables.",
-    "bio-lab":           "The bio-switch needs a specific pattern. Study the specimens.",
-    "director-office":   "The safe combination is hidden in this room — look carefully.",
-    "security-hub":      "The security panel needs a sequence. Watch it carefully.",
-    "utility-corridor":  "Check the frequency reader — match the target shown elsewhere.",
-    "final-exit":        "Use everything you've collected. The exit is close.",
-    "secret-room":       "You found it. The hatch code is here somewhere."
+    "lab-entry": [
+      { "text": "Check the metal drawer on the left wall — something's inside.", "when": { "objectNot": "entry-drawer:open" } },
+      { "text": "The keypad code is on the sticky note you found.", "when": { "puzzleUnsolved": "entry-keypad" } },
+      { "text": "The keypad is solved. Try the door to the main lab." }
+    ],
+    "main-lab": [
+      { "text": "Open the cabinets and locker — items are hidden inside.", "when": { "objectNot": "lab-cabinet-left:open" } },
+      { "text": "The symbol diagram on the wall controls the locked doors. Match the cards.", "when": { "puzzleUnsolved": "lab-symbol" } },
+      { "text": "Head to the server room to restore power." }
+    ],
+    "server-room": [
+      { "text": "You need a fuse from the main lab for the fuse box.", "when": { "missingItem": "fuse" } },
+      { "text": "Wire colours match the diagram. Connect them in order.", "when": { "puzzleUnsolved": "server-wire" } },
+      { "text": "Power is back. Check the security hub next." }
+    ],
+    "security-hub": [
+      { "text": "The sequence panel on the right wall needs to be solved.", "when": { "puzzleUnsolved": "security-panel" } },
+      { "text": "The security locker has the pass you need. Grab it." }
+    ],
+    "utility-corridor": [
+      { "text": "Match the frequency reader to the target value.", "when": { "puzzleUnsolved": "power-frequency" } },
+      { "text": "The bypass chip is in the compartment. Take it for the laser grid." }
+    ],
+    "bio-lab": [
+      { "text": "Open the specimen fridge — it has a research note and a clue.", "when": { "objectNot": "bio-fridge:open" } },
+      { "text": "The bio-switch pattern is hinted at by the specimens.", "when": { "puzzleUnsolved": "bio-switch" } },
+      { "text": "The maintenance key from the key box opens the secret path." }
+    ],
+    "director-office": [
+      { "text": "The safe code is in the bio lab fridge note.", "when": { "puzzleUnsolved": "director-safe" } },
+      { "text": "The emergency ID card from the safe opens the maintenance hatch." }
+    ],
+    "final-exit": [
+      { "text": "You need the bypass chip from the utility corridor.", "when": { "missingItem": "bypass-chip" } },
+      { "text": "The lever diagram was in the main lab — recall the pattern.", "when": { "puzzleUnsolved": "lever-combo" } },
+      { "text": "Navigate the laser corridor to the green exit zone.", "when": { "puzzleUnsolved": "laser-avoid" } },
+      { "text": "Everything's done — reach the exit!" }
+    ],
+    "secret-room": [
+      { "text": "Read every piece of writing in this room.", "when": { "puzzleUnsolved": "hatch-keypad" } },
+      { "text": "You need the emergency ID card from the director's office.", "when": { "missingItem": "emergency-id" } },
+      { "text": "The hatch code is carved into the wall. Look carefully." }
+    ]
   },
   "endings": {
     "catalogue": [

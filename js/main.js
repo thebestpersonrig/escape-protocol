@@ -73,6 +73,25 @@ window.addEventListener('ep:show-menu', e => {
 const btnCont = document.getElementById('btn-continue');
 if (SaveSystem.hasSave(_missionId) && btnCont) btnCont.disabled = false;
 
+// Speed Run: only show if mission completed at least once
+const _btnSpeedRun = document.getElementById('btn-speed-run');
+if (_btnSpeedRun) {
+  const _endingsKeys = {
+    arcadia: 'ep-endings-seen',
+    blackwood: 'ep-blackwood-endings-seen',
+    meridian: 'ep-meridian-endings-seen',
+  };
+  const _eKey = _endingsKeys[_missionId] || 'ep-endings-seen';
+  try {
+    const _seenEndings = JSON.parse(localStorage.getItem(_eKey) || '[]');
+    const _hasWon = _seenEndings.some(e => e === 'escaped' || e === 'secret-escape' || e === 'self-sacrifice');
+    if (_hasWon) {
+      _btnSpeedRun.style.display = '';
+      _btnSpeedRun.disabled = false;
+    }
+  } catch (e) {}
+}
+
 // ── New Game ──────────────────────────────────────────────────
 document.getElementById('btn-new-game')?.addEventListener('click', async function() {
   const btn = this;
@@ -112,6 +131,29 @@ btnCont?.addEventListener('click', async function() {
     await engine.resumeGame();
   } catch (e) {
     console.error('[EP] Resume failed:', e);
+  }
+});
+
+// ── Speed Run ────────────────────────────────────────────────
+_btnSpeedRun?.addEventListener('click', async function() {
+  const btn = this;
+  btn.dataset.label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Starting...';
+  try {
+    const config = _missionConfig || await _missionConfigPromise;
+    if (config) {
+      initMission(config);
+      SaveSystem.setSaveKey(config.saveKey);
+      SaveSystem.setEndingsSaveKey(config.endingsSaveKey);
+    }
+    const engine = await getEngine();
+    engine.setMissionConfig(config);
+    SaveSystem.deleteSave();
+    dispatch('RESET_STATE');
+    await engine.startNewGame(_selectedDifficulty, true); // true = speed run
+  } catch (e) {
+    showButtonError(btn, e?.message || String(e));
   }
 });
 

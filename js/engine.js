@@ -198,10 +198,16 @@ export class Engine {
     if (config?.hints) setMissionHints(config.hints);
   }
 
-  async startNewGame(difficulty = 'medium') {
+  async startNewGame(difficulty = 'medium', speedRun = false) {
     const seed = Date.now();
     dispatch('SET_SEED', { seed });
     dispatch('SET_DIFFICULTY', { difficulty });
+    if (speedRun) {
+      // Speed Run: halve the timer, disable hints, 2x score
+      dispatch('SET_SPEED_RUN');
+      const st = getState();
+      dispatch('DEDUCT_TIME', { seconds: Math.floor(st.timerSeconds / 2) });
+    }
     dispatch('START_TIMER');
     localStorage.setItem('ep-seed', String(seed));
     if (this._missionConfig?.clueRandomization !== false) initClueLocations(seed);
@@ -405,19 +411,25 @@ export class Engine {
 
     const min = Math.floor(elapsed / 60);
     const sec = elapsed % 60;
-    if (statsEl) statsEl.textContent = `Time: ${min}m ${sec}s  ·  Hints: ${st.hintsUsed}  ·  Mistakes: ${st.mistakeCount}`;
+    const modeLabel = st.speedRunMode ? ' [SPEED RUN]' : '';
+    if (statsEl) statsEl.textContent = `Time: ${min}m ${sec}s  ·  Hints: ${st.hintsUsed}  ·  Mistakes: ${st.mistakeCount}${modeLabel}`;
 
     // Score (only for success endings)
     if (scoreEl) {
-      if (endingId === 'escaped' || endingId === 'secret-escape') {
-        const score = Math.max(0,
+      if (endingId === 'escaped' || endingId === 'secret-escape' || endingId === 'self-sacrifice') {
+        const multiplier = st.scoreMultiplier || 1;
+        const baseScore = Math.max(0,
           10000
           - Math.round(elapsed / 60) * 80
           - st.hintsUsed * 500
           - st.mistakeCount * 200
           + (endingId === 'secret-escape' ? 2000 : 0)
+          + (endingId === 'self-sacrifice' ? 3000 : 0)
         );
-        scoreEl.textContent = `SCORE: ${score.toLocaleString()}`;
+        const score = baseScore * multiplier;
+        scoreEl.textContent = multiplier > 1
+          ? `SCORE: ${score.toLocaleString()} (${multiplier}x Speed Run)`
+          : `SCORE: ${score.toLocaleString()}`;
         scoreEl.style.display = 'block';
       } else {
         scoreEl.style.display = 'none';

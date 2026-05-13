@@ -93,51 +93,59 @@ export function updateRoomIndicator(name) {
 }
 
 // ── Hints ─────────────────────────────────────────────────
+
+// Escalating time costs per hint: 30s, 60s, 90s, 120s, 150s
+const HINT_TIME_COSTS = [30, 60, 90, 120, 150];
+
+// Progress-aware fallback hints (Arcadia) — arrays of { text, when? }
 const HINTS = {
   'lab-entry': [
-    'Have you checked inside the metal drawer near the left wall?',
-    'The vent on the ceiling might be loose — you\'d need a tool to open it.',
-    'The keypad code is somewhere in this room. Check every surface carefully.',
+    { text: 'Have you checked inside the metal drawer near the left wall?', when: { objectNot: 'entry-drawer:open' } },
+    { text: 'The keypad code is written on the sticky note in the drawer.', when: { puzzleUnsolved: 'entry-keypad' } },
+    { text: 'The vent on the ceiling looks loose — you\'d need a tool.', when: { puzzleSolved: 'entry-keypad' } },
+    { text: 'Try the door to the main lab — the keypad should have unlocked it.' },
   ],
   'main-lab': [
-    'Look inside the cabinets and the locker. Items are randomised each game.',
-    'The symbol puzzle on the wall controls both the server room and biology wing doors.',
-    'You need server power restored before the main terminal will respond.',
+    { text: 'Look inside the cabinets and the locker for items.', when: { objectNot: 'lab-cabinet-left:open' } },
+    { text: 'The symbol puzzle on the wall controls the server room door.', when: { puzzleUnsolved: 'lab-symbol' } },
+    { text: 'You need server power restored before the main terminal will respond.', when: { puzzleSolved: 'lab-symbol' } },
+    { text: 'Head to the server room or explore other unlocked areas.' },
   ],
   'server-room': [
-    'The fuse box in the corner controls power. You need a fuse from the main lab.',
-    'Wire colours on the server panel match the diagram found in the lab.',
-    'Once the wires are connected, check the security hub for the pass you\'ll need later.',
+    { text: 'The fuse box in the corner controls power. You need a fuse from the main lab.', when: { missingItem: 'fuse' } },
+    { text: 'Wire colours on the server panel match the diagram found in the lab.', when: { puzzleUnsolved: 'server-wire' } },
+    { text: 'Check the security hub — the pass you need is there.', when: { puzzleSolved: 'server-wire' } },
+    { text: 'Power is restored. Move on to the security hub or other rooms.' },
   ],
   'security-hub': [
-    'The access control panel on the right wall needs to be solved first.',
-    'Solve the symbol panel — the security locker below it will unlock automatically.',
-    'The security pass from this locker is required to enter the emergency corridor.',
+    { text: 'The access control panel on the right wall needs to be solved first.', when: { puzzleUnsolved: 'security-panel' } },
+    { text: 'The security locker unlocks after the panel — grab the pass inside.', when: { puzzleSolved: 'security-panel' } },
+    { text: 'The security pass is required for the emergency corridor.' },
   ],
   'utility-corridor': [
-    'Reset the power junction on the right — the compartment below it will unlock.',
-    'The bypass chip inside is needed to activate the laser grid in the final corridor.',
-    'Read the warning notice — it explains exactly how the bypass chip works.',
+    { text: 'Reset the power junction on the right — the compartment below it will unlock.', when: { puzzleUnsolved: 'power-frequency' } },
+    { text: 'The bypass chip is inside the compartment. You\'ll need it for the laser grid.', when: { puzzleSolved: 'power-frequency' } },
+    { text: 'Head to the final exit with the bypass chip.' },
   ],
   'bio-lab': [
-    'Check the specimen fridge — there\'s a research note inside.',
-    'The vault sequence lock controls the key box below it.',
-    'The maintenance key from this room is needed to crawl through the server room vent.',
+    { text: 'Check the specimen fridge — there\'s a research note inside.', when: { objectNot: 'bio-fridge:open' } },
+    { text: 'The vault sequence lock controls the key box below it.', when: { puzzleUnsolved: 'bio-switch' } },
+    { text: 'The maintenance key from this room lets you access the secret room.', when: { puzzleSolved: 'bio-switch' } },
   ],
   'director-office': [
-    'The wall safe keypad is to the left — the code is in another room.',
-    'Check the bio lab fridge for the safe combination.',
-    'The emergency ID card in the safe is needed to open the maintenance hatch.',
+    { text: 'The wall safe keypad is to the left — the code is in the bio lab.', when: { puzzleUnsolved: 'director-safe' } },
+    { text: 'The emergency ID card in the safe opens the maintenance hatch.', when: { puzzleSolved: 'director-safe' } },
   ],
   'final-exit': [
-    'You need a bypass chip to activate the laser grid — check the utility corridor.',
-    'The lever combination was written on a diagram somewhere in the main lab.',
-    'The laser corridor moves — stay inside the safe zone and head right to the green exit.',
+    { text: 'You need a bypass chip to activate the laser grid — check the utility corridor.', when: { missingItem: 'bypass-chip' } },
+    { text: 'The lever combination was written on a diagram in the main lab.', when: { puzzleUnsolved: 'lever-combo' } },
+    { text: 'Navigate the laser corridor — stay in the safe zone and reach the green exit.', when: { puzzleUnsolved: 'laser-avoid' } },
+    { text: 'All puzzles solved — head for the exit!' },
   ],
   'secret-room': [
-    'Read every piece of writing in this room — the story connects.',
-    'The hatch requires the emergency ID card from the director\'s office.',
-    'Look at the wall near the back — something was left here on purpose.',
+    { text: 'Read every piece of writing in this room — the story connects.' },
+    { text: 'The hatch requires the emergency ID card from the director\'s office.', when: { missingItem: 'emergency-id' } },
+    { text: 'The hatch keypad code is hidden in this room — look at everything.' },
   ],
 };
 
@@ -149,20 +157,64 @@ export function setMissionHints(hints) {
   _missionHints = hints || {};
 }
 
+/** Pick the best hint for the current room based on player progress */
+function _pickHint(st) {
+  // Try mission config hints first
+  const missionEntry = _missionHints[st.currentRoom];
+  let candidates;
+
+  if (missionEntry) {
+    candidates = Array.isArray(missionEntry) ? missionEntry : [missionEntry];
+  } else {
+    candidates = HINTS[st.currentRoom] || [{ text: 'Keep exploring. There must be something you missed.' }];
+  }
+
+  // If hints are plain strings (from mission JSON), convert
+  if (typeof candidates[0] === 'string') {
+    candidates = candidates.map(t => ({ text: t }));
+  }
+
+  // Filter by conditions to find the most relevant hint
+  for (const h of candidates) {
+    if (!h.when) continue; // no condition = fallback
+    const w = h.when;
+
+    if (w.puzzleUnsolved && st.puzzles[w.puzzleUnsolved]?.solved) continue;
+    if (w.puzzleSolved && !st.puzzles[w.puzzleSolved]?.solved) continue;
+    if (w.missingItem && st.inventory.includes(w.missingItem)) continue;
+    if (w.hasItem && !st.inventory.includes(w.hasItem)) continue;
+    if (w.objectNot) {
+      const [objId, objState] = w.objectNot.split(':');
+      if (st.objects[objId] === objState) continue;
+    }
+    // All conditions passed — this hint is relevant
+    return h.text;
+  }
+
+  // Fall back to last hint (no condition = always valid)
+  const fallback = candidates.filter(h => !h.when);
+  if (fallback.length > 0) return fallback[fallback.length - 1].text;
+  return candidates[candidates.length - 1].text;
+}
+
+export function getHintTimeCost() {
+  const st = getState();
+  return HINT_TIME_COSTS[Math.min(st.hintsUsed, HINT_TIME_COSTS.length - 1)] || 150;
+}
+
 export function showHint() {
   const st = getState();
+  if (st.speedRunMode) return; // no hints in speed run
   if (st.hintsAvailable <= 0 || _hintCooldown > 0) return;
 
-  const missionEntry = _missionHints[st.currentRoom];
-  const roomHints = missionEntry
-    ? (Array.isArray(missionEntry) ? missionEntry : [missionEntry])
-    : HINTS[st.currentRoom] || ['Keep exploring. There must be something you missed.'];
-  const hintText = roomHints[Math.min(st.hintsUsed, roomHints.length - 1)] || roomHints[roomHints.length - 1];
+  const hintText = _pickHint(st);
+  const timeCost = getHintTimeCost();
 
   dispatch('USE_HINT');
+  dispatch('DEDUCT_TIME', { seconds: timeCost });
 
-  // Start 30s cooldown
-  _hintCooldown = 30;
+  // Start 20s cooldown
+  _hintCooldown = 20;
   if (_hintCooldownInterval) clearInterval(_hintCooldownInterval);
   _hintCooldownInterval = setInterval(() => {
     _hintCooldown--;
@@ -173,11 +225,14 @@ export function showHint() {
     }
   }, 1000);
   updateHintButton();
+  updateTimerDisplay();
 
   const popup = document.getElementById('hint-popup');
   const textEl = document.getElementById('hint-popup-text');
+  const labelEl = document.getElementById('hint-popup-label');
   if (!popup || !textEl) return;
   textEl.textContent = hintText;
+  if (labelEl) labelEl.textContent = `\u{1F4A1} HINT  (-${timeCost}s)`;
   popup.classList.add('visible');
   setTimeout(() => popup.classList.remove('visible'), 5500);
 }
@@ -186,14 +241,18 @@ export function updateHintButton() {
   const btn = document.getElementById('hint-button');
   if (!btn) return;
   const st = getState();
-  if (st.hintsAvailable <= 0) {
+  if (st.speedRunMode) {
+    btn.textContent = 'No hints (Speed Run)';
+    btn.classList.add('disabled');
+  } else if (st.hintsAvailable <= 0) {
     btn.textContent = 'No hints left';
     btn.classList.add('disabled');
   } else if (_hintCooldown > 0) {
     btn.textContent = `Hint (${_hintCooldown}s)`;
     btn.classList.add('disabled');
   } else {
-    btn.textContent = `Hint (${st.hintsAvailable} left)`;
+    const nextCost = getHintTimeCost();
+    btn.textContent = `Hint (${st.hintsAvailable} left · -${nextCost}s)`;
     btn.classList.remove('disabled');
   }
 }
@@ -396,13 +455,26 @@ function _renderJournalClues() {
 export function initUI() {
   document.getElementById('hint-button')?.addEventListener('click', () => {
     const st = getState();
-    if (st.hintsAvailable > 0) showHint();
+    if (!st.speedRunMode && st.hintsAvailable > 0) showHint();
   });
 
   // Close inspection on backdrop click only (not on note button)
   document.getElementById('inspection-popup')?.addEventListener('click', e => {
     if (e.target.id === 'inspection-popup') hideInspection();
   });
+
+  // Speed Run badge in HUD
+  const st = getState();
+  if (st.speedRunMode) {
+    const hud = document.getElementById('hud-top');
+    if (hud && !document.getElementById('speed-run-badge')) {
+      const badge = document.createElement('div');
+      badge.id = 'speed-run-badge';
+      badge.textContent = '⚡ SPEED RUN';
+      badge.style.cssText = 'font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;color:#ffb020;text-shadow:0 0 8px rgba(255,176,32,0.5);pointer-events:none;white-space:nowrap;';
+      hud.insertBefore(badge, hud.firstChild);
+    }
+  }
 
   initJournal();
   updateTimerDisplay();

@@ -687,6 +687,33 @@ body {
   background: rgba(255,48,64,0.08) !important;
 }
 
+/* Speed Run button */
+.menu-btn.speed-run-btn {
+  border-color: #ffb020;
+  color: #ffb020;
+  background: rgba(255,176,32,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.menu-btn.speed-run-btn:hover:not(:disabled) {
+  background: rgba(255,176,32,0.14);
+  border-color: #ffc040;
+  box-shadow: 0 0 12px rgba(255,176,32,0.2);
+  transform: translateY(-1px);
+}
+.menu-btn.speed-run-btn::after {
+  content: 'HALF TIME · NO HINTS · 2x SCORE';
+  position: absolute;
+  bottom: -14px;
+  left: 0;
+  right: 0;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  color: rgba(255,176,32,0.5);
+  text-align: center;
+  pointer-events: none;
+}
+
 /* ── Ending screen ───────────────────────────────────────── */
 #ending-screen {
   position: absolute;

@@ -41,16 +41,49 @@
     "terminalPassword": "MERIDIAN"
   },
   "hints": {
-    "ms-airlock-bay":      "The emergency seal code was posted for crew safety — check the posted notices.",
-    "ms-corridor-a":       "Life support is offline. The engineering deck below has the power reroute panel.",
-    "ms-crew-quarters":    "Personal logs sometimes contain operational codes. Check the bunks.",
-    "ms-med-bay":          "The navigation override panel uses a manual switch system. The access code is on the crew ID tag in the crew quarters.",
-    "ms-engineering":      "Match the wire colours to the schematic. Red is always high-voltage — don't cross it.",
-    "ms-cargo-bay":        "The cargo lock uses a four-position switch — the manifest lists the correct freight lock sequence.",
-    "ms-reactor-deck":     "The reactor sequence panel requires pressing buttons in a specific order. The safety manual has the protocol.",
-    "ms-command-deck":     "Command override codes are stored in the captain's locker. Navigation terminal access requires crew ID.",
-    "ms-comms-array":      "The distress beacon frequency is listed in standard emergency protocols — check the comms cabinet.",
-    "ms-escape-pod-bay":   "Escape pod launch codes are tied to crew manifest numbers. The captain's log has the authorisation."
+    "ms-airlock-bay": [
+      { "text": "The emergency seal code is posted on the wall for crew safety.", "when": { "puzzleUnsolved": "ms-airlock-seal" } },
+      { "text": "Airlock sealed. Head through to find the engineering deck." }
+    ],
+    "ms-corridor-a": [
+      { "text": "Life support is offline. Engineering is below — find the power reroute panel.", "when": { "puzzleUnsolved": "ms-power-reroute" } },
+      { "text": "Explore the crew quarters or med bay for supplies and codes." }
+    ],
+    "ms-crew-quarters": [
+      { "text": "Check the bunks — personal logs contain operational codes.", "when": { "objectNot": "ms-crew-cabinet:open" } },
+      { "text": "The crew ID tag has the navigation override access code." }
+    ],
+    "ms-med-bay": [
+      { "text": "The navigation override uses manual switches. The crew ID tag has the access code.", "when": { "puzzleUnsolved": "ms-nav-terminal" } },
+      { "text": "Check the med bay cabinet for supplies.", "when": { "objectNot": "ms-med-bay-cabinet:open" } },
+      { "text": "Med bay cleared. Move to engineering or the cargo bay." }
+    ],
+    "ms-engineering": [
+      { "text": "Match wire colours to the schematic. Red is high-voltage — don't cross it.", "when": { "puzzleUnsolved": "ms-power-reroute" } },
+      { "text": "Power is rerouted. Life support is stabilising. Head to the reactor deck." }
+    ],
+    "ms-cargo-bay": [
+      { "text": "The cargo manifest lists the correct freight lock sequence.", "when": { "puzzleUnsolved": "ms-cargo-lock" } },
+      { "text": "Check the manifest on the wall for the four-position switch order.", "when": { "objectNot": "ms-cargo-manifest:open" } },
+      { "text": "Cargo bay unlocked. Proceed to the reactor deck." }
+    ],
+    "ms-reactor-deck": [
+      { "text": "The reactor sequence follows the safety manual protocol.", "when": { "puzzleUnsolved": "ms-reactor-sequence" } },
+      { "text": "Check the reactor panel — the safety manual has the button order.", "when": { "objectNot": "ms-reactor-panel:open" } },
+      { "text": "Reactor stabilised. Head to the escape pod bay or command deck." }
+    ],
+    "ms-command-deck": [
+      { "text": "The captain's locker has command override codes.", "when": { "objectNot": "ms-command-locker:open" } },
+      { "text": "Navigation terminal requires crew ID. Check the crew quarters if you don't have it." }
+    ],
+    "ms-comms-array": [
+      { "text": "The distress beacon frequency is in the comms cabinet.", "when": { "objectNot": "ms-comms-cabinet:open" } },
+      { "text": "Send the distress signal and head to the escape pods." }
+    ],
+    "ms-escape-pod-bay": [
+      { "text": "Escape pod launch codes are in the captain's log.", "when": { "puzzleUnsolved": "ms-escape-pod-code" } },
+      { "text": "Enter the launch code and evacuate!" }
+    ]
   },
   "endings": {
     "catalogue": [

@@ -43,16 +43,53 @@
     "terminalPassword": "BLACKWOOD"
   },
   "hints": {
-    "bw-east-foyer":       "The reception desk might not be as empty as it looks.",
-    "bw-patient-corridor": "The ward B gate uses a number code. Patient records sometimes list admission numbers.",
-    "bw-patient-room-7":   "Patient 7's file has an unusual number sequence circled in red.",
-    "bw-nurses-station":   "The terminal is old but functional. The password might be the name of this place.",
-    "bw-treatment-room":   "Match the wire colours to the diagram on the wall panel.",
-    "bw-records-vault":    "The symbol order on the filing cabinet labels mirrors the patient intake sequence.",
-    "bw-directors-office": "The director recorded everything. His notes are hidden, but the safe combination is in plain sight — if you know where to look.",
-    "bw-chapel":              "The bell mechanism plays a sequence — watch carefully and repeat it in the same order.",
-    "bw-solitary-cell":       "Nothing useful here — only what they left behind.",
-    "bw-maintenance-tunnel":  "The hatch lock uses two numbers found in this tunnel. Read everything — the pipe, the walls, the door frame itself."
+    "bw-east-foyer": [
+      { "text": "Check the reception desk — there's something hidden inside.", "when": { "objectNot": "bw-reception-desk:open" } },
+      { "text": "The bulletin board has a ward code. Note it down.", "when": { "puzzleUnsolved": "bw-ward-lock" } },
+      { "text": "Head through the corridor — the ward gate is ahead." }
+    ],
+    "bw-patient-corridor": [
+      { "text": "The ward B gate uses a number code. Check patient room 7 for the admission number.", "when": { "puzzleUnsolved": "bw-ward-lock" } },
+      { "text": "The corridor branches. Explore patient room 7 or the nurses' station." }
+    ],
+    "bw-patient-room-7": [
+      { "text": "Patient 7's file has an unusual number sequence circled in red.", "when": { "puzzleUnsolved": "bw-ward-lock" } },
+      { "text": "Check the cabinet — there may be something useful.", "when": { "objectNot": "bw-room7-cabinet:open" } },
+      { "text": "You've found what you need here. Move on." }
+    ],
+    "bw-nurses-station": [
+      { "text": "The terminal password might be the name of this place.", "when": { "puzzleUnsolved": "bw-nurses-terminal" } },
+      { "text": "The medicine cabinet has supplies. Check inside.", "when": { "objectNot": "bw-medicine-cabinet:open" } },
+      { "text": "Terminal solved. Check what it unlocked." }
+    ],
+    "bw-treatment-room": [
+      { "text": "Match the wire colours to the diagram on the wall.", "when": { "puzzleUnsolved": "bw-power-wires" } },
+      { "text": "Power is restored to Ward B. New areas are accessible." }
+    ],
+    "bw-records-vault": [
+      { "text": "The filing cabinet labels show a symbol sequence — that's your cipher key.", "when": { "puzzleUnsolved": "bw-records-cipher" } },
+      { "text": "Check both records cabinets for files.", "when": { "objectNot": "bw-records-cabinet-a:open" } },
+      { "text": "You found the director's office key. Head there next." }
+    ],
+    "bw-directors-office": [
+      { "text": "The safe combination is written somewhere in this room. Check the desk.", "when": { "puzzleUnsolved": "bw-director-safe" } },
+      { "text": "The master key is in the safe. Grab it.", "when": { "objectNot": "bw-director-safe-door:open" } },
+      { "text": "You have the master key. Find the exit." }
+    ],
+    "bw-chapel": [
+      { "text": "Watch the bell sequence carefully — then repeat it in the same order.", "when": { "puzzleUnsolved": "bw-chapel-bells" } },
+      { "text": "The chapel alcove opened. Check inside.", "when": { "objectNot": "bw-chapel-alcove:open" } },
+      { "text": "Chapel complete. The tunnel entrance is nearby." }
+    ],
+    "bw-solitary-cell": [
+      { "text": "There's nothing useful here — only what they left behind. Read the walls." },
+      { "text": "The scratches on the wall might mean something. Note them." }
+    ],
+    "bw-maintenance-tunnel": [
+      { "text": "The hatch lock code uses two numbers. Read the pipe markings and wall carvings.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
+      { "text": "Agnes Colm, patient 07. The number 47 is on the pipe. Combine them.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
+      { "text": "The hatch is open. Escape through the tunnel." }
+    ]
   },
   "endings": {
     "catalogue": [
