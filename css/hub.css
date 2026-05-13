@@ -179,14 +179,14 @@ body::after {
   color: #ff0040;
   text-shadow: none;
   z-index: -1;
-  animation: glitch-red 8s infinite linear;
+  animation: glitch-red 2.8s infinite linear;
 }
 
 .hub-logo-accent::after {
   color: #00ccff;
   text-shadow: none;
   z-index: -1;
-  animation: glitch-cyan 6s infinite linear;
+  animation: glitch-cyan 2.3s infinite linear;
 }
 
 .hub-tagline {
@@ -707,38 +707,40 @@ body::after {
   background: linear-gradient(90deg, var(--border2), transparent);
 }
 
-/* ── Title glitch — RGB channel split ────────────────────────── */
+/* ── Title glitch — RGB channel split (every ~2-3s) ─────────── */
 @keyframes glitch-red {
-  0%, 82%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
-  83%  { clip-path: inset(15% 0 55% 0); transform: translateX(-4px); }
-  84%  { clip-path: inset(55% 0 10% 0); transform: translateX(3px); }
-  85%  { clip-path: inset(30% 0 35% 0); transform: translateX(-2px); }
-  86%  { clip-path: inset(0 0 100% 0); transform: none; }
-  92%  { clip-path: inset(0 0 100% 0); transform: none; }
-  93%  { clip-path: inset(45% 0 25% 0); transform: translateX(5px); }
-  94%  { clip-path: inset(0 0 100% 0); transform: none; }
+  0%, 60%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  62%  { clip-path: inset(15% 0 55% 0); transform: translateX(-5px); }
+  64%  { clip-path: inset(55% 0 10% 0); transform: translateX(4px); }
+  66%  { clip-path: inset(30% 0 35% 0); transform: translateX(-3px); }
+  68%  { clip-path: inset(0 0 100% 0); transform: none; }
+  82%  { clip-path: inset(0 0 100% 0); transform: none; }
+  84%  { clip-path: inset(45% 0 20% 0); transform: translateX(6px); }
+  86%  { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
+  88%  { clip-path: inset(0 0 100% 0); transform: none; }
 }
 
 @keyframes glitch-cyan {
-  0%, 78%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-  79%  { clip-path: inset(60% 0 10% 0); transform: translateX(4px); }
-  80%  { clip-path: inset(20% 0 50% 0); transform: translateX(-3px); }
-  81%  { clip-path: inset(0 0 100% 0); transform: none; }
-  88%  { clip-path: inset(0 0 100% 0); transform: none; }
-  89%  { clip-path: inset(5% 0 65% 0); transform: translateX(-4px); }
-  90%  { clip-path: inset(70% 0 5% 0); transform: translateX(3px); }
-  91%  { clip-path: inset(100% 0 0 0); transform: none; }
+  0%, 55%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
+  57%  { clip-path: inset(60% 0 10% 0); transform: translateX(5px); }
+  59%  { clip-path: inset(20% 0 50% 0); transform: translateX(-4px); }
+  61%  { clip-path: inset(0 0 100% 0); transform: none; }
+  75%  { clip-path: inset(0 0 100% 0); transform: none; }
+  77%  { clip-path: inset(5% 0 65% 0); transform: translateX(-5px); }
+  79%  { clip-path: inset(70% 0 5% 0); transform: translateX(4px); }
+  81%  { clip-path: inset(40% 0 30% 0); transform: translateX(-2px); }
+  83%  { clip-path: inset(100% 0 0 0); transform: none; }
 }
 
 /* Subtle random flicker on the whole title */
 @keyframes title-flicker {
-  0%, 95%, 100% { opacity: 1; }
-  96% { opacity: 0.85; }
-  97% { opacity: 1; }
-  98% { opacity: 0.9; }
-  99% { opacity: 1; }
+  0%, 88%, 100% { opacity: 1; }
+  89% { opacity: 0.82; }
+  90% { opacity: 1; }
+  91% { opacity: 0.88; }
+  92% { opacity: 1; }
 }
-.hub-logo-title { animation: title-flicker 6s infinite; }
+.hub-logo-title { animation: title-flicker 2.5s infinite; }
 
 /* ── Mission themes ──────────────────────────────────────────── */
 
