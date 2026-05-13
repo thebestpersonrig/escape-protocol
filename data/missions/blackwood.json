@@ -16,7 +16,8 @@
     "bw-nurses-terminal": { "solved": false, "attempts": 0 },
     "bw-records-cipher":  { "solved": false, "attempts": 0, "cardOrder": [] },
     "bw-director-safe":   { "solved": false, "attempts": 0, "code": "1972" },
-    "bw-chapel-bells":    { "solved": false, "attempts": 0 }
+    "bw-chapel-bells":    { "solved": false, "attempts": 0 },
+    "bw-tunnel-hatch":    { "solved": false, "attempts": 0, "code": "0747" }
   },
   "objects": {
     "bw-reception-desk":   "closed",
@@ -49,8 +50,9 @@
     "bw-treatment-room":   "Match the wire colours to the diagram on the wall panel.",
     "bw-records-vault":    "The symbol order on the filing cabinet labels mirrors the patient intake sequence.",
     "bw-directors-office": "The director recorded everything. His notes are hidden, but the safe combination is in plain sight — if you know where to look.",
-    "bw-chapel":           "The bell mechanism plays a sequence — watch carefully and repeat it in the same order.",
-    "bw-solitary-cell":    "Nothing useful here — only what they left behind."
+    "bw-chapel":              "The bell mechanism plays a sequence — watch carefully and repeat it in the same order.",
+    "bw-solitary-cell":       "Nothing useful here — only what they left behind.",
+    "bw-maintenance-tunnel":  "The hatch lock uses two numbers found in this tunnel. Read everything — the pipe, the walls, the door frame itself."
   },
   "endings": {
     "catalogue": [

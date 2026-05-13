@@ -19,10 +19,31 @@
     {
       "id": "bw-tunnel-exit",
       "type": "door",
-      "label": "Exit — Open Air",
-      "x": 60, "y": 10, "w": 32, "h": 80,
+      "label": "Exit Hatch — Open Air",
+      "x": 68, "y": 10, "w": 24, "h": 80,
       "cursor": "pointer",
+      "condition": { "puzzleSolved": "bw-tunnel-hatch" },
       "action": { "type": "navigate", "to": "secret-escaped" },
+      "lockedMessage": "A rusted combination lock holds the hatch bar in place. Four digits. Someone set this lock before they left.",
+      "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-tunnel-hatch" },
+      "contents": []
+    },
+    {
+      "id": "bw-hatch-lock-trigger",
+      "type": "puzzle-trigger",
+      "label": "Combination Lock",
+      "x": 60, "y": 38, "w": 8, "h": 22,
+      "cursor": "zoom-in",
+      "action": { "type": "open-puzzle", "puzzleId": "bw-tunnel-hatch" },
+      "contents": []
+    },
+    {
+      "id": "bw-hatch-carved-note",
+      "type": "inspect",
+      "label": "Carved Door Frame",
+      "x": 60, "y": 62, "w": 8, "h": 18,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Someone carved into the wood of the hatch frame — carefully, deliberately. Not desperate scratching. This was planned.\n\n'She set the lock before she went.\nShe said only someone who understood would open it.\n\nTwo numbers.\nThe patient they could never silence.\nAnd all those who never left.\n\nIn that order.\n— A.C.'\n\nBelow that, much smaller, almost worn smooth:\n\n'I hope you already know both numbers.\nIf you've come this far, you do.'" },
       "contents": []
     },
     {
