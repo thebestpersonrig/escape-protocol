@@ -106,3 +106,18 @@ body::after {
 #journal-panel {
   border-color: rgba(192,57,43,0.2);
 }
+
+/* Hotspot highlight — crimson instead of default cyan */
+#hotspot-highlight.active {
+  border-color: rgba(192, 57, 43, 0.75) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(192,57,43,0.25),
+    0 0 14px rgba(192,57,43,0.18) !important;
+  background: rgba(192, 57, 43, 0.05) !important;
+}
+
+/* Tooltip — match crimson accent */
+#hotspot-tooltip {
+  border-color: rgba(192, 57, 43, 0.45) !important;
+  color: #e0c0b8 !important;
+}

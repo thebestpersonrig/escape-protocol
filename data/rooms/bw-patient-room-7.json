@@ -1,7 +1,7 @@
 {
   "id": "bw-patient-room-7",
   "name": "Room 7",
-  "ambientSound": "ambient-hum",
+  "ambientSound": "ambient-creep",
   "lighting": "flicker-fast",
   "narrativeOnEnter": "A small room. A bare mattress on an iron frame. The barred window is painted over. The walls are covered in scratched writing — the same four digits, repeated hundreds of times.",
   "particles": { "type": "dust", "density": 0.2 },

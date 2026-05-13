@@ -1,4 +1,5 @@
 import { getState, dispatch } from '../state.js';
+import { AudioSystem } from '../audio.js';
 
 export function init(container, puzzleState, callbacks, puzzleId = 'lever-combo') {
   const pattern = getState().leverPattern || [1, 0, 1, 0];
@@ -34,6 +35,7 @@ export function init(container, puzzleState, callbacks, puzzleId = 'lever-combo'
       const i = parseInt(track.dataset.lever);
       positions[i] = positions[i] ? 0 : 1;
       track.classList.toggle('up', !!positions[i]);
+      AudioSystem.play('lever-click');
       dispatch('UPDATE_LEVER_POSITIONS', { puzzleId, positions });
     });
   });

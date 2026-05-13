@@ -102,6 +102,11 @@ export const AudioSystem = {
       case 'spark':
         this._makeNoise(0.1, 0.3 * sfx, 3000);
         break;
+      case 'lever-click':
+        // Mechanical thunk: noise burst + low sawtooth thud
+        this._makeNoise(0.04, 0.18 * sfx, 280);
+        setTimeout(() => this._makeTone(65, 'sawtooth', 0.1, 0.14 * sfx, 0.002, 0.09), 8);
+        break;
     }
   },
 
@@ -121,16 +126,31 @@ export const AudioSystem = {
         'ambient-hum':    [60, 120],
         'ambient-server': [80, 160],
         'ambient-final':  [40, 80],
+        'ambient-creep':  [32, 48],
       };
       const [f1, f2] = freqMap[soundId] || [60, 120];
+      const isCreep = soundId === 'ambient-creep';
 
-      osc1.type = 'sine'; osc1.frequency.value = f1;
-      osc2.type = 'sine'; osc2.frequency.value = f2;
-      lfo.type  = 'sine'; lfo.frequency.value   = 0.08;
-      lfoG.gain.value = 0.008;
+      osc1.type = 'sine';     osc1.frequency.value = f1;
+      osc2.type = isCreep ? 'triangle' : 'sine'; osc2.frequency.value = f2;
+      lfo.type  = 'sine';     lfo.frequency.value  = isCreep ? 0.04 : 0.08;
+      lfoG.gain.value = isCreep ? 0.025 : 0.008;
 
       lfo.connect(lfoG);
       lfoG.connect(osc1.frequency);
+
+      // Creep mode: slow volume tremolo makes the drone "breathe" unsettlingly
+      let volLfo = null;
+      if (isCreep) {
+        volLfo = this.ctx.createOscillator();
+        const volLfoG = this.ctx.createGain();
+        volLfo.type = 'sine';
+        volLfo.frequency.value = 0.11;
+        volLfoG.gain.value = 0.06;
+        volLfo.connect(volLfoG);
+        volLfoG.connect(gain.gain);
+        volLfo.start();
+      }
 
       gain.gain.value = this._volume.ambient;
       this.ambientGain = gain; // expose for live volume adjustment
@@ -139,7 +159,10 @@ export const AudioSystem = {
       gain.connect(this.masterGain);
 
       osc1.start(); osc2.start(); lfo.start();
-      this.ambientNode = { stop: () => { try { osc1.stop(); osc2.stop(); lfo.stop(); } catch(e){} } };
+      this.ambientNode = { stop: () => {
+        try { osc1.stop(); osc2.stop(); lfo.stop(); } catch(e){}
+        try { if (volLfo) volLfo.stop(); } catch(e){}
+      }};
     } catch (e) {}
   },
 
