@@ -39,10 +39,10 @@
     {
       "id": "bw-wire-diagram",
       "type": "inspect",
-      "label": "Wiring Diagram",
+      "label": "Technical Diagram",
       "x": 52, "y": 10, "w": 20, "h": 12,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A handwritten diagram taped above the fuse panel.\n\nEach coloured wire must be connected to its matching socket:\n  Red    → Red socket\n  Blue   → Blue socket\n  Green  → Green socket\n  Yellow → Yellow socket\n  White  → White socket\n\nA note underneath:\n'Sockets are scrambled — drag each wire to its colour match.\nDO NOT cross connections — short circuit will trigger alarm.'" },
+      "action": { "type": "inspect", "text": "A handwritten technical diagram taped above the fuse panel.\n\n    WARD B — EMERGENCY POWER RESTORATION\n    Mains Frequency Calibration Protocol\n\nTo restore power to the records vault:\n  Set the frequency dial to the standard mains reference:\n\n        ▶  TARGET: 220 Hz  ◀\n\nWhen the signal locks green, press LOCK IN FREQUENCY.\n\nNote: Tolerance ±10 Hz. Do not over-tune." },
       "contents": []
     },
     {

@@ -3,7 +3,7 @@
   "name": "Medical Bay",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "Clean, white, cold. Medical equipment lines the walls. A diagnostic terminal sits on the main counter, screen still active. The med cabinet is sealed — biometric lock is offline, but the manual override is visible.",
+  "narrativeOnEnter": "Clean, white, cold. Medical equipment lines the walls. A navigation override panel is mounted on the main counter — the biometric scanner is offline, but the manual switch access is still live. The med cabinet is sealed.",
   "particles": { "type": "dust", "density": 0.1 },
 
   "hotspots": [
@@ -19,7 +19,7 @@
     {
       "id": "ms-nav-terminal-trigger",
       "type": "puzzle-trigger",
-      "label": "Medical Terminal",
+      "label": "Navigation Override Panel",
       "x": 50, "y": 28, "w": 22, "h": 40,
       "cursor": "zoom-in",
       "action": { "type": "open-puzzle", "puzzleId": "ms-nav-terminal" },

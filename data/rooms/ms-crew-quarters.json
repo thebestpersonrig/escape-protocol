@@ -31,7 +31,7 @@
           "x": 76, "y": 32, "w": 10, "h": 8,
           "clueSlot": "ms-crew-id",
           "visibleWhen": { "objectState": "ms-crew-cabinet", "equals": "open" },
-          "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — CREW IDENTIFICATION\n\nName: CHEN, YUKI\nRole: Navigation Officer\nCrew ID: #0447\n\nNavigation terminal password: MERIDIAN (station default)\n\nHandwritten note on the back:\n'Pod bay code — last four of mission stamp: 5519\nDO NOT WRITE DOWN — but I always forget it.'" }
+          "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — CREW IDENTIFICATION\n\nName: CHEN, YUKI\nRole: Navigation Officer\nCrew ID: #0447\n\nNavigation override panel — Medical Bay.\nManual switch access code: B=ON, C=ON (A and D remain OFF).\n\nHandwritten note on the back:\n'Pod bay code — last four of mission stamp: 5519\nDO NOT WRITE DOWN — but I always forget it.'" }
         },
         {
           "id": "ms-personal-photo",
@@ -67,7 +67,7 @@
       "label": "Bunk B",
       "x": 38, "y": 20, "w": 20, "h": 20,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A bunk with a rumpled sleep sack. A worn paperback book is wedged at the pillow end.\n\nInside the front cover: a name. 'KOVALEV, D.' And below it:\n\n'Station callsign: MERIDIAN. All terminal passwords default to station callsign on first login.'" },
+      "action": { "type": "inspect", "text": "A bunk with a rumpled sleep sack. A worn paperback book is wedged at the pillow end.\n\nInside the front cover: a name. 'KOVALEV, D.' And below it:\n\n'Station callsign: MERIDIAN. The nav override panel in Med Bay runs on manual switches — biometric scanner has been offline since the power incident.'" },
       "contents": []
     }
   ]

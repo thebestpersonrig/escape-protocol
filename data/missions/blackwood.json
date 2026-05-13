@@ -12,11 +12,11 @@
   },
   "puzzles": {
     "bw-ward-lock":       { "solved": false, "attempts": 0, "code": "4031" },
-    "bw-power-wires":     { "solved": false, "attempts": 0, "shuffledWires": [] },
+    "bw-power-wires":     { "solved": false, "attempts": 0, "target": 220, "title": "WARD B — FUSE PANEL CALIBRATION" },
     "bw-nurses-terminal": { "solved": false, "attempts": 0 },
     "bw-records-cipher":  { "solved": false, "attempts": 0, "cardOrder": [] },
     "bw-director-safe":   { "solved": false, "attempts": 0, "code": "1972" },
-    "bw-chapel-bells":    { "solved": false, "attempts": 0, "leverPositions": [0,0,0,0] }
+    "bw-chapel-bells":    { "solved": false, "attempts": 0 }
   },
   "objects": {
     "bw-reception-desk":   "closed",
@@ -39,7 +39,6 @@
   ],
   "initialValues": {
     "keypadCode":       "4031",
-    "leverPattern":     [1, 0, 1, 0],
     "terminalPassword": "BLACKWOOD"
   },
   "hints": {
@@ -50,7 +49,7 @@
     "bw-treatment-room":   "Match the wire colours to the diagram on the wall panel.",
     "bw-records-vault":    "The symbol order on the filing cabinet labels mirrors the patient intake sequence.",
     "bw-directors-office": "The director recorded everything. His notes are hidden, but the safe combination is in plain sight — if you know where to look.",
-    "bw-chapel":           "The bell mechanism responds to a four-beat pattern. Listen to the rhythm of the chimes.",
+    "bw-chapel":           "The bell mechanism plays a sequence — watch carefully and repeat it in the same order.",
     "bw-solitary-cell":    "Nothing useful here — only what they left behind."
   },
   "endings": {

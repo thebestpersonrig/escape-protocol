@@ -3,7 +3,8 @@
 const TOLERANCE = 10; // ±10 Hz out of 100–999 range
 
 export function init(container, puzzleState, callbacks) {
-  const target = puzzleState.target ?? 500;
+  const target    = puzzleState.target ?? 500;
+  const titleText = puzzleState.title  ?? 'POWER JUNCTION PJ-7 — FREQ. STABILISER';
   let   value  = Math.floor(Math.random() * 800) + 100; // random start, never exactly target
   if (value === target) value = target > 500 ? target - 50 : target + 50;
   let   locked = false;
@@ -12,7 +13,7 @@ export function init(container, puzzleState, callbacks) {
   container.innerHTML = `
     <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 20px;font-family:'Courier New',monospace;min-width:360px;">
 
-      <div style="color:rgba(255,150,40,0.8);font-size:12px;letter-spacing:0.25em;">POWER JUNCTION PJ-7 — FREQ. STABILISER</div>
+      <div style="color:rgba(255,150,40,0.8);font-size:12px;letter-spacing:0.25em;">${titleText}</div>
 
       <div style="
         background:rgba(20,12,0,0.8);

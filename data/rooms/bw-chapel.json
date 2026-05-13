@@ -50,7 +50,7 @@
           "label": "Handwritten Sheet",
           "x": 14, "y": 35, "w": 10, "h": 14,
           "visibleWhen": { "objectState": "bw-chapel-alcove", "equals": "open" },
-          "action": { "type": "inspect", "text": "A sheet of paper, folded carefully.\n\n'The maintenance passage bolt is controlled by the bell sequence.\nThe pattern was agreed among staff who wanted a way out.\n\nPull the handles in this order:\nUp, Down, Up, Down\n(Handles 1, 2, 3, 4 — positions High, Low, High, Low)\n\nThe bolt will release after the correct sequence is played.'" }
+          "action": { "type": "inspect", "text": "A sheet of paper, folded carefully.\n\n'The maintenance passage bolt is released by the bell mechanism.\nThe sequence was chosen so it cannot be triggered accidentally.\n\nTo operate:\n  Approach the bell mechanism.\n  Watch the sequence of symbols it shows.\n  Repeat the same sequence in the same order.\n\nFive correct strikes disengages the bolt.\nIf you make a mistake, the mechanism will show the sequence again.'" }
         }
       ]
     },

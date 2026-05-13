@@ -3,6 +3,7 @@
 export function init(container, puzzleState, callbacks) {
   const target  = puzzleState.pattern ?? [1, 0, 1, 1];
   const labels  = ['A', 'B', 'C', 'D'];
+  const title   = puzzleState.title ?? 'Specimen Vault — Circuit Lock';
   let   state   = [0, 0, 0, 0];
   let   solved  = false;
 
@@ -63,7 +64,7 @@ export function init(container, puzzleState, callbacks) {
       <div style="display:flex;flex-direction:column;align-items:center;gap:22px;padding:24px 16px;font-family:'Courier New',monospace;">
 
         <div style="color:rgba(0,210,160,0.8);font-size:12px;letter-spacing:0.25em;text-transform:uppercase;">
-          Specimen Vault — Circuit Lock
+          ${title}
         </div>
 
         <div style="
