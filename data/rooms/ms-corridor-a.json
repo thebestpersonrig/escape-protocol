@@ -73,6 +73,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "MERIDIAN STATION ALPHA — DECK DIRECTORY\n\nUpper Deck:\n  → Airlock Bay (Stern)\n  → Crew Quarters (Port)\n  → Medical Bay (Starboard)\n  → Command Deck (Bow) [BLAST DOOR SEALED]\n  → Engineering Hatch [Lower Deck]\n\nLower Deck:\n  → Engineering\n  → Cargo Bay\n  → Reactor Deck [RESTRICTED]\n  → Comms Array\n  → Escape Pod Bay (Stern)" },
       "contents": []
+    },
+    {
+      "id": "delta-ms-corridor-a",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 96, "y": 90, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-corridor-a" },
+      "contents": []
     }
   ]
 }

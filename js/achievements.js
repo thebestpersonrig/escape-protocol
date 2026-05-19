@@ -25,6 +25,8 @@ const DEFS = [
   { id: 'wire-first-try', name: 'Electrician',          desc: 'Solve the wire puzzle on the first try.' },
   { id: 'memory-master',  name: 'Memory Master',        desc: 'Complete the memory puzzle on the first try.' },
   { id: 'safe-cracker',   name: 'Safe Cracker',         desc: "Crack the director's safe on the first attempt." },
+  // Delta collectibles
+  { id: 'delta-hunter',   name: 'Delta Hunter',         desc: 'Find all Δ fragments in a single mission.' },
 ];
 
 export class AchievementSystem {
@@ -72,6 +74,17 @@ export class AchievementSystem {
 
     if (endingId === 'secret-escape') this.unlock('secret-escape');
     if (endingId === 'time-out')      this.unlock('time-out');
+
+    // Delta hunter — find all delta fragments in a single mission
+    const deltas = st.collectedDeltas || [];
+    // Determine mission delta count by prefix
+    const bwCount = deltas.filter(d => d.startsWith('delta-bw-')).length;
+    const msCount = deltas.filter(d => d.startsWith('delta-ms-')).length;
+    const arcCount = deltas.filter(d => !d.startsWith('delta-bw-') && !d.startsWith('delta-ms-')).length;
+    // Arcadia: 9 deltas, Blackwood: 10, Meridian: 11
+    if (arcCount >= 9 || bwCount >= 10 || msCount >= 11) {
+      this.unlock('delta-hunter');
+    }
   }
 
   checkPuzzleSolve(puzzleId, attempts) {

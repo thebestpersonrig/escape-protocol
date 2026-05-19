@@ -52,6 +52,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "CREW STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — EVACUATED\nKOVALEV, D. — UNKNOWN (Reactor Deck)\nPATEL, S.  — EVACUATED\nDIAZ, M.   — EVACUATED\n\nKovalev remained to attempt reactor stabilisation.\nIf he failed — cascade in ~30 minutes.\n\nDefibrillator on the wall. Charged. Hopefully not needed." },
       "contents": []
+    },
+    {
+      "id": "delta-ms-med-bay",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 4, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-med-bay" },
+      "contents": []
     }
   ]
 }

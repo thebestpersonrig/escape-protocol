@@ -62,6 +62,15 @@
       "cursor": "pointer",
       "action": { "type": "navigate", "to": "security-hub" },
       "contents": []
+    },
+    {
+      "id": "delta-utility-corridor",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 50, "y": 4, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-utility-corridor" },
+      "contents": []
     }
   ]
 }

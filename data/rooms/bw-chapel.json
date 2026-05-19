@@ -62,6 +62,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Stone altar. Plaque: 'For those who could not leave.'\nScratched below: '1972. We tried.'\n\nStained glass above — a figure before an open door. Entering or leaving, unclear." },
       "contents": []
+    },
+    {
+      "id": "delta-bw-chapel",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 30, "y": 91, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-chapel" },
+      "contents": []
     }
   ]
 }

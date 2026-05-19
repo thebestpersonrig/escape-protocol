@@ -71,6 +71,15 @@
       "cursor": "pointer",
       "action": { "type": "navigate", "to": "main-lab" },
       "contents": []
+    },
+    {
+      "id": "delta-bio-lab",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 96, "y": 8, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bio-lab" },
+      "contents": []
     }
   ]
 }

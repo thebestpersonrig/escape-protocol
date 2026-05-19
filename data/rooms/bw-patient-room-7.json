@@ -52,6 +52,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Barred window — painted over. Scratch marks on one bar.\n\nUnder the mattress, a torn list: 47 names. Each stamped 'AXIOM — HELIOS Phase 1'.\nTop entry underlined: 'VOSS, ELARA — Patient 07.'\n\nBottom of list: 'They mapped all of us. 90 minutes in a chair. — E. Voss'" },
       "contents": []
+    },
+    {
+      "id": "delta-bw-patient-room-7",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 3, "y": 90, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-patient-room-7" },
+      "contents": []
     }
   ]
 }

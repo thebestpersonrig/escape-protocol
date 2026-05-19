@@ -63,6 +63,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Sealed containers. One stands apart — seal broken from outside.\n\nLabel: 'AXIOM BIOTECH — NEURAL MAPPING ARRAY (BATCH 7) — CONFIDENTIAL'\n\nInside: foam for six cylindrical devices. All gone.\nPacking slip: '6 units. Pre-calibrated for crew biometrics. Activation: automatic on power-up.'\n\nKovalev's pencil on the lid:\n'Found them behind every bunk vent panel. Running since Day 1. 63 days of data.\nThis is what they did at Blackwood. This is what PROMETHEUS was built from.\nI'm not letting them do it again.'" },
       "contents": []
+    },
+    {
+      "id": "delta-ms-cargo-bay",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 55, "y": 88, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-cargo-bay" },
+      "contents": []
     }
   ]
 }

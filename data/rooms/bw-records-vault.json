@@ -84,6 +84,15 @@
       "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-records-cipher" },
       "action": { "type": "pick-up", "itemId": "bw-director-key" },
       "contents": []
+    },
+    {
+      "id": "delta-bw-records-vault",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 5, "y": 4, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-records-vault" },
+      "contents": []
     }
   ]
 }

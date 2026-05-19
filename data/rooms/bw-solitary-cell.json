@@ -33,6 +33,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "A rusted drain in the floor. An iron hook bolted into the ceiling.\nNo context needed." },
       "contents": []
+    },
+    {
+      "id": "delta-bw-solitary-cell",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 92, "y": 40, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-solitary-cell" },
+      "contents": []
     }
   ]
 }

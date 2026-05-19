@@ -61,6 +61,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Patient chart: 'Patient 07 — agitated after treatment. Sessions last 90 min — ECT only takes 20. Equipment brought by AXIOM subsidiary. — A. Colm, RN'\n\nTerminal password: BLACKWOOD\n\nCarved into countertop: 'Director's safe code = year Blackwood opened: 1972. — Agnes Colm'" },
       "contents": []
+    },
+    {
+      "id": "delta-bw-nurses-station",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 40, "y": 7, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-nurses-station" },
+      "contents": []
     }
   ]
 }

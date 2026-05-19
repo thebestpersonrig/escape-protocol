@@ -23,6 +23,7 @@ export class InteractionSystem {
     this._scene     = document.getElementById('scene-container');
     this._config    = null;
     this._allHotspots = [];
+    this._lastHoveredId = null;
 
     this._touchMoved = false;
 
@@ -67,9 +68,14 @@ export class InteractionSystem {
   _onMouseMove(e) {
     const hs = this._findHotspotAt(e.clientX, e.clientY);
     if (hs) {
+      if (hs.id !== this._lastHoveredId) {
+        this._lastHoveredId = hs.id;
+        AudioSystem.play('hover');
+      }
       this._showHighlight(hs);
       this._showTooltip(hs, e);
     } else {
+      this._lastHoveredId = null;
       this._clearHighlight();
     }
   }
@@ -201,7 +207,7 @@ export class InteractionSystem {
         const current = state.objects[action.objectId] || 'closed';
         const next    = current === 'open' ? 'closed' : 'open';
         dispatch('SET_OBJECT_STATE', { objectId: action.objectId, newState: next });
-        if (next === 'open') AudioSystem.play('door-unlock');
+        AudioSystem.play(next === 'open' ? 'container-open' : 'container-close');
         this._renderer.rerender();
         this._buildHotspotList(this._config, getState());
         break;
@@ -224,7 +230,7 @@ export class InteractionSystem {
           .replace(/\{\{lever-pattern\}\}/g, _pat)
           .replace(/\{\{director-safe-code\}\}/g, _dirCode);
         showInspection(_text, action.image || null, hs.id);
-        AudioSystem.play('paper-rustle');
+        AudioSystem.play('inspect-open');
         if (action.unlocksRoom === 'secret-room') {
           dispatch('UNLOCK_SECRET_ROOM');
         }
@@ -245,6 +251,23 @@ export class InteractionSystem {
         AudioSystem.play('pick-up');
         showToast(`Picked up: ${hs.label || action.itemId}`, 'success');
         if (_pickupEl && _pickupDef) animatePickup(_pickupEl, _pickupDef.icon);
+        this._renderer.rerender();
+        this._buildHotspotList(this._config, getState());
+        SaveSystem.save(getState());
+        break;
+      }
+
+      case 'collect-delta': {
+        const _deltaState = getState();
+        if (_deltaState.collectedDeltas.includes(action.deltaId)) {
+          showToast('Already collected this Δ fragment.', 'info');
+          return;
+        }
+        dispatch('COLLECT_DELTA', { deltaId: action.deltaId });
+        AudioSystem.play('delta-collect');
+        const _newSt = getState();
+        const _count = _newSt.collectedDeltas.length;
+        showToast(`Δ FRAGMENT COLLECTED (${_count})`, 'success');
         this._renderer.rerender();
         this._buildHotspotList(this._config, getState());
         SaveSystem.save(getState());

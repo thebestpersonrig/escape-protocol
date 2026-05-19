@@ -60,6 +60,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Reactor housing. Temperature: 847°C (CRITICAL — threshold 900°C)\n\nAt the base — six small black devices. Δ mark. Wired into the network bus.\nAll LEDs red: BUFFER FULL.\n\nSynaptic Response Recorders. One per crew member. 63 days of data.\n\nThe thermal spike will hit the buffer first. Kovalev planned this.\nMinutes, not hours. Complete the sequence." },
       "contents": []
+    },
+    {
+      "id": "delta-ms-reactor-deck",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 38, "y": 8, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-reactor-deck" },
+      "contents": []
     }
   ]
 }

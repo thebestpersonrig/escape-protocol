@@ -804,3 +804,331 @@ body::after {
   border-color: rgba(120,80,240,0.65);
   box-shadow: 0 0 14px rgba(100,60,220,0.35);
 }
+
+/* ── Loading overlay ─────────────────────────────────────────── */
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0f;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#loading-overlay.active {
+  display: flex;
+}
+
+#loading-overlay.visible {
+  opacity: 1;
+}
+
+/* Scanline effect on overlay */
+#loading-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    rgba(0,0,0,0.08), rgba(0,0,0,0.08) 1px,
+    transparent 1px, transparent 3px
+  );
+  pointer-events: none;
+  animation: scanline-scroll 12s linear infinite;
+}
+
+/* CRT vignette on overlay */
+#loading-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+
+#loading-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 32px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.loading-line {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-shadow: 0 0 12px var(--accent-glow), 0 0 30px rgba(0,255,224,0.15);
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0.1s ease;
+}
+
+.loading-line.visible {
+  opacity: 1;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+.loading-cursor {
+  display: inline;
+  animation: blink 0.7s step-end infinite;
+}
+
+/* Selected card glow */
+.hub-card.selected {
+  border-color: rgba(0,255,224,0.7) !important;
+  box-shadow:
+    0 0 30px rgba(0,255,224,0.25),
+    0 0 60px rgba(0,255,224,0.1),
+    inset 0 0 20px rgba(0,255,224,0.05) !important;
+  transform: scale(1.02) !important;
+  transition: all 0.3s ease !important;
+}
+
+.hub-card.theme-blackwood.selected {
+  border-color: rgba(200,30,55,0.7) !important;
+  box-shadow:
+    0 0 30px rgba(180,20,40,0.3),
+    0 0 60px rgba(180,20,40,0.12),
+    inset 0 0 20px rgba(180,20,40,0.05) !important;
+}
+
+.hub-card.theme-meridian.selected {
+  border-color: rgba(120,80,240,0.7) !important;
+  box-shadow:
+    0 0 30px rgba(100,60,220,0.3),
+    0 0 60px rgba(100,60,220,0.12),
+    inset 0 0 20px rgba(100,60,220,0.05) !important;
+}
+
+/* ── Timed Challenges ────────────────────────────────────────── */
+#challenge-section {
+  max-width: 1120px;
+  width: 100%;
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .challenge-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .challenge-grid { grid-template-columns: 1fr; }
+}
+
+.challenge-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.challenge-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--warn), transparent);
+  opacity: 0.5;
+}
+
+.challenge-card.locked {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.challenge-card.completed {
+  border-color: rgba(0,255,224,0.2);
+}
+
+.challenge-card.completed::before {
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.challenge-card:not(.locked):hover {
+  border-color: rgba(255,176,64,0.4);
+  box-shadow: 0 4px 20px rgba(255,176,64,0.08);
+  cursor: pointer;
+}
+
+.challenge-card.completed:hover {
+  border-color: rgba(0,255,224,0.35);
+  box-shadow: 0 4px 20px rgba(0,255,224,0.08);
+}
+
+.challenge-mission {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.challenge-name {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--text-bright);
+  text-transform: uppercase;
+}
+
+.challenge-desc {
+  font-size: 10px;
+  color: var(--text);
+  line-height: 1.5;
+  font-family: Georgia, serif;
+}
+
+.challenge-target {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--warn);
+  padding: 5px 10px;
+  border: 1px solid rgba(255,176,64,0.2);
+  border-radius: 2px;
+  background: rgba(255,176,64,0.04);
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+.challenge-card.completed .challenge-target {
+  color: var(--accent);
+  border-color: rgba(0,255,224,0.2);
+  background: rgba(0,255,224,0.04);
+}
+
+.challenge-best {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.challenge-status {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.challenge-status.status-locked { color: var(--text-dim); }
+.challenge-status.status-open   { color: var(--warn); }
+.challenge-status.status-done   { color: var(--accent); }
+
+.challenge-card.selected {
+  border-color: rgba(255,176,64,0.7) !important;
+  box-shadow: 0 0 20px rgba(255,176,64,0.2) !important;
+  transform: scale(1.02);
+}
+
+/* ── AXIOM Terminal Card ─────────────────────────────────────── */
+#axiom-section {
+  max-width: 1120px;
+  width: 100%;
+  padding: 0 24px;
+  margin-bottom: 40px;
+}
+
+.axiom-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.axiom-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffb040, #ff3040, #ffb040, transparent);
+  opacity: 0.6;
+}
+
+.axiom-card.locked {
+  opacity: 0.4;
+}
+
+.axiom-card:not(.locked) {
+  cursor: pointer;
+  border-color: rgba(255,176,64,0.2);
+}
+
+.axiom-card:not(.locked):hover {
+  border-color: rgba(255,176,64,0.5);
+  box-shadow: 0 6px 30px rgba(255,176,64,0.1), 0 0 0 1px rgba(255,176,64,0.1);
+}
+
+.axiom-icon {
+  font-size: 28px;
+  color: var(--warn);
+  text-shadow: 0 0 12px rgba(255,176,64,0.4);
+  flex-shrink: 0;
+  width: 44px;
+  text-align: center;
+}
+
+.axiom-card.locked .axiom-icon {
+  color: var(--text-dim);
+  text-shadow: none;
+}
+
+.axiom-info {
+  flex: 1;
+}
+
+.axiom-label {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--warn);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.axiom-card.locked .axiom-label { color: var(--text-dim); }
+
+.axiom-sublabel {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.axiom-progress {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.axiom-progress .done { color: var(--accent); }
+.axiom-progress .undone { color: var(--text-dim); opacity: 0.4; }

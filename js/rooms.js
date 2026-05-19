@@ -914,6 +914,13 @@ export class RoomRenderer {
   }
 
   _renderHotspot(hs, config, state) {
+    // Delta collectibles — hide if already collected
+    if (hs.type === 'delta-collect') {
+      if (state.collectedDeltas && state.collectedDeltas.includes(hs.action?.deltaId || hs.id)) return;
+      this._renderDeltaHotspot(hs, config);
+      return;
+    }
+
     const el = document.createElement('div');
     el.className = 'hotspot-object';
     el.dataset.hotspotId = hs.id;
@@ -939,6 +946,54 @@ export class RoomRenderer {
       }
     }
 
+    this._objEl.appendChild(el);
+  }
+
+  _renderDeltaHotspot(hs, config) {
+    // Determine glow colour based on room/mission
+    const roomId = config.id || '';
+    let glowColor, textColor;
+    if (roomId.startsWith('bw-')) {
+      // Blackwood — sickly green
+      glowColor = 'rgba(120,200,80,0.3)';
+      textColor = 'rgba(120,200,80,0.2)';
+    } else if (roomId.startsWith('ms-')) {
+      // Meridian — cold blue
+      glowColor = 'rgba(80,160,255,0.3)';
+      textColor = 'rgba(80,160,255,0.2)';
+    } else {
+      // Arcadia — warm amber
+      glowColor = 'rgba(255,180,60,0.3)';
+      textColor = 'rgba(255,180,60,0.2)';
+    }
+
+    const el = document.createElement('div');
+    el.className = 'hotspot-object delta-hotspot';
+    el.dataset.hotspotId = hs.id;
+    el.style.cssText = `
+      left:${hs.x}%;top:${hs.y}%;
+      width:${hs.w}%;height:${hs.h}%;
+      position:absolute;
+      cursor:pointer;
+      box-sizing:border-box;
+      z-index:12;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0.18;
+      transition:opacity 0.4s ease, text-shadow 0.4s ease;
+      font-size:clamp(8px,1.2vw,16px);
+      color:${textColor};
+      text-shadow:0 0 4px ${glowColor};
+      pointer-events:auto;
+    `;
+    el.innerHTML = `<span style="user-select:none;">Δ</span>`;
+    el.addEventListener('mouseenter', () => {
+      el.style.opacity = '0.55';
+      el.style.textShadow = `0 0 8px ${glowColor}, 0 0 16px ${glowColor}`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.opacity = '0.18';
+      el.style.textShadow = `0 0 4px ${glowColor}`;
+    });
     this._objEl.appendChild(el);
   }
 

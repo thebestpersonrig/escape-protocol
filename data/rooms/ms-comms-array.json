@@ -62,6 +62,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "EXTERNAL AIRLOCK — EVA STATUS\n\nStatus: LOCKED (Reactor radiation field active)\nClearance required: Reactor deck — NOMINAL status\n\nOnce reactor is stabilised, this airlock will automatically unlock.\nDistance to rescue shuttle: 40 metres. EVA tether required." },
       "contents": []
+    },
+    {
+      "id": "delta-ms-comms-array",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 4, "y": 6, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-comms-array" },
+      "contents": []
     }
   ]
 }

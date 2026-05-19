@@ -90,6 +90,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "BLACKWOOD PSYCHIATRIC INSTITUTE\nEast Wing Floor Plan\n\nGround Floor:\n  → Reception / Foyer [YOU ARE HERE]\n  → Patient Corridor — Ward A & Ward B\n  → Chapel (East End)\n\nWard B (Gate-Locked):\n  → Nurses' Station\n  → Treatment Room\n  → Records Vault (requires power)\n\nDirector's Office — Second Floor\n  Access via Records Vault only." },
       "contents": []
+    },
+    {
+      "id": "delta-bw-east-foyer",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 73, "y": 88, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-east-foyer" },
+      "contents": []
     }
   ]
 }

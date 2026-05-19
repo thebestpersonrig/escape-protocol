@@ -60,6 +60,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Two bunks. One stripped — sticky note on the frame:\n'Reactor sequence: ask Kovalev.'\n\nA torn note on the floor:\n'148.350 MHz — CALLISTO. Do NOT signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. The shuttle isn't rescue — it's extraction.\nCALLISTO has the Blackwood files. Contact them.'\n\nOther bunk — rumpled. Kovalev's paperback:\n'Nav override in Med Bay runs on manual switches — biometric scanner offline.'" },
       "contents": []
+    },
+    {
+      "id": "delta-ms-crew-quarters",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 66, "y": 5, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-crew-quarters" },
+      "contents": []
     }
   ]
 }

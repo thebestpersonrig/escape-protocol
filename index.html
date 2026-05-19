@@ -36,7 +36,7 @@
 
   <div id="hub-grid">
 
-    <div class="hub-card available theme-arcadia" onclick="location.href='arcadia.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='arcadia.html'">
+    <div class="hub-card available theme-arcadia" onclick="launchMission(this,'arcadia')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'arcadia')">
       <div class="hub-card-num">Mission 01</div>
       <div class="hub-card-title">Arcadia Research<br>Facility</div>
       <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
@@ -54,7 +54,7 @@
       <div class="hub-card-play">▶ Enter Facility</div>
     </div>
 
-    <div class="hub-card available theme-blackwood" onclick="location.href='blackwood.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='blackwood.html'">
+    <div class="hub-card available theme-blackwood" onclick="launchMission(this,'blackwood')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'blackwood')">
       <div class="hub-card-num">Mission 02</div>
       <div class="hub-card-title">Blackwood<br>Asylum</div>
       <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
@@ -71,7 +71,7 @@
       <div class="hub-card-play">▶ Enter Asylum</div>
     </div>
 
-    <div class="hub-card available theme-meridian" onclick="location.href='meridian.html'" role="button" tabindex="0" onkeydown="if(event.key==='Enter')location.href='meridian.html'">
+    <div class="hub-card available theme-meridian" onclick="launchMission(this,'meridian')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'meridian')">
       <div class="hub-card-num">Mission 03</div>
       <div class="hub-card-title">Meridian<br>Station Alpha</div>
       <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
@@ -89,6 +89,25 @@
     </div>
 
   </div><!-- #hub-grid -->
+
+  <!-- ── AXIOM Terminal ──────────────────────────────────────── -->
+  <div id="axiom-section" style="display:none;">
+    <div class="hub-section-label">// Classified Access</div>
+    <div class="axiom-card locked" id="axiom-card" role="button" tabindex="0">
+      <div class="axiom-icon">⬡</div>
+      <div class="axiom-info">
+        <div class="axiom-label">AXIOM Terminal</div>
+        <div class="axiom-sublabel">Complete all 3 missions to decrypt classified files</div>
+      </div>
+      <div class="axiom-progress" id="axiom-progress"></div>
+    </div>
+  </div>
+
+  <!-- ── Timed Challenges ────────────────────────────────────── -->
+  <div id="challenge-section" style="display:none;">
+    <div class="hub-section-label">// Speed Challenges</div>
+    <div class="challenge-grid" id="challenge-grid"></div>
+  </div>
 
   <!-- ── Stat Bar ────────────────────────────────────────────── -->
   <div id="hub-stats">
@@ -139,7 +158,191 @@
     const msFound = ['escaped','secret-escape','self-sacrifice','alarm-caught','time-out'].filter(e => msSeen.includes(e)).length;
     document.getElementById('meridian-endings').textContent = msFound + ' / 5';
 
+    // ── AXIOM Terminal unlock ────────────────────────────────
+    var arcadiaDone = seen.length > 0;
+    var bwDone      = bwSeen.length > 0;
+    var msDone      = msSeen.length > 0;
+    var missionsDone = [arcadiaDone, bwDone, msDone].filter(Boolean).length;
+
+    var axiomSection = document.getElementById('axiom-section');
+    var axiomCard    = document.getElementById('axiom-card');
+    var axiomProg    = document.getElementById('axiom-progress');
+    axiomSection.style.display = '';
+
+    var dots = ['Arcadia','Blackwood','Meridian'].map(function(name, i) {
+      var done = [arcadiaDone, bwDone, msDone][i];
+      return '<span class="' + (done ? 'done' : 'undone') + '">' + (done ? '◆' : '◇') + '</span>';
+    }).join(' ');
+    axiomProg.innerHTML = dots + ' <span style="margin-left:6px;">' + missionsDone + '/3</span>';
+
+    if (missionsDone === 3) {
+      axiomCard.classList.remove('locked');
+      axiomCard.onclick = function() { location.href = 'axiom.html'; };
+      axiomCard.onkeydown = function(e) { if (e.key === 'Enter') location.href = 'axiom.html'; };
+    }
+
+    // ── Timed Challenges ─────────────────────────────────────
+    var challenges = [
+      { id: 'speed-arcadia-5',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Speed Demon',       desc: 'Escape Arcadia in under 5 minutes.',     target: '5:00',  seconds: 300, requires: arcadiaDone },
+      { id: 'speed-arcadia-3',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Lightning Run',     desc: 'Escape Arcadia in under 3 minutes.',     target: '3:00',  seconds: 180, requires: arcadiaDone },
+      { id: 'speed-blackwood-8', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Quick Getaway',    desc: 'Escape Blackwood in under 8 minutes.',   target: '8:00',  seconds: 480, requires: bwDone },
+      { id: 'speed-blackwood-5', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Asylum Sprinter',  desc: 'Escape Blackwood in under 5 minutes.',   target: '5:00',  seconds: 300, requires: bwDone },
+      { id: 'speed-meridian-10', mission: 'meridian',  missionLabel: 'Meridian',  name: 'Orbital Rush',     desc: 'Escape Meridian in under 10 minutes.',   target: '10:00', seconds: 600, requires: msDone },
+      { id: 'speed-meridian-6',  mission: 'meridian',  missionLabel: 'Meridian',  name: 'Zero-G Sprint',    desc: 'Escape Meridian in under 6 minutes.',    target: '6:00',  seconds: 360, requires: msDone },
+    ];
+
+    var bestTimes = JSON.parse(localStorage.getItem('ep-challenge-times') || '{}');
+    var anyVisible = false;
+    var gridEl = document.getElementById('challenge-grid');
+
+    challenges.forEach(function(ch) {
+      var best = bestTimes[ch.id];
+      var completed = best !== undefined && best <= ch.seconds;
+      var locked = !ch.requires;
+
+      if (ch.requires) anyVisible = true;
+
+      var card = document.createElement('div');
+      card.className = 'challenge-card' + (locked ? ' locked' : '') + (completed ? ' completed' : '');
+      var bestStr = '';
+      if (best !== undefined) {
+        var m = Math.floor(best / 60);
+        var s = best % 60;
+        bestStr = '<div class="challenge-best">Best: ' + m + ':' + (s < 10 ? '0' : '') + s + '</div>';
+      }
+
+      var statusClass = locked ? 'status-locked' : (completed ? 'status-done' : 'status-open');
+      var statusText  = locked ? '🔒 LOCKED' : (completed ? '✓ COMPLETED' : '◎ INCOMPLETE');
+
+      card.innerHTML =
+        '<div class="challenge-mission">' + ch.missionLabel + '</div>' +
+        '<div class="challenge-name">' + ch.name + '</div>' +
+        '<div class="challenge-desc">' + ch.desc + '</div>' +
+        '<div class="challenge-target">⏱ Target: ' + ch.target + '</div>' +
+        bestStr +
+        '<div class="challenge-status ' + statusClass + '">' + statusText + '</div>';
+
+      if (!locked) {
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.onclick = function() { launchMission(card, ch.mission); };
+        card.onkeydown = function(e) { if (e.key === 'Enter') launchMission(card, ch.mission); };
+      }
+
+      gridEl.appendChild(card);
+    });
+
+    if (anyVisible) {
+      document.getElementById('challenge-section').style.display = '';
+    }
+
   })();
+</script>
+
+<div id="loading-overlay">
+  <div id="loading-text"></div>
+</div>
+
+<script>
+  var missionLaunching = false;
+
+  var missionLines = {
+    arcadia: [
+      'ESTABLISHING CONNECTION...',
+      'ACCESSING ARCADIA RESEARCH NETWORK...',
+      'DECRYPTING SECURITY PROTOCOLS...',
+      'CONNECTION ESTABLISHED.',
+      'ENTERING FACILITY.'
+    ],
+    blackwood: [
+      'ESTABLISHING CONNECTION...',
+      'ACCESSING BLACKWOOD INSTITUTE ARCHIVES...',
+      'DECRYPTING SEALED RECORDS...',
+      'CONNECTION ESTABLISHED.',
+      'ENTERING ASYLUM.'
+    ],
+    meridian: [
+      'ESTABLISHING CONNECTION...',
+      'ACCESSING MERIDIAN STATION TELEMETRY...',
+      'DECRYPTING EMERGENCY CHANNELS...',
+      'CONNECTION ESTABLISHED.',
+      'BOARDING STATION.'
+    ]
+  };
+
+  function typewriterLine(container, text, charDelay) {
+    return new Promise(function (resolve) {
+      var lineEl = document.createElement('div');
+      lineEl.className = 'loading-line visible';
+      container.appendChild(lineEl);
+
+      var cursor = document.createElement('span');
+      cursor.className = 'loading-cursor';
+      cursor.textContent = '_';
+
+      var i = 0;
+      function tick() {
+        if (i < text.length) {
+          lineEl.textContent = text.slice(0, i + 1);
+          lineEl.appendChild(cursor);
+          i++;
+          setTimeout(tick, charDelay);
+        } else {
+          lineEl.textContent = text;
+          lineEl.appendChild(cursor);
+          resolve(cursor);
+        }
+      }
+      tick();
+    });
+  }
+
+  function launchMission(cardEl, mission) {
+    if (missionLaunching) return;
+    missionLaunching = true;
+
+    var lines = missionLines[mission];
+    var url = mission + '.html';
+    if (!lines) { location.href = url; return; }
+
+    // Select card with glow
+    cardEl.classList.add('selected');
+
+    var overlay = document.getElementById('loading-overlay');
+    var textBox = document.getElementById('loading-text');
+    textBox.innerHTML = '';
+
+    // Show overlay
+    overlay.classList.add('active');
+    // Force reflow then fade in
+    overlay.offsetHeight;
+    overlay.classList.add('visible');
+
+    var lineDelay = 400;
+    var charDelay = 30;
+    var prevCursor = null;
+
+    function showLine(index) {
+      if (index >= lines.length) {
+        // All lines done — navigate after 500ms
+        setTimeout(function () { location.href = url; }, 500);
+        return;
+      }
+
+      setTimeout(function () {
+        // Remove cursor from previous line
+        if (prevCursor && prevCursor.parentNode) {
+          prevCursor.parentNode.removeChild(prevCursor);
+        }
+        typewriterLine(textBox, lines[index], charDelay).then(function (cursor) {
+          prevCursor = cursor;
+          showLine(index + 1);
+        });
+      }, index === 0 ? 300 : lineDelay);
+    }
+
+    showLine(0);
+  }
 </script>
 
 </body>

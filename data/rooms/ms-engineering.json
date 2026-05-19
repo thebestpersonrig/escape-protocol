@@ -60,6 +60,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "ENGINEERING LOG — KOVALEV, D.\n\nEntry 110:\n'Found Synaptic Response Recorders in the reactor housing. Six of them — one per crew member.\nTransmitting neural data for 63 days. Buffer is full. That's what MERIDIAN-3 is waiting for.'\n\nEntry 111:\n'Shipping origin: Δ Medical Dynamics = AXIOM Group. HELIOS GROUP = AXIOM.\nThis was never a science posting. We were the science.\nOption: trigger a thermal event that wipes the buffer. Survivable. Probably.'\n\nEntry 112:\n'Started the thermal sequence. Alarm triggered — had to abort.\nGone to Reactor Deck to finish it.\n\nIf anyone finds this:\n— Wiring schematic is on the panel\n— Cargo lock sequence on the freight manifest\n— Reactor sequence in the safety manual\n— Pod bay code on Chen's ID\n\nIf the buffer burns: we're crew again. Not data. Not PROMETHEUS.\n— D. Kovalev'" },
       "contents": []
+    },
+    {
+      "id": "delta-ms-engineering",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 34, "y": 4, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-engineering" },
+      "contents": []
     }
   ]
 }

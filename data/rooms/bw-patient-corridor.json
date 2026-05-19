@@ -72,6 +72,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "WARD B — RESTRICTED ACCESS\nCode-Locked Gate\n\n'Code changed after the 1972 incident.\nSee Patient 07's intake notes for reference.'\n\nSmall stamp in corner: Δ — the AXIOM mark." },
       "contents": []
+    },
+    {
+      "id": "delta-bw-patient-corridor",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 95, "y": 5, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-patient-corridor" },
+      "contents": []
     }
   ]
 }

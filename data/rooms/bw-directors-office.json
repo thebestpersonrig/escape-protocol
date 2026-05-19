@@ -73,6 +73,15 @@
       "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-director-safe" },
       "action": { "type": "pick-up", "itemId": "bw-master-key" },
       "contents": []
+    },
+    {
+      "id": "delta-bw-directors-office",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 80, "y": 4, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-directors-office" },
+      "contents": []
     }
   ]
 }

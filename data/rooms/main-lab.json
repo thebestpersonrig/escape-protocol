@@ -202,6 +202,15 @@
         "Terminal hacked — but the corridor needs a security pass to open. Find one."
       ],
       "contents": []
+    },
+    {
+      "id": "delta-main-lab",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 2, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-main-lab" },
+      "contents": []
     }
   ]
 }

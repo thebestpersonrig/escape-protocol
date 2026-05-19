@@ -62,6 +62,15 @@
       "action": { "type": "navigate", "to": "self-sacrificed" },
       "lockedMessage": "Reactor must be stabilised before you can lock the station down.",
       "contents": []
+    },
+    {
+      "id": "delta-ms-command-deck",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 48, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-command-deck" },
+      "contents": []
     }
   ]
 }

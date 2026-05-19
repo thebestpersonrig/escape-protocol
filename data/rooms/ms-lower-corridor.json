@@ -55,6 +55,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "RADIATION WARNING — REACTOR DECK ADJACENT\n\nCurrent reading: ELEVATED (Class 2)\nSafe exposure limit: 15 minutes cumulative\n\nPersonnel accessing Reactor Deck: proceed directly.\nDo not linger in this corridor.\n\nReactor stabilisation will clear the radiation field." },
       "contents": []
+    },
+    {
+      "id": "delta-ms-lower-corridor",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 95, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-lower-corridor" },
+      "contents": []
     }
   ]
 }

@@ -71,6 +71,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "An electroconvulsive therapy table. Thick leather restraint straps — still buckled — hold the shape of a body that is no longer there.\n\nThe table's steel surface is cold. Scratch marks run along the right side." },
       "contents": []
+    },
+    {
+      "id": "delta-bw-treatment-room",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 94, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-treatment-room" },
+      "contents": []
     }
   ]
 }

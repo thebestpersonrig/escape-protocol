@@ -45,6 +45,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Earth hangs in the lower quadrant — blue and enormous.\n\nPlaque: 'MERIDIAN STATION ALPHA — For the crew who gave it life.'" },
       "contents": []
+    },
+    {
+      "id": "delta-ms-escape-pod-bay",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 94, "y": 80, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-ms-escape-pod-bay" },
+      "contents": []
     }
   ]
 }

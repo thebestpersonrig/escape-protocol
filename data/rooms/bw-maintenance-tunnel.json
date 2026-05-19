@@ -54,6 +54,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Behind a pipe: a cloth bag with a list. 47 names — all Ward B patients.\nVoss's name at the top, underlined twice.\n\nScratched into the wall: 'Dr. Elara Voss — not Patient 07. AXIOM mapped all 47 of us. They built something called PROMETHEUS. — E.V.'\n\nBelow it: 'She made it out. Godspeed. — Agnes Colm'" },
       "contents": []
+    },
+    {
+      "id": "delta-bw-maintenance-tunnel",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 10, "y": 88, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-bw-maintenance-tunnel" },
+      "contents": []
     }
   ]
 }

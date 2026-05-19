@@ -62,6 +62,15 @@
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "EMERGENCY EXIT PROTOCOL\n\n1. Disengage EM locks via lever panel\n2. Navigate laser grid to reach door\n3. Use access card on door reader\n\nWARNING: Once the exit sequence begins, you have 30 seconds before full facility lockdown." },
       "contents": []
+    },
+    {
+      "id": "delta-final-exit",
+      "type": "delta-collect",
+      "label": "Δ",
+      "x": 70, "y": 92, "w": 3, "h": 4,
+      "cursor": "pointer",
+      "action": { "type": "collect-delta", "deltaId": "delta-final-exit" },
+      "contents": []
     }
   ]
 }

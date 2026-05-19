@@ -1,4 +1,5 @@
 import { getState, dispatch } from './state.js';
+import { AudioSystem } from './audio.js';
 
 // ── Timer ─────────────────────────────────────────────────
 let _timerInterval = null;
@@ -32,8 +33,13 @@ export function updateTimerDisplay() {
   if (!el) return;
   el.textContent = `${pad(min)}:${pad(sec)}`;
   el.className = '';
-  if (s <= 120) el.classList.add('danger');
-  else if (s <= 300) el.classList.add('warn');
+  if (s <= 120) {
+    el.classList.add('danger');
+    if (s === 120) AudioSystem.play('timer-critical');
+  } else if (s <= 300) {
+    el.classList.add('warn');
+    if (s === 300) AudioSystem.play('timer-warning');
+  }
 }
 
 function checkTimeOut() {
@@ -234,6 +240,7 @@ export function showHint() {
   textEl.textContent = hintText;
   if (labelEl) labelEl.textContent = `\u{1F4A1} HINT  (-${timeCost}s)`;
   popup.classList.add('visible');
+  AudioSystem.play('hint-reveal');
   setTimeout(() => popup.classList.remove('visible'), 5500);
 }
 

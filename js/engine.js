@@ -278,6 +278,7 @@ export class Engine {
     }
     const st = getState();
     if (roomId === 'secret-room' && !st.secretRoomUnlocked) return;
+    this._audio.play('room-transition');
     await this._fadeOut();
     dispatch('NAVIGATE_TO_ROOM', { roomId });
     await this._loadRoom(roomId);
@@ -440,6 +441,69 @@ export class Engine {
       }
     }
 
+    // ── Delta Lore — bonus section if all deltas collected ──
+    const _deltaLoreEl = document.getElementById('ending-delta-lore');
+    const _existingLore = this._endEl?.querySelector('.delta-lore-section');
+    if (_existingLore) _existingLore.remove();
+
+    const _deltas = st.collectedDeltas || [];
+    const _startRoom = this._missionConfig?.startRoom || 'lab-entry';
+    // Determine required delta count by mission
+    let _requiredDeltas = 9; // Arcadia default
+    let _missionLabel = 'ARCADIA';
+    let _deltaLoreText = '';
+    if (_startRoom === 'bw-east-foyer') {
+      _requiredDeltas = 10;
+      _missionLabel = 'BLACKWOOD';
+      _deltaLoreText = 'AXIOM internal memo, 1971:\n\n"The Blackwood facility was selected for Phase 1 because of Director Harlan\'s compliance. 47 patients — all involuntary. The neural mapping sessions were disguised as EEG treatments. Each session lasted 90 minutes; the actual mapping took 20.\n\nPatient 07 (Dr. Elara Voss) proved exceptional. Her neural architecture produced the highest-fidelity map in the cohort. PROMETHEUS was built primarily from her data.\n\nHarlan eventually broke. He gave Voss the tunnel key. He sealed the institute. But the data was already transmitted.\n\nPhase 2 proceeded without him."';
+    } else if (_startRoom === 'ms-airlock-bay') {
+      _requiredDeltas = 11;
+      _missionLabel = 'MERIDIAN';
+      _deltaLoreText = 'CALLISTO intercept, decoded:\n\n"MERIDIAN STATION ALPHA was never a research posting. The six crew members were selected because their neural profiles matched gaps in the PROMETHEUS model.\n\nThe Synaptic Response Recorders ran for 63 days. The buffer contains enough data to complete the model — 47 maps from Blackwood, refined through Arcadia, finalised through Meridian.\n\nKovalev discovered the recorders on Day 61. He chose to burn the buffer rather than let AXIOM extract it.\n\nThe second vessel — Contact Beta — is CALLISTO. They have Dr. Voss\'s testimony. They have Kira Reiss\'s evidence from Arcadia. And now, if the buffer burns, PROMETHEUS dies incomplete.\n\nAXIOM will try again. They always do.\nBut not with these 47. Not with these 6."';
+    } else {
+      _deltaLoreText = 'AXIOM INTERNAL — PROJECT HELIOS — EYES ONLY:\n\n"PROMETHEUS is not artificial intelligence. It is 47 human neural maps, taken without consent at Blackwood Psychiatric Institute in 1972.\n\nPhase 1 (Blackwood): Neural mapping of 47 patients. Dr. Elara Voss — Patient 07 — produced the core architecture.\n\nPhase 2 (Arcadia): PROMETHEUS constructed. Kira Reiss discovered the truth. She triggered the lockdown and severed the uplink.\n\nPhase 3 (Meridian Station): Six crew members selected for supplementary mapping. Synaptic Response Recorders deployed covertly.\n\nThe CALLISTO network — an IREX Board whistleblower cell — has been monitoring all three phases. They possess testimony from Voss and Reiss.\n\nIf the Meridian buffer is destroyed, PROMETHEUS cannot be completed. The 47 maps remain fragments. The 6 crew members remain people.\n\nThis is what they fought for."';
+    }
+
+    const _collectedCount = _deltas.length;
+    if (_collectedCount >= _requiredDeltas) {
+      const loreSection = document.createElement('div');
+      loreSection.className = 'delta-lore-section';
+      loreSection.style.cssText = 'margin-top:20px;padding:16px 20px;background:rgba(255,180,60,0.06);border:1px solid rgba(255,180,60,0.25);border-radius:6px;max-width:520px;margin-left:auto;margin-right:auto;text-align:left;';
+      loreSection.innerHTML = `
+        <div style="color:rgba(255,180,60,0.8);font-family:monospace;font-size:11px;letter-spacing:0.15em;margin-bottom:8px;">Δ ${_missionLabel} DOSSIER — ALL FRAGMENTS COLLECTED</div>
+        <div style="color:rgba(220,200,160,0.75);font-family:monospace;font-size:12px;line-height:1.6;white-space:pre-wrap;">${_deltaLoreText}</div>
+      `;
+      // Insert after score or body
+      const insertAfter = scoreEl || statsEl || bodyEl;
+      if (insertAfter && insertAfter.parentNode) {
+        insertAfter.parentNode.insertBefore(loreSection, insertAfter.nextSibling);
+      }
+    }
+
+    // ── Record challenge best time ──
+    if (endingId === 'escaped' || endingId === 'secret-escape' || endingId === 'self-sacrifice') {
+      try {
+        const _startRoom = this._missionConfig?.startRoom || 'lab-entry';
+        let _missionKey = 'arcadia';
+        if (_startRoom === 'bw-east-foyer') _missionKey = 'blackwood';
+        else if (_startRoom.startsWith('ms-')) _missionKey = 'meridian';
+        const _times = JSON.parse(localStorage.getItem('ep-challenge-times') || '{}');
+        // Find all challenges for this mission and update bests
+        const _challengeTargets = {
+          arcadia:  [['speed-arcadia-5',300],['speed-arcadia-3',180]],
+          blackwood:[['speed-blackwood-8',480],['speed-blackwood-5',300]],
+          meridian: [['speed-meridian-10',600],['speed-meridian-6',360]],
+        };
+        const _targets = _challengeTargets[_missionKey] || [];
+        for (const [cid] of _targets) {
+          if (_times[cid] === undefined || elapsed < _times[cid]) {
+            _times[cid] = elapsed;
+          }
+        }
+        localStorage.setItem('ep-challenge-times', JSON.stringify(_times));
+      } catch (e) { console.warn('[Engine] Challenge time save error:', e); }
+    }
+
     this._endEl?.classList.add('visible');
     this._achievements.checkEnding(endingId, st);
     SaveSystem.deleteSave();
@@ -482,7 +546,7 @@ export class Engine {
     if (action === 'UNLOCK_ACHIEVEMENT') {
       const id = state.achievements[state.achievements.length - 1];
       const def = this._achievements.getDef(id);
-      if (def) showAchievementToast(def.name);
+      if (def) { showAchievementToast(def.name); this._audio.play('achievement'); }
     }
   }
 

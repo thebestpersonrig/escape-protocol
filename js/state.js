@@ -78,6 +78,7 @@ const DEFAULT_STATE = {
   bioSwitchPattern: [1, 0, 1, 1],
   powerFrequency: 500,
   inspectedObjects: [],
+  collectedDeltas: [],
   achievements: [],
   ending: null,
   secretRoomUnlocked: false,
@@ -237,8 +238,16 @@ export function dispatch(action, payload = {}) {
       }
       break;
 
+    case "COLLECT_DELTA":
+      if (!_state.collectedDeltas.includes(payload.deltaId)) {
+        _state.collectedDeltas.push(payload.deltaId);
+      }
+      break;
+
     case "LOAD_STATE":
       _state = JSON.parse(JSON.stringify(payload.state));
+      // Backward compat: ensure collectedDeltas exists for older saves
+      if (!Array.isArray(_state.collectedDeltas)) _state.collectedDeltas = [];
       break;
 
     case "RESET_STATE":

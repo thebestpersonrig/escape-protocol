@@ -107,6 +107,55 @@ export const AudioSystem = {
         this._makeNoise(0.04, 0.18 * sfx, 280);
         setTimeout(() => this._makeTone(65, 'sawtooth', 0.1, 0.14 * sfx, 0.002, 0.09), 8);
         break;
+      case 'hover':
+        // Soft tick — barely audible feedback on hotspot hover
+        this._makeTone(1800, 'sine', 0.025, 0.03 * sfx, 0.003, 0.02);
+        break;
+      case 'container-open':
+        // Drawer / cabinet creak — noise + low tone
+        this._makeNoise(0.08, 0.1 * sfx, 350);
+        setTimeout(() => this._makeTone(90, 'sawtooth', 0.12, 0.07 * sfx, 0.005, 0.1), 40);
+        break;
+      case 'container-close':
+        this._makeNoise(0.06, 0.08 * sfx, 300);
+        setTimeout(() => this._makeTone(70, 'sawtooth', 0.08, 0.05 * sfx, 0.005, 0.07), 30);
+        break;
+      case 'inspect-open':
+        // Document unfolding — quiet paper + subtle tone
+        this._makeNoise(0.1, 0.04 * sfx, 900);
+        this._makeTone(440, 'sine', 0.15, 0.04 * sfx, 0.02, 0.12);
+        break;
+      case 'room-transition':
+        // Whoosh — filtered noise sweep
+        this._makeNoise(0.5, 0.12 * sfx, 600);
+        this._makeTone(80, 'sine', 0.4, 0.06 * sfx, 0.05, 0.35);
+        break;
+      case 'timer-warning':
+        // Urgent double ping — when timer goes yellow
+        this._makeTone(1000, 'sine', 0.1, 0.12 * sfx, 0.005, 0.08);
+        setTimeout(() => this._makeTone(1200, 'sine', 0.1, 0.1 * sfx, 0.005, 0.08), 120);
+        break;
+      case 'timer-critical':
+        // Low pulse — when timer goes red
+        this._makeTone(200, 'square', 0.15, 0.15 * sfx, 0.005, 0.12);
+        break;
+      case 'delta-collect':
+        // Ethereal ascending chime — special collectible
+        [0, 100, 200, 350].forEach((delay, i) => {
+          setTimeout(() => this._makeTone([660, 880, 1100, 1320][i], 'sine', 0.35, 0.1 * sfx, 0.02, 0.3), delay);
+        });
+        break;
+      case 'achievement':
+        // Triumphant stinger — 5-note ascending
+        [0, 80, 160, 280, 400].forEach((delay, i) => {
+          setTimeout(() => this._makeTone([440, 554, 659, 880, 1047][i], 'sine', 0.3, 0.12 * sfx, 0.01, 0.25), delay);
+        });
+        break;
+      case 'hint-reveal':
+        // Soft descending — like a whisper
+        this._makeTone(600, 'sine', 0.2, 0.06 * sfx, 0.02, 0.15);
+        setTimeout(() => this._makeTone(400, 'sine', 0.25, 0.05 * sfx, 0.02, 0.2), 100);
+        break;
     }
   },
 
