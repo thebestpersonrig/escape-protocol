@@ -3,7 +3,7 @@
   "name": "Medical Bay",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "Clean, white, cold. Medical equipment lines the walls. A navigation override panel is mounted on the main counter — the biometric scanner is offline, but the manual switch access is still live. The med cabinet is sealed.",
+  "narrativeOnEnter": "Cold, white, sterile. Navigation override panel on the counter — biometric scanner offline, manual switches live.",
   "particles": { "type": "dust", "density": 0.1 },
 
   "hotspots": [
@@ -45,21 +45,12 @@
       ]
     },
     {
-      "id": "ms-medical-chart",
+      "id": "ms-medical-equipment",
       "type": "inspect",
-      "label": "Medical Chart",
-      "x": 76, "y": 28, "w": 16, "h": 40,
+      "label": "Medical Chart & Equipment",
+      "x": 76, "y": 28, "w": 16, "h": 60,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "CREW MEDICAL STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — Last scan: 48h ago. Status: EVACUATED\nKOVALEV, D. — Last scan: 6h ago. Status: UNKNOWN (Reactor Deck)\nPATEL, S.  — Last scan: 48h ago. Status: EVACUATED\nDIAZ, M.   — Last scan: 48h ago. Status: EVACUATED\n\nNote: Kovalev remained on station to attempt manual reactor stabilisation.\nIf he succeeded, structural integrity of the station was preserved.\nIf not — the reactor will cascade in approximately 30 minutes from lockdown." },
-      "contents": []
-    },
-    {
-      "id": "ms-defibrillator",
-      "type": "inspect",
-      "label": "Defibrillator",
-      "x": 76, "y": 70, "w": 14, "h": 18,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "An automated defibrillator unit. Charged and ready. Station-issue.\n\nA label on the side:\n'MERIDIAN STATION — MEDICAL INVENTORY #7'\n\nYou do not need this right now. Hopefully." },
+      "action": { "type": "inspect", "text": "CREW STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — EVACUATED\nKOVALEV, D. — UNKNOWN (Reactor Deck)\nPATEL, S.  — EVACUATED\nDIAZ, M.   — EVACUATED\n\nKovalev remained to attempt reactor stabilisation.\nIf he failed — cascade in ~30 minutes.\n\nDefibrillator on the wall. Charged. Hopefully not needed." },
       "contents": []
     }
   ]

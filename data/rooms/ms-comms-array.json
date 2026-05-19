@@ -3,7 +3,7 @@
   "name": "Comms Array",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "A tight room — just equipment racks, a transmitter console, and a satellite dish control terminal. The distress beacon is blinking orange: active, but unconfirmed. A cabinet on the wall has an external airlock indicator behind a cracked glass panel.",
+  "narrativeOnEnter": "Tight room. Transmitter console and equipment racks. Distress beacon blinking orange — active, unconfirmed.",
   "particles": { "type": "dust", "density": 0.1 },
 
   "hotspots": [
@@ -41,7 +41,7 @@
           "label": "Beacon Manual",
           "x": 38, "y": 32, "w": 16, "h": 14,
           "visibleWhen": { "objectState": "ms-comms-cabinet", "equals": "open" },
-          "action": { "type": "inspect", "text": "MERIDIAN STATION — DISTRESS BEACON PROTOCOL\n\nBeacon is active. Rescue shuttle is in position.\nTo confirm evacuation and authorise approach:\n\n1. Stabilise reactor (required for safe beacon confirmation)\n2. Access the escape pod bay for passenger manifest upload\n3. OR: use external airlock EVA route to dock directly\n   (EVA route requires reactor stabilisation — no active radiation fields)\n\nEmergency beacon transmission will automatically signal shuttle\nupon reactor stabilisation completion.\n\n───\nKovalev's handwriting, on a note tucked inside the manual:\n\n'Do not let the beacon auto-signal MERIDIAN-3.\nOverride the auto-signal before reactor sequence completes.\nManually transmit on 148.350 MHz instead.\n\nMERIDIAN-3 will tell you they're from HELIOS GROUP.\nHELIOS GROUP is AXIOM. Their shuttle carries a portable SRR extraction unit.\nIf they dock, they will board with a team and attempt to pull the buffer data\nbefore the thermal wipe completes.\nDo not give them that window.\n\nCALLISTO is the real rescue.\nThey are a whistleblower network — IREX Board — operating outside AXIOM channels.\nThey have testimony from Dr. Elara Voss, who survived Blackwood.\nThey have Kira Reiss's server logs from Arcadia.\nThey know what PROMETHEUS is.\nAnd they know what AXIOM will do if they get six more neural maps to build the next one.\n\nTransmit: \"Buffer is clean. Kovalev's message.\"\nThey will know what it means. They will come in.\n— D.K.'" }
+          "action": { "type": "inspect", "text": "DISTRESS BEACON PROTOCOL\n\nBeacon active. To confirm evacuation:\n1. Stabilise reactor\n2. Access pod bay — OR use external airlock EVA route\n\nBeacon auto-signals shuttle on reactor stabilisation.\n\n───\nKovalev's note inside:\n\n'Do NOT let the beacon auto-signal MERIDIAN-3.\nManually transmit on 148.350 MHz.\n\nHELIOS GROUP = AXIOM. Their shuttle has a portable SRR extraction unit.\nDo not give them a window to pull the buffer data.\n\nCALLISTO is the real rescue — IREX Board whistleblower network.\nThey have testimony from Dr. Voss (Blackwood) and Kira Reiss (Arcadia).\n\nTransmit: \"Buffer is clean. Kovalev's message.\"\n— D.K.'" }
         }
       ]
     },
@@ -51,7 +51,7 @@
       "label": "Transmitter Console",
       "x": 10, "y": 30, "w": 22, "h": 44,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The transmitter console shows two active signals.\n\nSIGNAL 1 — Standard emergency frequency:\nSHUTTLE MERIDIAN-3 RESPONSE:\n'Station acknowledged. Holding position. Awaiting confirmation of crew manifest and reactor status before approach. Sending response to EVA channel: airlock accessible from Comms Array once radiation clear.'\n\nSIGNAL 2 — 148.350 MHz (encrypted burst, partially decoded):\nHEADER: CALLISTO / IREX BOARD — INDEPENDENT RESEARCH ETHICS EXCHANGE\n\n'MERIDIAN STATION — WE KNOW ABOUT HELIOS.\nWE HAVE THE BLACKWOOD FILES.\nWE HAVE TESTIMONY FROM DR. ELARA VOSS AND K. REISS.\nWE HAVE THE ARCADIA SERVER LOGS.\n\nKOVALEV — IF YOU ARE READING THIS — WE ARE AT 148.350.\nDO NOT BOARD MERIDIAN-3.\nREPEAT: DO NOT BOARD MERIDIAN-3.\nTHEY WILL TELL YOU THEY ARE RESCUE.\nTHEY ARE EXTRACTION.\n\nWHEN THE REACTOR IS STABLE: TRANSMIT ON THIS FREQUENCY.\nWE WILL COME IN.'\n\n───\nA second burst, timestamp 03:41 — the moment Arcadia's network went dark. Origin: unknown. Signal pattern matches no registered vessel or station.\n\n'I HAVE THE NAMES.\nALL 47.\nAND NOW ALL 6.\nTELL CALLISTO: THE DATA MUST NOT REACH AXIOM.\nI HAVE BEEN WAITING FIFTEEN YEARS TO SAY THIS.\n— P'" },
+      "action": { "type": "inspect", "text": "Two active signals.\n\nSIGNAL 1 — MERIDIAN-3:\n'Holding position. Awaiting reactor status before approach.'\n\nSIGNAL 2 — 148.350 MHz (encrypted):\nCALLISTO / IREX BOARD:\n'WE KNOW ABOUT HELIOS. WE HAVE THE BLACKWOOD FILES.\nDO NOT BOARD MERIDIAN-3. THEY ARE EXTRACTION.\nWHEN REACTOR IS STABLE: TRANSMIT. WE WILL COME IN.'\n\n───\nA second burst, timestamp 03:41 — the moment Arcadia went dark. Origin: unknown.\n\n'ALL 47. AND NOW ALL 6.\nTHE DATA MUST NOT REACH AXIOM.\n— P'" },
       "contents": []
     },
     {

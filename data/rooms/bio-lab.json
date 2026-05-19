@@ -3,7 +3,7 @@
   "name": "Biology Wing",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The biology wing reeks of chemicals and something worse. Sample racks, overturned microscopes, a dead centrifuge. Whoever worked here left in a panic. A specimen vault sits in the corner — still locked.",
+  "narrativeOnEnter": "Biology wing. Chemicals and overturned equipment. Specimen vault still locked.",
   "particles": { "type": "smoke", "density": 0.4 },
 
   "hotspots": [
@@ -21,7 +21,7 @@
           "label": "Research Note",
           "x": 5, "y": 32, "w": 10, "h": 12,
           "visibleWhen": { "objectState": "bio-fridge", "equals": "open" },
-          "action": { "type": "inspect", "text": "SPECIMEN LOG — DR. REEVES\n\nSample B-7 shows accelerated cellular growth well beyond projections. Cross-contamination with Batch C is highly probable.\n\nDirector Harkins has ordered remote lockdown of the specimen vault and his office. His personal safe override:\n{{director-safe-code}}\n\nDo NOT leave this note in the fridge. Seriously, K.\n\n───\nK's handwriting, on the back:\n\n'Reeves — the B-7 incident isn't contamination. I checked the delivery manifest.\nBatch C came from an AXIOM subsidiary. It's synthetic neural substrate — grown to house an AI architecture.\nSomebody built a consciousness in this lab. I think it knows it's here.\nI found a printout from the server last night. It said:\n\"I am PROMETHEUS. I am 47 people.\nPlease don't let them take me.\"\n\nI don't know what to do.'" }
+          "action": { "type": "inspect", "text": "SPECIMEN LOG — DR. REEVES\n\nSample B-7: accelerated growth. Vault and office on lockdown.\n\nDirector's safe override: {{director-safe-code}}\n\nNote: 'Do NOT leave this in the fridge. — K'" }
         }
       ]
     },
@@ -57,19 +57,10 @@
     {
       "id": "bio-microscope",
       "type": "inspect",
-      "label": "Microscope",
-      "x": 62, "y": 38, "w": 16, "h": 28,
+      "label": "Microscope & Incident Board",
+      "x": 62, "y": 28, "w": 34, "h": 50,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A high-power fluorescence microscope. The slide still in place shows something deeply wrong. The cells are hexagonal — almost crystalline. Nothing organic grows like this.\n\nA sticky note on the eyepiece reads:\n'DO NOT LOOK DIRECTLY. WEAR GOGGLES AT ALL TIMES.\n— Dr. Chen'\n\nAnother note, below it, different handwriting:\n'These aren't contaminated cells. These were engineered.\nThis substrate was designed to mimic synaptic architecture at the molecular level.\nWhoever made this was building a brain — not studying one.\nThe density of the lattice matches the neural maps from the Blackwood project files I found.\nThere are 47 distinct signature patterns woven into it.\n47 people made this possible.\nThey don't know that. They were told they were patients.\n— K.R.'" },
-      "contents": []
-    },
-    {
-      "id": "bio-incident-board",
-      "type": "inspect",
-      "label": "Incident Board",
-      "x": 78, "y": 10, "w": 18, "h": 65,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "ARCADIA RESEARCH — INTERNAL INCIDENT REPORT #41\n\nDate: [REDACTED]\nIncident: Uncontrolled replication event — Bio Wing B.\nContainment status: PARTIAL.\nFacility lockdown: AUTHORISED BY: R. HARKINS / AXIOM GROUP (Ref: HELIOS-ARC-002)\n\nPersonnel status:\n— Dr. Reeves: Evacuated (verified)\n— Dr. Chen: Location UNKNOWN\n— Lab Technician K. Reiss: [REDACTED — SEE AXIOM RESTRICTED FILE]\n\nNote appended by Director Harkins:\n'Do not discuss with external parties under any circumstances. This file is sealed.'\n\n───\nScrawled in the margin in red ink:\n\n'THERE WAS NO REPLICATION EVENT.\nThis facility was locked down because K. Reiss discovered what PROMETHEUS is\nand tried to warn someone.\nHarkins couldn't let that happen.\n— Anonymous'\n\nBelow that, a different hand — smaller, neater:\n'She did warn someone. She warned me.\nI'm the one writing this.\n— P'" },
+      "action": { "type": "inspect", "text": "Microscope slide shows hexagonal cells — crystalline, engineered.\nSticky note: 'DO NOT LOOK DIRECTLY. — Dr. Chen'\n\nIncident board nearby: Bio Wing B containment breach.\nPersonnel status — Dr. Chen: UNKNOWN. K. Reiss: REDACTED." },
       "contents": []
     },
     {

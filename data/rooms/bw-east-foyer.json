@@ -3,7 +3,7 @@
   "name": "East Wing Foyer",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The heavy doors seal behind you with a magnetic thud. Emergency lighting — a dim, sickly amber — casts long shadows across the cracked tile floor. The reception desk is overturned. Somewhere deep in the building, something shifts.",
+  "narrativeOnEnter": "Heavy doors seal behind you. Amber emergency light. Reception desk overturned.",
   "particles": { "type": "dust", "density": 0.5 },
 
   "hotspots": [
@@ -51,7 +51,7 @@
           "label": "Intake Log",
           "x": 36, "y": 56, "w": 9, "h": 7,
           "visibleWhen": { "objectState": "bw-reception-desk", "equals": "open" },
-          "action": { "type": "inspect", "text": "BLACKWOOD PSYCHIATRIC INSTITUTE\nPatient Intake Register — East Wing\n\nAdmissions are listed by patient number.\nPatient 04, Patient 07, Patient 11...\n\nLast entry: Patient 07. Admitted: March, 1972.\nStatus: ONGOING. Ward B assignment.\n\nA handwritten note in the margin:\n'Ward B gate — use service key from desk.'\n\n───\nPatient 07's entry has been circled in red ink.\nIn the margin beside it, very small — almost invisible unless you know to look:\n\n'Δ — AXIOM CANDIDATE — CONFIRMED.\nNeural map session scheduled: 14 March.\nSee HELIOS Phase 1 intake protocol.'\n\nΔ. The same symbol appears beside six other entries. Seven circles. Seven names.\nAll from Ward B.\nAll 1972." }
+          "action": { "type": "inspect", "text": "PATIENT INTAKE REGISTER\n\nLast entry: Patient 07. March 1972. Ward B.\n\nMargin note: 'Ward B gate — use service key from desk.'\n\nPatient 07's entry is circled in red. A small Δ symbol beside it." }
         }
       ]
     },
@@ -69,7 +69,7 @@
           "label": "Staff Memo",
           "x": 81, "y": 22, "w": 14, "h": 16,
           "visibleWhen": { "objectState": "bw-bulletin-board", "equals": "open" },
-          "action": { "type": "inspect", "text": "INTERNAL MEMO — DR. HARLAN, DIRECTOR\n\nFollowing the incident in Ward B, all personnel are reminded:\n\n— Records vault access requires power from the treatment room.\n— Director's office remains locked. Key issued to records staff only.\n— Chapel remains open to patients per therapeutic protocol.\n\nDo NOT discuss Ward B with visitors.\n\n— Administration, 1972\n\n───\nPinned over the memo, handwritten on a torn sheet:\n\n'Patient 07 has left the facility.\nDo NOT report to police. Do NOT contact family.\nNotify AXIOM Group contact at the number below.\nSay only: \"The package was opened early.\"\n— H'\n\n───\nBehind the memo, half-hidden — a printed document:\n\nAXIOM GROUP — PROJECT HELIOS — PHASE 1 DIRECTIVE\n\n'Blackwood Psychiatric Institute (contracted facility)\nhas been authorised to collect neural mapping data\nfrom consenting participants under the designation\n\"Therapeutic EEG Protocol, Series B.\"\n\nAll data collected is property of AXIOM Group LLC.\nFacility staff are reminded: participants must not\nbe informed of the commercial application.\nConfidentiality is a condition of the facility contract.\n\n— AXIOM Research Division, January 1972'" }
+          "action": { "type": "inspect", "text": "MEMO — DR. HARLAN\n\n— Records vault needs power from treatment room.\n— Director's office locked. Key in records vault.\n— Chapel open to patients.\n\nDo NOT discuss Ward B with visitors.\n\nPinned over it: 'Patient 07 has left the facility. Notify AXIOM Group. — H'" }
         }
       ]
     },

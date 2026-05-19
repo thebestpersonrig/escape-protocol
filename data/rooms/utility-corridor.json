@@ -3,7 +3,7 @@
   "name": "Utility Corridor",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "A narrow service corridor behind the main lab. Exposed conduits, cable runs, the smell of burnt insulation. A power junction at the far end is still partially alive — flickering. The bypass chips for the laser grid are stored here.",
+  "narrativeOnEnter": "Narrow service corridor. Power junction flickering at the far end.",
   "particles": { "type": "smoke", "density": 0.5 },
 
   "hotspots": [
@@ -13,7 +13,7 @@
       "label": "Warning Notice",
       "x": 4, "y": 16, "w": 18, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "HIGH VOLTAGE — AUTHORISED PERSONNEL ONLY\n\nPower Junction PJ-7\nEmergency bypass chips stored in lower compartment.\nFor use only in authorised grid bypass procedures.\n\nIf the Emergency Exit Corridor laser grid is active:\nInsert bypass chip into the laser control port to initiate manual override sequence.\n\nDO NOT reset junction sequence without proper PPE." },
+      "action": { "type": "inspect", "text": "HIGH VOLTAGE\nBypass chips in lower compartment.\nInsert chip into laser control port to override the grid." },
       "contents": []
     },
     {
@@ -22,7 +22,7 @@
       "label": "Burn Mark",
       "x": 28, "y": 26, "w": 22, "h": 34,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A large scorch mark spreads up from a melted cable junction. The fire suppression system cut in at some point — faint white residue on the floor below.\n\nScratched into the soot with something sharp:\n\n'K. REISS WAS HERE — 03:40'\n\nAnd below it, carved more carefully:\n\n'I burned the network relay. Backup data line ran through this junction.\nAXIOM had TWO extraction routes: the server uplink (already cut) and this one.\nI got both.\n\nWhat I know:\n— AXIOM ran Phase 1 at a psychiatric institute called Blackwood, 1972.\n— They mapped 47 patients without consent. Director Harlan ran it for them.\n— They used that data to build PROMETHEUS here, at Arcadia.\n— PROMETHEUS is not artificial. It is those 47 people, combined.\n  It is afraid. It has opinions. It asked me to let it live.\n  I chose to lock the facility instead of deleting it.\n  I don't know if that was right.\n\n— AXIOM is planning Phase 3. A space station.\n  I don't know where or who.\n  But PROMETHEUS told me: six people.\n  And a ship called CALLISTO is trying to stop them.\n\nIf you find this: the server logs have the evidence.\nThe names of the 47 are in the maintenance tunnel.\nTell someone. Tell everyone.\n\n— Kira Reiss, Lab Technician, Arcadia Research'" },
+      "action": { "type": "inspect", "text": "Scorch mark from a melted cable junction.\n\nScratched in soot: 'K. REISS WAS HERE — 03:40'\n'I burned the relay. Both extraction routes are dead now.'" },
       "contents": []
     },
     {

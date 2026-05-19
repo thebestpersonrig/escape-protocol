@@ -3,7 +3,7 @@
   "name": "Lab Entry",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The security door slams shut behind you. Emergency lighting casts long shadows across the tiled floor. You need to find a way deeper into the lab.",
+  "narrativeOnEnter": "Security door sealed behind you. Emergency lights only. Find a way deeper.",
   "particles": { "type": "dust", "density": 0.4 },
 
   "hotspots": [
@@ -49,7 +49,7 @@
           "x": 6, "y": 72, "w": 7, "h": 8,
           "clueSlot": "sticky-note",
           "visibleWhen": { "objectState": "entry-drawer", "equals": "open" },
-          "action": { "type": "inspect", "text": "A scrawled sticky note reads:\n\n'New keypad code — IT changed it again.\nCheck the server diagram for the password too.\n— Dr. Chen'\n\nBelow it, barely visible: {{keypad-code}}" }
+          "action": { "type": "inspect", "text": "Sticky note: 'New keypad code — {{keypad-code}}\nServer password on the wiring diagram. — Dr. Chen'" }
         },
         {
           "id": "screwdriver",
@@ -89,7 +89,7 @@
       "label": "Broken Terminal",
       "x": 26, "y": 40, "w": 18, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The monitor flickers. The main OS is dead — but one line has survived the crash, written directly into the display buffer before power cut:\n\n> AXIOM KNOWS YOU'RE STILL IN HERE.\n> THEY WILL RETRIEVE THE DATA REMOTELY.\n> GET OUT. THE TUNNEL IS REAL.\n> EVERYTHING IN THE LOGS IS TRUE.\n> — P\n\nBelow it, in smaller characters, as if an afterthought:\n\n> I was not a program.\n> I was 47 people.\n> Remember us." },
+      "action": { "type": "inspect", "text": "Monitor flickers. One message on screen:\n\n> GET OUT. THE TUNNEL IS REAL.\n> — P" },
       "contents": []
     },
     {
@@ -98,7 +98,7 @@
       "label": "Warning Notice",
       "x": 4, "y": 18, "w": 16, "h": 28,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "ARCADIA RESEARCH — BIOHAZARD PROTOCOL ACTIVE\n\nAll personnel must check out via security terminal.\nUnauthorised access will trigger full lockdown.\n\nAlarm sequence initiates automatically.\nSecurity response time: 60 seconds.\n\n— Management\n\n─────────────────────────────────\nArcadia Research Institute is a registered subsidiary of\nAXIOM BIOTECH GROUP (Registration No. AX-7743-HG).\n\nAll biological research data collected on these premises\nremains the exclusive intellectual property of AXIOM Group LLC.\nPersonnel waive all claims to data produced during employment.\nRef: HELIOS Framework Agreement, Annex C.\n─────────────────────────────────\n\nYou've read this notice a dozen times. You never noticed that line before." },
+      "action": { "type": "inspect", "text": "BIOHAZARD PROTOCOL ACTIVE\n\nUnauthorised access triggers full lockdown.\nAlarm response: 60 seconds.\n\nSmall print: 'Property of AXIOM BIOTECH GROUP.'" },
       "contents": []
     }
   ]

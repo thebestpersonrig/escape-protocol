@@ -3,7 +3,7 @@
   "name": "Main Laboratory",
   "ambientSound": "ambient-hum",
   "lighting": "flicker-fast",
-  "narrativeOnEnter": "The main lab. Overturned chairs, scattered papers. Someone left in a hurry. Power to the server room must still be down.",
+  "narrativeOnEnter": "Main lab. Overturned chairs, scattered papers. Server room power is down.",
   "particles": { "type": "smoke", "density": 0.3 },
 
   "hotspots": [
@@ -40,7 +40,7 @@
           "x": 5, "y": 55, "w": 8, "h": 10,
           "clueSlot": "server-diagram",
           "visibleWhen": { "objectState": "lab-cabinet-left", "equals": "open" },
-          "action": { "type": "inspect", "text": "SERVER ROOM WIRING DIAGRAM\n\nWire junction panel — cross-reference:\nRed → Red terminal\nBlue → Blue terminal\nGreen → Green terminal\nYellow → Yellow terminal\nWhite → White terminal\n\n(Match colours to restore routing)\n\nAlso noted at bottom in red ink:\nTerminal password: {{terminal-password}}" }
+          "action": { "type": "inspect", "text": "WIRING DIAGRAM\nMatch wire colours: Red→Red, Blue→Blue, Green→Green, Yellow→Yellow, White→White.\n\nScrawled in red ink: Terminal password — {{terminal-password}}" }
         }
       ]
     },
@@ -68,7 +68,7 @@
           "x": 81, "y": 48, "w": 8, "h": 9,
           "clueSlot": "lever-diagram",
           "visibleWhen": { "objectState": "lab-cabinet-right", "equals": "open" },
-          "action": { "type": "inspect", "text": "EMERGENCY EXIT — LEVER CONTROL SEQUENCE\n\nTo disengage electromagnetic locks:\n\n L1  L2  L3  L4\n{{lever-pattern}}\n\nAll four must be set simultaneously before pressing ENGAGE.\n\nWarning: Incorrect sequence triggers secondary alarm." }
+          "action": { "type": "inspect", "text": "EXIT LEVER SEQUENCE\nL1  L2  L3  L4\n{{lever-pattern}}\n\nSet all four, then press ENGAGE. Wrong combo triggers alarm." }
         }
       ]
     },
@@ -104,7 +104,7 @@
           "x": 69, "y": 54, "w": 8, "h": 10,
           "clueSlot": "server-diagram",
           "visibleWhen": { "objectState": "lab-locker", "equals": "open" },
-          "action": { "type": "inspect", "text": "SERVER ROOM WIRING DIAGRAM\n\nWire junction panel — cross-reference:\nRed → Red terminal\nBlue → Blue terminal\nGreen → Green terminal\nYellow → Yellow terminal\nWhite → White terminal\n\n(Match colours to restore routing)\n\nAlso noted at bottom in red ink:\nTerminal password: {{terminal-password}}" }
+          "action": { "type": "inspect", "text": "WIRING DIAGRAM\nMatch wire colours: Red→Red, Blue→Blue, Green→Green, Yellow→Yellow, White→White.\n\nScrawled in red ink: Terminal password — {{terminal-password}}" }
         },
         {
           "id": "lever-diagram",
@@ -113,7 +113,7 @@
           "x": 69, "y": 68, "w": 8, "h": 9,
           "clueSlot": "lever-diagram",
           "visibleWhen": { "objectState": "lab-locker", "equals": "open" },
-          "action": { "type": "inspect", "text": "EMERGENCY EXIT — LEVER CONTROL SEQUENCE\n\nTo disengage electromagnetic locks:\n\n L1  L2  L3  L4\n{{lever-pattern}}\n\nAll four must be set simultaneously before pressing ENGAGE.\n\nWarning: Incorrect sequence triggers secondary alarm." }
+          "action": { "type": "inspect", "text": "EXIT LEVER SEQUENCE\nL1  L2  L3  L4\n{{lever-pattern}}\n\nSet all four, then press ENGAGE. Wrong combo triggers alarm." }
         }
       ]
     },
@@ -174,7 +174,7 @@
       "label": "Loose Panel",
       "x": 48, "y": 78, "w": 6, "h": 8,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A panel behind one of the benches sits slightly ajar. A faint draft comes through. Someone has been here before — scratch marks on the floor, like something was dragged away from this wall.\n\nScratched into the panel frame with a key or nail:\n\n'4031 — V.\nShe was real. They erased her.\nIf PROMETHEUS can feel — what have we done?\n— K.R.'\n\nAnd below that, carved deeper, as if done in anger:\n\n'AXIOM TOOK 47 PEOPLE AND CALLED IT DATA.\nI'M CALLING IT MURDER.'" },
+      "action": { "type": "inspect", "text": "A loose panel. Faint draft coming through. Scratch marks on the floor.\n\nCarved into the frame: '4031 — K.R.'" },
       "contents": []
     },
     {

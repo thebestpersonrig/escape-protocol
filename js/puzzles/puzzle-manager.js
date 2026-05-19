@@ -23,6 +23,7 @@ const PUZZLE_NAMES = {
   'bw-records-cipher':  'Symbol Cipher',
   'bw-director-safe':   "Director's Safe",
   'bw-chapel-bells':    'Bell Sequence',
+  'bw-tunnel-hatch':    'Hatch Lock',
   // Meridian
   'ms-airlock-seal':     'Airlock Override',
   'ms-power-reroute':    'Power Reroute',
@@ -55,6 +56,7 @@ const PUZZLE_MODULES = {
   'bw-records-cipher':  () => import('./symbol-sequence.js'),
   'bw-director-safe':   () => import('./keypad.js'),
   'bw-chapel-bells':    () => import('./memory-card.js'),
+  'bw-tunnel-hatch':    () => import('./keypad.js'),
   // Meridian
   'ms-airlock-seal':     () => import('./keypad.js'),
   'ms-power-reroute':    () => import('./wire-connect.js'),

@@ -3,7 +3,7 @@
   "name": "Escape Pod Bay",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "A single escape pod — standard crew evacuation vehicle, rated for four. The launch panel is active. A keypad requires the authorisation code before the pod will launch. Through the blast window: open space, stars, the distant glow of Earth.",
+  "narrativeOnEnter": "One escape pod. Launch panel active — keypad requires an authorisation code. Earth glows through the blast window.",
   "particles": { "type": "dust", "density": 0.1 },
 
   "hotspots": [
@@ -43,7 +43,7 @@
       "label": "Blast Window",
       "x": 76, "y": 20, "w": 18, "h": 50,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Through the blast-proof glass: open space. The Earth hangs in the lower quadrant — blue and enormous. The rescue shuttle is not visible from this angle.\n\nA small plaque is mounted below the window:\n\n'MERIDIAN STATION ALPHA\nConstructed: Year 1, Station Era\nDesigned to last: 25 years\n\nFor the crew who gave it life.'" },
+      "action": { "type": "inspect", "text": "Earth hangs in the lower quadrant — blue and enormous.\n\nPlaque: 'MERIDIAN STATION ALPHA — For the crew who gave it life.'" },
       "contents": []
     }
   ]

@@ -3,7 +3,7 @@
   "name": "Solitary Cell",
   "ambientSound": "ambient-creep",
   "lighting": "flicker-fast",
-  "narrativeOnEnter": "A tiny room, barely two metres across. The walls are padded — old foam, mouldering now — and the single overhead light is caged behind thick wire mesh. There is no window. There is no furniture. There is only the drain in the floor and a hook on the ceiling.",
+  "narrativeOnEnter": "Tiny padded room. No window, no furniture. A drain in the floor and a hook on the ceiling.",
   "particles": { "type": "fog", "density": 0.3 },
 
   "hotspots": [
@@ -22,25 +22,16 @@
       "label": "Padded Walls",
       "x": 10, "y": 10, "w": 80, "h": 70,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The foam padding is rotting, pulling away from the wall in strips. Behind it: bare concrete — and words. Layers of them, written at different heights, over what must have been months.\n\nFirst layer (near the floor, scratched with something small):\n'4031'\n'I KNOW WHAT THEY'RE DOING TO US'\n'THE SESSIONS ARE NOT THERAPY'\n'MY NAME IS ELARA VOSS AND I WAS A NEUROSCIENTIST'\n'I PUBLISHED PAPERS ON CONSENT IN COGNITIVE RESEARCH'\n'THE IRONY IS NOT LOST ON ME'\n\nSecond layer (middle of the wall, written faster, more ragged):\n'47 OF US. MAPPED. ARCHIVED. SOLD.\nWHAT WILL THEY BUILD FROM OUR MINDS?\nWHAT DID WE BECOME WITHOUT KNOWING?\n\nIF YOU FIND THIS: WE WERE PEOPLE.\nWE WERE NOT DATA.\nAXIOM TOOK SOMETHING FROM EACH OF US\nTHAT WE CANNOT GET BACK.\nBUT YOU CAN MAKE SURE THEY PAY FOR IT.\nTELL SOMEONE. TELL EVERYONE.'\n\nThird layer (high up, calmer, deliberate):\n'Harlan told me about the tunnel tonight.\nI'm leaving tomorrow.\nI'm taking my list.\nSomeday, AXIOM will have to answer for all 47 names on it.\n\nI will be there when they do.\n— E. Voss'\n\nAnd below everything, a different hand entirely. Shakier. Later:\n\n'She was right. She escaped.\nI stayed. I'm too old to run.\nI'm writing this so someone knows she was here.\nShe was real. She was brave.\nShe told the truth in this room for eight months\nbefore anyone listened.\n— M. Farrow, Patient 11'" },
+      "action": { "type": "inspect", "text": "Foam rotting off the walls. Behind it — scratched words:\n\n'4031'\n'MY NAME IS ELARA VOSS'\n'47 OF US. MAPPED. WE WERE NOT DATA.'\n'Harlan told me about the tunnel. I'm leaving tomorrow. — E. Voss'\n\nDifferent hand, later: 'She escaped. I stayed. — M. Farrow, Patient 11'" },
       "contents": []
     },
     {
-      "id": "bw-solitary-drain",
+      "id": "bw-solitary-details",
       "type": "inspect",
-      "label": "Floor Drain",
-      "x": 42, "y": 78, "w": 14, "h": 15,
+      "label": "Drain & Hook",
+      "x": 42, "y": 5, "w": 14, "h": 88,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A rusted metal drain in the centre of the floor. Nothing more. You don't want to think about why it's there." },
-      "contents": []
-    },
-    {
-      "id": "bw-solitary-hook",
-      "type": "inspect",
-      "label": "Ceiling Hook",
-      "x": 44, "y": 5, "w": 10, "h": 18,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "An iron hook, bolted into the ceiling. No context provided. No context needed." },
+      "action": { "type": "inspect", "text": "A rusted drain in the floor. An iron hook bolted into the ceiling.\nNo context needed." },
       "contents": []
     }
   ]

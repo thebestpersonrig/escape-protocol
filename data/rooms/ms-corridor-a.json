@@ -3,7 +3,7 @@
   "name": "Corridor A — Upper Deck",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The main corridor of the upper deck. Modular wall panels, conduit runs, yellow caution markings. Emergency lights pulse at the far end. Access hatches lead in three directions — some sealed, some not.",
+  "narrativeOnEnter": "Upper deck corridor. Emergency lights pulse. Hatches lead in several directions — some sealed.",
   "particles": { "type": "dust", "density": 0.15 },
 
   "hotspots": [

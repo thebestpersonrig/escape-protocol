@@ -3,7 +3,7 @@
   "name": "Chapel",
   "ambientSound": "ambient-creep",
   "lighting": "flicker",
-  "narrativeOnEnter": "The institutional chapel. Rows of worn pews face a stone altar. A stained glass window — dark now — depicts something you can't quite make out. In the corner stands a bell mechanism: four handles, each connected by rusted wire to a bell above. A narrow door behind the altar is sealed with a heavy bolt.",
+  "narrativeOnEnter": "Chapel. Worn pews, stone altar. A bell mechanism in the corner. A sealed door behind the altar.",
   "particles": { "type": "fog", "density": 0.5 },
 
   "hotspots": [
@@ -55,21 +55,12 @@
       ]
     },
     {
-      "id": "bw-altar",
+      "id": "bw-chapel-decor",
       "type": "inspect",
-      "label": "Stone Altar",
-      "x": 36, "y": 40, "w": 22, "h": 30,
+      "label": "Altar & Window",
+      "x": 36, "y": 8, "w": 22, "h": 62,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A simple stone altar. A single candle — long since burned out — sits in the centre.\n\nA small plaque is embedded in the stone:\n'For those who could not leave.'\n\nBelow it, scratched with a nail: '1972. We tried.'" },
-      "contents": []
-    },
-    {
-      "id": "bw-stained-glass",
-      "type": "inspect",
-      "label": "Stained Glass",
-      "x": 36, "y": 8, "w": 22, "h": 28,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A large stained glass window. The light that might once have made it beautiful is gone — the boards outside block everything.\n\nThe image, barely visible: a figure standing before an open door. Whether they're entering or leaving is unclear." },
+      "action": { "type": "inspect", "text": "Stone altar. Plaque: 'For those who could not leave.'\nScratched below: '1972. We tried.'\n\nStained glass above — a figure before an open door. Entering or leaving, unclear." },
       "contents": []
     }
   ]

@@ -3,7 +3,7 @@
   "name": "Cargo Bay",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "Stacked containers, magnetic clamps, a loading rail overhead. One section is blocked by a freight security lock — four-position switch, red light blinking. Beyond it, a passage to the reactor deck. A clipboard with a freight manifest hangs on the wall.",
+  "narrativeOnEnter": "Cargo containers and magnetic clamps. A freight lock blocks the passage to reactor deck. Manifest on the wall.",
   "particles": { "type": "dust", "density": 0.25 },
 
   "hotspots": [
@@ -51,7 +51,7 @@
           "label": "Freight Note",
           "x": 16, "y": 36, "w": 16, "h": 14,
           "visibleWhen": { "objectState": "ms-cargo-manifest", "equals": "open" },
-          "action": { "type": "inspect", "text": "MERIDIAN STATION — CARGO MANIFEST\nDelivery Ref: MA-7743-C\n\nFreight security lock sequence for this section:\nSwitch positions must be set HIGH, HIGH, LOW, LOW\n(Positions 1–4)\n\nNote from logistics:\n'This sequence was changed after the last incident.\nDo not reset to default.'\n\nThe switches engage a magnetic clamp release on the passage to Reactor Deck.\n\n───\nOn the back of the manifest, Kovalev's handwriting:\n\n'Delivery Ref: MA-7743-C.\nI looked up the origin. HELIOS GROUP subsid account.\nHELIOS GROUP is AXIOM.\nAXIOM chartered this station. Funded the mission.\nPaid every one of our salaries.\nWe were never colonists.\nWe were subjects.\n\nOn the lading manifest — buried in the appendix, page 9, line 47:\n\"CALLISTO — monitoring frequency: 148.350 MHz\"\nSomeone flagged it. Someone on the inside wanted us to find it.\nCALLISTO knows. They're watching.\nThey know what AXIOM does with what they collect.\nThey know about Blackwood. About PROMETHEUS.\nAbout all of it.\n\nIf MERIDIAN-3 boards this station: they are not rescue.\nContact CALLISTO first.\n148.350 MHz.\n— D.K.'" }
+          "action": { "type": "inspect", "text": "CARGO MANIFEST — Ref: MA-7743-C\n\nFreight lock sequence: HIGH, HIGH, LOW, LOW (Positions 1–4)\n\n───\nKovalev's handwriting on the back:\n\n'HELIOS GROUP = AXIOM. They chartered this station. We were never colonists — we were subjects.\n\nBuried in the manifest appendix:\nCALLISTO — monitoring frequency: 148.350 MHz\nSomeone on the inside wanted us to find it.\n\nIf MERIDIAN-3 boards: they are not rescue.\nContact CALLISTO first. 148.350 MHz.\n— D.K.'" }
         }
       ]
     },
@@ -61,7 +61,7 @@
       "label": "Cargo Containers",
       "x": 10, "y": 70, "w": 40, "h": 20,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Sealed cargo containers, secured with magnetic clamps. Labels read:\n'REACTOR COMPONENTS — HANDLE WITH CARE'\n'MEDICAL SUPPLIES — COLD STORAGE'\n'PERSONAL EFFECTS — CREW ROTATION 7'\n\nOne container stands apart. No magnetic clamp. Seal already broken — from the outside, recently, by someone who knew what they were looking for.\n\nLabel: 'AXIOM BIOTECH — NEURAL MAPPING ARRAY (BATCH 7) — CONFIDENTIAL'\n\nInside: packing foam cut to hold six cylindrical devices. The devices are gone — only the foam remains.\nA packing slip is attached to the lid:\n\n'Addressee: MERIDIAN STATION ALPHA\nShipping auth: HELIOS GROUP (Ref: HG-7743-SRR)\nAttn: Station Maintenance (DO NOT DISTRIBUTE)\nHandle with care — equipment pre-calibrated for crew biometrics on file.\n6 units. Install per diagram enclosed. Activation: automatic on station power-up.'\n\nKovalev has written in pencil on the inside of the lid:\n\n'I found them. Every bunk. Behind the vent panels in the walls.\nThey've been running since Day 1.\n63 days of data. All six of us.\nThis is what AXIOM does.\nThis is what they did at Blackwood.\nThis is what they built PROMETHEUS from.\nI'm not letting them do it again.'" },
+      "action": { "type": "inspect", "text": "Sealed containers. One stands apart — seal broken from outside.\n\nLabel: 'AXIOM BIOTECH — NEURAL MAPPING ARRAY (BATCH 7) — CONFIDENTIAL'\n\nInside: foam for six cylindrical devices. All gone.\nPacking slip: '6 units. Pre-calibrated for crew biometrics. Activation: automatic on power-up.'\n\nKovalev's pencil on the lid:\n'Found them behind every bunk vent panel. Running since Day 1. 63 days of data.\nThis is what they did at Blackwood. This is what PROMETHEUS was built from.\nI'm not letting them do it again.'" },
       "contents": []
     }
   ]

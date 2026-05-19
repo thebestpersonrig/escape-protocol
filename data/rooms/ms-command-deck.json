@@ -3,7 +3,7 @@
   "name": "Command Deck",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The nerve centre of Meridian Station. Wide viewport looking out at open space — the rescue shuttle is clearly visible, holding position. Navigation terminals, captain's station, comms systems. A locked command locker sits against the far wall.",
+  "narrativeOnEnter": "Command deck. Viewport shows a rescue shuttle holding position outside. Captain's locker against the far wall.",
   "particles": { "type": "dust", "density": 0.1 },
 
   "hotspots": [
@@ -39,26 +39,17 @@
           "label": "Captain's Log",
           "x": 57, "y": 38, "w": 12, "h": 14,
           "visibleWhen": { "objectState": "ms-command-locker", "equals": "open" },
-          "action": { "type": "inspect", "text": "CAPTAIN'S LOG — FINAL ENTRY\n\n'Reactor alarm at 03:10. Ordered full crew evacuation — Kovalev stayed to attempt manual stabilisation. I should have ordered everyone off.\n\nDistress beacon is active via the comms array — rescue shuttle is holding at 800m.\nEscape pod launch code is 5519 — Kovalev and Chen both know it.\n\nIf anyone finds this log: stabilise the reactor first.\nThen get to the pod bay. Then go home.\n\n— Captain Diaz, Meridian Station Alpha'" }
+          "action": { "type": "inspect", "text": "CAPTAIN'S LOG — FINAL ENTRY\n\n'Reactor alarm at 03:10. Ordered evacuation — Kovalev stayed.\nBeacon active. Rescue shuttle holding at 800m.\nPod launch code: 5519.\n\nStabilise the reactor. Get to the pod bay. Go home.\n— Captain Diaz'" }
         }
       ]
     },
     {
-      "id": "ms-viewport",
+      "id": "ms-viewport-console",
       "type": "inspect",
-      "label": "Viewport",
-      "x": 14, "y": 18, "w": 30, "h": 42,
+      "label": "Viewport & Navigation",
+      "x": 14, "y": 18, "w": 30, "h": 54,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Two shapes in the dark.\n\nThe closer one — 800 metres, running full lights — is MERIDIAN-3. Standard shuttle profile. It's been holding position for over an hour. Steady. Patient.\n\nThe farther one — 3 kilometres, running dark — is smaller. No lights, no transponder ping. But it's there. And twice, as you watch, it blinks.\n\nTwice. Pause. Three times. Pause. Once.\n\nMorse. W-E—A-R-E—H-E-R-E.\n\nWe are here.\n\nThey know someone's still aboard.\nThey're not moving.\nThey're waiting to see which ship you signal.\n\nThrough the external hull below the viewport: an access port. An external airlock — rarely used, but it connects directly to the docking ring. If the station's internal systems are compromised, that might be your backup route." },
-      "contents": []
-    },
-    {
-      "id": "ms-nav-console",
-      "type": "inspect",
-      "label": "Navigation Console",
-      "x": 14, "y": 62, "w": 28, "h": 10,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Navigation console for Meridian Station Alpha. Orbital positioning, thruster control, docking systems.\n\nAll systems showing nominal — the station's position is stable.\n\nTwo contacts on the proximity display:\n\nCONTACT ALPHA — 'RESCUE SHUTTLE MERIDIAN-3 — HOLDING. AWAITING BEACON CONFIRMATION.'\nRegistered to: HELIOS GROUP (subsidiary charter)\nDistance: 800m. Running standard lights. Crew complement: 4.\n\nCONTACT BETA — UNKNOWN VESSEL\nRegistered to: [NO TRANSPONDER]\nDistance: 3.1km. Running dark. Crew complement: unknown.\nFirst detected: 03:08 GST — 6 minutes before station lockdown.\n\nSomeone has annotated the display in yellow grease pencil:\n\n'Contact B = CALLISTO. Don't signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. They are NOT rescue.\nWait for Contact B. 148.350 MHz.'\n\nThe distress beacon is in the Comms Array." },
+      "action": { "type": "inspect", "text": "Two shapes in the dark.\n\nMERIDIAN-3 — 800m, full lights. Holding position. Patient.\nA second vessel — 3km, running dark. No transponder. It blinks:\nMorse. W-E—A-R-E—H-E-R-E.\n\nNavigation display:\nCONTACT ALPHA — MERIDIAN-3. Registered: HELIOS GROUP. 800m.\nCONTACT BETA — UNKNOWN. No transponder. 3.1km. Running dark.\n\nYellow grease pencil on the display:\n'Contact B = CALLISTO. Don't signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. They are NOT rescue.\nWait for Contact B. 148.350 MHz.'\n\nBelow the viewport: an external airlock access port — backup route to the docking ring." },
       "contents": []
     },
     {

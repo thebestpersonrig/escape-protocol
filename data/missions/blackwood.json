@@ -86,8 +86,8 @@
       { "text": "The scratches on the wall might mean something. Note them." }
     ],
     "bw-maintenance-tunnel": [
-      { "text": "The hatch lock code uses two numbers. Read the pipe markings and wall carvings.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
-      { "text": "Agnes Colm, patient 07. The number 47 is on the pipe. Combine them.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
+      { "text": "The hatch code is two numbers combined. Check the door frame carving.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
+      { "text": "Patient 07's number, then the total number of patients mapped: 0747.", "when": { "puzzleUnsolved": "bw-tunnel-hatch" } },
       { "text": "The hatch is open. Escape through the tunnel." }
     ]
   },

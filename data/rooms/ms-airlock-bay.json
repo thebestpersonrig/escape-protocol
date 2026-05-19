@@ -3,7 +3,7 @@
   "name": "Airlock Bay",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "Emergency lighting bathes everything in cold blue. The outer airlock is sealed — standard for a station on lockdown. A pressure warning blinks on the wall panel. Somewhere above, a hull alarm is cycling. You have oxygen. For now.",
+  "narrativeOnEnter": "Cold blue emergency lighting. Outer airlock sealed. Pressure warning blinking. You have oxygen. For now.",
   "particles": { "type": "snowflake", "density": 0.25 },
 
   "hotspots": [
@@ -50,26 +50,17 @@
           "label": "O2 Monitor",
           "x": 18, "y": 42, "w": 8, "h": 8,
           "visibleWhen": { "objectState": "ms-supply-locker", "equals": "open" },
-          "action": { "type": "inspect", "text": "STATION O2 MONITOR — HANDHELD\nCurrent Reading: 19.2% (NOMINAL)\nStation Life Support: OFFLINE\n\nWarning: Without life support, O2 levels will drop below safe threshold in approximately 30 minutes.\n\nRestore power to life support from Engineering Deck immediately." }
+          "action": { "type": "inspect", "text": "O2: 19.2% (NOMINAL). Life Support: OFFLINE.\nWithout power, O2 drops below safe threshold in ~30 minutes.\nRestore from Engineering Deck." }
         }
       ]
     },
     {
-      "id": "ms-airlock-warning",
+      "id": "ms-airlock-status",
       "type": "inspect",
-      "label": "Warning Panel",
-      "x": 36, "y": 60, "w": 18, "h": 24,
+      "label": "Warning Panel & Porthole",
+      "x": 2, "y": 15, "w": 52, "h": 69,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "EMERGENCY STATUS — MERIDIAN STATION ALPHA\n\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] COMMS — PARTIAL\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL (standby mode)\n\nStation lockdown initiated: 03:14 GST\nCrew status: UNKNOWN\n\nAll personnel: proceed to emergency muster stations.\n\n───\nYou read it twice before it registers.\n\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL (standby mode)\n\nNeural Extraction Array.\nOn a space station.\nIn a section of the status board between hull integrity and comms,\nas if it belongs there.\n\nAs if it's standard equipment." },
-      "contents": []
-    },
-    {
-      "id": "ms-outer-airlock",
-      "type": "inspect",
-      "label": "Outer Airlock",
-      "x": 2, "y": 15, "w": 6, "h": 68,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "The outer airlock is sealed and vacuum-locked. Standard procedure during station emergencies.\n\nThrough the small porthole: open space. Stars.\n\nTwo shapes.\n\nThe closer one — 800 metres, running full lights — is MERIDIAN-3. Standard rescue shuttle configuration. The registry markings are barely visible but legible: HELIOS GROUP, Registration No. HG-3301.\n\nThe farther one — 3 kilometres out, beyond visual without the porthole magnifier — is dark. Running no lights, no transponder. Smaller than MERIDIAN-3. Holding position precisely, as if it's watching.\n\nYou don't know what it is.\nYou don't know why it's running dark.\nBut it's been there since before you woke up.\nAnd it hasn't moved.\n\nSomeone out there is watching to see how this ends." },
+      "action": { "type": "inspect", "text": "EMERGENCY STATUS:\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL\n\nNeural Extraction Array. On a space station. Listed as standard equipment.\n\n───\nThrough the porthole: two shapes.\nMERIDIAN-3 — 800m, full lights. Registry: HELIOS GROUP.\nA second vessel — 3km, running dark. No transponder.\n\nSomeone out there is watching to see how this ends." },
       "contents": []
     }
   ]

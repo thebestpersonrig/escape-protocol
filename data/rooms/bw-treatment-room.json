@@ -3,7 +3,7 @@
   "name": "Treatment Room",
   "ambientSound": "ambient-creep",
   "lighting": "flicker-fast",
-  "narrativeOnEnter": "An electroshock treatment table dominates the centre — leather restraints still buckled. A metal fuse panel on the far wall is open, wires hanging loose. A handwritten diagram is taped above it. The records vault requires power from this room.",
+  "narrativeOnEnter": "Treatment table with restraints. Fuse panel on the wall — vault needs power from here.",
   "particles": { "type": "dust", "density": 0.2 },
 
   "hotspots": [

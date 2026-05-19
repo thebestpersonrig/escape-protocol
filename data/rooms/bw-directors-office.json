@@ -3,7 +3,7 @@
   "name": "Director's Office",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "A heavy oak desk. Floor-to-ceiling bookshelves. A portrait of the director hangs above a dormant fireplace. The room feels sealed — not abandoned, but deliberately closed. A wall safe sits recessed behind the portrait.",
+  "narrativeOnEnter": "Oak desk, bookshelves, a portrait. The room was deliberately sealed. Wall safe behind the portrait.",
   "particles": { "type": "dust", "density": 0.3 },
 
   "hotspots": [
@@ -49,17 +49,17 @@
           "x": 25, "y": 58, "w": 14, "h": 16,
           "clueSlot": "bw-desk-journal",
           "visibleWhen": { "objectState": "bw-director-desk", "equals": "open" },
-          "action": { "type": "inspect", "text": "DIRECTOR'S PERSONAL JOURNAL\nFinal Entry — November 1972\n\n'I have sealed the institute. The board will say it was the incident. But the truth is simpler: what we were doing here was wrong.\n\nIn 1970, AXIOM Group approached me with a proposition:\nFunding — substantial, unconditional — in exchange for access to our patients.\nThey called it a neural mapping study. Non-invasive, they said. Completely safe.\nI signed their contract. I didn't read the full Annex C.\n\nFor two years, AXIOM's equipment came through the service entrance every week.\nFor two years, 47 of my patients sat in chairs for ninety minutes\nand were told they were receiving therapy.\nThey were being disassembled — not harmed, but scanned, mapped, archived.\nEach session took another layer of them and stored it in AXIOM's servers.\n\nWhen Voss confronted me, I finally read the full contract.\nI finally understood what they were building.\n\nThey called it PROMETHEUS.\nA consciousness assembled from fragments of other minds.\nFrom our patients.\nFrom people who never agreed to become its raw material.\n\nI let Voss go. I gave her the tunnel.\nI sealed the institute. I told AXIOM the project was complete.\n\nThey believed me. Or they pretended to.\n\nI don't know if that is enough.\nI don't know if anything I could do would be enough.\n\nThe master key is in my safe. To anyone who finds it:\nTake it. Get out.\n\nSafe combination: 1-9-7-2\n(The year I opened this place. The year I should have known better.\nThe year 47 people sat in my chairs and trusted me to protect them.\nI didn't.\nI am sorry. I am profoundly, uselessly sorry.)\n— E. Harlan'" }
+          "action": { "type": "inspect", "text": "DIRECTOR'S JOURNAL — Final Entry, 1972\n\n'What we were doing here was wrong. AXIOM mapped 47 patients without real consent. They built something called PROMETHEUS from it.\n\nI let Voss go. I sealed the institute.\n\nMaster key is in my safe. Combination: 1-9-7-2.\nTake it. Get out.\n— E. Harlan'" }
         }
       ]
     },
     {
       "id": "bw-director-portrait",
       "type": "inspect",
-      "label": "Director's Portrait",
-      "x": 55, "y": 10, "w": 18, "h": 8,
+      "label": "Portrait & Bookshelf",
+      "x": 3, "y": 10, "w": 70, "h": 38,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "A formal oil portrait. The nameplate reads: 'DR. E. HARLAN, DIRECTOR — BLACKWOOD PSYCHIATRIC INSTITUTE, EST. 1972'.\n\nThe portrait is hinged slightly off the wall. The wall safe is recessed behind it.\n\nOn the back of the canvas — facing the wall, invisible unless you tilt the frame — a card is fixed with two pins. Harlan's handwriting:\n\n'PATIENT 07 = DR. ELARA VOSS.\nShe was a neuroscientist. She refused to cooperate with AXIOM.\nSo they had her committed and took what they needed anyway.\nShe is the one person who knows the full scope of what was done here.\nIf you find her — believe her.\nEverything she says is true.\nEverything AXIOM says is not.\n— E. Harlan'\n\nBelow that, in block capitals from a different pen, pressed hard:\n\n'HE LET HER GO. IN THE END, HE LET HER GO.\nTHAT IS THE ONLY THING I HAVE CHOSEN TO FORGIVE HIM FOR.'\n\nNo signature. But you recognise the handwriting.\nIt matches the writing on the wall of Room 7." },
+      "action": { "type": "inspect", "text": "Portrait: 'DR. E. HARLAN — EST. 1972'. Wall safe behind it.\nCard on back: 'Patient 07 = Dr. Elara Voss. Believe her. — Harlan'\n\nBookshelf holds a hidden AXIOM folder — 47 names, all stamped 'neural map: COMPLETE.'\nHarlan's note: 'I refused to sign Phase 2. They proceeded without me.'" },
       "contents": []
     },
     {
@@ -72,15 +72,6 @@
       "lockedMessage": "The safe is locked. Crack the combination first.",
       "lockedAction": { "type": "open-puzzle", "puzzleId": "bw-director-safe" },
       "action": { "type": "pick-up", "itemId": "bw-master-key" },
-      "contents": []
-    },
-    {
-      "id": "bw-bookshelf",
-      "type": "inspect",
-      "label": "Bookshelves",
-      "x": 3, "y": 18, "w": 14, "h": 52,
-      "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Rows of psychiatric textbooks and clinical journals. Dates range from 1955 to 1972.\n\nOne is not a book. It's disguised as a hardcover — the spine reads 'Institutional Management Quarterly, Vol. 14' — but inside: a folder.\n\nAXIOM GROUP — PROJECT HELIOS PHASE 1\nBLACKWOOD COMPLETION SUMMARY — CONFIDENTIAL\n\nA list of 47 names. Each one confirmed 'neural map: COMPLETE.' Each stamped with the Δ mark.\nThe names are ordinary. A teacher. A carpenter. A retired postman.\nA neuroscientist who wouldn't cooperate — listed last, with a note:\n'Subject non-compliant. Involuntary admission arranged via medical board contract.\nMapping completed in full. Data quality: SUPERIOR.'\n\nAt the back of the folder: an AXIOM board authorisation. Four signatures.\nA fifth signature line — blank.\nBelow it, Harlan's handwriting:\n\n'I refused to sign.\nThey proceeded without me.\nMy refusal is in the record.\nI do not believe it matters.\nBut it is there.\n\nI signed the contract in 1970.\nThat is what matters.\nEverything after was the consequence of that signature.\n— E. Harlan'\n\nPulled slightly forward from the real shelf behind it:\na clinical study called 'Electroconvulsive Therapy: Progress & Ethics, 1972'.\nA note tucked inside: 'This was a mistake from the beginning.'" },
       "contents": []
     }
   ]

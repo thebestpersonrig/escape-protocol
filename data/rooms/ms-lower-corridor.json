@@ -3,7 +3,7 @@
   "name": "Lower Deck Corridor",
   "ambientSound": "ambient-hum",
   "lighting": "flicker",
-  "narrativeOnEnter": "The lower deck runs stern to bow. Heavier construction here — reactor shielding in the walls. Emergency lighting is dimmer. The escape pod bay is aft, comms array forward. Access to engineering is via the hatch above.",
+  "narrativeOnEnter": "Lower deck. Heavier construction, reactor shielding in the walls. Pod bay aft, comms forward.",
   "particles": { "type": "dust", "density": 0.2 },
 
   "hotspots": [
