@@ -58,7 +58,7 @@
       "id": "ms-external-airlock-panel",
       "type": "inspect",
       "label": "EVA Status Panel",
-      "x": 76, "y": 65, "w": 16, "h": 20,
+      "x": 66, "y": 68, "w": 12, "h": 16,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "EXTERNAL AIRLOCK — EVA STATUS\n\nStatus: LOCKED (Reactor radiation field active)\nClearance required: Reactor deck — NOMINAL status\n\nOnce reactor is stabilised, this airlock will automatically unlock.\nDistance to rescue shuttle: 40 metres. EVA tether required." },
       "contents": []

@@ -57,7 +57,7 @@
       "id": "bw-nurses-charts-counter",
       "type": "inspect",
       "label": "Charts & Counter",
-      "x": 10, "y": 24, "w": 42, "h": 64,
+      "x": 34, "y": 24, "w": 18, "h": 64,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Patient chart: 'Patient 07 — agitated after treatment. Sessions last 90 min — ECT only takes 20. Equipment brought by AXIOM subsidiary. — A. Colm, RN'\n\nTerminal password: BLACKWOOD\n\nCarved into countertop: 'Director's safe code = year Blackwood opened: 1972. — Agnes Colm'" },
       "contents": []

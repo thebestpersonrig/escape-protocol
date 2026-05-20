@@ -1365,26 +1365,54 @@ export class RoomRenderer {
 
   _getGenericHotspot(hs, objState) {
     const type = hs.type || 'inspect';
+    const roomId = this._currentConfig?.id || '';
+
+    // Mission-aware colour palettes so generics don't vanish into backgrounds
+    let bg1, bg2, border, borderHi, accent, accentDim, handleBg, handleBorder;
+    if (roomId.startsWith('bw-')) {
+      // Blackwood — warm amber/brown
+      bg1 = '#221a0e'; bg2 = '#181008';
+      border = '#3a2a14'; borderHi = 'rgba(200,150,60,0.5)';
+      accent = 'rgba(200,150,60,0.6)'; accentDim = 'rgba(200,150,60,0.04)';
+      handleBg = '#2a1e10'; handleBorder = '#4a3618';
+    } else if (roomId.startsWith('ms-')) {
+      // Meridian — cold steel blue
+      bg1 = '#0a1828'; bg2 = '#06101e';
+      border = '#1a3050'; borderHi = 'rgba(0,160,255,0.5)';
+      accent = 'rgba(0,160,255,0.6)'; accentDim = 'rgba(0,160,255,0.04)';
+      handleBg = '#0c1e30'; handleBorder = '#1a3a60';
+    } else {
+      // Arcadia — teal/purple
+      bg1 = '#1a1a2a'; bg2 = '#12121e';
+      border = '#2a2a44'; borderHi = 'rgba(0,255,224,0.4)';
+      accent = 'rgba(0,255,224,0.5)'; accentDim = 'rgba(0,255,224,0.03)';
+      handleBg = '#1e1e38'; handleBorder = '#3a3a5a';
+    }
+
     if (type === 'door') {
-      return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,#1a1a2a,#12121e);border:2px solid #2a2a44;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6%;">
-        <div style="width:7%;aspect-ratio:1;background:#1a1a30;border:1px solid #3a3a5a;border-radius:50%;"></div>
+      return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,${bg1},${bg2});border:2px solid ${border};border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6%;box-shadow:inset 0 0 20px rgba(0,0,0,0.3);">
+        <div style="width:7%;aspect-ratio:1;background:${handleBg};border:1px solid ${handleBorder};border-radius:50%;box-shadow:0 0 6px ${accentDim};"></div>
       </div>`;
     }
     if (type === 'container') {
       const isOpen = objState === 'open';
-      return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,#1e1e2e,#14142a);border:1px solid ${isOpen ? 'rgba(0,255,224,0.4)' : '#2a2a44'};border-radius:3px;position:relative;">
-        ${isOpen ? '<div style="position:absolute;inset:0;background:rgba(0,255,224,0.03);border-radius:3px;"></div>' : ''}
-        <div style="position:absolute;top:50%;right:8%;width:6%;height:8%;background:#1e1e38;border:1px solid #3a3a5a;border-radius:50%;transform:translateY(-50%);"></div>
+      return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,${bg1},${bg2});border:1px solid ${isOpen ? borderHi : border};border-radius:3px;position:relative;box-shadow:inset 0 0 16px rgba(0,0,0,0.3);">
+        ${isOpen ? `<div style="position:absolute;inset:0;background:${accentDim};border-radius:3px;"></div><div style="position:absolute;bottom:0;left:8%;right:8%;height:35%;background:rgba(0,0,0,0.2);border:1px solid ${border};border-bottom:none;border-radius:0 0 2px 2px;"></div>` : ''}
+        <div style="position:absolute;top:50%;right:8%;width:8%;height:10%;background:${handleBg};border:1px solid ${handleBorder};border-radius:2px;transform:translateY(-50%);"></div>
+        <div style="position:absolute;top:15%;left:10%;right:10%;height:1px;background:${border};"></div>
+        <div style="position:absolute;top:35%;left:10%;right:10%;height:1px;background:${border};"></div>
       </div>`;
     }
     if (type === 'puzzle-trigger') {
-      return `<div style="width:100%;height:100%;background:#12121e;border:1px solid #2a2a44;border-radius:3px;display:flex;align-items:center;justify-content:center;">
-        <div style="color:rgba(0,200,180,0.5);font-size:1.8vw;">⚙</div>
+      return `<div style="width:100%;height:100%;background:linear-gradient(to bottom,${bg1},${bg2});border:1px solid ${border};border-radius:3px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 8px rgba(0,0,0,0.4);">
+        <div style="width:60%;height:50%;background:rgba(0,0,0,0.3);border:1px solid ${borderHi};border-radius:2px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 6px ${accentDim};">
+          <span style="color:${accent};font-size:1.2vw;font-family:monospace;">▣</span>
+        </div>
       </div>`;
     }
-    // inspect / default
-    return `<div style="width:100%;height:100%;background:#141420;border:1px solid #222238;border-radius:2px;display:flex;align-items:center;justify-content:center;">
-      <div style="color:rgba(180,180,220,0.2);font-size:1.2vw;">🔍</div>
+    // inspect / default — subtle outline so it reads as clickable
+    return `<div style="width:100%;height:100%;background:rgba(0,0,0,0.15);border:1px solid ${border};border-radius:2px;display:flex;align-items:center;justify-content:center;">
+      <div style="color:${accent};font-size:1.2vw;opacity:0.4;">🔍</div>
     </div>`;
   }
 

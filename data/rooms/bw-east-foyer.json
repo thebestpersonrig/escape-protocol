@@ -86,7 +86,7 @@
       "id": "bw-foyer-sign",
       "type": "inspect",
       "label": "Facility Map",
-      "x": 4, "y": 16, "w": 12, "h": 22,
+      "x": 4, "y": 2, "w": 12, "h": 12,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "BLACKWOOD PSYCHIATRIC INSTITUTE\nEast Wing Floor Plan\n\nGround Floor:\n  → Reception / Foyer [YOU ARE HERE]\n  → Patient Corridor — Ward A & Ward B\n  → Chapel (East End)\n\nWard B (Gate-Locked):\n  → Nurses' Station\n  → Treatment Room\n  → Records Vault (requires power)\n\nDirector's Office — Second Floor\n  Access via Records Vault only." },
       "contents": []

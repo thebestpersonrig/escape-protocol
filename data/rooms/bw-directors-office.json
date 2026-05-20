@@ -57,7 +57,7 @@
       "id": "bw-director-portrait",
       "type": "inspect",
       "label": "Portrait & Bookshelf",
-      "x": 3, "y": 10, "w": 70, "h": 38,
+      "x": 3, "y": 10, "w": 50, "h": 38,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Portrait: 'DR. E. HARLAN — EST. 1972'. Wall safe behind it.\nCard on back: 'Patient 07 = Dr. Elara Voss. Believe her. — Harlan'\n\nBookshelf holds a hidden AXIOM folder — 47 names, all stamped 'neural map: COMPLETE.'\nHarlan's note: 'I refused to sign Phase 2. They proceeded without me.'" },
       "contents": []

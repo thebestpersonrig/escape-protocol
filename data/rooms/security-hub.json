@@ -67,7 +67,7 @@
       "id": "security-hub-to-utility",
       "type": "door",
       "label": "Utility Corridor →",
-      "x": 87, "y": 12, "w": 10, "h": 70,
+      "x": 91, "y": 12, "w": 7, "h": 70,
       "cursor": "pointer",
       "action": { "type": "navigate", "to": "utility-corridor" },
       "contents": []

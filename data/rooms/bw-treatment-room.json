@@ -67,7 +67,7 @@
       "id": "bw-treatment-table",
       "type": "inspect",
       "label": "Treatment Table",
-      "x": 20, "y": 35, "w": 30, "h": 40,
+      "x": 30, "y": 35, "w": 20, "h": 40,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "An electroconvulsive therapy table. Thick leather restraint straps — still buckled — hold the shape of a body that is no longer there.\n\nThe table's steel surface is cold. Scratch marks run along the right side." },
       "contents": []

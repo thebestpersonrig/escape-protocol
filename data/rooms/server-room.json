@@ -11,7 +11,7 @@
       "id": "fuse-box",
       "type": "container",
       "label": "Fuse Box",
-      "x": 82, "y": 22, "w": 10, "h": 18,
+      "x": 74, "y": 22, "w": 10, "h": 18,
       "cursor": "pointer",
       "action": { "type": "toggle-container", "objectId": "fuse-box" },
       "contents": []

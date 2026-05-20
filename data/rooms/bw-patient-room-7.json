@@ -48,7 +48,7 @@
       "id": "bw-room7-details",
       "type": "inspect",
       "label": "Window & Mattress",
-      "x": 14, "y": 12, "w": 60, "h": 73,
+      "x": 56, "y": 12, "w": 22, "h": 50,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "Barred window — painted over. Scratch marks on one bar.\n\nUnder the mattress, a torn list: 47 names. Each stamped 'AXIOM — HELIOS Phase 1'.\nTop entry underlined: 'VOSS, ELARA — Patient 07.'\n\nBottom of list: 'They mapped all of us. 90 minutes in a chair. — E. Voss'" },
       "contents": []
