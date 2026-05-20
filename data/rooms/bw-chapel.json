@@ -55,12 +55,21 @@
       ]
     },
     {
-      "id": "bw-chapel-decor",
+      "id": "bw-chapel-altar",
       "type": "inspect",
-      "label": "Altar & Window",
-      "x": 36, "y": 8, "w": 22, "h": 62,
+      "label": "Stone Altar",
+      "x": 36, "y": 40, "w": 22, "h": 30,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Stone altar. Plaque: 'For those who could not leave.'\nScratched below: '1972. We tried.'\n\nStained glass above — a figure before an open door. Entering or leaving, unclear." },
+      "action": { "type": "inspect", "text": "Stone altar. Plaque: 'For those who could not leave.'\nScratched below: '1972. We tried.'" },
+      "contents": []
+    },
+    {
+      "id": "bw-chapel-window",
+      "type": "inspect",
+      "label": "Stained Glass",
+      "x": 36, "y": 8, "w": 22, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Stained glass above the altar — a figure before an open door. Entering or leaving, unclear." },
       "contents": []
     },
     {

@@ -57,10 +57,19 @@
     {
       "id": "bio-microscope",
       "type": "inspect",
-      "label": "Microscope & Incident Board",
-      "x": 62, "y": 28, "w": 34, "h": 50,
+      "label": "Microscope",
+      "x": 62, "y": 28, "w": 16, "h": 50,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Microscope slide shows hexagonal cells — crystalline, engineered.\nSticky note: 'DO NOT LOOK DIRECTLY. — Dr. Chen'\n\nIncident board nearby: Bio Wing B containment breach.\nPersonnel status — Dr. Chen: UNKNOWN. K. Reiss: REDACTED." },
+      "action": { "type": "inspect", "text": "Microscope slide shows hexagonal cells — crystalline, engineered.\nSticky note: 'DO NOT LOOK DIRECTLY. — Dr. Chen'" },
+      "contents": []
+    },
+    {
+      "id": "bio-incident-board",
+      "type": "inspect",
+      "label": "Incident Board",
+      "x": 78, "y": 28, "w": 18, "h": 50,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Bio Wing B containment breach.\nPersonnel status — Dr. Chen: UNKNOWN. K. Reiss: REDACTED." },
       "contents": []
     },
     {

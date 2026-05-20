@@ -44,18 +44,27 @@
       ]
     },
     {
-      "id": "ms-viewport-console",
+      "id": "ms-viewport",
       "type": "inspect",
-      "label": "Viewport & Navigation",
-      "x": 14, "y": 18, "w": 30, "h": 54,
+      "label": "Viewport",
+      "x": 14, "y": 18, "w": 16, "h": 54,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Two shapes in the dark.\n\nMERIDIAN-3 — 800m, full lights. Holding position. Patient.\nA second vessel — 3km, running dark. No transponder. It blinks:\nMorse. W-E—A-R-E—H-E-R-E.\n\nNavigation display:\nCONTACT ALPHA — MERIDIAN-3. Registered: HELIOS GROUP. 800m.\nCONTACT BETA — UNKNOWN. No transponder. 3.1km. Running dark.\n\nYellow grease pencil on the display:\n'Contact B = CALLISTO. Don't signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. They are NOT rescue.\nWait for Contact B. 148.350 MHz.'\n\nBelow the viewport: an external airlock access port — backup route to the docking ring." },
+      "action": { "type": "inspect", "text": "Two shapes in the dark.\n\nMERIDIAN-3 — 800m, full lights. Holding position. Patient.\nA second vessel — 3km, running dark. No transponder. It blinks:\nMorse. W-E—A-R-E—H-E-R-E.\n\nBelow the viewport: an external airlock access port — backup route to the docking ring." },
+      "contents": []
+    },
+    {
+      "id": "ms-nav-console",
+      "type": "inspect",
+      "label": "Navigation Console",
+      "x": 30, "y": 30, "w": 14, "h": 42,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Navigation display:\nCONTACT ALPHA — MERIDIAN-3. Registered: HELIOS GROUP. 800m.\nCONTACT BETA — UNKNOWN. No transponder. 3.1km. Running dark.\n\nYellow grease pencil on the display:\n'Contact B = CALLISTO. Don't signal MERIDIAN-3.\nHELIOS GROUP = AXIOM. They are NOT rescue.\nWait for Contact B. 148.350 MHz.'" },
       "contents": []
     },
     {
       "id": "ms-self-sacrifice-trigger",
       "type": "door",
-      "label": "Lock Station & Signal All Clear",
+      "label": "Station Lockdown",
       "x": 18, "y": 75, "w": 20, "h": 10,
       "cursor": "pointer",
       "condition": { "puzzleSolved": "ms-reactor-sequence" },

@@ -28,7 +28,7 @@
     {
       "id": "bw-solitary-details",
       "type": "inspect",
-      "label": "Drain & Hook",
+      "label": "Cell Fixtures",
       "x": 42, "y": 5, "w": 14, "h": 88,
       "cursor": "zoom-in",
       "action": { "type": "inspect", "text": "A rusted drain in the floor. An iron hook bolted into the ceiling.\nNo context needed." },

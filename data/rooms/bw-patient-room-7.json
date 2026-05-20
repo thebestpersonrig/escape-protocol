@@ -45,12 +45,21 @@
       "contents": []
     },
     {
-      "id": "bw-room7-details",
+      "id": "bw-room7-window",
       "type": "inspect",
-      "label": "Window & Mattress",
-      "x": 56, "y": 12, "w": 22, "h": 50,
+      "label": "Barred Window",
+      "x": 56, "y": 12, "w": 22, "h": 24,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Barred window — painted over. Scratch marks on one bar.\n\nUnder the mattress, a torn list: 47 names. Each stamped 'AXIOM — HELIOS Phase 1'.\nTop entry underlined: 'VOSS, ELARA — Patient 07.'\n\nBottom of list: 'They mapped all of us. 90 minutes in a chair. — E. Voss'" },
+      "action": { "type": "inspect", "text": "Barred window — painted over. Scratch marks on one bar." },
+      "contents": []
+    },
+    {
+      "id": "bw-room7-mattress",
+      "type": "inspect",
+      "label": "Mattress",
+      "x": 56, "y": 38, "w": 22, "h": 24,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Under the mattress, a torn list: 47 names. Each stamped 'AXIOM — HELIOS Phase 1'.\nTop entry underlined: 'VOSS, ELARA — Patient 07.'\n\nBottom of list: 'They mapped all of us. 90 minutes in a chair. — E. Voss'" },
       "contents": []
     },
     {

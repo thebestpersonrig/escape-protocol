@@ -56,10 +56,19 @@
     {
       "id": "bw-director-portrait",
       "type": "inspect",
-      "label": "Portrait & Bookshelf",
-      "x": 3, "y": 10, "w": 50, "h": 38,
+      "label": "Portrait",
+      "x": 3, "y": 10, "w": 24, "h": 38,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Portrait: 'DR. E. HARLAN — EST. 1972'. Wall safe behind it.\nCard on back: 'Patient 07 = Dr. Elara Voss. Believe her. — Harlan'\n\nBookshelf holds a hidden AXIOM folder — 47 names, all stamped 'neural map: COMPLETE.'\nHarlan's note: 'I refused to sign Phase 2. They proceeded without me.'" },
+      "action": { "type": "inspect", "text": "Portrait: 'DR. E. HARLAN — EST. 1972'. Wall safe behind it.\nCard on back: 'Patient 07 = Dr. Elara Voss. Believe her. — Harlan'" },
+      "contents": []
+    },
+    {
+      "id": "bw-director-bookshelf",
+      "type": "inspect",
+      "label": "Bookshelf",
+      "x": 27, "y": 10, "w": 26, "h": 38,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Bookshelf holds a hidden AXIOM folder — 47 names, all stamped 'neural map: COMPLETE.'\nHarlan's note: 'I refused to sign Phase 2. They proceeded without me.'" },
       "contents": []
     },
     {

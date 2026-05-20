@@ -45,12 +45,21 @@
       ]
     },
     {
-      "id": "ms-medical-equipment",
+      "id": "ms-crew-status",
       "type": "inspect",
-      "label": "Medical Chart & Equipment",
-      "x": 76, "y": 28, "w": 16, "h": 60,
+      "label": "Crew Status Board",
+      "x": 76, "y": 28, "w": 16, "h": 30,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "CREW STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — EVACUATED\nKOVALEV, D. — UNKNOWN (Reactor Deck)\nPATEL, S.  — EVACUATED\nDIAZ, M.   — EVACUATED\n\nKovalev remained to attempt reactor stabilisation.\nIf he failed — cascade in ~30 minutes.\n\nDefibrillator on the wall. Charged. Hopefully not needed." },
+      "action": { "type": "inspect", "text": "CREW STATUS — MERIDIAN ALPHA\n\nCHEN, Y.   — EVACUATED\nKOVALEV, D. — UNKNOWN (Reactor Deck)\nPATEL, S.  — EVACUATED\nDIAZ, M.   — EVACUATED\n\nKovalev remained to attempt reactor stabilisation.\nIf he failed — cascade in ~30 minutes." },
+      "contents": []
+    },
+    {
+      "id": "ms-defibrillator",
+      "type": "inspect",
+      "label": "Defibrillator",
+      "x": 76, "y": 58, "w": 16, "h": 30,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Defibrillator on the wall. Charged. Hopefully not needed." },
       "contents": []
     },
     {

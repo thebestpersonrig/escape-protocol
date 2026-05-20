@@ -57,10 +57,19 @@
     {
       "id": "ms-airlock-status",
       "type": "inspect",
-      "label": "Warning Panel & Porthole",
-      "x": 28, "y": 15, "w": 26, "h": 42,
+      "label": "Warning Panel",
+      "x": 28, "y": 15, "w": 26, "h": 20,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "EMERGENCY STATUS:\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL\n\nNeural Extraction Array. On a space station. Listed as standard equipment.\n\n───\nThrough the porthole: two shapes.\nMERIDIAN-3 — 800m, full lights. Registry: HELIOS GROUP.\nA second vessel — 3km, running dark. No transponder.\n\nSomeone out there is watching to see how this ends." },
+      "action": { "type": "inspect", "text": "EMERGENCY STATUS:\n[!] LIFE SUPPORT — OFFLINE\n[!] REACTOR DECK — CRITICAL\n[✓] HULL INTEGRITY — NOMINAL\n[!] NEURAL EXTRACTION ARRAY — BUFFER FULL\n\nNeural Extraction Array. On a space station. Listed as standard equipment." },
+      "contents": []
+    },
+    {
+      "id": "ms-airlock-porthole",
+      "type": "inspect",
+      "label": "Porthole",
+      "x": 28, "y": 37, "w": 26, "h": 20,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Through the porthole: two shapes.\nMERIDIAN-3 — 800m, full lights. Registry: HELIOS GROUP.\nA second vessel — 3km, running dark. No transponder.\n\nSomeone out there is watching to see how this ends." },
       "contents": []
     },
     {

@@ -63,12 +63,21 @@
       ]
     },
     {
-      "id": "director-office-decor",
+      "id": "director-portrait",
       "type": "inspect",
-      "label": "Portrait & Bookshelf",
-      "x": 40, "y": 6, "w": 57, "h": 38,
+      "label": "Portrait",
+      "x": 40, "y": 6, "w": 28, "h": 38,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Portrait: DIRECTOR RAYMOND HARKINS. Someone drew an X over his eyes.\nSigned beneath: 'He knew from the start. — K.R.'\n\nBookshelf holds a hidden binder — AXIOM PROJECT HELIOS.\n47 names. All from Blackwood Psychiatric Institute, 1972.\nMargin note in red ink: 'Necessary.'" },
+      "action": { "type": "inspect", "text": "Portrait: DIRECTOR RAYMOND HARKINS. Someone drew an X over his eyes.\nSigned beneath: 'He knew from the start. — K.R.'" },
+      "contents": []
+    },
+    {
+      "id": "director-bookshelf",
+      "type": "inspect",
+      "label": "Bookshelf",
+      "x": 68, "y": 6, "w": 29, "h": 38,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Bookshelf holds a hidden binder — AXIOM PROJECT HELIOS.\n47 names. All from Blackwood Psychiatric Institute, 1972.\nMargin note in red ink: 'Necessary.'" },
       "contents": []
     },
     {

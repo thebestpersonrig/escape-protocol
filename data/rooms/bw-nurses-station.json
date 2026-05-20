@@ -54,12 +54,21 @@
       ]
     },
     {
-      "id": "bw-nurses-charts-counter",
+      "id": "bw-nurses-chart",
       "type": "inspect",
-      "label": "Charts & Counter",
-      "x": 34, "y": 24, "w": 18, "h": 64,
+      "label": "Patient Chart",
+      "x": 34, "y": 24, "w": 18, "h": 32,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Patient chart: 'Patient 07 — agitated after treatment. Sessions last 90 min — ECT only takes 20. Equipment brought by AXIOM subsidiary. — A. Colm, RN'\n\nTerminal password: BLACKWOOD\n\nCarved into countertop: 'Director's safe code = year Blackwood opened: 1972. — Agnes Colm'" },
+      "action": { "type": "inspect", "text": "Patient chart: 'Patient 07 — agitated after treatment. Sessions last 90 min — ECT only takes 20. Equipment brought by AXIOM subsidiary. — A. Colm, RN'\n\nTerminal password: BLACKWOOD" },
+      "contents": []
+    },
+    {
+      "id": "bw-nurses-counter",
+      "type": "inspect",
+      "label": "Counter Carving",
+      "x": 34, "y": 56, "w": 18, "h": 32,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Carved into countertop: 'Director's safe code = year Blackwood opened: 1972. — Agnes Colm'" },
       "contents": []
     },
     {

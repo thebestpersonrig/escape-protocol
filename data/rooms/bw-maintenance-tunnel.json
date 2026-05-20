@@ -47,12 +47,21 @@
       "contents": []
     },
     {
-      "id": "bw-tunnel-evidence",
+      "id": "bw-tunnel-pipe-stash",
       "type": "inspect",
-      "label": "Pipes & Wall Carvings",
-      "x": 15, "y": 8, "w": 42, "h": 72,
+      "label": "Pipe Stash",
+      "x": 15, "y": 8, "w": 20, "h": 72,
       "cursor": "zoom-in",
-      "action": { "type": "inspect", "text": "Behind a pipe: a cloth bag with a list. 47 names — all Ward B patients.\nVoss's name at the top, underlined twice.\n\nScratched into the wall: 'Dr. Elara Voss — not Patient 07. AXIOM mapped all 47 of us. They built something called PROMETHEUS. — E.V.'\n\nBelow it: 'She made it out. Godspeed. — Agnes Colm'" },
+      "action": { "type": "inspect", "text": "Behind a pipe: a cloth bag with a list. 47 names — all Ward B patients.\nVoss's name at the top, underlined twice." },
+      "contents": []
+    },
+    {
+      "id": "bw-tunnel-wall-carving",
+      "type": "inspect",
+      "label": "Wall Carving",
+      "x": 35, "y": 8, "w": 22, "h": 72,
+      "cursor": "zoom-in",
+      "action": { "type": "inspect", "text": "Scratched into the wall: 'Dr. Elara Voss — not Patient 07. AXIOM mapped all 47 of us. They built something called PROMETHEUS. — E.V.'\n\nBelow it: 'She made it out. Godspeed. — Agnes Colm'" },
       "contents": []
     },
     {
