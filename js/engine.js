@@ -505,7 +505,22 @@ export class Engine {
     }
 
     this._endEl?.classList.add('visible');
-    this._achievements.checkEnding(endingId, st);
+
+    // Detect mission for achievements
+    const _achStartRoom = this._missionConfig?.startRoom || 'lab-entry';
+    let _achMissionId = 'arcadia';
+    if (_achStartRoom === 'bw-east-foyer' || _achStartRoom.startsWith('bw-')) _achMissionId = 'blackwood';
+    else if (_achStartRoom.startsWith('ms-')) _achMissionId = 'meridian';
+
+    // Save delta progress for cross-mission tracking
+    const _achDeltas = st.collectedDeltas || [];
+    this._achievements.saveDeltaProgress(_achMissionId, _achDeltas.length);
+
+    this._achievements.checkEnding(endingId, st, {
+      missionId: _achMissionId,
+      elapsed,
+      totalSecs,
+    });
     SaveSystem.deleteSave();
     await this._fadeIn(800);
   }

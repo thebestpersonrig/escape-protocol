@@ -145,7 +145,7 @@
 
     document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
     document.getElementById('hstat-attempts').textContent = seen.length;
-    document.getElementById('hstat-ach').textContent      = ach.length + ' / 18';
+    document.getElementById('hstat-ach').textContent      = ach.length + ' / 42';
 
     const found = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => seen.includes(e)).length;
     document.getElementById('arcadia-endings').textContent = found + ' / 4';

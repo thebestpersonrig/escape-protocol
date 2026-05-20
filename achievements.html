@@ -6,68 +6,208 @@
   <title>Escape Protocol — Achievements</title>
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="css/hub.css" />
+  <style>
+    .ach-section { margin-bottom: 36px; width: 100%; max-width: 1120px; padding: 0 24px; }
+    .ach-section-label {
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(160,200,255,0.35);
+      margin-bottom: 14px;
+    }
+    .ach-section-label.section-arcadia   { color: rgba(0,255,224,0.4); }
+    .ach-section-label.section-blackwood { color: rgba(200,80,80,0.5); }
+    .ach-section-label.section-meridian  { color: rgba(130,100,255,0.45); }
+    .ach-section-label.section-cross     { color: rgba(255,180,40,0.45); }
+
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .ach-card {
+      background: rgba(20,24,50,0.7);
+      border: 1px solid rgba(100,120,200,0.12);
+      border-radius: 6px;
+      padding: 14px 16px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .ach-card.unlocked {
+      border-color: rgba(100,255,180,0.25);
+      background: rgba(30,60,50,0.5);
+    }
+    .ach-card.locked {
+      opacity: 0.5;
+    }
+    .ach-name {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #c0c8e0;
+      margin-bottom: 4px;
+    }
+    .ach-card.unlocked .ach-name { color: #80ffc0; }
+    .ach-desc {
+      font-size: 11px;
+      color: rgba(160,170,200,0.6);
+      line-height: 1.5;
+    }
+    .ach-card.unlocked .ach-desc { color: rgba(160,200,180,0.7); }
+
+    .ach-progress-bar {
+      width: 100%;
+      max-width: 400px;
+      height: 6px;
+      background: rgba(100,120,200,0.1);
+      border-radius: 3px;
+      margin: 8px auto 0;
+      overflow: hidden;
+    }
+    .ach-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(100,255,180,0.6), rgba(0,255,224,0.5));
+      border-radius: 3px;
+      transition: width 0.6s ease;
+    }
+  </style>
 </head>
 <body>
 <div id="hub-wrap">
 
   <header id="hub-header">
-    <div class="hub-eyebrow">Operative Dossier · Achievement Record</div>
+    <div class="hub-eyebrow">Operative Dossier &middot; Achievement Record</div>
     <h1 class="hub-logo-title">
       <span class="hub-logo-accent">ACHIEVEMENTS</span><span class="hub-cursor">_</span>
     </h1>
-    <div class="hub-tagline"><span id="ach-count">0 / 18</span> unlocked</div>
+    <div class="hub-tagline"><span id="ach-count">0 / 0</span> unlocked</div>
+    <div class="ach-progress-bar"><div class="ach-progress-fill" id="ach-bar"></div></div>
   </header>
 
-  <div class="hub-section-label">// Arcadia Research Facility</div>
-  <div id="hub-achievements"></div>
+  <div id="ach-container"></div>
 
   <div style="padding: 0 24px 40px; width: 100%; max-width: 1120px;">
-    <a href="index.html" class="hub-back-btn">← Back to Mission Select</a>
+    <a href="index.html" class="hub-back-btn">&larr; Back to Mission Select</a>
   </div>
 
   <footer id="hub-footer">
-    <div class="hub-footer-text">Escape Protocol · Operative Briefing System</div>
+    <div class="hub-footer-text">Escape Protocol &middot; Operative Briefing System</div>
     <div class="hub-footer-sub">All scenarios are classified. Unauthorized access is logged and reported.</div>
   </footer>
 
 </div>
 
 <script>
-  (function () {
-    const raw = localStorage.getItem('escape-protocol-achievements');
-    const ach = raw ? (JSON.parse(raw).unlocked || []) : [];
+(function () {
+  var raw = localStorage.getItem('escape-protocol-achievements');
+  var ach = raw ? (JSON.parse(raw).unlocked || []) : [];
 
-    document.getElementById('ach-count').textContent = ach.length + ' / 18';
+  var SECTIONS = [
+    {
+      label: 'General', cssClass: '',
+      defs: [
+        { id: 'first-escape',    name: 'First Steps Out',      desc: 'Escape any mission for the first time.' },
+        { id: 'speed-runner',    name: 'Speed Runner',         desc: 'Escape any mission with more than half your time remaining.' },
+        { id: 'no-hints',        name: "I Don't Need Help",    desc: 'Escape any mission without using hints.' },
+        { id: 'ghost-protocol',  name: 'Ghost Protocol',       desc: 'Escape any mission without triggering the alarm.' },
+        { id: 'too-loud',        name: 'Too Loud',             desc: 'Escape while the alarm is still active.' },
+        { id: 'under-pressure',  name: 'Under Pressure',       desc: 'Escape on Hard with the alarm active.' },
+        { id: 'hard-boiled',     name: 'Hard Boiled',          desc: 'Escape any mission on Hard difficulty.' },
+        { id: 'purist',          name: 'Purist',               desc: 'Escape on Hard without using any hints.' },
+        { id: 'time-out',        name: "Time's Up",            desc: 'Run out of time.' },
+        { id: 'patient-zero',    name: 'Patient Zero',         desc: 'Trigger the security alarm.' },
+      ],
+    },
+    {
+      label: 'Arcadia Research Facility', cssClass: 'section-arcadia',
+      defs: [
+        { id: 'arcadia-escape',   name: 'Facility Cleared',  desc: 'Escape Arcadia Research Facility.' },
+        { id: 'arcadia-secret',   name: 'Shadow Exit',       desc: 'Find and use the secret room exit in Arcadia.' },
+        { id: 'arcadia-explorer', name: 'Lab Rat',           desc: 'Visit every room in Arcadia (9 rooms).' },
+        { id: 'arcadia-lore',     name: 'Research Notes',    desc: 'Inspect 15+ unique objects in Arcadia.' },
+        { id: 'arcadia-speed-5',  name: 'Speed Demon',       desc: 'Escape Arcadia in under 5 minutes.' },
+        { id: 'arcadia-speed-3',  name: 'Lightning Run',     desc: 'Escape Arcadia in under 3 minutes.' },
+        { id: 'arcadia-wire',     name: 'Electrician',       desc: 'Solve the wire puzzle on the first try.' },
+        { id: 'arcadia-memory',   name: 'Memory Master',     desc: 'Complete the memory card puzzle on the first try.' },
+        { id: 'arcadia-safe',     name: 'Safe Cracker',      desc: "Crack the director's safe on the first attempt." },
+      ],
+    },
+    {
+      label: 'Blackwood Asylum', cssClass: 'section-blackwood',
+      defs: [
+        { id: 'blackwood-escape',   name: 'Asylum Cleared',    desc: 'Escape Blackwood Psychiatric Institute.' },
+        { id: 'blackwood-secret',   name: 'Tunnel Rat',        desc: 'Find and use the secret exit in Blackwood.' },
+        { id: 'blackwood-explorer', name: 'Ward Walker',       desc: 'Visit every room in Blackwood (10 rooms).' },
+        { id: 'blackwood-lore',     name: 'Case Files',        desc: 'Inspect 15+ unique objects in Blackwood.' },
+        { id: 'blackwood-speed-8',  name: 'Quick Getaway',     desc: 'Escape Blackwood in under 8 minutes.' },
+        { id: 'blackwood-speed-5',  name: 'Asylum Sprinter',   desc: 'Escape Blackwood in under 5 minutes.' },
+        { id: 'blackwood-bells',    name: 'Bell Ringer',       desc: 'Solve the chapel bells on the first try.' },
+        { id: 'blackwood-cipher',   name: 'Codebreaker',       desc: 'Solve the records cipher on the first try.' },
+        { id: 'blackwood-safe',     name: "Harlan's Secret",   desc: "Crack the director's safe on the first attempt." },
+      ],
+    },
+    {
+      label: 'Meridian Station Alpha', cssClass: 'section-meridian',
+      defs: [
+        { id: 'meridian-escape',   name: 'Station Cleared',    desc: 'Escape Meridian Station Alpha.' },
+        { id: 'meridian-secret',   name: 'Ghost Signal',       desc: 'Find and use the secret exit on Meridian.' },
+        { id: 'meridian-explorer', name: 'Station Sweep',      desc: 'Visit every room on Meridian (11 rooms).' },
+        { id: 'meridian-lore',     name: 'Flight Recorder',    desc: 'Inspect 15+ unique objects on Meridian.' },
+        { id: 'meridian-speed-10', name: 'Orbital Rush',       desc: 'Escape Meridian in under 10 minutes.' },
+        { id: 'meridian-speed-6',  name: 'Zero-G Sprint',      desc: 'Escape Meridian in under 6 minutes.' },
+        { id: 'meridian-reactor',  name: 'Nuclear Precision',  desc: 'Solve the reactor sequence on the first try.' },
+        { id: 'meridian-wires',    name: 'Rewired',            desc: 'Solve the power reroute on the first try.' },
+        { id: 'meridian-pod',      name: 'Pod Jockey',         desc: 'Crack the escape pod code on the first attempt.' },
+      ],
+    },
+    {
+      label: 'Cross-Mission', cssClass: 'section-cross',
+      defs: [
+        { id: 'triple-threat',  name: 'Triple Threat',   desc: 'Escape all three missions.' },
+        { id: 'all-endings',    name: 'Seen It All',     desc: 'Witness every ending across all missions.' },
+        { id: 'delta-hunter',   name: 'Delta Hunter',    desc: 'Find all Δ fragments in a single mission.' },
+        { id: 'delta-master',   name: 'Delta Master',    desc: 'Find all Δ fragments across all three missions.' },
+        { id: 'completionist',  name: 'Completionist',   desc: 'Unlock every other achievement.' },
+      ],
+    },
+  ];
 
-    const DEFS = [
-      { id: 'first-escape',   name: 'First Steps Out',   desc: 'Complete the escape for the first time.' },
-      { id: 'speed-runner',   name: 'Speed Runner',       desc: 'Escape with more than half your time remaining.' },
-      { id: 'no-hints',       name: "I Don't Need Help",  desc: 'Escape without using any hints.' },
-      { id: 'no-mistakes',    name: 'Ghost Protocol',     desc: 'Escape without triggering the alarm.' },
-      { id: 'secret-escape',  name: 'Shadow Exit',        desc: 'Find and use the secret room exit.' },
-      { id: 'too-loud',       name: 'Too Loud',           desc: 'Escape while the alarm is still active.' },
-      { id: 'under-pressure', name: 'Under Pressure',     desc: 'Escape on Hard with the alarm active.' },
-      { id: 'time-out',       name: "Time's Up",          desc: 'Run out of time. Better luck next time.' },
-      { id: 'patient-zero',   name: 'Patient Zero',       desc: 'Trigger the security alarm.' },
-      { id: 'explorer',       name: 'Every Room',         desc: 'Visit at least 7 of the 9 rooms.' },
-      { id: 'cartographer',   name: 'Cartographer',       desc: 'Visit every room in the facility.' },
-      { id: 'lore-hunter',    name: 'Deep Dive',          desc: 'Inspect 18 or more unique objects.' },
-      { id: 'completionist',  name: 'Completionist',      desc: 'Inspect 20 or more objects in a single run.' },
-      { id: 'speedrun-hard',  name: 'Hard Boiled',        desc: 'Escape on Hard difficulty.' },
-      { id: 'no-hints-hard',  name: 'Purist',             desc: 'Escape on Hard without using any hints.' },
-      { id: 'wire-first-try', name: 'Electrician',        desc: 'Solve the wire puzzle on the first try.' },
-      { id: 'memory-master',  name: 'Memory Master',      desc: 'Complete the memory puzzle on the first try.' },
-      { id: 'safe-cracker',   name: 'Safe Cracker',       desc: "Crack the director's safe on the first attempt." },
-    ];
+  var totalDefs = 0;
+  var totalUnlocked = 0;
+  var container = document.getElementById('ach-container');
 
-    document.getElementById('hub-achievements').innerHTML = DEFS.map(d => {
-      const unlocked = ach.includes(d.id);
-      return `<div class="hub-ach-card ${unlocked ? 'unlocked' : 'locked'}">
-        <div class="hub-ach-name">${unlocked ? d.name : '???'}</div>
-        <div class="hub-ach-desc">${unlocked ? d.desc : 'Keep playing to unlock.'}</div>
-      </div>`;
-    }).join('');
-  })();
+  SECTIONS.forEach(function (section) {
+    var sectionEl = document.createElement('div');
+    sectionEl.className = 'ach-section';
+
+    var label = document.createElement('div');
+    label.className = 'ach-section-label ' + section.cssClass;
+    label.textContent = '// ' + section.label;
+    sectionEl.appendChild(label);
+
+    var grid = document.createElement('div');
+    grid.className = 'ach-grid';
+
+    section.defs.forEach(function (d) {
+      totalDefs++;
+      var unlocked = ach.includes(d.id);
+      if (unlocked) totalUnlocked++;
+
+      var card = document.createElement('div');
+      card.className = 'ach-card ' + (unlocked ? 'unlocked' : 'locked');
+      card.innerHTML =
+        '<div class="ach-name">' + (unlocked ? d.name : '???') + '</div>' +
+        '<div class="ach-desc">' + (unlocked ? d.desc : 'Keep playing to unlock.') + '</div>';
+      grid.appendChild(card);
+    });
+
+    sectionEl.appendChild(grid);
+    container.appendChild(sectionEl);
+  });
+
+  document.getElementById('ach-count').textContent = totalUnlocked + ' / ' + totalDefs;
+  document.getElementById('ach-bar').style.width = (totalDefs > 0 ? (totalUnlocked / totalDefs * 100) : 0) + '%';
+})();
 </script>
 </body>
 </html>

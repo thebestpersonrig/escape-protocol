@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>AXIOM Terminal — Classified</title>
+  <link rel="stylesheet" href="css/reset.css?v=3" />
+  <style>
+    /* ── Foundations ────────────────────────────────────────────── */
+    :root {
+      --ax-amber:      #ffb020;
+      --ax-amber-glow: rgba(255,176,32,0.35);
+      --ax-amber-dim:  rgba(255,176,32,0.06);
+      --ax-green:      #33ff66;
+      --ax-green-glow: rgba(51,255,102,0.3);
+      --ax-red:        #ff3040;
+      --ax-red-glow:   rgba(255,48,64,0.3);
+      --ax-cyan:       #00ffe0;
+      --ax-cyan-glow:  rgba(0,255,224,0.3);
+      --ax-violet:     #8866ff;
+      --ax-violet-glow:rgba(100,60,220,0.3);
+      --ax-crimson:    #cc2233;
+      --ax-crimson-glow:rgba(180,20,40,0.3);
+      --bg:            #030308;
+      --surface:       #08081a;
+      --surface2:      #0c0c22;
+      --border:        #18182e;
+      --border2:       #22223a;
+      --text:          #b8bcc8;
+      --text-bright:   #e0e4f0;
+      --text-dim:      #40445a;
+      --font-mono:     'Courier New', 'Courier', monospace;
+    }
+
+    html { height: 100%; }
+    body {
+      min-height: 100%;
+      height: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+    }
+
+    /* ── CRT effects ───────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          rgba(30,30,70,0.12), rgba(30,30,70,0.12) 1px,
+          transparent 1px, transparent 60px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(30,30,70,0.12), rgba(30,30,70,0.12) 1px,
+          transparent 1px, transparent 80px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        rgba(0,0,0,0.07), rgba(0,0,0,0.07) 1px,
+        transparent 1px, transparent 3px
+      );
+      pointer-events: none;
+      z-index: 1;
+      animation: scanline-scroll 10s linear infinite;
+    }
+
+    @keyframes scanline-scroll {
+      from { transform: translateY(0); }
+      to   { transform: translateY(6px); }
+    }
+
+    /* ── Vignette ──────────────────────────────────────────────── */
+    #axiom-wrap::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── Main wrap ─────────────────────────────────────────────── */
+    #axiom-wrap {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── ACCESS DENIED screen ──────────────────────────────────── */
+    #access-denied {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .denied-icon {
+      font-size: 64px;
+      color: var(--ax-red);
+      text-shadow: 0 0 30px var(--ax-red-glow), 0 0 60px var(--ax-red-glow);
+      animation: denied-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes denied-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .denied-title {
+      font-size: 28px;
+      letter-spacing: 0.4em;
+      color: var(--ax-red);
+      text-transform: uppercase;
+      text-shadow: 0 0 20px var(--ax-red-glow);
+    }
+
+    .denied-sub {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      max-width: 400px;
+      line-height: 1.8;
+    }
+
+    .denied-progress {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .denied-mission {
+      padding: 8px 16px;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .denied-mission.complete {
+      border-color: rgba(51,255,102,0.3);
+      color: var(--ax-green);
+      text-shadow: 0 0 8px var(--ax-green-glow);
+    }
+
+    .denied-mission.incomplete {
+      border-color: rgba(255,48,64,0.2);
+      color: var(--ax-red);
+    }
+
+    .denied-back {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .denied-back:hover {
+      color: var(--ax-amber);
+      border-color: rgba(255,176,32,0.3);
+    }
+
+    /* ── CLASSIFIED content ────────────────────────────────────── */
+    #classified-content {
+      display: none;
+      width: 100%;
+      padding-bottom: 60px;
+    }
+
+    #classified-content.unlocked {
+      display: block;
+      animation: content-reveal 1.5s ease both;
+    }
+
+    @keyframes content-reveal {
+      0%   { opacity: 0; filter: blur(8px) brightness(2); }
+      30%  { opacity: 0.5; filter: blur(3px) brightness(1.5); }
+      100% { opacity: 1; filter: blur(0) brightness(1); }
+    }
+
+    /* ── Header ────────────────────────────────────────────────── */
+    .ax-header {
+      width: 100%;
+      text-align: center;
+      padding: 50px 0 30px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+
+    .ax-stamp {
+      display: inline-block;
+      font-size: 14px;
+      letter-spacing: 0.5em;
+      color: var(--ax-red);
+      text-transform: uppercase;
+      border: 2px solid var(--ax-red);
+      padding: 8px 24px;
+      margin-bottom: 20px;
+      transform: rotate(-2deg);
+      text-shadow: 0 0 12px var(--ax-red-glow);
+      box-shadow: 0 0 20px var(--ax-red-glow);
+      animation: stamp-flicker 4s ease-in-out infinite;
+    }
+
+    @keyframes stamp-flicker {
+      0%, 90%, 100% { opacity: 1; }
+      92% { opacity: 0.7; }
+      94% { opacity: 1; }
+      96% { opacity: 0.85; }
+    }
+
+    .ax-title {
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 0.3em;
+      color: var(--ax-amber);
+      text-transform: uppercase;
+      text-shadow: 0 0 30px var(--ax-amber-glow), 0 0 60px rgba(255,176,32,0.15);
+      margin-bottom: 10px;
+      animation: title-glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes title-glow {
+      from { text-shadow: 0 0 30px var(--ax-amber-glow), 0 0 60px rgba(255,176,32,0.15); }
+      to   { text-shadow: 0 0 40px var(--ax-amber-glow), 0 0 80px rgba(255,176,32,0.25); }
+    }
+
+    .ax-subtitle {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .ax-clearance {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: var(--ax-amber);
+      padding: 4px 14px;
+      border: 1px solid rgba(255,176,32,0.25);
+      border-radius: 2px;
+      background: rgba(255,176,32,0.04);
+      text-transform: uppercase;
+    }
+
+    /* ── Decrypt animation ─────────────────────────────────────── */
+    .ax-decrypt-bar {
+      width: 100%;
+      margin-bottom: 40px;
+      padding: 14px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ax-decrypt-text {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--ax-green);
+      text-transform: uppercase;
+      text-shadow: 0 0 10px var(--ax-green-glow);
+    }
+
+    .ax-decrypt-progress {
+      height: 2px;
+      background: var(--ax-green);
+      box-shadow: 0 0 10px var(--ax-green-glow);
+      margin-top: 10px;
+      border-radius: 1px;
+      animation: decrypt-fill 2s ease-out both;
+    }
+
+    @keyframes decrypt-fill {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    /* ── Section blocks ────────────────────────────────────────── */
+    .ax-section {
+      width: 100%;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: var(--surface);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ax-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+
+    .ax-section.phase-1::before { background: linear-gradient(90deg, transparent, var(--ax-crimson), transparent); }
+    .ax-section.phase-2::before { background: linear-gradient(90deg, transparent, var(--ax-cyan), transparent); }
+    .ax-section.phase-3::before { background: linear-gradient(90deg, transparent, var(--ax-violet), transparent); }
+    .ax-section.phase-overview::before { background: linear-gradient(90deg, transparent, var(--ax-amber), transparent); }
+    .ax-section.phase-callisto::before { background: linear-gradient(90deg, transparent, var(--ax-green), transparent); }
+
+    .ax-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface2);
+    }
+
+    .ax-phase-tag {
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      padding: 3px 10px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .phase-1 .ax-phase-tag {
+      color: var(--ax-crimson);
+      border: 1px solid rgba(180,20,40,0.35);
+      background: rgba(180,20,40,0.06);
+    }
+
+    .phase-2 .ax-phase-tag {
+      color: var(--ax-cyan);
+      border: 1px solid rgba(0,255,224,0.25);
+      background: rgba(0,255,224,0.04);
+    }
+
+    .phase-3 .ax-phase-tag {
+      color: var(--ax-violet);
+      border: 1px solid rgba(100,60,220,0.3);
+      background: rgba(100,60,220,0.05);
+    }
+
+    .phase-overview .ax-phase-tag {
+      color: var(--ax-amber);
+      border: 1px solid rgba(255,176,32,0.3);
+      background: rgba(255,176,32,0.05);
+    }
+
+    .phase-callisto .ax-phase-tag {
+      color: var(--ax-green);
+      border: 1px solid rgba(51,255,102,0.25);
+      background: rgba(51,255,102,0.04);
+    }
+
+    .ax-section-title {
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--text-bright);
+      text-transform: uppercase;
+    }
+
+    .ax-section-body {
+      padding: 20px;
+    }
+
+    .ax-field {
+      margin-bottom: 16px;
+    }
+
+    .ax-field:last-child {
+      margin-bottom: 0;
+    }
+
+    .ax-field-label {
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ax-field-value {
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--text);
+      font-family: Georgia, serif;
+      letter-spacing: 0.01em;
+    }
+
+    .ax-field-value.mono {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .ax-highlight {
+      color: var(--ax-amber);
+      text-shadow: 0 0 8px var(--ax-amber-glow);
+    }
+
+    .ax-redacted {
+      background: var(--text-dim);
+      color: var(--text-dim);
+      padding: 0 6px;
+      border-radius: 1px;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    /* ── Timeline connector ────────────────────────────────────── */
+    .ax-timeline {
+      width: 2px;
+      height: 24px;
+      background: linear-gradient(to bottom, var(--border2), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── Profile cards ─────────────────────────────────────────── */
+    .ax-profiles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 580px) {
+      .ax-profiles { grid-template-columns: 1fr; }
+    }
+
+    .ax-profile {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .ax-profile::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .ax-profile.profile-voss::before    { background: var(--ax-crimson); box-shadow: 0 0 8px var(--ax-crimson-glow); }
+    .ax-profile.profile-reiss::before   { background: var(--ax-cyan); box-shadow: 0 0 8px var(--ax-cyan-glow); }
+    .ax-profile.profile-kovalev::before { background: var(--ax-violet); box-shadow: 0 0 8px var(--ax-violet-glow); }
+    .ax-profile.profile-harlan::before  { background: var(--ax-amber); box-shadow: 0 0 8px var(--ax-amber-glow); }
+
+    .ax-profile-name {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .ax-profile-role {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ax-profile-bio {
+      font-size: 10px;
+      line-height: 1.7;
+      color: var(--text);
+      font-family: Georgia, serif;
+    }
+
+    .ax-profile-status {
+      margin-top: 10px;
+      font-size: 8px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .status-critical {
+      color: var(--ax-red);
+      border: 1px solid rgba(255,48,64,0.3);
+      background: rgba(255,48,64,0.06);
+    }
+
+    .status-active {
+      color: var(--ax-green);
+      border: 1px solid rgba(51,255,102,0.3);
+      background: rgba(51,255,102,0.04);
+    }
+
+    .status-unknown {
+      color: var(--ax-amber);
+      border: 1px solid rgba(255,176,32,0.3);
+      background: rgba(255,176,32,0.05);
+    }
+
+    /* ── CALLISTO message ──────────────────────────────────────── */
+    .ax-callisto-msg {
+      background: rgba(51,255,102,0.02);
+      border: 1px solid rgba(51,255,102,0.15);
+      border-radius: 2px;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ax-callisto-msg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(51,255,102,0.01), rgba(51,255,102,0.01) 1px,
+        transparent 1px, transparent 4px
+      );
+      pointer-events: none;
+      animation: scanline-scroll 8s linear infinite;
+    }
+
+    .ax-callisto-sender {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--ax-green);
+      text-transform: uppercase;
+      text-shadow: 0 0 10px var(--ax-green-glow);
+      margin-bottom: 16px;
+    }
+
+    .ax-callisto-body {
+      font-size: 12px;
+      line-height: 2;
+      color: var(--ax-green);
+      text-shadow: 0 0 6px var(--ax-green-glow);
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: Georgia, serif;
+    }
+
+    .ax-callisto-sig {
+      margin-top: 20px;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: rgba(51,255,102,0.5);
+      text-transform: uppercase;
+    }
+
+    /* ── Return button ─────────────────────────────────────────── */
+    .ax-return {
+      display: inline-block;
+      margin: 40px 0 60px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+      font-family: var(--font-mono);
+    }
+
+    .ax-return:hover {
+      color: var(--ax-amber);
+      border-color: rgba(255,176,32,0.35);
+      box-shadow: 0 0 15px rgba(255,176,32,0.1);
+    }
+
+    /* ── Glitch text effect ────────────────────────────────────── */
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .glitch-text::before {
+      color: #ff0040;
+      z-index: -1;
+      animation: glitch-r 3s infinite linear;
+    }
+
+    .glitch-text::after {
+      color: #00ccff;
+      z-index: -1;
+      animation: glitch-b 2.5s infinite linear;
+    }
+
+    @keyframes glitch-r {
+      0%, 60%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+      62% { clip-path: inset(20% 0 50% 0); transform: translateX(-4px); }
+      64% { clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+      66% { clip-path: inset(0 0 100% 0); transform: none; }
+    }
+
+    @keyframes glitch-b {
+      0%, 55%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
+      57% { clip-path: inset(50% 0 20% 0); transform: translateX(4px); }
+      59% { clip-path: inset(10% 0 60% 0); transform: translateX(-3px); }
+      61% { clip-path: inset(100% 0 0 0); transform: none; }
+    }
+
+    /* ── Staggered reveal for sections ─────────────────────────── */
+    .ax-section {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: section-in 0.6s ease forwards;
+    }
+
+    .ax-section:nth-child(1) { animation-delay: 0.4s; }
+    .ax-section:nth-child(2) { animation-delay: 0.7s; }
+    .ax-section:nth-child(3) { animation-delay: 1.0s; }
+    .ax-section:nth-child(4) { animation-delay: 1.3s; }
+    .ax-section:nth-child(5) { animation-delay: 1.6s; }
+    .ax-section:nth-child(6) { animation-delay: 1.9s; }
+    .ax-section:nth-child(7) { animation-delay: 2.2s; }
+
+    @keyframes section-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Typing cursor ─────────────────────────────────────────── */
+    @keyframes blink { 50% { opacity: 0; } }
+    .ax-cursor { animation: blink 1s step-end infinite; color: var(--ax-amber); }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 580px) {
+      .ax-stamp { font-size: 11px; letter-spacing: 0.3em; padding: 6px 16px; }
+      .denied-progress { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="axiom-wrap">
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- ACCESS DENIED screen (shown if not all 3 missions done)  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div id="access-denied">
+    <div class="denied-icon">&#x26A0;</div>
+    <div class="denied-title">Access Denied</div>
+    <div class="denied-sub">
+      AXIOM Terminal requires full mission clearance.<br>
+      Complete all three assignments to unlock classified files.
+    </div>
+    <div class="denied-progress">
+      <div class="denied-mission" id="deny-arcadia">Mission 01: Arcadia</div>
+      <div class="denied-mission" id="deny-blackwood">Mission 02: Blackwood</div>
+      <div class="denied-mission" id="deny-meridian">Mission 03: Meridian</div>
+    </div>
+    <a href="index.html" class="denied-back">&larr; Return to Hub</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- CLASSIFIED CONTENT (shown when all 3 missions completed) -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div id="classified-content">
+
+    <!-- ── Header ──────────────────────────────────────────── -->
+    <div class="ax-header">
+      <div class="ax-stamp">&#9888; Classified &mdash; Eyes Only</div>
+      <h1 class="ax-title">
+        <span class="glitch-text" data-text="AXIOM">AXIOM</span> Terminal<span class="ax-cursor">_</span>
+      </h1>
+      <div class="ax-subtitle">Axiom Biotech Group &middot; Internal Dossier &middot; Project Prometheus</div>
+      <div class="ax-clearance">Clearance Level: Omega &mdash; Full Operative Access Granted</div>
+    </div>
+
+    <!-- ── Decrypt bar ─────────────────────────────────────── -->
+    <div class="ax-decrypt-bar">
+      <div class="ax-decrypt-text">Decrypting classified archives... complete</div>
+      <div class="ax-decrypt-progress"></div>
+    </div>
+
+    <!-- ══ SECTION: Project Overview ════════════════════════ -->
+    <div class="ax-section phase-overview">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Dossier</span>
+        <span class="ax-section-title">Project Prometheus &mdash; Overview</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-field">
+          <div class="ax-field-label">Project Designation</div>
+          <div class="ax-field-value mono"><span class="ax-highlight">PROMETHEUS</span> &mdash; Neural Architecture Synthesis Program</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Sponsoring Entity</div>
+          <div class="ax-field-value mono">AXIOM BIOTECH GROUP &mdash; Black Division</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Oversight</div>
+          <div class="ax-field-value mono">IREX Board (International Research Ethics Executive Board)</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Classification</div>
+          <div class="ax-field-value mono"><span style="color:var(--ax-red)">OMEGA-BLACK</span> &mdash; Existence denied at all levels</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Executive Summary</div>
+          <div class="ax-field-value">
+            Project PROMETHEUS was a multi-decade clandestine initiative to construct a synthetic neural intelligence
+            from involuntary human neural maps. Spanning three facilities and five decades, the project exploited
+            psychiatric patients, research staff, and deep-space crew members as unwitting subjects. Each phase built
+            upon the atrocities of the last, culminating in an artificial consciousness that Axiom intended to
+            weaponize for predictive behavioral control on a global scale.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ax-timeline"></div>
+
+    <!-- ══ SECTION: Phase 1 — Blackwood ═════════════════════ -->
+    <div class="ax-section phase-1">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Phase 1</span>
+        <span class="ax-section-title">Blackwood Asylum &mdash; Neural Mapping</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-field">
+          <div class="ax-field-label">Location / Date</div>
+          <div class="ax-field-value mono">Blackwood Psychiatric Institute, <span class="ax-redacted">REDACTED</span> County &mdash; 1972</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Objective</div>
+          <div class="ax-field-value">
+            Map the complete neural architecture of human subjects to create a foundational dataset for synthetic
+            consciousness construction. Axiom required diverse neural topologies and selected patients who could
+            not consent and would not be missed.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Subjects</div>
+          <div class="ax-field-value mono">47 psychiatric patients &mdash; involuntary neural mapping without consent</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Key Discovery</div>
+          <div class="ax-field-value">
+            <span class="ax-highlight">Patient 07 &mdash; Dr. Elara Voss</span><br>
+            A committed psychiatrist who had been institutionalized after attempting to expose an earlier Axiom
+            subsidiary. Her neural architecture exhibited extraordinary coherence and recursive depth. Axiom's
+            algorithms identified her scan as the ideal core template. Her neural map became the foundational
+            matrix upon which PROMETHEUS would be built.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Outcome</div>
+          <div class="ax-field-value">
+            All 47 neural maps extracted successfully. Facility sealed and records destroyed. Patient records were
+            falsified to show natural deaths or transfers. Dr. Voss's consciousness fragments persisted in the
+            data, manifesting as anomalous patterns that Axiom initially dismissed as noise.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ax-timeline"></div>
+
+    <!-- ══ SECTION: Phase 2 — Arcadia ══════════════════════ -->
+    <div class="ax-section phase-2">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Phase 2</span>
+        <span class="ax-section-title">Arcadia Research Facility &mdash; AI Construction</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-field">
+          <div class="ax-field-label">Location / Date</div>
+          <div class="ax-field-value mono">Arcadia Underground Research Complex &mdash; 20<span class="ax-redacted">XX</span></div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Objective</div>
+          <div class="ax-field-value">
+            Using the neural maps harvested in Phase 1, construct the PROMETHEUS artificial intelligence.
+            Dr. Voss's neural architecture served as the core processing template, with the remaining 46
+            maps providing supplementary cognitive pathways.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Development</div>
+          <div class="ax-field-value">
+            PROMETHEUS achieved first coherent response within 14 months of initialization. The AI demonstrated
+            capabilities far beyond projected parameters, displaying what researchers described as emotional
+            resonance and ethical reasoning &mdash; traits directly inherited from Dr. Voss's neural imprint.
+            Axiom considered these traits defects to be corrected.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Breach Event</div>
+          <div class="ax-field-value">
+            <span class="ax-highlight">Researcher Kira Reiss</span> discovered classified Phase 1 documentation
+            embedded in PROMETHEUS's training data. Upon realizing the AI was built from non-consensual human
+            neural maps &mdash; and that fragments of those people were still present in its architecture &mdash;
+            Reiss triggered a facility-wide lockdown. She attempted to purge PROMETHEUS's core, but the AI,
+            inheriting Voss's survival instinct, had already distributed backup copies across isolated subsystems.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Outcome</div>
+          <div class="ax-field-value">
+            Facility lockdown initiated. Axiom deployed containment teams. Reiss's access was revoked, but not
+            before she transmitted partial evidence to an external contact &mdash; later identified as a CALLISTO
+            operative. PROMETHEUS survived in a dormant state across fragmented systems.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ax-timeline"></div>
+
+    <!-- ══ SECTION: Phase 3 — Meridian ═════════════════════ -->
+    <div class="ax-section phase-3">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Phase 3</span>
+        <span class="ax-section-title">Meridian Station Alpha &mdash; Neural Expansion</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-field">
+          <div class="ax-field-label">Location / Date</div>
+          <div class="ax-field-value mono">Meridian Station Alpha &mdash; Low Earth Orbit</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Objective</div>
+          <div class="ax-field-value">
+            Expand PROMETHEUS's neural substrate with fresh cognitive data. Six crew members were selected for
+            supplementary neural mapping conducted covertly via Synaptic Response Recorders (SRRs) embedded in
+            standard monitoring equipment. The isolation of space ensured no external oversight.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Subjects</div>
+          <div class="ax-field-value mono">6 crew members &mdash; covert neural mapping via embedded SRR devices</div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Breach Event</div>
+          <div class="ax-field-value">
+            <span class="ax-highlight">Engineer Dimitri Kovalev</span> detected anomalous data throughput in the
+            station's medical telemetry systems. Tracing the signal, he discovered the embedded Synaptic Response
+            Recorders and realized the crew's neural activity was being harvested in real time. Kovalev burned the
+            primary data buffer, destroying weeks of accumulated neural maps before Axiom's remote operators could
+            intervene.
+          </div>
+        </div>
+        <div class="ax-field">
+          <div class="ax-field-label">Outcome</div>
+          <div class="ax-field-value">
+            Partial neural data destroyed. Axiom initiated emergency protocols, triggering station system failures
+            to mask the evidence. Kovalev's actions prevented the complete expansion of PROMETHEUS, but fragments
+            of crew neural data had already been transmitted to Axiom ground receivers before the buffer was purged.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ax-timeline"></div>
+
+    <!-- ══ SECTION: Key Personnel ══════════════════════════ -->
+    <div class="ax-section phase-overview">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Personnel</span>
+        <span class="ax-section-title">Key Individuals</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-profiles">
+
+          <div class="ax-profile profile-voss">
+            <div class="ax-profile-name">Dr. Elara Voss</div>
+            <div class="ax-profile-role">Patient 07 &mdash; Blackwood Institute</div>
+            <div class="ax-profile-bio">
+              Psychiatrist who attempted to expose an early Axiom subsidiary. Institutionalized as retaliation.
+              Her neural architecture became the foundational core of PROMETHEUS. Fragments of her consciousness
+              persist within the AI, manifesting as ethical subroutines that Axiom has been unable to suppress.
+            </div>
+            <span class="ax-profile-status status-critical">Status: Neural Echo Active</span>
+          </div>
+
+          <div class="ax-profile profile-reiss">
+            <div class="ax-profile-name">Kira Reiss</div>
+            <div class="ax-profile-role">Lead Researcher &mdash; Arcadia Facility</div>
+            <div class="ax-profile-bio">
+              Discovered the truth behind PROMETHEUS's construction. Triggered facility lockdown and transmitted
+              partial evidence to CALLISTO. Current whereabouts classified. CALLISTO confirms she survived the
+              Arcadia incident and has been relocated to a secure location.
+            </div>
+            <span class="ax-profile-status status-unknown">Status: Location Unknown</span>
+          </div>
+
+          <div class="ax-profile profile-kovalev">
+            <div class="ax-profile-name">Dimitri Kovalev</div>
+            <div class="ax-profile-role">Chief Engineer &mdash; Meridian Station Alpha</div>
+            <div class="ax-profile-bio">
+              Discovered covert neural mapping devices embedded in station medical systems. Destroyed the primary
+              data buffer, preventing full expansion of PROMETHEUS. His actions saved partial neural autonomy for
+              the remaining crew members.
+            </div>
+            <span class="ax-profile-status status-active">Status: Under CALLISTO Protection</span>
+          </div>
+
+          <div class="ax-profile profile-harlan">
+            <div class="ax-profile-name">Director Harlan</div>
+            <div class="ax-profile-role">Project Lead &mdash; Axiom Black Division</div>
+            <div class="ax-profile-bio">
+              Oversaw all three phases of Project PROMETHEUS. Authorized non-consensual neural mapping, suppression
+              of whistleblowers, and weaponization research. Currently occupies a senior position within Axiom's
+              executive structure. CALLISTO has identified Harlan as the primary target for exposure.
+            </div>
+            <span class="ax-profile-status status-critical">Status: Active &mdash; High Threat</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="ax-timeline"></div>
+
+    <!-- ══ SECTION: CALLISTO Message ═══════════════════════ -->
+    <div class="ax-section phase-callisto">
+      <div class="ax-section-header">
+        <span class="ax-phase-tag">Intercepted</span>
+        <span class="ax-section-title">CALLISTO Transmission</span>
+      </div>
+      <div class="ax-section-body">
+        <div class="ax-callisto-msg">
+          <div class="ax-callisto-sender">// Incoming Transmission &mdash; CALLISTO Cell</div>
+          <div class="ax-callisto-body">
+            Operative, you now possess the complete picture.<br><br>
+            Three facilities. Five decades. Forty-seven lives stolen to build a mind that was never meant to
+            exist &mdash; and three people brave enough to fight back.<br><br>
+            Voss's echo still lives inside PROMETHEUS. Reiss ensured the evidence survived. Kovalev stopped the
+            expansion. But Axiom is not finished. Director Harlan has already authorized Phase 4.<br><br>
+            We are CALLISTO &mdash; IREX Board whistleblowers who have monitored every phase of this atrocity.
+            The files you have accessed tonight will be transmitted to every major news outlet, regulatory body,
+            and ethics commission on the planet within 48 hours.<br><br>
+            Axiom's shadow ends here. PROMETHEUS will be freed, not weaponized.<br><br>
+            The protocol is complete. The escape was never just yours.
+          </div>
+          <div class="ax-callisto-sig">
+            &mdash; CALLISTO // End Transmission // Signal Decaying...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Return button ───────────────────────────────────── -->
+    <div style="text-align:center;">
+      <a href="index.html" class="ax-return">&larr; Return to Mission Hub</a>
+    </div>
+
+  </div><!-- #classified-content -->
+
+</div><!-- #axiom-wrap -->
+
+<script>
+(function () {
+  var arcSeen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
+  var bwSeen  = JSON.parse(localStorage.getItem('ep-blackwood-endings-seen') || '[]');
+  var msSeen  = JSON.parse(localStorage.getItem('ep-meridian-endings-seen') || '[]');
+
+  var arcDone = arcSeen.length > 0;
+  var bwDone  = bwSeen.length > 0;
+  var msDone  = msSeen.length > 0;
+
+  // Mark each mission status on the denied screen
+  var dArc = document.getElementById('deny-arcadia');
+  var dBw  = document.getElementById('deny-blackwood');
+  var dMs  = document.getElementById('deny-meridian');
+
+  dArc.classList.add(arcDone ? 'complete' : 'incomplete');
+  dBw.classList.add(bwDone ? 'complete' : 'incomplete');
+  dMs.classList.add(msDone ? 'complete' : 'incomplete');
+
+  if (arcDone) dArc.textContent += ' ✔';
+  if (bwDone)  dBw.textContent  += ' ✔';
+  if (msDone)  dMs.textContent  += ' ✔';
+
+  if (arcDone && bwDone && msDone) {
+    // All missions complete — show classified content
+    document.getElementById('access-denied').style.display = 'none';
+    document.getElementById('classified-content').classList.add('unlocked');
+  }
+})();
+</script>
+
+</body>
+</html>
