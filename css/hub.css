@@ -5,14 +5,14 @@
   --accent-dim:  rgba(0,255,224,0.06);
   --danger:      #ff3040;
   --warn:        #ffb040;
-  --bg:          #05050d;
-  --surface:     #0a0a18;
-  --surface2:    #0e0e20;
-  --border:      #18182e;
-  --border2:     #22223a;
+  --bg:          #0a0a16;
+  --surface:     #10102a;
+  --surface2:    #15152e;
+  --border:      #1e1e38;
+  --border2:     #2a2a48;
   --text:        #b8bcc8;
   --text-bright: #e0e4f0;
-  --text-dim:    #40445a;
+  --text-dim:    #50546e;
   --font-mono:   'Courier New', 'Courier', monospace;
   --radius:      4px;
   --card-w:      340px;
@@ -331,8 +331,8 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 56px;
-  max-width: 860px;
+  gap: 64px;
+  max-width: 980px;
   width: 100%;
   padding: 0 24px 10px;
   margin-bottom: 50px;
@@ -348,30 +348,200 @@ body::after {
   z-index: 0;
 }
 
-.flow-row {
+.flow-track {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 36px;
   width: 100%;
   position: relative;
   z-index: 1;
 }
 
 .flow-node {
-  width: 320px;
+  width: 260px;
   flex-shrink: 0;
 }
 
-/* Compact card adjustments for flowchart */
-#flowchart .hub-card {
-  width: 100%;
+.flow-spacer {
+  width: 260px;
+  flex-shrink: 0;
+  visibility: hidden;
 }
 
-#flowchart .hub-card-desc {
+/* ── Compact mission tiles ───────────────────────────────────── */
+.hub-tile {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hub-tile.available {
+  cursor: pointer;
+  border-color: rgba(0,255,224,0.22);
+  border-left-color: var(--accent);
+}
+
+.hub-tile.available:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0,255,224,0.5);
+  box-shadow: 0 10px 30px rgba(0,255,224,0.10), 0 0 0 1px rgba(0,255,224,0.12);
+}
+
+.hub-tile.locked-mission {
+  opacity: 0.55;
+  filter: saturate(0.45) brightness(0.92);
+  cursor: default;
+}
+
+.hub-tile.coming-soon {
+  opacity: 0.5;
+  filter: saturate(0.5);
+  cursor: default;
+  border-left-color: rgba(255,176,64,0.4);
+}
+
+/* Glitch edge flicker on left border */
+.hub-tile::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 3px;
+  height: 100%;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  animation: tile-edge-flicker 4.6s infinite linear;
+  color: var(--accent);
+}
+
+.hub-tile.theme-blackwood::after { color: #cc1133; }
+.hub-tile.theme-meridian::after  { color: #7755ee; }
+.hub-tile.theme-classified::after { color: #ffb040; }
+
+@keyframes tile-edge-flicker {
+  0%, 92%, 100% { opacity: 0; transform: translateY(0); }
+  93% { opacity: 0.9; transform: translateY(-2px); }
+  94% { opacity: 0.2; transform: translateY(1px); }
+  95% { opacity: 0.7; transform: translateY(-1px); }
+  96% { opacity: 0; transform: translateY(0); }
+}
+
+.hub-tile .tile-badge {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+.hub-tile .tile-title {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--text-bright);
+  text-transform: uppercase;
+  line-height: 1.3;
+  position: relative;
+}
+
+.hub-tile.available:hover .tile-title {
+  color: var(--accent);
+}
+
+/* RGB channel-split glitch on tile title */
+.tile-glitch {
+  display: inline-block;
+  position: relative;
+}
+
+.tile-glitch::before,
+.tile-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+  text-shadow: none;
+}
+
+.tile-glitch::before {
+  color: #ff0040;
+  z-index: -1;
+  animation: glitch-red 3.4s infinite linear;
+}
+
+.tile-glitch::after {
+  color: #00ccff;
+  z-index: -1;
+  animation: glitch-cyan 2.8s infinite linear;
+}
+
+.hub-tile .tile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.hub-tile .tile-endings {
   font-size: 10px;
-  line-height: 1.6;
-  padding-top: 8px;
-  margin-top: 0;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.hub-tile .tile-play {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.hub-tile.locked-mission .tile-play,
+.hub-tile.coming-soon .tile-play {
+  color: var(--text-dim);
+}
+
+/* Tile theme tints */
+.hub-tile.theme-blackwood.available { border-color: rgba(180,20,40,0.28); border-left-color: #cc1133; }
+.hub-tile.theme-blackwood.available:hover { border-color: rgba(200,30,55,0.55); box-shadow: 0 10px 30px rgba(180,20,40,0.12); }
+.hub-tile.theme-blackwood.available .tile-play { color: #cc2233; }
+.hub-tile.theme-blackwood.available:hover .tile-title { color: #cc2233; }
+
+.hub-tile.theme-meridian.available { border-color: rgba(100,60,220,0.28); border-left-color: #7755ee; }
+.hub-tile.theme-meridian.available:hover { border-color: rgba(120,80,240,0.55); box-shadow: 0 10px 30px rgba(100,60,220,0.12); }
+.hub-tile.theme-meridian.available .tile-play { color: #8866ff; }
+.hub-tile.theme-meridian.available:hover .tile-title { color: #8866ff; }
+
+.hub-tile.theme-classified .tile-title { color: rgba(255,176,64,0.55); font-style: italic; }
+.hub-tile.theme-classified .tile-play  { color: rgba(255,176,64,0.4); font-style: italic; }
+
+.hub-tile.selected {
+  border-color: rgba(0,255,224,0.7) !important;
+  box-shadow: 0 0 30px rgba(0,255,224,0.25), 0 0 60px rgba(0,255,224,0.1) !important;
+  transform: scale(1.02) !important;
+}
+.hub-tile.theme-blackwood.selected {
+  border-color: rgba(200,30,55,0.7) !important;
+  box-shadow: 0 0 30px rgba(180,20,40,0.3) !important;
+}
+.hub-tile.theme-meridian.selected {
+  border-color: rgba(120,80,240,0.7) !important;
+  box-shadow: 0 0 30px rgba(100,60,220,0.3) !important;
 }
 
 .hub-card-header {
@@ -462,20 +632,22 @@ body::after {
 }
 
 /* ── Flowchart responsive ────────────────────────────────────── */
-@media (max-width: 750px) {
-  .flow-row {
+@media (max-width: 900px) {
+  .flow-track {
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 28px;
   }
+
+  .flow-spacer { display: none; }
 
   .flow-node {
     width: 100%;
-    max-width: 380px;
+    max-width: 340px;
   }
 
   #flowchart {
-    gap: 40px;
+    gap: 32px;
   }
 }
 
