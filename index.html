@@ -37,63 +37,101 @@
   <div id="flowchart">
     <svg id="flow-lines"></svg>
 
-    <!-- Main lane: Arcadia → Blackwood → Meridian -->
-    <div class="flow-track flow-track-main">
+    <!-- Row 1: Arcadia — always available -->
+    <div class="flow-row">
       <div class="flow-node" id="node-arcadia">
-        <div class="hub-tile available theme-arcadia" id="card-arcadia"
+        <div class="hub-card available theme-arcadia" id="card-arcadia"
              onclick="launchMission(this,'arcadia')" role="button" tabindex="0"
              onkeydown="if(event.key==='Enter')launchMission(this,'arcadia')">
-          <div class="tile-badge hub-badge-available">AVAILABLE</div>
-          <div class="tile-title"><span class="tile-glitch" data-text="ARCADIA RESEARCH FACILITY">ARCADIA RESEARCH FACILITY</span></div>
-          <div class="tile-footer">
-            <span class="tile-endings" id="arcadia-endings">0 / 4</span>
-            <span class="tile-play">▶ Enter Facility</span>
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 01</div>
+            <div class="hub-card-badge hub-badge-available">AVAILABLE</div>
           </div>
-        </div>
-      </div>
-      <div class="flow-node" id="node-blackwood">
-        <div class="hub-tile locked-mission theme-blackwood" id="card-blackwood">
-          <div class="tile-badge hub-badge-locked" id="badge-blackwood">LOCKED</div>
-          <div class="tile-title"><span class="tile-glitch" data-text="BLACKWOOD ASYLUM">BLACKWOOD ASYLUM</span></div>
-          <div class="tile-footer">
-            <span class="tile-endings" id="blackwood-endings">0 / 4</span>
-            <span class="tile-play locked" id="play-blackwood">🔒 Complete Arcadia</span>
+          <div class="hub-card-title">Arcadia Research<br>Facility</div>
+          <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
+          <div class="hub-card-desc">Underground research facility. 72 hours dark. One hour to escape.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">20 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★☆☆</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="arcadia-endings">0 / 4</span></div>
           </div>
-        </div>
-      </div>
-      <div class="flow-node" id="node-meridian">
-        <div class="hub-tile locked-mission theme-meridian" id="card-meridian">
-          <div class="tile-badge hub-badge-locked" id="badge-meridian">LOCKED</div>
-          <div class="tile-title"><span class="tile-glitch" data-text="MERIDIAN STATION ALPHA">MERIDIAN STATION ALPHA</span></div>
-          <div class="tile-footer">
-            <span class="tile-endings" id="meridian-endings">0 / 5</span>
-            <span class="tile-play locked" id="play-meridian">🔒 Complete Blackwood</span>
-          </div>
+          <div class="hub-card-play">▶ Enter Facility</div>
         </div>
       </div>
     </div>
 
-    <!-- Branch lane: Mission 04 → Mission 05 (offset under Blackwood/Meridian) -->
-    <div class="flow-track flow-track-branch">
-      <div class="flow-spacer"></div>
-      <div class="flow-node" id="node-mission4">
-        <div class="hub-tile coming-soon theme-classified" id="card-mission4">
-          <div class="tile-badge hub-badge-soon">COMING SOON</div>
-          <div class="tile-title"><span class="tile-glitch" data-text="[CLASSIFIED]">[CLASSIFIED]</span></div>
-          <div class="tile-footer">
-            <span class="tile-endings">— / —</span>
-            <span class="tile-play locked">⧗ Awaiting Intel</span>
+    <!-- Row 2: Blackwood + Mission 04 (Coming Soon) -->
+    <div class="flow-row">
+      <div class="flow-node" id="node-blackwood">
+        <div class="hub-card theme-blackwood locked-mission" id="card-blackwood">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 02</div>
+            <div class="hub-card-badge hub-badge-locked" id="badge-blackwood">LOCKED</div>
           </div>
+          <div class="hub-card-title">Blackwood<br>Asylum</div>
+          <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
+          <div class="hub-card-desc">Sealed psychiatric institute. 40 years abandoned. Something still active.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">25 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★☆</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="blackwood-endings">0 / 4</span></div>
+          </div>
+          <div class="hub-card-play locked" id="play-blackwood">🔒 Complete Arcadia to Unlock</div>
+        </div>
+      </div>
+      <div class="flow-node" id="node-mission4">
+        <div class="hub-card theme-classified coming-soon" id="card-mission4">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 04</div>
+            <div class="hub-card-badge hub-badge-soon">COMING SOON</div>
+          </div>
+          <div class="hub-card-title">[CLASSIFIED]</div>
+          <div class="hub-card-tags">??? · ??? · ???</div>
+          <div class="hub-card-desc">Intel suggests a hidden facility. Briefing pending authorization.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">— / —</span></div>
+          </div>
+          <div class="hub-card-play locked">⧗ Awaiting Intel</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Meridian + Mission 05 (Coming Soon) -->
+    <div class="flow-row">
+      <div class="flow-node" id="node-meridian">
+        <div class="hub-card theme-meridian locked-mission" id="card-meridian">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 03</div>
+            <div class="hub-card-badge hub-badge-locked" id="badge-meridian">LOCKED</div>
+          </div>
+          <div class="hub-card-title">Meridian<br>Station Alpha</div>
+          <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
+          <div class="hub-card-desc">Space station. Lost contact. 30 minutes of oxygen remaining.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="meridian-endings">0 / 5</span></div>
+          </div>
+          <div class="hub-card-play locked" id="play-meridian">🔒 Complete Blackwood to Unlock</div>
         </div>
       </div>
       <div class="flow-node" id="node-mission5">
-        <div class="hub-tile coming-soon theme-classified" id="card-mission5">
-          <div class="tile-badge hub-badge-soon">COMING SOON</div>
-          <div class="tile-title"><span class="tile-glitch" data-text="[CLASSIFIED]">[CLASSIFIED]</span></div>
-          <div class="tile-footer">
-            <span class="tile-endings">— / —</span>
-            <span class="tile-play locked">⧗ Awaiting Intel</span>
+        <div class="hub-card theme-classified coming-soon" id="card-mission5">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 05</div>
+            <div class="hub-card-badge hub-badge-soon">COMING SOON</div>
           </div>
+          <div class="hub-card-title">[CLASSIFIED]</div>
+          <div class="hub-card-tags">??? · ??? · ???</div>
+          <div class="hub-card-desc">Final operation. All prior intelligence required. Details pending.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">— / —</span></div>
+          </div>
+          <div class="hub-card-play locked">⧗ Awaiting Intel</div>
         </div>
       </div>
     </div>
@@ -201,9 +239,9 @@
       cardBW.onkeydown  = function(e){ if(e.key==='Enter') launchMission(this, 'blackwood'); };
       cardBW.setAttribute('role', 'button');
       cardBW.setAttribute('tabindex', '0');
-      badgeBW.className   = 'tile-badge hub-badge-available';
+      badgeBW.className   = 'hub-card-badge hub-badge-available';
       badgeBW.textContent  = 'AVAILABLE';
-      playBW.className     = 'tile-play';
+      playBW.className     = 'hub-card-play';
       playBW.textContent   = '▶ Enter Asylum';
     }
 
@@ -218,9 +256,9 @@
       cardMS.onkeydown  = function(e){ if(e.key==='Enter') launchMission(this, 'meridian'); };
       cardMS.setAttribute('role', 'button');
       cardMS.setAttribute('tabindex', '0');
-      badgeMS.className   = 'tile-badge hub-badge-available';
+      badgeMS.className   = 'hub-card-badge hub-badge-available';
       badgeMS.textContent  = 'AVAILABLE';
-      playMS.className     = 'tile-play';
+      playMS.className     = 'hub-card-play';
       playMS.textContent   = '▶ Board the Station';
     }
 
@@ -297,10 +335,10 @@
 
     /* ── Flowchart SVG lines ───────────────────────────────── */
     var connections = [
-      { from: 'node-arcadia',  to: 'node-blackwood', active: arcadiaDone, color: '#cc1133', horizontal: true },
-      { from: 'node-blackwood',to: 'node-meridian',  active: bwDone,      color: '#7755ee', horizontal: true },
-      { from: 'node-arcadia',  to: 'node-mission4',  active: false,       color: '#ffb040', horizontal: false },
-      { from: 'node-mission4', to: 'node-mission5',  active: false,       color: '#ffb040', horizontal: true }
+      { from: 'node-arcadia',  to: 'node-blackwood', active: arcadiaDone, color: '#cc1133' },
+      { from: 'node-arcadia',  to: 'node-mission4',  active: arcadiaDone, color: '#ffb040' },
+      { from: 'node-blackwood',to: 'node-meridian',  active: bwDone,      color: '#7755ee' },
+      { from: 'node-mission4', to: 'node-mission5',  active: false,       color: '#ffb040' }
     ];
 
     function drawFlowLines() {
@@ -327,25 +365,14 @@
 
         var fr = fromEl.getBoundingClientRect();
         var tr = toEl.getBoundingClientRect();
-        var x1, y1, x2, y2, d;
 
-        if (c.horizontal) {
-          // Right-center → left-center (same row)
-          x1 = fr.right - fRect.left;
-          y1 = fr.top + fr.height / 2 - fRect.top;
-          x2 = tr.left - fRect.left;
-          y2 = tr.top + tr.height / 2 - fRect.top;
-          var mx = (x1 + x2) / 2;
-          d = 'M' + x1 + ',' + y1 + ' C' + mx + ',' + y1 + ' ' + mx + ',' + y2 + ' ' + x2 + ',' + y2;
-        } else {
-          // Bottom-center → top-center (cross-row)
-          x1 = fr.left + fr.width / 2 - fRect.left;
-          y1 = fr.bottom - fRect.top;
-          x2 = tr.left + tr.width / 2 - fRect.left;
-          y2 = tr.top - fRect.top;
-          var my = (y1 + y2) / 2;
-          d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + my + ' ' + x2 + ',' + my + ' ' + x2 + ',' + y2;
-        }
+        var x1 = fr.left + fr.width / 2 - fRect.left;
+        var y1 = fr.bottom - fRect.top;
+        var x2 = tr.left + tr.width / 2 - fRect.left;
+        var y2 = tr.top - fRect.top;
+        var my = (y1 + y2) / 2;
+
+        var d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + my + ' ' + x2 + ',' + my + ' ' + x2 + ',' + y2;
 
         // Glow layer
         if (c.active) {
