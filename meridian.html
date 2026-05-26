@@ -11,71 +11,6 @@
   <link rel="stylesheet" href="css/transitions.css" />
   <link rel="stylesheet" href="css/inventory.css" />
   <link rel="stylesheet" href="css/puzzles.css" />
-  <style>
-    /* RGB channel-split glitch for menu title */
-    .menu-glitch {
-      display: inline-block;
-      position: relative;
-    }
-    .menu-glitch::before,
-    .menu-glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      overflow: hidden;
-      pointer-events: none;
-      text-shadow: none;
-    }
-    .menu-glitch::before {
-      color: #ff0040;
-      z-index: -1;
-      animation: glitch-red 2.8s infinite linear;
-    }
-    .menu-glitch::after {
-      color: #00ccff;
-      z-index: -1;
-      animation: glitch-cyan 2.3s infinite linear;
-    }
-    @keyframes glitch-red {
-      0%, 60%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
-      62%  { clip-path: inset(15% 0 55% 0); transform: translateX(-5px); }
-      64%  { clip-path: inset(55% 0 10% 0); transform: translateX(4px); }
-      66%  { clip-path: inset(30% 0 35% 0); transform: translateX(-3px); }
-      68%  { clip-path: inset(0 0 100% 0); transform: none; }
-      82%  { clip-path: inset(0 0 100% 0); transform: none; }
-      84%  { clip-path: inset(45% 0 20% 0); transform: translateX(6px); }
-      86%  { clip-path: inset(10% 0 70% 0); transform: translateX(-3px); }
-      88%  { clip-path: inset(0 0 100% 0); transform: none; }
-    }
-    @keyframes glitch-cyan {
-      0%, 55%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-      57%  { clip-path: inset(60% 0 10% 0); transform: translateX(5px); }
-      59%  { clip-path: inset(20% 0 50% 0); transform: translateX(-4px); }
-      61%  { clip-path: inset(0 0 100% 0); transform: none; }
-      75%  { clip-path: inset(0 0 100% 0); transform: none; }
-      77%  { clip-path: inset(5% 0 65% 0); transform: translateX(-5px); }
-      79%  { clip-path: inset(70% 0 5% 0); transform: translateX(4px); }
-      81%  { clip-path: inset(40% 0 30% 0); transform: translateX(-2px); }
-      83%  { clip-path: inset(100% 0 0 0); transform: none; }
-    }
-    /* Mission briefing description on start menu */
-    .menu-briefing {
-      font-family: Georgia, serif;
-      font-size: 17px;
-      line-height: 1.65;
-      letter-spacing: 0.04em;
-      color: #c4c8d4;
-      max-width: 480px;
-      text-align: center;
-      margin: 14px auto 4px;
-      padding: 0 16px;
-      position: relative;
-      z-index: 2;
-      font-style: italic;
-    }
-  </style>
 </head>
 <body>
 
@@ -220,9 +155,8 @@
   <!-- ── Main menu ──────────────────────────────────── -->
   <div id="main-menu">
     <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:4px;">MERIDIAN STATION ALPHA</div>
-    <h1 style="animation:menu-title-glow 3s ease-in-out infinite;"><span class="menu-glitch" data-text="ESCAPE">ESCAPE</span> PROTOCOL</h1>
+    <h1 style="animation:menu-title-glow 3s ease-in-out infinite;">ESCAPE PROTOCOL</h1>
     <div class="subtitle">CLASSIFIED · UNAUTHORIZED ACCESS DETECTED</div>
-    <div class="menu-briefing">Space station. Lost contact. 30 minutes of oxygen remaining.</div>
     <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
       <div style="display:flex;gap:6px;justify-content:center;">
         <button class="diff-btn" data-diff="easy"   style="flex:1;max-width:68px;padding:7px 0;border:1px solid #2a2a3a;border-radius:6px;background:#111118;color:#5a6070;font-family:'Courier New',monospace;font-size:11px;letter-spacing:.08em;cursor:pointer;transition:all .2s;">EASY</button>
