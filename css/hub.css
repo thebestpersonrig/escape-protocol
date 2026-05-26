@@ -308,7 +308,7 @@ body::after {
   width: calc(100% - 48px);
 }
 
-/* ── Cards grid ───────────────────────────────────────────────── */
+/* ── Cards grid (legacy, unused — see #flowchart) ────────────── */
 #hub-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -319,15 +319,164 @@ body::after {
   margin-bottom: 60px;
 }
 
-@media (max-width: 900px) {
-  #hub-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 580px) {
-  #hub-grid { grid-template-columns: 1fr; }
   #hub-stats { flex-direction: column; }
   .hub-stat { border-right: none; border-bottom: 1px solid var(--border); }
   .hub-stat:last-child { border-bottom: none; }
+}
+
+/* ── Mission Flowchart ───────────────────────────────────────── */
+#flowchart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  max-width: 860px;
+  width: 100%;
+  padding: 0 24px 10px;
+  margin-bottom: 50px;
+}
+
+#flow-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flow-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.flow-node {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+/* Compact card adjustments for flowchart */
+#flowchart .hub-card {
+  width: 100%;
+}
+
+#flowchart .hub-card-desc {
+  font-size: 10px;
+  line-height: 1.6;
+  padding-top: 8px;
+  margin-top: 0;
+}
+
+.hub-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ── Locked mission state ────────────────────────────────────── */
+.hub-card.locked-mission {
+  opacity: 0.45;
+  filter: saturate(0.4) brightness(0.85);
+  cursor: default;
+}
+
+.hub-card.locked-mission:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--border2) !important;
+}
+
+.hub-card.locked-mission .hub-card-title {
+  color: var(--text-dim);
+}
+
+/* ── Coming Soon / Classified theme ──────────────────────────── */
+.hub-card.theme-classified {
+  border-color: rgba(255,176,64,0.08);
+}
+
+.hub-card.theme-classified::before {
+  background: linear-gradient(90deg, transparent, rgba(255,176,64,0.25), transparent);
+  opacity: 0.3;
+}
+
+.hub-card.theme-classified .hub-card-num {
+  color: rgba(255,176,64,0.3);
+}
+
+.hub-card.theme-classified .hub-card-title {
+  color: rgba(255,176,64,0.4);
+  font-style: italic;
+  letter-spacing: 0.22em;
+}
+
+.hub-card.theme-classified .hub-card-tags {
+  color: rgba(255,176,64,0.15);
+  border-color: rgba(255,176,64,0.08);
+}
+
+.hub-card.theme-classified .hub-card-desc {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.hub-card.theme-classified .hub-card-meta {
+  border-color: rgba(255,176,64,0.08);
+}
+
+.hub-card.theme-classified .hub-card-stat {
+  background: rgba(255,176,64,0.02);
+}
+
+.hub-card.theme-classified .meta-val {
+  color: var(--text-dim);
+}
+
+.hub-card.theme-classified .hub-card-play {
+  border-color: rgba(255,176,64,0.12);
+  color: rgba(255,176,64,0.35);
+  background: rgba(255,176,64,0.02);
+  font-style: italic;
+}
+
+/* ── SVG line animations ─────────────────────────────────────── */
+.flow-line-active {
+  animation: flow-pulse 3s ease-in-out infinite;
+}
+
+.flow-glow {
+  animation: flow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes flow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 1; }
+}
+
+/* ── Flowchart responsive ────────────────────────────────────── */
+@media (max-width: 750px) {
+  .flow-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .flow-node {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  #flowchart {
+    gap: 40px;
+  }
 }
 
 /* ── Card base ────────────────────────────────────────────────── */

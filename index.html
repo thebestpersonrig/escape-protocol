@@ -7,8 +7,8 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Escape Protocol — Mission Select</title>
-  <link rel="stylesheet" href="css/reset.css?v=3" />
-  <link rel="stylesheet" href="css/hub.css?v=3" />
+  <link rel="stylesheet" href="css/reset.css?v=5" />
+  <link rel="stylesheet" href="css/hub.css?v=5" />
 </head>
 <body>
 
@@ -17,7 +17,7 @@
   <!-- ── Status strip ──────────────────────────────────────────── -->
   <div class="hub-status-strip">
     <span class="hub-status-dot"></span>TERMINAL ONLINE
-    <span class="hub-status-sep">·</span>3 ASSIGNMENTS ACTIVE
+    <span class="hub-status-sep">·</span><span id="strip-assignments">1</span> ASSIGNMENTS UNLOCKED
     <span class="hub-status-sep">·</span>ACCESS LEVEL: OPERATIVE
     <span class="hub-status-sep">·</span>SESSION ENCRYPTED
   </div>
@@ -31,64 +31,112 @@
     <div class="hub-tagline">Select your assignment, operative</div>
   </header>
 
-  <!-- ── Mission Cards ──────────────────────────────────────── -->
-  <div class="hub-section-label">// Active Assignments</div>
+  <!-- ── Mission Flowchart ──────────────────────────────────── -->
+  <div class="hub-section-label">// Mission Network</div>
 
-  <div id="hub-grid">
+  <div id="flowchart">
+    <svg id="flow-lines"></svg>
 
-    <div class="hub-card available theme-arcadia" onclick="launchMission(this,'arcadia')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'arcadia')">
-      <div class="hub-card-num">Mission 01</div>
-      <div class="hub-card-title">Arcadia Research<br>Facility</div>
-      <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
-      <div class="hub-card-desc">
-        Arcadia's underground research facility went dark 72 hours ago.
-        An emergency lockdown has sealed all exits. You have one hour to
-        navigate the labs, restore power, and find the override codes before
-        the lockdown becomes permanent.
+    <!-- Row 1: Arcadia — always available -->
+    <div class="flow-row">
+      <div class="flow-node" id="node-arcadia">
+        <div class="hub-card available theme-arcadia" id="card-arcadia"
+             onclick="launchMission(this,'arcadia')" role="button" tabindex="0"
+             onkeydown="if(event.key==='Enter')launchMission(this,'arcadia')">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 01</div>
+            <div class="hub-card-badge hub-badge-available">AVAILABLE</div>
+          </div>
+          <div class="hub-card-title">Arcadia Research<br>Facility</div>
+          <div class="hub-card-tags">Sci-Fi · Laboratory · Abandoned</div>
+          <div class="hub-card-desc">Underground research facility. 72 hours dark. One hour to escape.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">20 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★☆☆</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="arcadia-endings">0 / 4</span></div>
+          </div>
+          <div class="hub-card-play">▶ Enter Facility</div>
+        </div>
       </div>
-      <div class="hub-card-meta">
-        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">20 min</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★☆☆</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="arcadia-endings">0 / 4</span></div>
-      </div>
-      <div class="hub-card-play">▶ Enter Facility</div>
     </div>
 
-    <div class="hub-card available theme-blackwood" onclick="launchMission(this,'blackwood')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'blackwood')">
-      <div class="hub-card-num">Mission 02</div>
-      <div class="hub-card-title">Blackwood<br>Asylum</div>
-      <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
-      <div class="hub-card-desc">
-        Blackwood Psychiatric Institute has been sealed for 40 years.
-        An anonymous tip sent you inside the east wing. The doors locked
-        behind you. Something in the dark is still active.
+    <!-- Row 2: Blackwood + Mission 04 (Coming Soon) -->
+    <div class="flow-row">
+      <div class="flow-node" id="node-blackwood">
+        <div class="hub-card theme-blackwood locked-mission" id="card-blackwood">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 02</div>
+            <div class="hub-card-badge hub-badge-locked" id="badge-blackwood">LOCKED</div>
+          </div>
+          <div class="hub-card-title">Blackwood<br>Asylum</div>
+          <div class="hub-card-tags">Horror · Psychiatric · Gothic</div>
+          <div class="hub-card-desc">Sealed psychiatric institute. 40 years abandoned. Something still active.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">25 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★☆</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="blackwood-endings">0 / 4</span></div>
+          </div>
+          <div class="hub-card-play locked" id="play-blackwood">🔒 Complete Arcadia to Unlock</div>
+        </div>
       </div>
-      <div class="hub-card-meta">
-        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">25 min</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★☆</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="blackwood-endings">0 / 4</span></div>
+      <div class="flow-node" id="node-mission4">
+        <div class="hub-card theme-classified coming-soon" id="card-mission4">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 04</div>
+            <div class="hub-card-badge hub-badge-soon">COMING SOON</div>
+          </div>
+          <div class="hub-card-title">[CLASSIFIED]</div>
+          <div class="hub-card-tags">??? · ??? · ???</div>
+          <div class="hub-card-desc">Intel suggests a hidden facility. Briefing pending authorization.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">— / —</span></div>
+          </div>
+          <div class="hub-card-play locked">⧗ Awaiting Intel</div>
+        </div>
       </div>
-      <div class="hub-card-play">▶ Enter Asylum</div>
     </div>
 
-    <div class="hub-card available theme-meridian" onclick="launchMission(this,'meridian')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')launchMission(this,'meridian')">
-      <div class="hub-card-num">Mission 03</div>
-      <div class="hub-card-title">Meridian<br>Station Alpha</div>
-      <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
-      <div class="hub-card-desc">
-        Six hours from Earth orbit, Meridian Station has lost contact with
-        Mission Control. The airlock is compromised, life support failing.
-        You have 30 minutes of oxygen.
+    <!-- Row 3: Meridian + Mission 05 (Coming Soon) -->
+    <div class="flow-row">
+      <div class="flow-node" id="node-meridian">
+        <div class="hub-card theme-meridian locked-mission" id="card-meridian">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 03</div>
+            <div class="hub-card-badge hub-badge-locked" id="badge-meridian">LOCKED</div>
+          </div>
+          <div class="hub-card-title">Meridian<br>Station Alpha</div>
+          <div class="hub-card-tags">Sci-Fi · Space Station · Survival</div>
+          <div class="hub-card-desc">Space station. Lost contact. 30 minutes of oxygen remaining.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="meridian-endings">0 / 5</span></div>
+          </div>
+          <div class="hub-card-play locked" id="play-meridian">🔒 Complete Blackwood to Unlock</div>
+        </div>
       </div>
-      <div class="hub-card-meta">
-        <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">30 min</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">★★★★★</span></div>
-        <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val" id="meridian-endings">0 / 5</span></div>
+      <div class="flow-node" id="node-mission5">
+        <div class="hub-card theme-classified coming-soon" id="card-mission5">
+          <div class="hub-card-header">
+            <div class="hub-card-num">Mission 05</div>
+            <div class="hub-card-badge hub-badge-soon">COMING SOON</div>
+          </div>
+          <div class="hub-card-title">[CLASSIFIED]</div>
+          <div class="hub-card-tags">??? · ??? · ???</div>
+          <div class="hub-card-desc">Final operation. All prior intelligence required. Details pending.</div>
+          <div class="hub-card-meta">
+            <div class="hub-card-stat"><span class="meta-label">Time</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Difficulty</span><span class="meta-val">—</span></div>
+            <div class="hub-card-stat"><span class="meta-label">Endings</span><span class="meta-val">— / —</span></div>
+          </div>
+          <div class="hub-card-play locked">⧗ Awaiting Intel</div>
+        </div>
       </div>
-      <div class="hub-card-play">▶ Board the Station</div>
     </div>
 
-  </div><!-- #hub-grid -->
+  </div><!-- #flowchart -->
 
   <!-- ── AXIOM Terminal ──────────────────────────────────────── -->
   <div id="axiom-section" style="display:none;">
@@ -137,33 +185,85 @@
 
 </div><!-- #hub-wrap -->
 
+<!-- ── Main logic: prerequisites, stats, flowchart lines ───── -->
 <script>
   (function () {
-    const seen = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
-    const achRaw = localStorage.getItem('escape-protocol-achievements');
-    const ach  = achRaw ? (JSON.parse(achRaw).unlocked || []) : [];
+    /* ── Read completion state ──────────────────────────────── */
+    var seen   = JSON.parse(localStorage.getItem('ep-endings-seen') || '[]');
+    var bwSeen = JSON.parse(localStorage.getItem('ep-blackwood-endings-seen') || '[]');
+    var msSeen = JSON.parse(localStorage.getItem('ep-meridian-endings-seen') || '[]');
 
-    document.getElementById('hstat-escaped').textContent  = seen.filter(e => e === 'escaped' || e === 'secret-escape').length;
-    document.getElementById('hstat-attempts').textContent = seen.length;
-    document.getElementById('hstat-ach').textContent      = ach.length + ' / 42';
-
-    const found = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => seen.includes(e)).length;
-    document.getElementById('arcadia-endings').textContent = found + ' / 4';
-
-    const bwSeen = JSON.parse(localStorage.getItem('ep-blackwood-endings-seen') || '[]');
-    const bwFound = ['escaped','secret-escape','alarm-caught','time-out'].filter(e => bwSeen.includes(e)).length;
-    document.getElementById('blackwood-endings').textContent = bwFound + ' / 4';
-
-    const msSeen = JSON.parse(localStorage.getItem('ep-meridian-endings-seen') || '[]');
-    const msFound = ['escaped','secret-escape','self-sacrifice','alarm-caught','time-out'].filter(e => msSeen.includes(e)).length;
-    document.getElementById('meridian-endings').textContent = msFound + ' / 5';
-
-    // ── AXIOM Terminal unlock ────────────────────────────────
     var arcadiaDone = seen.length > 0;
     var bwDone      = bwSeen.length > 0;
     var msDone      = msSeen.length > 0;
-    var missionsDone = [arcadiaDone, bwDone, msDone].filter(Boolean).length;
 
+    /* ── Ending counts ─────────────────────────────────────── */
+    var arcadiaFound = ['escaped','secret-escape','alarm-caught','time-out'].filter(function(e){return seen.includes(e)}).length;
+    document.getElementById('arcadia-endings').textContent = arcadiaFound + ' / 4';
+
+    var bwFound = ['escaped','secret-escape','alarm-caught','time-out'].filter(function(e){return bwSeen.includes(e)}).length;
+    document.getElementById('blackwood-endings').textContent = bwFound + ' / 4';
+
+    var msFound = ['escaped','secret-escape','self-sacrifice','alarm-caught','time-out'].filter(function(e){return msSeen.includes(e)}).length;
+    document.getElementById('meridian-endings').textContent = msFound + ' / 5';
+
+    /* ── Stats bar (all missions) ──────────────────────────── */
+    var achRaw = localStorage.getItem('escape-protocol-achievements');
+    var ach    = achRaw ? (JSON.parse(achRaw).unlocked || []) : [];
+
+    var totalEscapes = 0;
+    if (seen.includes('escaped')   || seen.includes('secret-escape'))   totalEscapes++;
+    if (bwSeen.includes('escaped') || bwSeen.includes('secret-escape')) totalEscapes++;
+    if (msSeen.includes('escaped') || msSeen.includes('secret-escape')) totalEscapes++;
+
+    document.getElementById('hstat-escaped').textContent  = totalEscapes;
+    document.getElementById('hstat-attempts').textContent  = seen.length + bwSeen.length + msSeen.length;
+    document.getElementById('hstat-ach').textContent       = ach.length + ' / 42';
+
+    /* ── Status strip — unlocked count ─────────────────────── */
+    var unlockedCount = 1;
+    if (arcadiaDone) unlockedCount++;
+    if (bwDone)      unlockedCount++;
+    document.getElementById('strip-assignments').textContent = unlockedCount;
+
+    /* ── Prerequisite system ───────────────────────────────── */
+
+    // Blackwood: requires Arcadia
+    if (arcadiaDone) {
+      var cardBW  = document.getElementById('card-blackwood');
+      var badgeBW = document.getElementById('badge-blackwood');
+      var playBW  = document.getElementById('play-blackwood');
+      cardBW.classList.remove('locked-mission');
+      cardBW.classList.add('available');
+      cardBW.onclick    = function(){ launchMission(this, 'blackwood'); };
+      cardBW.onkeydown  = function(e){ if(e.key==='Enter') launchMission(this, 'blackwood'); };
+      cardBW.setAttribute('role', 'button');
+      cardBW.setAttribute('tabindex', '0');
+      badgeBW.className   = 'hub-card-badge hub-badge-available';
+      badgeBW.textContent  = 'AVAILABLE';
+      playBW.className     = 'hub-card-play';
+      playBW.textContent   = '▶ Enter Asylum';
+    }
+
+    // Meridian: requires Blackwood
+    if (bwDone) {
+      var cardMS  = document.getElementById('card-meridian');
+      var badgeMS = document.getElementById('badge-meridian');
+      var playMS  = document.getElementById('play-meridian');
+      cardMS.classList.remove('locked-mission');
+      cardMS.classList.add('available');
+      cardMS.onclick    = function(){ launchMission(this, 'meridian'); };
+      cardMS.onkeydown  = function(e){ if(e.key==='Enter') launchMission(this, 'meridian'); };
+      cardMS.setAttribute('role', 'button');
+      cardMS.setAttribute('tabindex', '0');
+      badgeMS.className   = 'hub-card-badge hub-badge-available';
+      badgeMS.textContent  = 'AVAILABLE';
+      playMS.className     = 'hub-card-play';
+      playMS.textContent   = '▶ Board the Station';
+    }
+
+    /* ── AXIOM Terminal unlock ─────────────────────────────── */
+    var missionsDone = [arcadiaDone, bwDone, msDone].filter(Boolean).length;
     var axiomSection = document.getElementById('axiom-section');
     var axiomCard    = document.getElementById('axiom-card');
     var axiomProg    = document.getElementById('axiom-progress');
@@ -177,33 +277,33 @@
 
     if (missionsDone === 3) {
       axiomCard.classList.remove('locked');
-      axiomCard.onclick = function() { location.href = 'axiom.html'; };
-      axiomCard.onkeydown = function(e) { if (e.key === 'Enter') location.href = 'axiom.html'; };
+      axiomCard.onclick   = function(){ location.href = 'axiom.html'; };
+      axiomCard.onkeydown = function(e){ if(e.key==='Enter') location.href = 'axiom.html'; };
     }
 
-    // ── Timed Challenges ─────────────────────────────────────
+    /* ── Timed Challenges ──────────────────────────────────── */
     var challenges = [
-      { id: 'speed-arcadia-5',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Speed Demon',       desc: 'Escape Arcadia in under 5 minutes.',     target: '5:00',  seconds: 300, requires: arcadiaDone },
-      { id: 'speed-arcadia-3',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Lightning Run',     desc: 'Escape Arcadia in under 3 minutes.',     target: '3:00',  seconds: 180, requires: arcadiaDone },
-      { id: 'speed-blackwood-8', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Quick Getaway',    desc: 'Escape Blackwood in under 8 minutes.',   target: '8:00',  seconds: 480, requires: bwDone },
-      { id: 'speed-blackwood-5', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Asylum Sprinter',  desc: 'Escape Blackwood in under 5 minutes.',   target: '5:00',  seconds: 300, requires: bwDone },
-      { id: 'speed-meridian-10', mission: 'meridian',  missionLabel: 'Meridian',  name: 'Orbital Rush',     desc: 'Escape Meridian in under 10 minutes.',   target: '10:00', seconds: 600, requires: msDone },
-      { id: 'speed-meridian-6',  mission: 'meridian',  missionLabel: 'Meridian',  name: 'Zero-G Sprint',    desc: 'Escape Meridian in under 6 minutes.',    target: '6:00',  seconds: 360, requires: msDone },
+      { id: 'speed-arcadia-5',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Speed Demon',     desc: 'Escape Arcadia in under 5 minutes.',   target: '5:00',  seconds: 300, requires: arcadiaDone },
+      { id: 'speed-arcadia-3',   mission: 'arcadia',  missionLabel: 'Arcadia',  name: 'Lightning Run',   desc: 'Escape Arcadia in under 3 minutes.',   target: '3:00',  seconds: 180, requires: arcadiaDone },
+      { id: 'speed-blackwood-8', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Quick Getaway',  desc: 'Escape Blackwood in under 8 minutes.', target: '8:00',  seconds: 480, requires: bwDone },
+      { id: 'speed-blackwood-5', mission: 'blackwood', missionLabel: 'Blackwood', name: 'Asylum Sprinter',desc: 'Escape Blackwood in under 5 minutes.', target: '5:00',  seconds: 300, requires: bwDone },
+      { id: 'speed-meridian-10', mission: 'meridian',  missionLabel: 'Meridian',  name: 'Orbital Rush',   desc: 'Escape Meridian in under 10 minutes.', target: '10:00', seconds: 600, requires: msDone },
+      { id: 'speed-meridian-6',  mission: 'meridian',  missionLabel: 'Meridian',  name: 'Zero-G Sprint',  desc: 'Escape Meridian in under 6 minutes.',  target: '6:00',  seconds: 360, requires: msDone },
     ];
 
-    var bestTimes = JSON.parse(localStorage.getItem('ep-challenge-times') || '{}');
+    var bestTimes  = JSON.parse(localStorage.getItem('ep-challenge-times') || '{}');
     var anyVisible = false;
-    var gridEl = document.getElementById('challenge-grid');
+    var gridEl     = document.getElementById('challenge-grid');
 
     challenges.forEach(function(ch) {
-      var best = bestTimes[ch.id];
+      var best      = bestTimes[ch.id];
       var completed = best !== undefined && best <= ch.seconds;
-      var locked = !ch.requires;
-
+      var locked    = !ch.requires;
       if (ch.requires) anyVisible = true;
 
       var card = document.createElement('div');
       card.className = 'challenge-card' + (locked ? ' locked' : '') + (completed ? ' completed' : '');
+
       var bestStr = '';
       if (best !== undefined) {
         var m = Math.floor(best / 60);
@@ -225,20 +325,104 @@
       if (!locked) {
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
-        card.onclick = function() { launchMission(card, ch.mission); };
-        card.onkeydown = function(e) { if (e.key === 'Enter') launchMission(card, ch.mission); };
+        card.onclick   = function(){ launchMission(card, ch.mission); };
+        card.onkeydown = function(e){ if(e.key==='Enter') launchMission(card, ch.mission); };
       }
-
       gridEl.appendChild(card);
     });
 
-    if (anyVisible) {
-      document.getElementById('challenge-section').style.display = '';
+    if (anyVisible) document.getElementById('challenge-section').style.display = '';
+
+    /* ── Flowchart SVG lines ───────────────────────────────── */
+    var connections = [
+      { from: 'node-arcadia',  to: 'node-blackwood', active: arcadiaDone, color: '#cc1133' },
+      { from: 'node-arcadia',  to: 'node-mission4',  active: arcadiaDone, color: '#ffb040' },
+      { from: 'node-blackwood',to: 'node-meridian',  active: bwDone,      color: '#7755ee' },
+      { from: 'node-mission4', to: 'node-mission5',  active: false,       color: '#ffb040' }
+    ];
+
+    function drawFlowLines() {
+      var svg       = document.getElementById('flow-lines');
+      var flowchart = document.getElementById('flowchart');
+      var fRect     = flowchart.getBoundingClientRect();
+
+      svg.setAttribute('width',   fRect.width);
+      svg.setAttribute('height',  fRect.height);
+      svg.setAttribute('viewBox', '0 0 ' + fRect.width + ' ' + fRect.height);
+
+      svg.innerHTML =
+        '<defs>' +
+          '<filter id="gl" x="-50%" y="-50%" width="200%" height="200%">' +
+            '<feGaussianBlur stdDeviation="5" result="b"/>' +
+            '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>' +
+          '</filter>' +
+        '</defs>';
+
+      connections.forEach(function(c) {
+        var fromEl = document.getElementById(c.from);
+        var toEl   = document.getElementById(c.to);
+        if (!fromEl || !toEl) return;
+
+        var fr = fromEl.getBoundingClientRect();
+        var tr = toEl.getBoundingClientRect();
+
+        var x1 = fr.left + fr.width / 2 - fRect.left;
+        var y1 = fr.bottom - fRect.top;
+        var x2 = tr.left + tr.width / 2 - fRect.left;
+        var y2 = tr.top - fRect.top;
+        var my = (y1 + y2) / 2;
+
+        var d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + my + ' ' + x2 + ',' + my + ' ' + x2 + ',' + y2;
+
+        // Glow layer
+        if (c.active) {
+          var g = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          g.setAttribute('d', d);
+          g.setAttribute('fill', 'none');
+          g.setAttribute('stroke', c.color);
+          g.setAttribute('stroke-width', '8');
+          g.setAttribute('opacity', '0.2');
+          g.setAttribute('filter', 'url(#gl)');
+          g.classList.add('flow-glow');
+          svg.appendChild(g);
+        }
+
+        // Main line
+        var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        p.setAttribute('d', d);
+        p.setAttribute('fill', 'none');
+        p.setAttribute('stroke', c.active ? c.color : '#1a1a2e');
+        p.setAttribute('stroke-width', c.active ? '2.5' : '1');
+        p.setAttribute('stroke-linecap', 'round');
+        if (!c.active) p.setAttribute('stroke-dasharray', '6,5');
+        if (c.active) p.classList.add('flow-line-active');
+        svg.appendChild(p);
+
+        // Connection dots
+        var pts = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+        pts.forEach(function(pt) {
+          var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          dot.setAttribute('cx', pt.x);
+          dot.setAttribute('cy', pt.y);
+          dot.setAttribute('r',  c.active ? '4' : '2.5');
+          dot.setAttribute('fill', c.active ? c.color : '#1a1a2e');
+          if (c.active) dot.setAttribute('filter', 'url(#gl)');
+          svg.appendChild(dot);
+        });
+      });
     }
+
+    // Draw after layout settles, and on resize
+    setTimeout(drawFlowLines, 80);
+    window.addEventListener('resize', function() {
+      clearTimeout(window._flowTimer);
+      window._flowTimer = setTimeout(drawFlowLines, 60);
+    });
 
   })();
 </script>
 
+<!-- ── Loading overlay ──────────────────────────────────────── -->
 <div id="loading-overlay">
   <div id="loading-text"></div>
 </div>
@@ -302,19 +486,16 @@
     missionLaunching = true;
 
     var lines = missionLines[mission];
-    var url = mission + '.html';
+    var url   = mission + '.html';
     if (!lines) { location.href = url; return; }
 
-    // Select card with glow
     cardEl.classList.add('selected');
 
     var overlay = document.getElementById('loading-overlay');
     var textBox = document.getElementById('loading-text');
     textBox.innerHTML = '';
 
-    // Show overlay
     overlay.classList.add('active');
-    // Force reflow then fade in
     overlay.offsetHeight;
     overlay.classList.add('visible');
 
@@ -324,13 +505,10 @@
 
     function showLine(index) {
       if (index >= lines.length) {
-        // All lines done — navigate after 500ms
         setTimeout(function () { location.href = url; }, 500);
         return;
       }
-
       setTimeout(function () {
-        // Remove cursor from previous line
         if (prevCursor && prevCursor.parentNode) {
           prevCursor.parentNode.removeChild(prevCursor);
         }
@@ -340,7 +518,6 @@
         });
       }, index === 0 ? 300 : lineDelay);
     }
-
     showLine(0);
   }
 </script>
