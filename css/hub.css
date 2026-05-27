@@ -5,14 +5,14 @@
   --accent-dim:  rgba(0,255,224,0.06);
   --danger:      #ff3040;
   --warn:        #ffb040;
-  --bg:          #05050d;
-  --surface:     #0a0a18;
-  --surface2:    #0e0e20;
-  --border:      #18182e;
-  --border2:     #22223a;
+  --bg:          #0a0a16;
+  --surface:     #10102a;
+  --surface2:    #15152e;
+  --border:      #1e1e38;
+  --border2:     #2a2a48;
   --text:        #b8bcc8;
   --text-bright: #e0e4f0;
-  --text-dim:    #40445a;
+  --text-dim:    #50546e;
   --font-mono:   'Courier New', 'Courier', monospace;
   --radius:      4px;
   --card-w:      340px;
@@ -325,53 +325,15 @@ body::after {
   .hub-stat:last-child { border-bottom: none; }
 }
 
-/* ── Mission Flowchart ───────────────────────────────────────── */
+/* ── Mission Grid ────────────────────────────────────────────── */
 #flowchart {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 56px;
-  max-width: 860px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1120px;
   width: 100%;
-  padding: 0 24px 10px;
+  padding: 0 24px;
   margin-bottom: 50px;
-}
-
-#flow-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.flow-row {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.flow-node {
-  width: 320px;
-  flex-shrink: 0;
-}
-
-/* Compact card adjustments for flowchart */
-#flowchart .hub-card {
-  width: 100%;
-}
-
-#flowchart .hub-card-desc {
-  font-size: 10px;
-  line-height: 1.6;
-  padding-top: 8px;
-  margin-top: 0;
 }
 
 .hub-card-header {
@@ -445,38 +407,6 @@ body::after {
   color: rgba(255,176,64,0.35);
   background: rgba(255,176,64,0.02);
   font-style: italic;
-}
-
-/* ── SVG line animations ─────────────────────────────────────── */
-.flow-line-active {
-  animation: flow-pulse 3s ease-in-out infinite;
-}
-
-.flow-glow {
-  animation: flow-pulse 3s ease-in-out infinite;
-}
-
-@keyframes flow-pulse {
-  0%, 100% { opacity: 0.5; }
-  50%      { opacity: 1; }
-}
-
-/* ── Flowchart responsive ────────────────────────────────────── */
-@media (max-width: 750px) {
-  .flow-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .flow-node {
-    width: 100%;
-    max-width: 380px;
-  }
-
-  #flowchart {
-    gap: 40px;
-  }
 }
 
 /* ── Card base ────────────────────────────────────────────────── */
